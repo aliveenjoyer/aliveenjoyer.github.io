@@ -200,7 +200,7 @@
         throw new Error("bad status " + r.status);
       }
     } catch (e) {
-      show(`<p>Заявка не ушла: сервер заявок сейчас не отвечает. Скопируй текст заявки и отправь его sashawaify в личные сообщения на <a href="https://www.twitch.tv/sashawaify" target="_blank" rel="noopener">Twitch</a>.</p>
+      show(`<p>Заявка не ушла: сервер заявок сейчас не отвечает. Скопируй текст заявки и отправь его AliveEnjoyer в <a href="https://discord.gg/sashawaify" target="_blank" rel="noopener">Discord</a>.</p>
             <button type="button" class="btn copy">Скопировать заявку</button>`, true);
       const btn = result.querySelector(".copy");
       btn.addEventListener("click", async () => {
