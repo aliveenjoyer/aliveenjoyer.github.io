@@ -73,6 +73,45 @@
   });
   if (viewer) viewer.addEventListener("click", (e) => { if (e.target === viewer) viewer.close(); });
 
+  /* ---------- carousel ---------- */
+  const car = document.querySelector(".carousel");
+  if (car) {
+    const track = car.querySelector(".track");
+    const slides = [...track.querySelectorAll(".slide")];
+    const prev = car.querySelector(".prev"), next = car.querySelector(".next"), count = car.querySelector(".car-count");
+    const thumbList = car.querySelector(".thumbs");
+    const thumbs = [...car.querySelectorAll(".thumb")];
+    let cur = 0;
+    const warm = (i) => [i - 1, i + 1].forEach((k) => { const im = slides[k] && slides[k].querySelector("img"); if (im) im.loading = "eager"; });
+    const mark = (i) => {
+      if (i === cur && count.textContent.startsWith(String(i + 1) + " ")) return;
+      cur = i;
+      count.textContent = `${i + 1} / ${slides.length}`;
+      prev.disabled = i === 0; next.disabled = i === slides.length - 1;
+      thumbs.forEach((t, k) => t.setAttribute("aria-current", k === i ? "true" : "false"));
+      const t = thumbs[i];
+      if (t) thumbList.scrollTo({ left: t.parentElement.offsetLeft - thumbList.clientWidth / 2 + t.clientWidth / 2, behavior: reduceMotion ? "auto" : "smooth" });
+      warm(i);
+    };
+    const go = (i) => {
+      i = Math.max(0, Math.min(slides.length - 1, i));
+      track.scrollTo({ left: i * track.clientWidth, behavior: reduceMotion ? "auto" : "smooth" });
+      mark(i);
+    };
+    prev.addEventListener("click", () => go(cur - 1));
+    next.addEventListener("click", () => go(cur + 1));
+    thumbs.forEach((t) => t.addEventListener("click", () => go(Number(t.dataset.i))));
+    track.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") { e.preventDefault(); go(cur + 1); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); go(cur - 1); }
+    });
+    let st;
+    track.addEventListener("scroll", () => { clearTimeout(st); st = setTimeout(() => mark(Math.round(track.scrollLeft / track.clientWidth)), 60); }, { passive: true });
+    window.addEventListener("resize", () => track.scrollTo({ left: cur * track.clientWidth }));
+    count.textContent = "";
+    mark(0);
+  }
+
   /* ---------- whitelist form ---------- */
   const form = document.getElementById("wl-form");
   if (!form) return;
