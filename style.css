@@ -72,6 +72,7 @@ p { margin: 0 0 1rem; }
 .streamers a::before { content: ""; width: .55em; height: .55em; background: #a970ff; box-shadow: 0 0 .5em #a970ff; }
 .streamers a:hover { border-color: #a970ff; color: #fff; }
 .actions { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.8rem 0 1.2rem; }
+.dl-note { color: var(--mist); font-size: 1rem; max-width: 38rem; margin: -.2rem 0 1rem; text-shadow: 0 0 1rem var(--void); }
 .live { display: flex; align-items: center; gap: .6rem; color: var(--mist); font-size: 1rem; }
 .live[hidden], [hidden] { display: none !important; }
 .pulse { width: .6rem; height: .6rem; background: var(--copper); box-shadow: 0 0 .7rem var(--copper); }
