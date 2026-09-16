@@ -60,6 +60,104 @@
     })
     .catch(() => {});
 
+  /* ---------- roster: whitelist with play time ---------- */
+  const plural = (n, one, few, many) => {
+    const a = n % 10, b = n % 100;
+    return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 10 || b >= 20) ? few : many;
+  };
+  const playTime = (min) => {
+    if (min < 60) return `${min} мин`;
+    const h = Math.floor(min / 60), m = min % 60;
+    return m ? `${h} ч ${m} мин` : `${h} ч`;
+  };
+  const lastSeen = (ts) => {
+    const midnight = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+    const days = Math.round((midnight(new Date()) - midnight(new Date(ts * 1000))) / 864e5);
+    if (days <= 0) return "в игре сегодня";
+    if (days === 1) return "в игре вчера";
+    return `в игре ${days} ${plural(days, "день", "дня", "дней")} назад`;
+  };
+  // deterministic 8x8 pixel face from the nick
+  const SVG = "http://www.w3.org/2000/svg";
+  const avatar = (nick) => {
+    let h = 2166136261;
+    for (const ch of nick.toLowerCase()) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); }
+    let s = h >>> 0;
+    const rnd = () => { s = (s + 0x6d2b79f5) >>> 0; let t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    const skins = [["#3a3356", "#4b4270", "#2a2446"], ["#2f4550", "#3d5a66", "#223540"], ["#4a3448", "#5e4460", "#352436"],
+                   ["#3c4633", "#4d5a41", "#2b3325"], ["#4a3c30", "#5f4d3d", "#352a21"], ["#343a58", "#444c72", "#262a42"]];
+    const eyes = ["#6cd3b6", "#f4b860", "#ee8793", "#b9a6ff", "#ddf5f0"];
+    const [base, light, dark] = skins[Math.floor(rnd() * skins.length)];
+    const eye = eyes[Math.floor(rnd() * eyes.length)];
+    const svg = document.createElementNS(SVG, "svg");
+    svg.setAttribute("viewBox", "0 0 8 8"); svg.setAttribute("class", "ava"); svg.setAttribute("aria-hidden", "true");
+    const px = (x, y, c, o) => {
+      const r = document.createElementNS(SVG, "rect");
+      r.setAttribute("x", x); r.setAttribute("y", y); r.setAttribute("width", 1); r.setAttribute("height", 1); r.setAttribute("fill", c);
+      if (o) r.setAttribute("opacity", o);
+      svg.appendChild(r);
+    };
+    const hood = rnd() < 0.5;
+    for (let y = 0; y < 8; y++) {
+      for (let x = 0; x < 4; x++) {
+        if (hood && y === 0 && x === 0) continue;
+        const v = rnd();
+        const c = y < 2 ? (v < 0.6 ? dark : base) : v < 0.2 ? light : v < 0.32 ? dark : base;
+        px(x, y, c); px(7 - x, y, c);
+      }
+    }
+    const ey = 3 + (rnd() < 0.5 ? 0 : 1), ex = rnd() < 0.65 ? 2 : 1;
+    px(ex, ey, eye); px(7 - ex, ey, eye);
+    px(ex, ey + 1, eye, 0.35); px(7 - ex, ey + 1, eye, 0.35);
+    if (rnd() < 0.55) { px(3, ey + 3 > 7 ? 7 : ey + 3, dark); px(4, ey + 3 > 7 ? 7 : ey + 3, dark); }
+    return svg;
+  };
+  const rosterSec = document.querySelector("#players");
+  if (rosterSec) {
+    withTimeout(fetch(API + "/players", { cache: "no-store" }), 5000)
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((d) => {
+        const list = (d.players || []).filter((p) => p && typeof p.name === "string");
+        if (!list.length) return;
+        const max = Math.max(1, ...list.map((p) => p.min || 0));
+        const total = list.reduce((a, p) => a + (p.min || 0), 0);
+        const ol = rosterSec.querySelector(".roster");
+        list.forEach((p, i) => {
+          const on = p.online && !d.stale, played = (p.min || 0) > 0;
+          const li = document.createElement("li");
+          li.className = "pl" + (on ? " on" : "") + (played && i < 3 ? " top" : "") + (played ? "" : " new");
+          li.appendChild(avatar(p.name));
+          const body = document.createElement("div"); body.className = "pl-body";
+          const name = document.createElement("span"); name.className = "pl-name"; name.textContent = p.name; name.title = p.name;
+          const time = document.createElement("div"); time.className = "pl-time"; time.textContent = played ? playTime(p.min) : "скоро в игре";
+          body.append(name, time);
+          if (played) {
+            const bar = document.createElement("div"); bar.className = "pl-bar"; bar.setAttribute("aria-hidden", "true");
+            const fill = document.createElement("i"); fill.style.width = (100 * p.min / max).toFixed(1) + "%";
+            bar.appendChild(fill); body.appendChild(bar);
+          }
+          if (on || p.last) {
+            const seen = document.createElement("div"); seen.className = "pl-seen";
+            seen.textContent = on ? "сейчас в игре" : lastSeen(p.last);
+            body.appendChild(seen);
+          }
+          if (played) {
+            const rank = document.createElement("span"); rank.className = "pl-rank"; rank.setAttribute("aria-hidden", "true"); rank.textContent = i + 1;
+            li.appendChild(rank);
+          }
+          li.appendChild(body);
+          ol.appendChild(li);
+        });
+        const online = list.filter((p) => p.online && !d.stale).length;
+        const hours = Math.floor(total / 60);
+        let sum = `В вайтлисте ${list.length} ${plural(list.length, "игрок", "игрока", "игроков")}, вместе они провели на сервере ${hours} ${plural(hours, "час", "часа", "часов")}.`;
+        if (online) sum += ` Сейчас в игре: ${online}.`;
+        rosterSec.querySelector(".roster-sum").textContent = sum;
+        rosterSec.hidden = false;
+      })
+      .catch(() => {});
+  }
+
   /* ---------- image viewer ---------- */
   const viewer = document.querySelector(".viewer");
   const vImg = viewer && viewer.querySelector("img");
