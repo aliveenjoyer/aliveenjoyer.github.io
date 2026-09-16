@@ -229,3 +229,37 @@ footer p { margin: 0 0 .4rem; }
   .actions .btn { width: 100%; text-align: center; }
   .steps li { padding-left: 2.6rem; }
 }
+
+/* ---------------- races ---------------- */
+.news { margin: 0 0 .6rem; }
+.news a { font-family: var(--pixel); font-size: 12px; line-height: 1.8; color: var(--lantern); text-decoration: none; text-shadow: 0 0 1rem var(--void); }
+.news a:hover { color: #ffcb7d; text-decoration: underline; }
+.kicker { font-family: var(--pixel); font-size: 12px; color: var(--lantern); margin: 0 0 .9rem; }
+.race-hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 1.5rem 2rem; margin: 2.2rem 0 0; align-items: end; }
+.race-hero figure { margin: 0; }
+@media (max-width: 760px) { .race-hero { grid-template-columns: 1fr; } }
+.tracks { list-style: none; padding: 0; margin: 2.4rem 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr)); gap: 1rem; }
+.rtrack { background: var(--deep); padding: 1.2rem 1.2rem 1rem; border-top: 3px solid var(--copper); display: flex; flex-direction: column; gap: .85rem; min-width: 0; }
+.rtrack[data-track="2"] { border-top-color: var(--blood); }
+.rtrack[data-track="3"] { border-top-color: var(--lantern); }
+.track-head { display: flex; gap: .9rem; align-items: center; }
+.track-no { font-family: var(--pixel); font-size: 24px; line-height: 1; color: var(--mist); }
+.rtrack h3 { margin: 0; font-size: 1.3rem; line-height: 1.25; }
+.track-meta { margin: .2rem 0 0; color: var(--mist); font-size: .95rem; line-height: 1.4; }
+.level { display: inline-block; font-size: .8rem; font-weight: 600; line-height: 1.5; padding: 0 .45rem; margin-right: .5rem; color: var(--void); background: var(--copper); }
+.level.hard { background: var(--blood); }
+.level.extreme { background: var(--lantern); }
+.track-desc { color: var(--mist); margin: 0; font-size: 1rem; line-height: 1.55; }
+.track-maps { display: flex; gap: .5rem; }
+.track-map { flex: 1 1 0; min-width: 0; cursor: zoom-in; }
+.track-map img { width: 100%; height: 140px; object-fit: cover; object-position: center 35%; border: 1px solid var(--slate); }
+.track-map:hover img { border-color: var(--lantern); }
+.leaders { width: 100%; border-collapse: collapse; font-size: 1rem; margin-top: .2rem; }
+.leaders caption { text-align: left; font-family: var(--pixel); font-size: 12px; color: var(--lantern); padding-bottom: .45rem; }
+.leaders td { padding: .32rem .2rem; border-top: 1px solid var(--slate); overflow-wrap: anywhere; }
+.leaders td.rank { width: 2rem; color: var(--mist); font-family: var(--pixel); font-size: 12px; }
+.leaders td.time { text-align: right; white-space: nowrap; font-family: var(--pixel); font-size: 12px; }
+.leaders tr.record td { color: var(--lantern); }
+.leaders tr.record td.name { font-weight: 600; }
+.leaders td.muted { color: var(--mist); font-size: .95rem; }
+.races-note { color: var(--mist); font-size: .95rem; margin-top: 1rem; }

@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20260917">
+<link rel="stylesheet" href="style.css?v=20260917r">
 </head>
 <body>
 <a class="skip" href="#apply">Перейти к заявке</a>
@@ -38,6 +38,7 @@
       <a class="btn btn-quiet" href="#apply">Подать заявку</a>
       <a class="btn btn-quiet" href="https://discord.gg/sashawaify" target="_blank" rel="noopener">Discord</a>
     </div>
+    <p class="news"><a href="#races">Новое: гонки на&nbsp;мётлах и&nbsp;таблица рекордов&nbsp;→</a></p>
     <p class="dl-note">Архив 1,2&nbsp;ГБ, инструкция внутри. Нужен TLauncher с&nbsp;версией Forge 1.20.1. Играть можно после одобрения заявки.</p>
     <p class="live" hidden><span class="pulse" aria-hidden="true"></span><span class="live-text"></span></p>
   </div>
@@ -182,6 +183,46 @@
     </div>
   </section>
 
+  <section class="races" id="races">
+    <div class="col">
+      <p class="kicker">Новое на сервере</p>
+      <h2>Гонки на мётлах</h2>
+      <p>Три трассы из колец: над заливом и горами, среди колец-иголок и прямо сквозь нашу подземную базу. Мётлы у&nbsp;всех одинаковые, а&nbsp;судит сам сервер: засчитывает кольца по&nbsp;порядку, показывает дорогу к&nbsp;следующему, считает время и&nbsp;записывает рекорды.</p>
+      <p>Как попасть: на&nbsp;спавне шагни в&nbsp;портал «Лобби гонок». Окажешься на&nbsp;Пристани Бездны: оттуда порталы на&nbsp;первые две трассы, а&nbsp;третья стартует прямо с&nbsp;Пристани. Нажми табличку «Записаться», сядь на&nbsp;гоночную метлу у&nbsp;ворот, и&nbsp;отсчёт начнётся сам.</p>
+    </div>
+    <div class="race-hero">
+      <figure>
+        <button class="zoom" data-full="img/race-castle.webp" aria-label="Открыть крупно"><img src="img/race-castle.webp" width="1000" height="1014" loading="lazy" alt="Небесная цитадель на парящем острове: донжон со шпилем, башни с фиолетовыми крышами, водопады и маленькие островки вокруг"></button>
+        <figcaption>Небесная Цитадель. Кольца третьей трассы вьются спиралью вокруг донжона, а&nbsp;с&nbsp;острова в&nbsp;океан падают водопады.</figcaption>
+      </figure>
+      <figure>
+        <button class="zoom" data-full="img/race-hub.webp" aria-label="Открыть крупно"><img src="img/race-hub.webp" width="900" height="695" loading="lazy" alt="Пристань Бездны: парящая площадка с золотыми стартовыми воротами и тремя порталами"></button>
+        <figcaption>Пристань Бездны — лобби всех трасс. Золотые ворота третьей трассы и&nbsp;порталы на&nbsp;первую, вторую и&nbsp;на&nbsp;спавн.</figcaption>
+      </figure>
+    </div>
+    <ul class="tracks">
+      <li class="rtrack" data-track="1">
+        <div class="track-head"><span class="track-no">1</span><div><h3>Гонка Бездны</h3><p class="track-meta"><span class="level mid">средняя</span>12 больших колец · ~1700 блоков</p></div></div>
+        <p class="track-desc">Над заливом, волнами и&nbsp;открытым морем, через снежный перевал, пик на&nbsp;высоте 216, нырок к&nbsp;лесу и&nbsp;пролёт над крепостью.</p>
+        <div class="track-maps"><button class="zoom track-map" data-full="img/race-map-1.webp" aria-label="Карта трассы Гонка Бездны крупно"><img src="img/thumb/race-map-1.webp" loading="lazy" alt="Карта трассы Гонка Бездны"></button></div>
+        <table class="leaders"><caption>Лучшие времена</caption><tbody><tr><td colspan="3" class="muted">загружаем рекорды…</td></tr></tbody></table>
+      </li>
+      <li class="rtrack" data-track="2">
+        <div class="track-head"><span class="track-no">2</span><div><h3>Кошмар Бездны</h3><p class="track-meta"><span class="level hard">сложная</span>22 кольца-иголки · ~1100 блоков</p></div></div>
+        <p class="track-desc">Кольца в&nbsp;пять блоков: слалом над самой водой, «Свеча» вертикально вверх, штопор, пике и&nbsp;«Игольное ушко» в&nbsp;три блока.</p>
+        <div class="track-maps"><button class="zoom track-map" data-full="img/race-map-2.webp" aria-label="Карта трассы Кошмар Бездны крупно"><img src="img/thumb/race-map-2.webp" loading="lazy" alt="Карта трассы Кошмар Бездны"></button></div>
+        <table class="leaders"><caption>Лучшие времена</caption><tbody><tr><td colspan="3" class="muted">загружаем рекорды…</td></tr></tbody></table>
+      </li>
+      <li class="rtrack" data-track="3">
+        <div class="track-head"><span class="track-no">3</span><div><h3>Сквозь Бездну</h3><p class="track-meta"><span class="level extreme">очень сложная</span>67 колец · ~2850 блоков</p></div></div>
+        <p class="track-desc">Мёртвая петля и&nbsp;штопор у&nbsp;небесной цитадели, нырок по&nbsp;радужной трубе в&nbsp;базу, пещера, вокзал, тоннель туда и&nbsp;обратно и&nbsp;вознесение по&nbsp;трубе к&nbsp;финишу.</p>
+        <div class="track-maps"><button class="zoom track-map" data-full="img/race-map-3-sky.webp" aria-label="Небесная часть трассы Сквозь Бездну крупно"><img src="img/thumb/race-map-3-sky.webp" loading="lazy" alt="Небесная часть трассы Сквозь Бездну"></button><button class="zoom track-map" data-full="img/race-map-3-under.webp" aria-label="Подземная часть трассы Сквозь Бездну крупно"><img src="img/thumb/race-map-3-under.webp" loading="lazy" alt="Подземная часть трассы Сквозь Бездну"></button></div>
+        <table class="leaders"><caption>Лучшие времена</caption><tbody><tr><td colspan="3" class="muted">загружаем рекорды…</td></tr></tbody></table>
+      </li>
+    </ul>
+    <p class="races-note">Таблицы рекордов подтягиваются с&nbsp;сервера и&nbsp;обновляются раз в&nbsp;минуту.</p>
+  </section>
+
   <section class="server" id="server">
     <div class="col">
       <h2>Что есть на сервере</h2>
@@ -296,6 +337,6 @@
   <img alt="">
 </dialog>
 
-<script src="app.js?v=20260917" defer></script>
+<script src="app.js?v=20260917r" defer></script>
 </body>
 </html>

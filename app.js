@@ -158,6 +158,42 @@
       .catch(() => {});
   }
 
+  /* ---------- broom race leaderboards ---------- */
+  const racesSec = document.querySelector("#races");
+  if (racesSec) {
+    const fmtRace = (t) => {
+      t = Math.round(t * 10) / 10;
+      const m = Math.floor(t / 60);
+      return m + ":" + (t - m * 60).toFixed(1).padStart(4, "0");
+    };
+    const message = (tb, text) => {
+      tb.textContent = "";
+      const tr = document.createElement("tr"), td = document.createElement("td");
+      td.colSpan = 3; td.className = "muted"; td.textContent = text;
+      tr.appendChild(td); tb.appendChild(tr);
+    };
+    withTimeout(fetch(API + "/races", { cache: "no-store" }), 5000)
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((d) => {
+        (d.tracks || []).forEach((t) => {
+          const tb = racesSec.querySelector('.rtrack[data-track="' + t.id + '"] .leaders tbody');
+          if (!tb) return;
+          const top = (t.top || []).filter((r) => r && typeof r.name === "string").slice(0, 5);
+          if (!top.length) { message(tb, "Пока никто не финишировал. Стань первым."); return; }
+          tb.textContent = "";
+          top.forEach((r, i) => {
+            const tr = document.createElement("tr");
+            if (i === 0) tr.className = "record";
+            [["rank", String(i + 1)], ["name", r.name], ["time", fmtRace(r.time)]].forEach(([cls, text]) => {
+              const td = document.createElement("td"); td.className = cls; td.textContent = text; tr.appendChild(td);
+            });
+            tb.appendChild(tr);
+          });
+        });
+      })
+      .catch(() => racesSec.querySelectorAll(".leaders tbody").forEach((tb) => message(tb, "Рекорды сейчас недоступны, загляни позже.")));
+  }
+
   /* ---------- image viewer ---------- */
   const viewer = document.querySelector(".viewer");
   const vImg = viewer && viewer.querySelector("img");
