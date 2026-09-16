@@ -263,3 +263,10 @@ footer p { margin: 0 0 .4rem; }
 .leaders tr.record td.name { font-weight: 600; }
 .leaders td.muted { color: var(--mist); font-size: .95rem; }
 .races-note { color: var(--mist); font-size: .95rem; margin-top: 1rem; }
+
+.rewards { margin-top: 2.4rem; }
+.rewards h3 { font-family: var(--pixel); font-weight: 400; font-size: 16px; color: var(--lantern); margin: 0 0 1rem; }
+.reward-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem 1.6rem; margin: 0; }
+.reward-list > div { border-top: 1px solid var(--slate); padding-top: .8rem; }
+.reward-list dt { font-weight: 600; color: var(--pearl); margin-bottom: .25rem; }
+.reward-list dd { margin: 0; color: var(--mist); font-size: 1rem; line-height: 1.5; }
