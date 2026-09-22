@@ -244,16 +244,23 @@
     }
   });
 
-  /* ---------- respawn ---------- */
+  /* ---------- respawn: the countdown to season 2, and the button that leads there ---------- */
+  const timer = $(".s1-respawn span");
+  if (timer) {
+    const to = new Date(timer.dataset.to).getTime();
+    const pad = (n) => String(n).padStart(2, "0");
+    const tick = () => {
+      const left = to - Date.now();
+      if (left <= 0) { timer.textContent = "0 — сезон 2 уже идёт"; return; }
+      timer.textContent = `${Math.floor(left / 864e5)} дн ${pad(Math.floor(left / 36e5) % 24)}:${pad(Math.floor(left / 6e4) % 60)}:${pad(Math.floor(left / 1e3) % 60)}`;
+      setTimeout(tick, 1000 - (Date.now() % 1000) + 5);
+    };
+    tick();
+  }
   const respawn = $("#respawn");
-  if (respawn) respawn.addEventListener("click", (e) => {
+  if (respawn && !reduceMotion) respawn.addEventListener("click", (e) => {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
-    toast("Возрождение… Сезон 2 скоро");
-    if (reduceMotion || !stamp) return;
-    setTimeout(() => {
-      stamp.style.animation = "none"; void stamp.offsetWidth; stamp.style.animation = "";
-      setTimeout(thud, 1450);
-    }, 700);
+    toast("Возрождение…");
+    setTimeout(() => { window.location.href = respawn.href; }, 900);
   });
 })();

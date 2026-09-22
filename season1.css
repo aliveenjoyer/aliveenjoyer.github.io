@@ -36,6 +36,9 @@
 @keyframes save { to { width: 100%; } }
 .s1-save.done .s1-save-text { color: var(--copper); }
 .s1-press { margin: 0; }
+.s1-next { margin: 1.1rem 0 0; }
+.s1-next a { display: inline-block; font-family: var(--book); font-size: 1.05rem; color: var(--void); background: var(--lantern); padding: .45rem .85rem; text-decoration: none; box-shadow: 0 .22rem 0 var(--lantern-step); }
+.s1-next a:hover { background: #ffcb7d; color: var(--void); }
 .s1-press a { font-family: var(--pixel); font-size: 12px; color: var(--lantern); text-decoration: none; animation: blink 1.1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
@@ -295,6 +298,8 @@
 .s1-cause { color: #f3d7da; margin: 0 0 .6rem; }
 .s1-score-line { font-family: var(--pixel); font-size: 16px; color: #f3d7da; margin: 0 0 2rem; }
 .s1-score-line b { color: var(--lantern); font-weight: 400; }
+.s1-respawn { font-family: var(--pixel); font-size: 12px; line-height: 1.8; color: #f3d7da; margin: -1.2rem 0 2rem; }
+.s1-respawn span { color: var(--lantern); font-variant-numeric: tabular-nums; }
 .s1-death-btns { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 .s1-death-btns .btn { min-width: min(22rem, 100%); text-align: center; }
 .s1-death .btn-quiet { background: rgba(21, 18, 42, .55); }

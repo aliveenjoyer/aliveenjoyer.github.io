@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Whispers in the Void — Minecraft-сервер AliveEnjoyer</title>
-<meta name="description" content="Приватный хоррор-сервер Minecraft 1.20.1 на сборке Whispers in the Void: около 300 модов, русский перевод, голосовой чат и подземный оазис. Подай заявку в вайтлист.">
+<title>Whispers in the Void — сезонный Minecraft-сервер AliveEnjoyer</title>
+<meta name="description" content="Сезонный Minecraft-сервер для зрителей Twitch-стримеров, вход по вайтлисту. Сезон 1 закрыт, наш мир можно скачать. Сезон 2 стартует 1 октября: 21 день, команды и небо над облаками.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Whispers in the Void — приватный хоррор-сервер">
-<meta property="og:description" content="Около 300 модов, русский перевод, голосовой чат и светящийся оазис под землёй. Сервер AliveEnjoyer, играем со зрителями.">
+<meta property="og:title" content="Whispers in the Void — сезонный Minecraft-сервер">
+<meta property="og:description" content="Сезон 2 стартует 1 октября: 21 день, команды, небо над облаками и красная луна. Сервер AliveEnjoyer, играем со зрителями.">
 <meta property="og:image" content="https://mikolakiyv.github.io/whispers-in-the-void/img/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#15122a">
@@ -15,18 +15,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20260922b">
+<link rel="stylesheet" href="style.css?v=20260922h">
+<script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
 <a class="skip" href="#apply">Перейти к заявке</a>
 
 <header class="hero">
   <canvas class="ceiling" aria-hidden="true"></canvas>
+  <div class="s2-sky" aria-hidden="true"><span class="s2-moon"></span><span class="s2-ship"></span></div>
   <div class="hero-text">
-    <a class="season-banner" href="season1.html"><span class="sb-tag">Сезон 1 закрыт</span><span class="sb-text">Смотри итоги: боссы, рекорды гонок и&nbsp;зал славы</span><span class="sb-go" aria-hidden="true">→</span></a>
+    <p class="kicker hero-kicker">Сезонный Minecraft-сервер</p>
     <h1>Whispers in&nbsp;the&nbsp;Void</h1>
-    <p class="lede">Приватный хоррор-сервер на&nbsp;Minecraft 1.20.1. Наверху кто-то шепчет в&nbsp;темноте, а&nbsp;под землёй светится наш оазис.</p>
-    <p class="hosts">Сервер <b>AliveEnjoyer</b>, модератора следующих Twitch-каналов. Играем со&nbsp;зрителями.</p>
+    <p class="lede">Сервер для зрителей Twitch-стримеров. Вход по&nbsp;вайтлисту, а&nbsp;каждый сезон — новая сборка, новый мир и&nbsp;свой финал.</p>
+    <p class="hosts">Сервер <b>AliveEnjoyer</b>, модератора этих Twitch-каналов. Играем со&nbsp;зрителями.</p>
     <ul class="streamers" aria-label="Twitch-каналы, где AliveEnjoyer модератор">
       <li><a href="https://www.twitch.tv/sashawaify" target="_blank" rel="noopener">sashawaify</a></li>
       <li><a href="https://www.twitch.tv/qissme_" target="_blank" rel="noopener">QissMe_</a></li>
@@ -34,13 +36,20 @@
       <li><a href="https://www.twitch.tv/aiihosh1no" target="_blank" rel="noopener">aiihosh1no</a></li>
       <li><a href="https://www.twitch.tv/ezdok_nakomaze" target="_blank" rel="noopener">ezdok_nakomaze</a></li>
     </ul>
+    <div class="seasons">
+      <a class="season-banner" href="season1.html"><span class="sb-tag">Сезон 1 закрыт</span><span class="sb-text">Смотри итоги: боссы, рекорды гонок и&nbsp;зал славы</span><span class="sb-go" aria-hidden="true">→</span></a>
+      <span class="flow" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <a class="s2-card" href="#season2">
+        <span class="s2-tag">Сезон 2 · 1 октября</span>
+        <span class="s2-count" data-to="2026-10-01T00:00:00+03:00" aria-hidden="true"><b data-u="d">00</b><i>дн</i><b data-u="h">00</b><i>ч</i><b data-u="m">00</b><i>мин</i><b data-u="s">00</b><i>с</i></span>
+        <span class="s2-line">Что-то поднимается над облаками<span class="s2-cursor" aria-hidden="true">_</span></span>
+      </a>
+    </div>
     <div class="actions">
-      <a class="btn" href="https://173-249-26-11.sslip.io:8444/files/WhispersInTheVoid-client.zip" download>Скачать сборку</a>
-      <a class="btn btn-quiet" href="#apply">Подать заявку</a>
+      <a class="btn" href="#apply">Подать заявку</a>
+      <a class="btn btn-quiet" href="#world">Скачать мир 1&nbsp;сезона</a>
       <a class="btn btn-quiet" href="https://discord.gg/sashawaify" target="_blank" rel="noopener">Discord</a>
     </div>
-    <p class="dl-note">Архив 1,2&nbsp;ГБ, инструкция внутри. Нужен TLauncher с&nbsp;версией Forge 1.20.1. Играть можно после одобрения заявки.</p>
-    <p class="live" hidden><span class="pulse" aria-hidden="true"></span><span class="live-text"></span></p>
   </div>
   <figure class="hero-art">
     <img src="img/oasis.webp" srcset="img/oasis-1100.webp 1100w, img/oasis.webp 2200w" sizes="(max-width: 900px) 100vw, 1400px"
@@ -49,122 +58,118 @@
 </header>
 
 <main>
-  <section class="pack" id="pack">
+  <section class="about" id="about">
     <div class="col">
-      <h2>Что за сборка</h2>
-      <p>Whispers in the Void — это выживание на&nbsp;Forge 1.20.1, в&nbsp;котором примерно триста модов. Ночь здесь опаснее, чем кажется. В&nbsp;пещерах караулит Cave Dweller, в&nbsp;лесу за&nbsp;тобой ходит Сталкер, а&nbsp;звук шагов за&nbsp;спиной не&nbsp;всегда твой. Зато в&nbsp;мире много магии, данжей и&nbsp;странных измерений, куда можно сбежать.</p>
+      <h2>Как это устроено</h2>
+      <p>Мы&nbsp;не&nbsp;держим один мир годами. Каждый сезон — отдельная история: с&nbsp;началом, финалом и&nbsp;итогами.</p>
     </div>
-    <dl class="tags">
-      <div class="tag-row">
-        <dt>Кто бродит</dt>
-        <dd><ul class="chips">
-          <li>The End of Herobrine</li><li>Cave Dweller</li><li>Born in Chaos</li><li>Mutant Monsters</li><li>Arthropod Phobia</li>
-          <li>Undead Revamp</li><li>Opposing Force</li><li>Sons of Sins</li><li>Mowzie’s Mobs</li><li>Bosses of Mass Destruction</li><li>Aquamirae</li><li>The Graveyard</li>
-        </ul></dd>
-      </div>
-      <div class="tag-row">
-        <dt>Миры</dt>
-        <dd><ul class="chips realms">
-          <li style="--c:#8fd3ff">Everbright</li><li style="--c:#ffd27a">Everdawn</li><li style="--c:#7bd37a">Undergarden</li><li style="--c:#b28cff">The Midnight</li>
-          <li style="--c:#4ec2b8">Otherside</li><li style="--c:#f4b860">Bumblezone</li><li style="--c:#8a86aa">Deep Void</li><li style="--c:#6d6a8a">The Pit</li>
-          <li style="--c:#9b86c9">Afterdark</li><li style="--c:#554d78">Pure Dark</li><li style="--c:#c98a5a">The Crawling</li><li style="--c:#d7b98a">Webrooms</li>
-          <li style="--c:#e6d77a">Level 0</li><li style="--c:#d9774a">Boiler Room</li><li style="--c:#c65a6a">Прошлое</li><li style="--c:#e05a4a">Незер</li><li style="--c:#d9d2a0">Энд</li>
-        </ul></dd>
-      </div>
-      <div class="tag-row">
-        <dt>Магия и дела</dt>
-        <dd><ul class="chips">
-          <li>Ars Nouveau</li><li>Blood Magic</li><li>EvilCraft</li><li>FTB Quests</li><li>YUNG’s данжи</li><li>Dungeon Crawl</li><li>Towns and Towers</li>
-          <li>Farmer’s Delight</li><li>Sophisticated Backpacks</li><li>Waystones</li><li>Supplementaries</li><li>Lootr</li>
-        </ul></dd>
-      </div>
-      <div class="tag-row">
-        <dt>Атмосфера</dt>
-        <dd><ul class="chips">
-          <li>Sound Physics Remastered</li><li>AmbientSounds</li><li>Leon’s Spooky Music</li><li>VoidFog</li><li>Visuality</li><li>Enhanced Visuals</li>
-        </ul></dd>
-      </div>
+    <dl class="features four">
+      <div><dt>Сезоны</dt><dd>Каждый сезон начинается с&nbsp;чистого мира и&nbsp;идёт от&nbsp;одной до&nbsp;трёх недель. В&nbsp;конце — финал, итоги и&nbsp;зал славы, а&nbsp;мир мы&nbsp;выкладываем на&nbsp;скачивание.</dd></div>
+      <div><dt>Вайтлист</dt><dd>Заходят только те, чью заявку одобрил AliveEnjoyer. Гриферов нет, потому что их&nbsp;некому пустить.</dd></div>
+      <div><dt>Зрители стримеров</dt><dd>Играют зрители Twitch-каналов, где AliveEnjoyer модератор. Иногда заходят и&nbsp;сами стримеры.</dd></div>
+      <div><dt>На русском и&nbsp;с&nbsp;голосом</dt><dd>Каждую сборку переводим на&nbsp;русский. Голосовой чат со&nbsp;звуком в&nbsp;пространстве: в&nbsp;пещере эхо, за&nbsp;стеной тише.</dd></div>
     </dl>
   </section>
 
-  <section class="base" id="base">
+  <section class="archive" id="season1">
+    <p class="kicker">11–19 сентября 2026</p>
+    <h2>Сезон 1 <span class="stamp">Закрыт</span></h2>
+    <p class="intro">8 дней под землёй, 14 игроков, 492 смерти и&nbsp;ни&nbsp;одной пойманной рыбы.</p>
     <div class="col">
-      <h2>Наш дом под землёй</h2>
-      <p>Базу мы вырыли в&nbsp;глубинном сланце: пещера на&nbsp;двести блоков, озеро с&nbsp;фонтаном, колонны гномьей кладки и&nbsp;двадцать четыре дерева, которые растут прямо с&nbsp;потолка и&nbsp;светятся. Все картинки ниже отрисованы из&nbsp;настоящего мира сервера.</p>
+      <p>Первый сезон шёл на&nbsp;нашей хоррор-сборке Whispers in&nbsp;the&nbsp;Void: Forge 1.20.1, 262 мода и&nbsp;русский перевод. В&nbsp;пещерах караулил Cave Dweller, в&nbsp;лесу ходил Сталкер, а&nbsp;шаги за&nbsp;спиной не&nbsp;всегда были твоими. Поэтому мы&nbsp;ушли под землю и&nbsp;построили там свой оазис.</p>
+      <p>Сезон закончился 19&nbsp;сентября в&nbsp;22:47, когда последний игрок вышел с&nbsp;сервера. Боссы, рекорды гонок, номинации и&nbsp;зал славы собраны на&nbsp;странице итогов.</p>
+    </div>
+    <div class="actions">
+      <a class="btn" href="season1.html">Итоги сезона</a>
+      <a class="btn btn-quiet" href="#world">Скачать наш мир</a>
     </div>
 
+    <h3 class="h3">Что мы построили</h3>
+    <p class="sub-lead">Базу мы&nbsp;вырыли в&nbsp;глубинном сланце: пещера на&nbsp;двести блоков, озеро с&nbsp;фонтаном, колонны гномьей кладки и&nbsp;двадцать четыре дерева, которые растут прямо с&nbsp;потолка и&nbsp;светятся. А&nbsp;в&nbsp;небе над заливом висят Пристань Бездны и&nbsp;Небесная Цитадель для гонок на&nbsp;мётлах. Все картинки отрисованы из&nbsp;настоящего мира сервера.</p>
     <div class="carousel" role="region" aria-roledescription="карусель" aria-label="Постройки и скриншоты">
       <div class="track" tabindex="0">
-        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="1 из 11">
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="1 из 13">
           <button class="zoom" data-full="img/oasis-map.webp" aria-label="Открыть крупно">
             <img src="img/oasis-map.webp" width="1800" height="968" loading="eager" alt="План подземного оазиса без потолка: озеро, дорожки со светящимися камнями, колонны, усадьба и вокзал">
           </button>
           <figcaption>Оазис без потолка. В&nbsp;центре озеро с&nbsp;островом-фонтаном, справа усадьба, у&nbsp;южной стены вокзал.</figcaption>
         </figure>
-        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="2 из 11">
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="2 из 13">
           <button class="zoom" data-full="img/close-center.webp" aria-label="Открыть крупно">
             <img src="img/close-center.webp" width="1400" height="875" loading="lazy" alt="Фиолетовые светящиеся деревья свисают с потолка над озером, рядом радужная труба спуска">
           </button>
           <figcaption>Деревья Ars Nouveau и&nbsp;Blue Skies свисают над озером. Радужная труба рядом — вход на&nbsp;базу: прыгаешь сверху и&nbsp;падаешь в&nbsp;воду.</figcaption>
         </figure>
-        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="3 из 11">
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="3 из 13">
           <button class="zoom" data-full="img/close-east.webp" aria-label="Открыть крупно">
             <img src="img/close-east.webp" width="1400" height="875" loading="lazy" alt="Хрустальное дерево с сосульками из стержней Края и лунное дерево среди арок">
           </button>
           <figcaption>Хрустальное дерево с&nbsp;сосульками из&nbsp;стержней Края. Под каждой кроной фонари на&nbsp;цепях и&nbsp;гирлянды.</figcaption>
         </figure>
-        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="4 из 11">
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="4 из 13">
           <button class="zoom" data-full="img/station-ext.webp" aria-label="Открыть крупно">
             <img src="img/station-ext.webp" width="1050" height="820" loading="lazy" alt="Вокзал из глубинного сланца с медным сводом, витражным окном и часовой башней">
           </button>
           <figcaption>Вокзал «Оазис»: медный свод, витраж и&nbsp;часовая башня с&nbsp;колоколом.</figcaption>
         </figure>
-        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="5 из 11">
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="5 из 13">
           <button class="zoom" data-full="img/station-int.webp" aria-label="Открыть крупно">
             <img src="img/station-int.webp" width="1050" height="735" loading="lazy" alt="Вокзал без крыши: зал ожидания с мозаикой, кассы, буфет, платформы и паровоз">
           </button>
           <figcaption>Внутри кассы, буфет, два пути в&nbsp;тоннель и&nbsp;паровоз-экспонат «Гном-1». Вагонетки выдаёт автомат.</figcaption>
         </figure>
-        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="6 из 11">
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="6 из 13">
           <button class="zoom" data-full="img/manor-sw.webp" aria-label="Открыть крупно">
             <img src="img/manor-sw.webp" width="1092" height="856" loading="lazy" alt="Фахверковая усадьба с круглой башней, кирпичными дымоходами и садом за каменной оградой">
           </button>
           <figcaption>Усадьба «Дубовый Двор»: круглая башня, два камина, библиотека и&nbsp;сад с&nbsp;колодцем.</figcaption>
         </figure>
-        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="7 из 11">
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="7 из 13">
           <button class="zoom" data-full="img/manor-nw.webp" aria-label="Открыть крупно">
             <img src="img/manor-nw.webp" width="1092" height="791" loading="lazy" alt="Усадьба с другой стороны: башня со входом, крыльцо и терраса">
           </button>
           <figcaption>Та же усадьба с&nbsp;другой стороны: вход через башню и&nbsp;терраса с&nbsp;огородом.</figcaption>
         </figure>
-        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="8 из 11">
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="8 из 13">
           <button class="zoom" data-full="img/close-station.webp" aria-label="Открыть крупно">
             <img src="img/close-station.webp" width="1400" height="875" loading="lazy" alt="Крыша вокзала, усадьба и синие светящиеся деревья у южной стены пещеры">
           </button>
           <figcaption>Вокзал и&nbsp;усадьба на&nbsp;общем плане пещеры.</figcaption>
         </figure>
-        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="9 из 11">
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="9 из 13">
           <button class="zoom" data-full="img/shot-cave.webp" aria-label="Открыть крупно">
             <img src="img/shot-cave.webp" width="1100" height="780" loading="lazy" alt="Скриншот из игры: светящееся голубое дерево висит над поляной с грибами">
           </button>
           <figcaption>Оазис глазами игрока.</figcaption>
         </figure>
-        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="10 из 11">
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="10 из 13">
           <button class="zoom" data-full="img/shot-house.webp" aria-label="Открыть крупно">
             <img src="img/shot-house.webp" width="1260" height="820" loading="lazy" alt="Скриншот из игры: деревянный дом с табличкой «Дом QissMe» и игрок в алмазной броне">
           </button>
           <figcaption>Дом QissMe наверху, у&nbsp;спавна.</figcaption>
         </figure>
-        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="11 из 11">
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="11 из 13">
           <button class="zoom" data-full="img/shot-dog.webp" aria-label="Открыть крупно">
             <img src="img/shot-dog.webp" width="1280" height="785" loading="lazy" alt="Скриншот из игры: собака спит в каменной будке с табличками «Конура Тубистрон гера» и «Не кормить»">
           </button>
           <figcaption>Конура Тубистрона. Не&nbsp;кормить.</figcaption>
         </figure>
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="12 из 13">
+          <button class="zoom" data-full="img/race-hub.webp" aria-label="Открыть крупно">
+            <img src="img/race-hub.webp" width="900" height="695" loading="lazy" alt="Пристань Бездны: парящая площадка с золотыми стартовыми воротами и тремя порталами">
+          </button>
+          <figcaption>Пристань Бездны — лобби гонок на&nbsp;мётлах. Отсюда стартовали все три трассы.</figcaption>
+        </figure>
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="13 из 13">
+          <button class="zoom" data-full="img/race-castle.webp" aria-label="Открыть крупно">
+            <img src="img/race-castle.webp" width="1000" height="1014" loading="lazy" alt="Небесная цитадель на парящем острове: донжон со шпилем, башни с фиолетовыми крышами, водопады и маленькие островки вокруг">
+          </button>
+          <figcaption>Небесная Цитадель: около ста тысяч блоков в&nbsp;небе. Кольца третьей трассы вились спиралью вокруг донжона.</figcaption>
+        </figure>
       </div>
       <div class="car-nav">
         <button class="car-btn prev" aria-label="Предыдущий слайд">‹</button>
-        <span class="car-count" aria-live="polite">1 / 11</span>
+        <span class="car-count" aria-live="polite">1 / 13</span>
         <button class="car-btn next" aria-label="Следующий слайд">›</button>
       </div>
       <ul class="thumbs">
@@ -179,81 +184,181 @@
         <li><button class="thumb" data-i="8" aria-label="Слайд 9"><img src="img/thumb/shot-cave.webp" width="320" height="200" alt="" loading="lazy"></button></li>
         <li><button class="thumb" data-i="9" aria-label="Слайд 10"><img src="img/thumb/shot-house.webp" width="320" height="200" alt="" loading="lazy"></button></li>
         <li><button class="thumb" data-i="10" aria-label="Слайд 11"><img src="img/thumb/shot-dog.webp" width="320" height="200" alt="" loading="lazy"></button></li>
+        <li><button class="thumb" data-i="11" aria-label="Слайд 12"><img src="img/thumb/slide-hub.webp" width="320" height="200" alt="" loading="lazy"></button></li>
+        <li><button class="thumb" data-i="12" aria-label="Слайд 13"><img src="img/thumb/slide-castle.webp" width="320" height="200" alt="" loading="lazy"></button></li>
       </ul>
     </div>
-  </section>
 
-  <section class="races" id="races">
-    <div class="col">
-      <p class="kicker">Новое на сервере</p>
-      <h2>Гонки на мётлах</h2>
-      <p>Три трассы из колец: над заливом и горами, среди колец-иголок и прямо сквозь нашу подземную базу. Мётлы у&nbsp;всех одинаковые, а&nbsp;судит сам сервер: засчитывает кольца по&nbsp;порядку, показывает дорогу к&nbsp;следующему, считает время и&nbsp;записывает рекорды.</p>
-      <p>Как попасть: на&nbsp;спавне шагни в&nbsp;портал «Лобби гонок». Окажешься на&nbsp;Пристани Бездны: оттуда порталы на&nbsp;первые две трассы, а&nbsp;третья стартует прямо с&nbsp;Пристани. Нажми табличку «Записаться», сядь на&nbsp;гоночную метлу у&nbsp;ворот, и&nbsp;отсчёт начнётся сам.</p>
+    <div class="world" id="world">
+      <h3 class="h3">Скачай наш мир</h3>
+      <p>Весь мир первого сезона целиком, каким мы&nbsp;его оставили: оазис, вокзал, усадьба, Пристань Бездны, Небесная Цитадель, дома игроков и&nbsp;8 открытых измерений. Открывается в&nbsp;одиночной игре на&nbsp;сборке первого сезона.</p>
+      <div class="mc-world" aria-hidden="true">
+        <img src="img/s1-world-icon.png" width="64" height="64" alt="">
+        <p><b>Whispers in&nbsp;the Void · Сезон&nbsp;1</b><span>WhispersInTheVoid-S1 (19.09.2026, 22:47)</span><span>Режим выживания, Читы, Версия: 1.20.1</span></p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="https://173-249-26-11.sslip.io:8444/files/WhispersInTheVoid-S1-world.zip" download>Скачать мир · 3&nbsp;ГБ</a>
+        <a class="btn btn-quiet" href="https://173-249-26-11.sslip.io:8444/files/WhispersInTheVoid-client.zip" download>Сборка · 1,2&nbsp;ГБ</a>
+      </div>
+      <ol class="steps">
+        <li><b>Поставь сборку первого сезона.</b> В&nbsp;TLauncher выбери версию Forge 1.20.1&nbsp;-&nbsp;47.4.20, обычную, без OptiFine. Выдели игре 8&nbsp;ГБ памяти, запусти один раз и&nbsp;закрой. Потом открой папку игры («Настройки» → «Директория») и&nbsp;скопируй туда все папки из&nbsp;архива сборки. Старую папку mods с&nbsp;другими модами сначала удали.</li>
+        <li><b>Положи мир в&nbsp;saves.</b> Распакуй архив мира и&nbsp;перенеси папку WhispersInTheVoid-S1 в&nbsp;папку saves внутри папки игры.</li>
+        <li><b>Открой.</b> «Одиночная игра» → «Whispers in&nbsp;the Void · Сезон&nbsp;1». Мир большой, первая загрузка займёт пару минут. Координаты оазиса, Пристани и&nbsp;спавна лежат в&nbsp;README внутри архива.</li>
+      </ol>
+      <p class="world-note">Читы включены: <code>/gamemode spectator</code> — и&nbsp;можно облететь всё сквозь стены. Гонки, лобби и&nbsp;награды работали через сервер, поэтому трассы можно пролететь, но&nbsp;таймер не&nbsp;запустится.</p>
     </div>
-    <div class="race-hero">
-      <figure>
-        <button class="zoom" data-full="img/race-castle.webp" aria-label="Открыть крупно"><img src="img/race-castle.webp" width="1000" height="1014" loading="lazy" alt="Небесная цитадель на парящем острове: донжон со шпилем, башни с фиолетовыми крышами, водопады и маленькие островки вокруг"></button>
-        <figcaption>Небесная Цитадель. Кольца третьей трассы вьются спиралью вокруг донжона, а&nbsp;с&nbsp;острова в&nbsp;океан падают водопады.</figcaption>
-      </figure>
-      <figure>
-        <button class="zoom" data-full="img/race-hub.webp" aria-label="Открыть крупно"><img src="img/race-hub.webp" width="900" height="695" loading="lazy" alt="Пристань Бездны: парящая площадка с золотыми стартовыми воротами и тремя порталами"></button>
-        <figcaption>Пристань Бездны — лобби всех трасс. Золотые ворота третьей трассы и&nbsp;порталы на&nbsp;первую, вторую и&nbsp;на&nbsp;спавн.</figcaption>
-      </figure>
-    </div>
-    <ul class="tracks">
-      <li class="rtrack" data-track="1">
-        <div class="track-head"><span class="track-no">1</span><div><h3>Гонка Бездны</h3><p class="track-meta"><span class="level mid">средняя</span>12 больших колец · ~1700 блоков</p></div></div>
-        <p class="track-desc">Над заливом, волнами и&nbsp;открытым морем, через снежный перевал, пик на&nbsp;высоте 216, нырок к&nbsp;лесу и&nbsp;пролёт над крепостью.</p>
-        <div class="track-maps"><button class="zoom track-map" data-full="img/race-map-1.webp" aria-label="Карта трассы Гонка Бездны крупно"><img src="img/thumb/race-map-1.webp" loading="lazy" alt="Карта трассы Гонка Бездны"></button></div>
-        <table class="leaders"><caption>Лучшие времена</caption><tbody><tr><td colspan="3" class="muted">загружаем рекорды…</td></tr></tbody></table>
-      </li>
-      <li class="rtrack" data-track="2">
-        <div class="track-head"><span class="track-no">2</span><div><h3>Кошмар Бездны</h3><p class="track-meta"><span class="level hard">сложная</span>22 кольца-иголки · ~1100 блоков</p></div></div>
-        <p class="track-desc">Кольца в&nbsp;пять блоков: слалом над самой водой, «Свеча» вертикально вверх, штопор, пике и&nbsp;«Игольное ушко» в&nbsp;три блока.</p>
-        <div class="track-maps"><button class="zoom track-map" data-full="img/race-map-2.webp" aria-label="Карта трассы Кошмар Бездны крупно"><img src="img/thumb/race-map-2.webp" loading="lazy" alt="Карта трассы Кошмар Бездны"></button></div>
-        <table class="leaders"><caption>Лучшие времена</caption><tbody><tr><td colspan="3" class="muted">загружаем рекорды…</td></tr></tbody></table>
-      </li>
-      <li class="rtrack" data-track="3">
-        <div class="track-head"><span class="track-no">3</span><div><h3>Сквозь Бездну</h3><p class="track-meta"><span class="level extreme">очень сложная</span>67 колец · ~2850 блоков</p></div></div>
-        <p class="track-desc">Мёртвая петля и&nbsp;штопор у&nbsp;небесной цитадели, нырок по&nbsp;радужной трубе в&nbsp;базу, пещера, вокзал, тоннель туда и&nbsp;обратно и&nbsp;вознесение по&nbsp;трубе к&nbsp;финишу.</p>
-        <div class="track-maps"><button class="zoom track-map" data-full="img/race-map-3-sky.webp" aria-label="Небесная часть трассы Сквозь Бездну крупно"><img src="img/thumb/race-map-3-sky.webp" loading="lazy" alt="Небесная часть трассы Сквозь Бездну"></button><button class="zoom track-map" data-full="img/race-map-3-under.webp" aria-label="Подземная часть трассы Сквозь Бездну крупно"><img src="img/thumb/race-map-3-under.webp" loading="lazy" alt="Подземная часть трассы Сквозь Бездну"></button></div>
-        <table class="leaders"><caption>Лучшие времена</caption><tbody><tr><td colspan="3" class="muted">загружаем рекорды…</td></tr></tbody></table>
-      </li>
-    </ul>
-    <div class="rewards">
-      <h3>Награды</h3>
-      <dl class="reward-list">
-        <div><dt>Финиш</dt><dd>Раз в&nbsp;сутки на&nbsp;каждой трассе: до&nbsp;3500 опыта, до&nbsp;32 алмазов, незерит и&nbsp;зачарованные яблоки, на&nbsp;третьей трассе ещё шалкеровый ящик.</dd></div>
-        <div><dt>Личный рекорд</dt><dd>До&nbsp;трёх раз в&nbsp;сутки, если быстрее прошлого хотя&nbsp;бы на&nbsp;полсекунды: опыт, алмазы и&nbsp;незеритовые обломки.</dd></div>
-        <div><dt>Рекорд трассы</dt><dd>Кубок рекорда с&nbsp;именем и&nbsp;временем, до&nbsp;64 алмазов, 8 незеритовых слитков, звёзды Незера и&nbsp;тотемы бессмертия.</dd></div>
-        <div><dt>Первое прохождение</dt><dd>Печать трассы и&nbsp;бонус: книга «Починка», незерит, а&nbsp;за&nbsp;третью трассу элитры «Крылья Сквозь Бездну».</dd></div>
-        <div><dt>Три печати</dt><dd>Корона Бездны: незеритовый шлем с&nbsp;Защитой&nbsp;IV, Прочностью&nbsp;III, Починкой и&nbsp;подводными чарами.</dd></div>
+
+    <details class="s1-pack">
+      <summary>Что было в&nbsp;сборке первого сезона</summary>
+      <dl class="tags">
+        <div class="tag-row">
+          <dt>Кто бродит</dt>
+          <dd><ul class="chips">
+            <li>The End of Herobrine</li><li>Cave Dweller</li><li>Born in Chaos</li><li>Mutant Monsters</li><li>Arthropod Phobia</li>
+            <li>Undead Revamp</li><li>Opposing Force</li><li>Sons of Sins</li><li>Mowzie’s Mobs</li><li>Bosses of Mass Destruction</li><li>Aquamirae</li><li>The Graveyard</li>
+          </ul></dd>
+        </div>
+        <div class="tag-row">
+          <dt>Миры</dt>
+          <dd><ul class="chips realms">
+            <li style="--c:#8fd3ff">Everbright</li><li style="--c:#ffd27a">Everdawn</li><li style="--c:#7bd37a">Undergarden</li><li style="--c:#b28cff">The Midnight</li>
+            <li style="--c:#4ec2b8">Otherside</li><li style="--c:#f4b860">Bumblezone</li><li style="--c:#8a86aa">Deep Void</li><li style="--c:#6d6a8a">The Pit</li>
+            <li style="--c:#9b86c9">Afterdark</li><li style="--c:#554d78">Pure Dark</li><li style="--c:#c98a5a">The Crawling</li><li style="--c:#d7b98a">Webrooms</li>
+            <li style="--c:#e6d77a">Level 0</li><li style="--c:#d9774a">Boiler Room</li><li style="--c:#c65a6a">Прошлое</li><li style="--c:#e05a4a">Незер</li><li style="--c:#d9d2a0">Энд</li>
+          </ul></dd>
+        </div>
+        <div class="tag-row">
+          <dt>Магия и дела</dt>
+          <dd><ul class="chips">
+            <li>Ars Nouveau</li><li>Blood Magic</li><li>EvilCraft</li><li>FTB Quests</li><li>YUNG’s данжи</li><li>Dungeon Crawl</li><li>Towns and Towers</li>
+            <li>Farmer’s Delight</li><li>Sophisticated Backpacks</li><li>Waystones</li><li>Supplementaries</li><li>Lootr</li>
+          </ul></dd>
+        </div>
+        <div class="tag-row">
+          <dt>Атмосфера</dt>
+          <dd><ul class="chips">
+            <li>Sound Physics Remastered</li><li>AmbientSounds</li><li>Leon’s Spooky Music</li><li>VoidFog</li><li>Visuality</li><li>Enhanced Visuals</li>
+          </ul></dd>
+        </div>
       </dl>
-    </div>
-    <p class="races-note">Таблицы рекордов подтягиваются с&nbsp;сервера и&nbsp;обновляются раз в&nbsp;минуту.</p>
+    </details>
   </section>
 
-  <section class="server" id="server">
-    <div class="col">
-      <h2>Что есть на сервере</h2>
+  <section class="s2" id="season2">
+    <p class="kicker">Засекречено до&nbsp;1 октября</p>
+    <h2><span class="s2-glitch" data-text="Сезон 2">Сезон 2</span></h2>
+    <p class="s2-intro">21 день. Всё открыто с&nbsp;первой минуты. Легко не&nbsp;будет.</p>
+    <p class="s2-lead">Первый сезон мы&nbsp;провели под землёй. Второй начнётся там, куда в&nbsp;первом никто не&nbsp;долетел, — над облаками. Кое-что уже просочилось наружу.</p>
+
+    <div class="s2-leak rv">
+      <p class="s2-leak-h">Утечка из&nbsp;сборки<span class="s2-secret">Не для печати</span></p>
+      <dl>
+        <div><dt>Модов</dt><dd><span class="ap" aria-hidden="true">~</span><span class="sr">около </span>580</dd></div>
+        <div><dt>Квестов</dt><dd><span class="ap" aria-hidden="true">~</span><span class="sr">около </span>2&nbsp;000</dd></div>
+        <div><dt>Рас</dt><dd><span class="ap" aria-hidden="true">~</span><span class="sr">около </span>20</dd></div>
+        <div><dt>Классов</dt><dd>4</dd></div>
+        <div><dt>Боссов</dt><dd><span class="ap" aria-hidden="true">~</span><span class="sr">около </span>30</dd></div>
+        <div><dt>Дней</dt><dd>21</dd></div>
+      </dl>
+      <p class="s2-leak-f">Модов в&nbsp;два с&nbsp;лишним раза больше, чем в&nbsp;первом сезоне. Цифры примерные — точные узнаете 1&nbsp;октября.</p>
     </div>
-    <dl class="features">
-      <div><dt>Всё на русском</dt><dd>Мы перевели 75 модов, все квесты FTB и&nbsp;двадцать лорных книг Corail Tombstone. Язык включается в&nbsp;настройках игры.</dd></div>
-      <div><dt>Голосовой чат</dt><dd>Simple Voice Chat со&nbsp;звуком в&nbsp;пространстве: в&nbsp;пещере эхо, за&nbsp;стеной тише. Говорить на&nbsp;Caps Lock.</dd></div>
-      <div><dt>Без лагов</dt><dd>Отдельный сервер в&nbsp;Европе на&nbsp;8&nbsp;ядер и&nbsp;24&nbsp;ГБ памяти. Мир вокруг баз сгенерирован заранее.</dd></div>
-      <div><dt>Только свои</dt><dd>Вход по&nbsp;вайтлисту, до&nbsp;двенадцати игроков одновременно. Гриферов нет, потому что их&nbsp;некому пустить.</dd></div>
-      <div><dt>Удобные команды</dt><dd><code>/home</code> на&nbsp;три точки, <code>/tpa</code>, <code>/back</code>, <code>/spawn</code>, а&nbsp;ещё <code>/day</code>, <code>/night</code>, <code>/sun</code> и&nbsp;<code>/rain</code> для всех.</dd></div>
-      <div><dt>Мелочи</dt><dd>Сортировка сундуков средней кнопкой мыши, карта Journeymap, надгробия с&nbsp;вещами после смерти и&nbsp;общая ферма еды у&nbsp;спавна.</dd></div>
-    </dl>
+
+    <div class="s2-term rv">
+      <p class="s2-term-top"><i></i><i></i><i></i><span>Перехваченные передачи</span></p>
+      <div class="s2-term-body">
+        <p class="s2-head">&gt; перехват 21.09 · 23:14</p>
+        <p>…острова висят над облаками. Без опоры. На&nbsp;одном — храм, в&nbsp;храме горит свет…</p>
+        <p class="s2-head">&gt; перехват 22.09 · 02:07</p>
+        <p>Луна опять красная. Закрывайте ворота. Они идут волнами, до&nbsp;самого утра.</p>
+        <p class="s2-head">&gt; перехват 22.09 · 04:51</p>
+        <p>Шестерни держат. Корабль поднялся выше облаков. Главное — не&nbsp;смотреть вниз.</p>
+        <p class="s2-head">&gt; перехват 22.09 · 06:30</p>
+        <p>Сегодня выбирали, кем родиться. У&nbsp;меня теперь жабры. Дома сухо. Это ненадолго.</p>
+        <p class="s2-head">&gt; перехват ██.██ · ██:██</p>
+        <p>Если вы это читаете — старт 1&nbsp;октября. Не&nbsp;опаздывайте, связь пропа…</p>
+      </div>
+    </div>
+
+    <h3 class="s2-h3">Досье</h3>
+    <p class="s2-howto">Наведи на&nbsp;досье или нажми на&nbsp;него, чтобы расшифровать. Три новых откроются сами — 26, 28 и&nbsp;30&nbsp;сентября.</p>
+    <ul class="s2-files">
+      <li class="s2-file rv"><span class="s2-no">Досье 01</span><span class="s2-secret">Секретно</span><h3>Над облаками</h3>
+        <p data-secret>Выше облаков есть земля: острова без опоры, храмы и&nbsp;те, кто их&nbsp;охраняет. Дверь туда — рамка, которая светится.</p></li>
+      <li class="s2-file rv"><span class="s2-no">Досье 02</span><span class="s2-secret">Секретно</span><h3>Машины</h3>
+        <p data-secret>Шестерни, поезда, реакторы и&nbsp;цифровые склады. А&nbsp;потом — пропеллеры и&nbsp;воздушные шары. Ваши машины оторвутся от&nbsp;земли.</p></li>
+      <li class="s2-file rv"><span class="s2-no">Досье 03</span><span class="s2-secret">Секретно</span><h3>Кем родиться</h3>
+        <p data-secret>В&nbsp;первый день каждый выбирает расу: крылья, жабры, чешуя или тень. У&nbsp;каждой свои силы — и&nbsp;свои слабости.</p></li>
+      <li class="s2-file rv"><span class="s2-no">Досье 04</span><span class="s2-secret">Секретно</span><h3>Путь героя</h3>
+        <p data-secret>Четыре класса и&nbsp;ветки навыков. Оружие с&nbsp;редкостью, камнями и&nbsp;случайными свойствами. Мечи научатся комбо, а&nbsp;ты — перекатам.</p></li>
+      <li class="s2-file rv"><span class="s2-no">Досье 05</span><span class="s2-secret">Секретно</span><h3>Красная луна</h3>
+        <p data-secret>Иногда луна краснеет, и&nbsp;ночь становится длинной. А&nbsp;иногда они приходят сами — волнами, до&nbsp;утра. Стены лучше строить заранее.</p></li>
+      <li class="s2-file rv"><span class="s2-no">Досье 06</span><span class="s2-secret">Секретно</span><h3>Команды и&nbsp;золото</h3>
+        <p data-secret>Своя команда, общая земля и&nbsp;общий прогресс. Каждый босс, мир и&nbsp;победа — очки в&nbsp;зачёт. И&nbsp;монеты, за&nbsp;которые продаётся почти всё.</p></li>
+      <li class="s2-file rv"><span class="s2-no">Досье 07</span><span class="s2-secret">Секретно</span><h3>Ивенты</h3>
+        <p data-secret>Гонки там, где раньше летали только птицы. Рейды на&nbsp;боссов всем сервером. Турнир на&nbsp;арене. Финал — 17–18 октября.</p></li>
+      <li class="s2-file rv" data-unlock="2026-09-26T00:00:00+03:00" data-enc="0JIg0LPQvtGA0L7QtNCw0YUg0L/QvtGP0LLRj9GC0YHRjyDRgtC1LCDQutGC0L4g0YDQsNC30LTQsNGR0YIg0LfQsNC00LDQvdC40Y8uINCd0LUg0LLRgdC1INC40Lcg0L3QuNGFINC70Y7QtNC4LiDQntC00L3QuCDQv9C70LDRgtGP0YIg0LfQvtC70L7RgtC+0LwsINC00YDRg9Cz0LjQtSDigJQg0YfQtdC8LdGC0L4g0L/QvtGF0YPQttC1Lg=="><span class="s2-no">Досье 09</span><span class="s2-secret">Секретно</span><h3>Гильдии</h3>
+        <p data-secret>Откроется позже.</p></li>
+      <li class="s2-file rv" data-unlock="2026-09-28T00:00:00+03:00" data-enc="0JLQvtC30LTRg9GI0L3Ri9C5INGI0LDRgCwg0L/RgNC+0L/QtdC70LvQtdGAINC4INC90LXQvNC90L7Qs9C+INGB0LzQtdC70L7RgdGC0LguINCf0LXRgNCy0YvQuSDQutC+0YDQsNCx0LvRjCwg0LrQvtGC0L7RgNGL0Lkg0L/QvtC00L3QuNC80LXRgtGB0Y8g0LIg0L3QtdCx0L4sINGD0LLQuNC00LjRgiDQstC10YHRjCDRgdC10YDQstC10YAu"><span class="s2-no">Досье 10</span><span class="s2-secret">Секретно</span><h3>Флот</h3>
+        <p data-secret>Откроется позже.</p></li>
+      <li class="s2-file rv" data-unlock="2026-09-30T00:00:00+03:00" data-enc="0J/QtdGA0LLQsNGPINC90L7Rh9GMIOKAlCDRgdCw0LzQsNGPINC00LvQuNC90L3QsNGPLiDQn9C+0YHRgtCw0LLRjCDQutGA0L7QstCw0YLRjCDQtNC+INC30LDQutCw0YLQsCDQuCDQvdC1INC+0YLRhdC+0LTQuCDQtNCw0LvQtdC60L4g0L7RgiDRgdCy0L7QuNGFLiDQm9GD0L3QsCDQsdGD0LTQtdGCINC+0LHRi9GH0L3QvtC5LiDQndCw0LLQtdGA0L3QvtC1Lg=="><span class="s2-no">Досье 11</span><span class="s2-secret">Секретно</span><h3>Первая ночь</h3>
+        <p data-secret>Откроется позже.</p></li>
+      <li class="s2-file s2-deny rv"><span class="s2-no">Досье 12</span><span class="s2-secret">Совершенно секретно</span><h3>████████</h3>
+        <p data-secret>Об этом нельзя рассказывать до старта сезона, даже намёком.</p></li>
+    </ul>
+
+    <h3 class="s2-h3">Кем ты родишься?</h3>
+    <p class="s2-howto">Из&nbsp;примерно двадцати рас показываем шесть. Выбери свою — посмотрим 1&nbsp;октября, повезло ли с&nbsp;судьбой.</p>
+    <div class="s2-origins">
+      <button type="button" class="s2-origin rv" data-origin="sky"><b>Небесный</b><span>Небо — дом. Земля — временно.</span></button>
+      <button type="button" class="s2-origin rv" data-origin="sea"><b>Морской</b><span>Дышит под водой. Суша — не&nbsp;его стихия.</span></button>
+      <button type="button" class="s2-origin rv" data-origin="web"><b>Паучий</b><span>Стены — не&nbsp;препятствие.</span></button>
+      <button type="button" class="s2-origin rv" data-origin="fire"><b>Огненный</b><span>Огонь не&nbsp;страшен. Вода — очень даже.</span></button>
+      <button type="button" class="s2-origin rv" data-origin="scale"><b>Драконий</b><span>Чешуя крепче брони. Характер тоже.</span></button>
+      <button type="button" class="s2-origin rv" data-origin="shade"><b>Тень</b><span>Сильнее там, где темно.</span></button>
+    </div>
+    <p class="s2-origin-note" aria-live="polite">Описания предварительные — точные силы узнаешь на&nbsp;старте.</p>
+
+    <h3 class="s2-h3">Они ждут</h3>
+    <ul class="s2-bosses">
+      <li class="s2-boss rv" data-boss="valkyrie"><span class="s2-sil"></span><b class="s2-bname">Королева валькирий</b><span>Правит островами над облаками. Не&nbsp;любит, когда её&nbsp;будят.</span></li>
+      <li class="s2-boss rv" data-boss="sun"><span class="s2-sil"></span><b class="s2-bname">Солнечный дух</b><span>Живёт в&nbsp;храме выше всех. Горячий приём гарантирован.</span></li>
+      <li class="s2-boss rv" data-boss="leviathan"><span class="s2-sil"></span><b class="s2-bname">Левиафан</b><span>Глубоко под водой кто-то очень большой ждёт, когда вы&nbsp;спуститесь.</span></li>
+      <li class="s2-boss rv" data-boss="ignis"><span class="s2-sil"></span><b class="s2-bname">Игнис</b><span>Рыцарь в&nbsp;доспехах из&nbsp;огня. Проверит, из&nbsp;чего сделано ваше оружие.</span></li>
+    </ul>
+
+    <h3 class="s2-h3">Было → будет</h3>
+    <table class="s2-vs rv">
+      <thead><tr><th scope="col"></th><th scope="col">Сезон 1</th><th scope="col">Сезон 2</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Модов</th><td>262</td><td>~580</td></tr>
+        <tr><th scope="row">Длится</th><td>8 дней</td><td>21 день</td></tr>
+        <tr><th scope="row">Играем</th><td>каждый сам за&nbsp;себя</td><td>командами, с&nbsp;общим зачётом</td></tr>
+        <tr><th scope="row">Небо</th><td>пустое</td><td>обитаемое</td></tr>
+        <tr><th scope="row">Главный злодей</th><td>Паук-мотылёк</td><td>узнаете 1&nbsp;октября</td></tr>
+        <tr><th scope="row">Поймано рыбы</th><td>0</td><td>посмотрим</td></tr>
+      </tbody>
+    </table>
+
+    <ol class="s2-dates">
+      <li><b>1.10</b>старт</li><li><b>17–18.10</b>финал</li><li><b>21.10</b>итоги</li>
+    </ol>
+    <div class="actions">
+      <a class="btn" href="#apply">Хочу во&nbsp;второй сезон</a>
+      <a class="btn btn-quiet" href="https://discord.gg/sashawaify" target="_blank" rel="noopener">Первыми узнают в&nbsp;Discord</a>
+    </div>
+    <p class="s2-note">Ветераны первого сезона, наигравшие больше 10&nbsp;часов, уже в&nbsp;вайтлисте.</p>
   </section>
 
-  <section class="players" id="players" hidden>
+  <section class="join" id="join">
     <div class="col">
-      <h2>Жители</h2>
-      <p class="roster-sum"></p>
+      <h2>Как попасть во&nbsp;второй сезон</h2>
+      <ol class="steps">
+        <li><b>Подай заявку.</b> Форма ниже. Ник пиши точно как в&nbsp;TLauncher, с&nbsp;теми&nbsp;же большими и&nbsp;маленькими буквами. Ветеранам первого сезона, наигравшим больше 10&nbsp;часов, заявка не&nbsp;нужна: вы&nbsp;уже в&nbsp;вайтлисте.</li>
+        <li><b>Дождись ответа.</b> Заявки читает AliveEnjoyer и&nbsp;отвечает туда, куда ты&nbsp;укажешь. Новости сезона — в&nbsp;<a href="https://discord.gg/sashawaify" target="_blank" rel="noopener">Discord</a>.</li>
+        <li><b>Скачай сборку.</b> Сборку второго сезона и&nbsp;инструкцию выложим здесь перед стартом. Сборка первого сезона для него не&nbsp;подойдёт.</li>
+        <li><b>Заходи 1&nbsp;октября.</b> Адрес сервера будет в&nbsp;инструкции к&nbsp;сборке.</li>
+      </ol>
     </div>
-    <ol class="roster"></ol>
-    <p class="roster-note">Время в&nbsp;игре считает сам сервер, список обновляется раз в&nbsp;минуту.</p>
   </section>
 
   <section class="rules" id="rules">
@@ -269,23 +374,10 @@
     </div>
   </section>
 
-  <section class="join" id="join">
-    <div class="col">
-      <h2>Как установить</h2>
-      <ol class="steps">
-        <li><b>Скачай сборку.</b> В&nbsp;архиве все моды, русский перевод, клавиши голосового чата и&nbsp;подробная инструкция. <a href="https://173-249-26-11.sslip.io:8444/files/WhispersInTheVoid-client.zip" download>Скачать архив, 1,2&nbsp;ГБ</a></li>
-        <li><b>Поставь Forge.</b> В&nbsp;TLauncher выбери версию Forge 1.20.1&nbsp;-&nbsp;47.4.20, обычную, без OptiFine. Выдели игре 8&nbsp;ГБ памяти, запусти один раз и&nbsp;закрой.</li>
-        <li><b>Скопируй папки.</b> Открой папку игры: в&nbsp;TLauncher это «Настройки», пункт «Директория». Скопируй туда все папки из&nbsp;архива. Старую папку mods с&nbsp;другими модами сначала удали.</li>
-        <li><b>Подай заявку.</b> Форма ниже. Ник пиши точно как в&nbsp;TLauncher, с&nbsp;теми&nbsp;же большими и&nbsp;маленькими буквами.</li>
-        <li><b>Заходи.</b> Когда заявку одобрят, добавь сервер по&nbsp;адресу из&nbsp;инструкции в&nbsp;архиве. При входе согласись скачать ресурспак с&nbsp;переводом.</li>
-      </ol>
-    </div>
-  </section>
-
   <section class="apply" id="apply">
     <div class="col">
-      <h2>Заявка в&nbsp;вайтлист</h2>
-      <p class="form-note">Заявки читает AliveEnjoyer. Ник пиши точно так же, как в&nbsp;игре, с&nbsp;теми же большими и&nbsp;маленькими буквами. Вопросы можно задать в&nbsp;<a href="https://discord.gg/sashawaify" target="_blank" rel="noopener">Discord</a>.</p>
+      <h2>Заявка на&nbsp;второй сезон</h2>
+      <p class="form-note">Заявки читает AliveEnjoyer. Ник пиши точно так&nbsp;же, как в&nbsp;игре, с&nbsp;теми&nbsp;же большими и&nbsp;маленькими буквами. Вопросы можно задать в&nbsp;<a href="https://discord.gg/sashawaify" target="_blank" rel="noopener">Discord</a>.</p>
       <form id="wl-form" novalidate>
         <div class="field">
           <label for="f-nick">Ник в&nbsp;Minecraft</label>
@@ -317,7 +409,7 @@
         </div>
         <div class="field">
           <label for="f-about">Расскажи о&nbsp;себе</label>
-          <textarea id="f-about" name="about" rows="5" required minlength="10" maxlength="1000" placeholder="Как давно играешь, что любишь строить или исследовать, были ли уже хоррор-сборки"></textarea>
+          <textarea id="f-about" name="about" rows="5" required minlength="10" maxlength="1000" placeholder="Как давно играешь и что любишь: строить, исследовать, собирать механизмы или ходить на боссов"></textarea>
           <p class="err" data-for="about"></p>
         </div>
         <div class="hp" aria-hidden="true">
@@ -338,7 +430,7 @@
 
 <footer>
   <p>Сервер AliveEnjoyer, модератора Twitch-каналов sashawaify, QissMe_, skipsleeps, aiihosh1no и&nbsp;ezdok_nakomaze. Играем со&nbsp;зрителями. Вопросы можно задать в&nbsp;<a href="https://discord.gg/sashawaify" target="_blank" rel="noopener">Discord</a>.</p>
-  <p>Сборка Whispers in the Void для Minecraft 1.20.1.</p>
+  <p>Сезон 1 — сборка Whispers in the Void для Minecraft 1.20.1, <a href="season1.html">итоги сезона</a>. Сезон 2 — с&nbsp;1&nbsp;октября.</p>
   <p class="fine">Minecraft — торговая марка Mojang Studios. Сайт и&nbsp;сервер с&nbsp;Mojang не&nbsp;связаны.</p>
 </footer>
 
@@ -347,6 +439,7 @@
   <img alt="">
 </dialog>
 
-<script src="app.js?v=20260917w" defer></script>
+<script src="app.js?v=20260922a" defer></script>
+<script src="teaser.js?v=20260922f" defer></script>
 </body>
 </html>

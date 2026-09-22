@@ -46,7 +46,7 @@
   /* ---------- live status ---------- */
   const withTimeout = (p, ms) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), ms))]);
   const live = document.querySelector(".live");
-  withTimeout(fetch(API + "/status", { cache: "no-store" }), 5000)
+  if (live) withTimeout(fetch(API + "/status", { cache: "no-store" }), 5000)
     .then((r) => (r.ok ? r.json() : Promise.reject()))
     .then((s) => {
       if (s.up === true && !s.stale) {

@@ -1,0 +1,238 @@
+(() => {
+  "use strict";
+  // Season 2 teaser on the main page: countdown, sky, leaked numbers, intercepted transmissions, classified files
+  // (three of them open on their own on set days), a race picker, boss silhouettes and a couple of easter eggs.
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const SVG = "http://www.w3.org/2000/svg";
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
+  const sprite = (rows, pal) => {
+    const svg = document.createElementNS(SVG, "svg");
+    svg.setAttribute("viewBox", `0 0 ${rows[0].length} ${rows.length}`);
+    svg.setAttribute("aria-hidden", "true"); svg.setAttribute("shape-rendering", "crispEdges");
+    rows.forEach((row, y) => [...row].forEach((ch, x) => {
+      if (!pal[ch]) return;
+      const r = document.createElementNS(SVG, "rect");
+      r.setAttribute("x", x); r.setAttribute("y", y); r.setAttribute("width", 1); r.setAttribute("height", 1); r.setAttribute("fill", pal[ch]);
+      svg.appendChild(r);
+    }));
+    return svg;
+  };
+  const pad = (n) => String(n).padStart(2, "0");
+  const plural = (n, one, few, many) => {
+    const a = n % 10, b = n % 100;
+    return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 10 || b >= 20) ? few : many;
+  };
+  // base64 of UTF-8, so the texts of files that are not open yet are not lying in the page as plain words
+  const decode = (s) => { try { return decodeURIComponent(escape(atob(s))); } catch (e) { return ""; } };
+
+  let toastTimer;
+  const toast = (text) => {
+    let t = $(".s2-toast");
+    if (!t) { t = document.createElement("div"); t.className = "s2-toast"; t.setAttribute("role", "status"); document.body.appendChild(t); }
+    t.textContent = text; t.hidden = false;
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 3400);
+  };
+
+  /* ---------- reveal on scroll ---------- */
+  const onSeen = (els, fn, threshold = 0.2) => {
+    if (reduceMotion || !("IntersectionObserver" in window)) { els.forEach(fn); return; }
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (e.isIntersecting) { io.unobserve(e.target); fn(e.target); }
+    }), { threshold, rootMargin: "0px 0px -8% 0px" });
+    els.forEach((el) => io.observe(el));
+  };
+  $$(".rv").forEach((el) => {
+    const sibs = Array.from(el.parentElement.children).filter((c) => c.classList.contains("rv"));
+    el.style.setProperty("--i", Math.min(8, sibs.indexOf(el)));
+  });
+  onSeen($$(".rv"), (el) => el.classList.add("in"), 0.15);
+
+  /* ---------- countdown to 1 October, Moscow midnight ---------- */
+  const count = $(".s2-count");
+  if (count) {
+    const to = new Date(count.dataset.to).getTime();
+    const cell = (u) => count.querySelector(`[data-u="${u}"]`);
+    const tick = () => {
+      const left = to - Date.now();
+      if (left <= 0) { count.textContent = "Сезон 2 начался"; count.classList.add("s2-live"); return; }
+      cell("d").textContent = pad(Math.floor(left / 864e5));
+      cell("h").textContent = pad(Math.floor(left / 36e5) % 24);
+      cell("m").textContent = pad(Math.floor(left / 6e4) % 60);
+      cell("s").textContent = pad(Math.floor(left / 1e3) % 60);
+      setTimeout(tick, 1000 - (Date.now() % 1000) + 5);
+    };
+    tick();
+  }
+
+  /* ---------- sky: an airship with a logbook, and a moon that turns red if you insist ---------- */
+  const ship = $(".s2-ship");
+  if (ship) {
+    ship.appendChild(sprite([
+      "......aaaaaaaaaaaa......", "...aaabbbbbbbbbbbbaaa...", ".aabbbbccbbbbbbbbbbbbaa.", "aabbbbccbbbbbbbbbbbbbbaa",
+      ".aabbbbbbbbbbbbbbbbbbaa.", "...aaabbbbbbbbbbbbaaa...", "......aaaaaaaaaaaa......", ".........a....a.........",
+      "........dddddddd....e...", "........dffdffdd...eee..", "........dddddddd....e...", "........................",
+    ], { a: "#2a2446", b: "#3a3356", c: "#574e70", d: "#1e1a36", e: "#b7aecb", f: "#f4b860" }));
+    const log = ["Бортовой журнал, день 1: поднялись выше облаков. Под нами — ничего.",
+                 "День 3: заметили остров. На нём кто-то стоит и смотрит на нас.",
+                 "День 5: ночью луна была красной. Снизу доносился вой.",
+                 "День 7: топливо на исходе. Садимся 1 октября."];
+    let entry = 0;
+    ship.addEventListener("click", () => toast(log[entry++ % log.length]));
+  }
+  const moonRows = ["....aaaa....", "..aaaaaaaa..", ".aaaaaaaaaa.", ".aaabaaaaaa.", "aaaaaaaabaaa", "aaaaaaaaaaaa",
+                    "aabaaaaaaaaa", "aaaaaaabaaaa", ".aaaaaaaaaa.", ".aaaaabaaaa.", "..aaaaaaaa..", "....aaaa...."];
+  const moon = $(".s2-moon");
+  if (moon) {
+    const pale = sprite(moonRows, { a: "#e8e0c8", b: "#c9c0a6" }), red = sprite(moonRows, { a: "#e05a4a", b: "#a8323a" });
+    pale.setAttribute("class", "s2-moon-pale"); red.setAttribute("class", "s2-moon-red");
+    moon.append(pale, red);
+    let clicks = 0;
+    moon.addEventListener("click", () => {
+      if (++clicks < 3) return;
+      moon.classList.add("blood");
+      toast("Красная луна показалась раньше времени. Она придёт в первую же неделю.");
+    });
+  }
+
+  /* ---------- decrypting text: shared by the files and the boss names ---------- */
+  const GLYPHS = "█▓▒░#%&@$*+=?/<>";
+  const scramble = (el, target, done) => {
+    if (reduceMotion) { el.textContent = target; if (done) done(); return; }
+    const t0 = performance.now(), dur = 600 + target.length * 14;
+    const step = (t) => {
+      const k = Math.min(1, (t - t0) / dur), n = Math.floor(k * target.length);
+      let out = target.slice(0, n);
+      for (let i = n; i < target.length; i++) out += target[i] === " " ? " " : GLYPHS[(Math.random() * GLYPHS.length) | 0];
+      el.textContent = out;
+      if (k < 1) requestAnimationFrame(step); else if (done) done();
+    };
+    requestAnimationFrame(step);
+  };
+  const redact = (s) => s.replace(/\S/g, "█");
+  const onOpen = (card, fn) => {
+    card.tabIndex = 0;
+    card.addEventListener("mouseenter", fn);
+    card.addEventListener("focus", fn);
+    card.addEventListener("click", fn);
+    card.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fn(); } });
+  };
+
+  /* ---------- classified files ---------- */
+  $$(".s2-file").forEach((card) => {
+    const p = card.querySelector("[data-secret]");
+    if (!p) return;
+    const denied = card.classList.contains("s2-deny");
+    let real = p.textContent.trim().replace(/\s+/g, " ");
+    const unlock = card.dataset.unlock ? new Date(card.dataset.unlock).getTime() : 0;
+    if (unlock) {
+      if (Date.now() < unlock) {
+        // Not yet: say when, and keep the words out of the page.
+        const days = Math.ceil((unlock - Date.now()) / 864e5);
+        const date = new Date(unlock).toLocaleDateString("ru-RU", { day: "numeric", month: "long", timeZone: "Europe/Moscow" });
+        card.classList.add("s2-locked");
+        p.textContent = `Откроется ${date} — ${days === 1 ? "завтра" : `через ${days} ${plural(days, "день", "дня", "дней")}`}.`;
+        return;
+      }
+      real = decode(card.dataset.enc);
+      card.classList.add("s2-new");
+    }
+    const target = denied ? "Доступ закрыт до 1 октября." : real;
+    const sr = document.createElement("span"); sr.className = "sr"; sr.textContent = denied ? "Засекречено до 1 октября." : real;
+    const vis = document.createElement("span"); vis.className = "s2-enc"; vis.setAttribute("aria-hidden", "true"); vis.textContent = redact(real);
+    p.textContent = ""; p.append(sr, vis);
+    let busy = false, opened = false;
+    onOpen(card, () => {
+      if (busy || (opened && !denied)) return;
+      busy = true; card.classList.add("open");
+      scramble(vis, target, () => {
+        busy = false; opened = true;
+        if (denied) setTimeout(() => { vis.textContent = redact(real); card.classList.remove("open"); opened = false; }, 2400);
+      });
+    });
+  });
+
+  /* ---------- intercepted transmissions: typed out once they scroll into view ---------- */
+  const term = $(".s2-term-body");
+  if (term) {
+    const lines = $$("p", term).map((p) => ({ p, text: p.textContent }));
+    if (!reduceMotion) lines.forEach((l) => { l.p.textContent = ""; l.p.classList.add("waiting"); });
+    const cursor = document.createElement("span"); cursor.className = "s2-term-cursor"; cursor.textContent = "▌";
+    const type = (i) => {
+      if (i >= lines.length) { term.appendChild(cursor); return; }
+      const { p, text } = lines[i];
+      p.classList.remove("waiting");
+      let n = 0;
+      const next = () => {
+        p.textContent = text.slice(0, ++n);
+        if (n < text.length) setTimeout(next, p.classList.contains("s2-head") ? 12 : 22 + Math.random() * 30);
+        else setTimeout(() => type(i + 1), p.classList.contains("s2-head") ? 120 : 520);
+      };
+      next();
+    };
+    if (!reduceMotion) onSeen([term], () => type(0), 0.3); else term.appendChild(cursor);
+  }
+
+  /* ---------- who will you be born as: remembered on this device ---------- */
+  const EMBLEMS = {
+    sky: [["........", ".a....a.", "aa....aa", "aaa..aaa", ".aaaaaa.", "..aaaa..", "...aa...", "........"], { a: "#b9a6ff" }],
+    sea: [["........", "..a.....", ".aaa..a.", "aa.aaaa.", "........", "..a.....", ".aaa..a.", "aa.aaaa."], { a: "#6cd3b6" }],
+    web: [["a..a..a.", ".a.a.a..", "..aaa...", "aaaaaaa.", "..aaa...", ".a.a.a..", "a..a..a.", "........"], { a: "#ece6f7" }],
+    fire: [["...a....", "...aa...", "..aaa...", "..abaa..", ".aabbaa.", ".abbbba.", ".aabbaa.", "..aaaa.."], { a: "#e05a4a", b: "#f4b860" }],
+    scale: [["aa.aa.aa", "a.aa.aa.", "aa.aa.aa", ".aa.aa.a", "aa.aa.aa", "a.aa.aa.", "aa.aa.aa", "........"], { a: "#4ec2b8" }],
+    shade: [["..aaaa..", ".aaaaaa.", "aabaabaa", "aaaaaaaa", "aaaaaaaa", "aa.aa.aa", "a..a..a.", "........"], { a: "#554d78", b: "#ee8793" }],
+  };
+  const picker = $(".s2-origins");
+  if (picker) {
+    const note = $(".s2-origin-note");
+    const say = (name) => { note.textContent = `Твой выбор — ${name}. Запомнили на этом устройстве. Проверим 1 октября.`; };
+    let saved = null;
+    try { saved = localStorage.getItem("s2-origin"); } catch (e) { saved = null; }
+    $$(".s2-origin", picker).forEach((b) => {
+      const e = EMBLEMS[b.dataset.origin];
+      if (e) { const em = document.createElement("span"); em.className = "s2-emblem"; em.appendChild(sprite(e[0], e[1])); b.prepend(em); }
+      const name = b.querySelector("b").textContent;
+      if (saved === b.dataset.origin) { b.setAttribute("aria-pressed", "true"); say(name); }
+      else b.setAttribute("aria-pressed", "false");
+      b.addEventListener("click", () => {
+        $$(".s2-origin", picker).forEach((o) => o.setAttribute("aria-pressed", "false"));
+        b.setAttribute("aria-pressed", "true");
+        try { localStorage.setItem("s2-origin", b.dataset.origin); } catch (err) { /* private mode: just not remembered */ }
+        say(name);
+      });
+    });
+  }
+
+  /* ---------- they are waiting: boss silhouettes, names decrypt on hover ---------- */
+  const DARK = { a: "#221d3b", b: "#2c2650", c: "#e0703a", e: "#ee8793", s: "#f4b860" };
+  const SILHOUETTES = {
+    valkyrie: ["................", "......aaaa......", "......aeea......", "......aaaa......", ".bb....aa....bb.", ".bbb..aaaa..bbb.",
+               "..bbbbaaaabbbb..", "...bbbaaaabbb...", "....bbaaaabb....", "......aaaa......", "......aaaa......", ".....aa..aa.....",
+               ".....aa..aa.....", "....aa....aa....", "................", "................"],
+    sun: ["................", ".......s........", "...s...s...s....", "....s.....s.....", "......bbbb......", ".....bbbbbb.....",
+          "ss..bbebbebb..ss", "....bbbbbbbb....", "....bbbccbbb....", ".....bbbbbb.....", "......bbbb......", "....s.....s.....",
+          "...s...s...s....", ".......s........", "................", "................"],
+    leviathan: ["................", "..........aaa...", ".........aeeaa..", "........aaaaaa..", ".......aaa..a...", "......aaa.......",
+                ".....aaa........", "....aaa.....aa..", "...aaa.....aaaa.", "..aaa.....aa..a.", "..aa.....aa.....", "..aaa...aaa.....",
+                "...aaaaaaa......", "....aaaaa.......", "................", "................"],
+    ignis: ["...c........c...", "...cc......cc...", "....aaaaaaaa....", "....aeeaaeea....", "....aaaaaaaa....", "...bbbbbbbbbb...",
+            "..bbbbbbbbbbbb..", "..bb.bbbbbb.bb..", "..bb.bbbbbb.bb..", "..cc.bbbbbb.cc..", ".....bb..bb.....", ".....bb..bb.....",
+            "....bbb..bbb....", "................", "................", "................"],
+  };
+  $$(".s2-boss").forEach((card) => {
+    const rows = SILHOUETTES[card.dataset.boss];
+    if (rows) $(".s2-sil", card).appendChild(sprite(rows, DARK));
+    const nameEl = $(".s2-bname", card), name = nameEl.textContent.trim();
+    nameEl.setAttribute("aria-label", name);
+    nameEl.textContent = redact(name);
+    let shown = false;
+    onOpen(card, () => { if (shown) return; shown = true; card.classList.add("open"); scramble(nameEl, name); });
+  });
+
+  /* ---------- arriving by a link to the teaser: land on it even if fonts shifted the layout ---------- */
+  if (location.hash === "#season2") {
+    const land = () => { const el = document.getElementById("season2"); if (el && window.scrollY < 10) el.scrollIntoView({ block: "start" }); };
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => setTimeout(land, 0));
+  }
+})();
