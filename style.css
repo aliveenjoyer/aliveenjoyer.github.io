@@ -270,3 +270,28 @@ footer p { margin: 0 0 .4rem; }
 .reward-list > div { border-top: 1px solid var(--slate); padding-top: .8rem; }
 .reward-list dt { font-weight: 600; color: var(--pearl); margin-bottom: .25rem; }
 .reward-list dd { margin: 0; color: var(--mist); font-size: 1rem; line-height: 1.5; }
+
+/* ---------------- season banner: first thing on the page ---------------- */
+.season-banner {
+  display: inline-flex; align-items: stretch; max-width: 100%; margin: 0 0 1.8rem;
+  color: var(--pearl); text-decoration: none; background: rgba(30, 26, 54, .92);
+  border: 2px solid var(--blood); box-shadow: 0 0 1.6rem -.4rem rgba(238, 135, 147, .55), .3rem .3rem 0 #0d0b1b;
+}
+.season-banner:hover { color: #fff; border-color: var(--lantern); box-shadow: 0 0 2rem -.3rem rgba(244, 184, 96, .6), .3rem .3rem 0 #0d0b1b; }
+.season-banner:focus-visible { outline: 3px solid var(--lantern); outline-offset: 3px; }
+.sb-tag {
+  display: flex; align-items: center; gap: .6rem; padding: .75rem .9rem; white-space: nowrap;
+  font-family: var(--pixel); font-size: 12px; line-height: 1.5; text-transform: uppercase; color: var(--void); background: var(--blood);
+}
+.sb-tag::before { content: ""; flex: none; width: 8px; height: 8px; background: var(--void); animation: sb-blink 1.2s steps(1) infinite; }
+@keyframes sb-blink { 50% { opacity: 0; } }
+.season-banner:hover .sb-tag { background: var(--lantern); }
+.sb-text { display: flex; align-items: center; padding: .55rem .2rem .55rem .95rem; font-size: 1.08rem; line-height: 1.35; }
+.sb-go { display: flex; align-items: center; padding: 0 .95rem 0 .6rem; font-size: 1.5rem; line-height: 1; color: var(--lantern); transition: transform .2s; }
+.season-banner:hover .sb-go { transform: translateX(.3rem); }
+@media (max-width: 560px) {
+  .season-banner { flex-wrap: wrap; }
+  .sb-tag { flex: 1 0 100%; }
+  .sb-text { flex: 1 1 0; padding-left: .8rem; }
+}
+@media (prefers-reduced-motion: reduce) { .sb-tag::before { animation: none; } .sb-go { transition: none; } }
