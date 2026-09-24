@@ -102,19 +102,23 @@
   $$(".s2-file").forEach((card) => {
     const p = card.querySelector("[data-secret]");
     if (!p) return;
-    const denied = card.classList.contains("s2-deny");
+    let denied = card.classList.contains("s2-deny");
     let real = p.textContent.trim().replace(/\s+/g, " ");
     const unlock = card.dataset.unlock ? new Date(card.dataset.unlock).getTime() : 0;
-    if (unlock) {
-      if (Date.now() < unlock) {
-        // Not yet: say when, and keep the words out of the page.
-        const days = Math.ceil((unlock - Date.now()) / 864e5);
-        const date = new Date(unlock).toLocaleDateString("ru-RU", { day: "numeric", month: "long", timeZone: "Europe/Moscow" });
-        card.classList.add("s2-locked");
-        p.textContent = `Откроется ${date} — ${days === 1 ? "завтра" : `через ${days} ${plural(days, "день", "дня", "дней")}`}.`;
-        return;
-      }
+    if (unlock && Date.now() < unlock && !denied) {
+      // Not yet: say when, and keep the words out of the page.
+      const days = Math.ceil((unlock - Date.now()) / 864e5);
+      const date = new Date(unlock).toLocaleDateString("ru-RU", { day: "numeric", month: "long", timeZone: "Europe/Moscow" });
+      card.classList.add("s2-locked");
+      p.textContent = `Откроется ${date} — ${days === 1 ? "завтра" : `через ${days} ${plural(days, "день", "дня", "дней")}`}.`;
+      return;
+    }
+    if (unlock && Date.now() >= unlock) {
+      // Its day has come: the words (and for the top-secret file also the title) are decoded and the card moves up.
       real = decode(card.dataset.enc);
+      const h = card.querySelector("h3");
+      if (h && card.dataset.title) h.textContent = decode(card.dataset.title);
+      if (denied) { card.classList.remove("s2-deny"); denied = false; }
       card.classList.add("s2-new");
       if (openFiles && card.parentElement === lockedFiles) openFiles.appendChild(card);
     }
