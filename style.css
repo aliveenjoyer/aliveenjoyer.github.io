@@ -454,9 +454,52 @@ footer p { margin: 0 0 .4rem; }
 .s2-vs td:nth-child(3) { color: var(--lantern); font-weight: 600; }
 @media (max-width: 560px) { .s2-vs th, .s2-vs td { padding: .5rem .4rem; font-size: .95rem; } }
 
+/* the season map, declassified: numbers of the ten paths, live progress once the season is on, a way to the map page */
+.s2-map { display: grid; gap: 1.6rem 2.4rem; margin: 2.4rem 0 0; padding: 1.4rem 1.3rem 1.5rem;
+  background: radial-gradient(40rem 22rem at 100% 0%, rgba(108, 211, 182, .1), transparent 70%), var(--deep);
+  border: 2px solid var(--copper); box-shadow: 0 0 2.4rem -1.1rem var(--copper), .3rem .3rem 0 #0d0b1b; }
+@media (min-width: 1000px) { .s2-map { grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr); align-items: center; padding: 1.8rem 2rem; } }
+.s2-map-k { display: inline-block; margin: 0 0 .9rem; padding: .4rem .5rem .3rem; font-family: var(--pixel); font-size: 8px; line-height: 1; text-transform: uppercase;
+  color: var(--void); background: var(--copper); transform: rotate(-2deg); }
+.s2-map-h { margin: 0 0 .9rem; font-family: var(--pixel); font-weight: 400; font-size: 20px; line-height: 1.4; color: var(--pearl); }
+.s2-map-text > p:not(.s2-map-k) { color: var(--mist); font-size: 1.02rem; }
+.s2-map-bar { display: flex; gap: 3px; height: 12px; margin: 1.3rem 0 .8rem; }
+.s2-map-bar span { position: relative; flex: var(--n) 1 0; overflow: hidden; }
+.s2-map-bar span::before { content: ""; position: absolute; inset: 0; background: var(--c); opacity: .28; }
+.s2-map-bar span i { position: absolute; inset: 0 auto 0 0; width: var(--p, 0%); background: var(--c); box-shadow: 0 0 10px var(--c); transition: width 1s ease; }
+.s2-map-paths { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .25rem 1rem; }
+.s2-map-paths li { display: flex; align-items: center; gap: .45rem; color: var(--mist); font-size: .92rem; }
+.s2-map-paths li::before { content: ""; width: 8px; height: 8px; background: var(--c); }
+.s2-map-live { margin: 1.1rem 0 0; color: var(--lantern); font-size: 1rem; }
+.s2-map .actions { margin-top: 1.2rem; }
+.s2-map-shot { position: relative; display: block; overflow: hidden; background: #120f24; border: 2px solid var(--slate); transition: border-color .25s; }
+.s2-map-shot img { width: 100%; transition: transform .8s ease; }
+.s2-map-shot::after { content: "Демо"; position: absolute; right: .6rem; top: .6rem; padding: .35rem .45rem .25rem; font-family: var(--pixel); font-size: 8px; line-height: 1;
+  text-transform: uppercase; color: var(--void); background: var(--lantern); }
+.s2-map-shot:hover { border-color: var(--copper); }
+.s2-map-shot:hover img { transform: scale(1.035); }
+
+/* the season in dates */
+.s2-plan { list-style: none; margin: 1.4rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1.4rem .9rem; }
+.s2-plan li { position: relative; padding-top: 1.2rem; border-top: 2px solid var(--slate); }
+.s2-plan li::before { content: ""; position: absolute; left: 0; top: -6px; width: 10px; height: 10px; background: var(--lantern); box-shadow: 0 0 10px var(--lantern); }
+.s2-plan b { display: block; font-family: var(--pixel); font-weight: 400; font-size: 12px; line-height: 1.5; color: var(--lantern); }
+.s2-plan span { display: block; margin: .35rem 0 .25rem; font-weight: 600; font-size: 1.05rem; line-height: 1.3; }
+.s2-plan small { display: block; color: var(--mist); font-size: .95rem; line-height: 1.45; }
+.s2-plan .s2-plan-live::before { background: var(--blood); box-shadow: 0 0 10px var(--blood); }
+.s2-plan .s2-plan-live b { color: var(--blood); }
+@media (max-width: 640px) {
+  .s2-plan { grid-template-columns: 1fr; gap: 0; margin-left: 4px; border-left: 2px solid var(--slate); }
+  .s2-plan li { border-top: 0; padding: 0 0 1.2rem 1.2rem; }
+  .s2-plan li::before { left: -6px; top: .3rem; }
+}
+.s2-more { margin-top: 1rem; }
+
 @media (prefers-reduced-motion: reduce) {
   .js .rv { opacity: 1; transform: none; transition: none; }
   .s2-term-cursor, .s2-boss:hover .s2-sil, .s2-boss.open .s2-sil { animation: none; }
+  .s2-map-bar span i, .s2-map-shot img { transition: none; }
+  .s2-map-shot:hover img { transform: none; }
 }
 
 /* ---------------- landing: what the server is -> season 1 -> season 2 ---------------- */

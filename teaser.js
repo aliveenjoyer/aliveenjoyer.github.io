@@ -230,6 +230,43 @@
     onOpen(card, () => { if (shown) return; shown = true; card.classList.add("open"); scramble(nameEl, name); });
   });
 
+  /* ---------- the season map: days to the start, then live progress from the server (same data as the map page) ---------- */
+  const mapBox = $(".s2-map");
+  if (mapBox) {
+    const live = $(".s2-map-live", mapBox);
+    const start = Date.parse(mapBox.dataset.start), end = Date.parse(mapBox.dataset.end), now = Date.now();
+    if (now < start) {
+      // whole days, like the countdown in the header
+      const d = Math.floor((start - now) / 864e5);
+      live.textContent = `До старта ${d ? `${d} ${plural(d, "день", "дня", "дней")}` : "меньше суток"}. Прогресс появится 1 октября, а пока есть демо: так карта будет выглядеть в разгар сезона.`;
+    } else {
+      onSeen([mapBox], () => {
+        Promise.all([
+          fetch(mapBox.dataset.json).then((r) => r.json()),
+          fetch("https://173-249-26-11.sslip.io:8444/api/roadmap", { cache: "no-store" }).then((r) => r.json()),
+        ]).then(([R, P]) => {
+          const since = start / 1000, byId = {}, total = {}, got = {};
+          R.nodes.forEach((n) => { byId[n.id] = n; total[n.branch] = (total[n.branch] || 0) + 1; });
+          let opened = 0, last = null;
+          Object.entries(P.done || {}).forEach(([id, who]) => {
+            const n = byId[id], season = who.filter((e) => e[1] >= since);
+            if (!n || !season.length) return;
+            opened++; got[n.branch] = (got[n.branch] || 0) + 1;
+            const first = season.reduce((a, e) => (e[1] < a[1] ? e : a));
+            if (!last || first[1] > last.ts) last = { title: n.title, nick: first[0], ts: first[1] };
+          });
+          $$(".s2-map-bar span", mapBox).forEach((s) => s.querySelector("i").style.setProperty("--p", `${(100 * (got[s.dataset.b] || 0)) / (total[s.dataset.b] || 1)}%`));
+          const all = R.nodes.length;
+          if (Date.now() > end) live.textContent = `Сезон завершён: открыто ${opened} из ${all} вех.`;
+          else {
+            const day = Math.min(21, Math.floor((Date.now() - start) / 864e5) + 1);
+            live.textContent = `День ${day} из 21: открыто ${opened} из ${all} вех.` + (last ? ` Последняя новая — «${last.title}» (${last.nick}).` : "");
+          }
+        }).catch(() => { /* the server may be off: the static text stays */ });
+      }, 0.1);
+    }
+  }
+
   /* ---------- arriving by a link to the teaser: land on it even if fonts shifted the layout ---------- */
   if (location.hash === "#season2") {
     const land = () => { const el = document.getElementById("season2"); if (el && window.scrollY < 10) el.scrollIntoView({ block: "start" }); };

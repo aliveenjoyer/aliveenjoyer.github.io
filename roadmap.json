@@ -1,0 +1,4825 @@
+{
+ "season": {
+  "start": "2026-10-01T00:00:00+03:00",
+  "end": "2026-10-21T23:59:59+03:00",
+  "finals": [
+   "2026-10-17",
+   "2026-10-18"
+  ],
+  "columns": [
+   {
+    "id": 1,
+    "title": "Неделя 1",
+    "dates": "1–7 октября"
+   },
+   {
+    "id": 2,
+    "title": "Неделя 2",
+    "dates": "8–14 октября"
+   },
+   {
+    "id": 3,
+    "title": "Неделя 3",
+    "dates": "15–21 октября"
+   },
+   {
+    "id": 4,
+    "title": "Финал",
+    "dates": "17–18 октября"
+   }
+  ]
+ },
+ "tiers": {
+  "1": {
+   "name": "обычная",
+   "points": 10
+  },
+  "2": {
+   "name": "важная",
+   "points": 20
+  },
+  "3": {
+   "name": "трудная",
+   "points": 40
+  },
+  "4": {
+   "name": "эпическая",
+   "points": 80
+  },
+  "5": {
+   "name": "легендарная",
+   "points": 150
+  }
+ },
+ "branches": [
+  {
+   "id": "world",
+   "name": "Мир",
+   "color": "#7bd37a",
+   "desc": "Незер, Сумеречный лес, Звездосветье, Жужжилище и Энд: куда можно попасть и что там ждёт."
+  },
+  {
+   "id": "explore",
+   "name": "Исследование",
+   "color": "#f0975a",
+   "desc": "Клады, гробницы, подземелья и логова: всё, что спрятано в мире. Найденное логово ведёт к боссу."
+  },
+  {
+   "id": "boss",
+   "name": "Боссы",
+   "color": "#ee7a8e",
+   "desc": "Сумеречный лес, Cataclysm, Звездосветье, Bosses of Mass Destruction и ванильные чудовища."
+  },
+  {
+   "id": "power",
+   "name": "Сила",
+   "color": "#6cd3b6",
+   "desc": "Уровни мира Apotheosis, врата с волнами монстров и враждебность L2: чем сильнее ты, тем сильнее мир."
+  },
+  {
+   "id": "magic",
+   "name": "Магия",
+   "color": "#b28cff",
+   "desc": "Iron's Spells, Ars Nouveau, Occultism, Neo Vitae и Spectrum: книги, глифы, ритуалы и самоцветы."
+  },
+  {
+   "id": "sky",
+   "name": "Небо",
+   "color": "#8fd3ff",
+   "desc": "Эфир над облаками, его сокровищницы и свои дирижабли из Create: Aeronautics."
+  },
+  {
+   "id": "tech",
+   "name": "Механика",
+   "color": "#f4c35f",
+   "desc": "Create: от андезитового сплава и первого колеса до поездов между мирами."
+  },
+  {
+   "id": "industry",
+   "name": "Индустрия",
+   "color": "#a9b6c8",
+   "desc": "Mekanism, Applied Energistics, Modern Industrialization и PneumaticCraft: энергия, склады и роботы."
+  },
+  {
+   "id": "farm",
+   "name": "Хозяйство",
+   "color": "#c98a5a",
+   "desc": "Грядки, скотный двор, кухня, пивоварня и винодельня. Сытая команда живёт дольше."
+  },
+  {
+   "id": "trade",
+   "name": "Торговля",
+   "color": "#e6d77a",
+   "desc": "Монеты, лавки, банк, жители и маяк команды: экономика сервера и помощь соседям."
+  }
+ ],
+ "nodes": [
+  {
+   "id": "w_bed",
+   "branch": "world",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "minecraft:adventure/sleep_in_bed",
+   "game": "Спи, моя радость, усни",
+   "title": "Первая ночь",
+   "desc": "Поставь кровать до заката и поспи: так появится точка возрождения. Первая ночь самая длинная.",
+   "deps": [],
+   "icon": "minecraft:red_bed",
+   "iconFile": "minecraft__item_clock_32.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "w_iron",
+   "branch": "world",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "minecraft:story/obtain_armor",
+   "game": "Дресс-код",
+   "title": "Железная броня",
+   "desc": "Надень хоть один железный доспех. Без брони мобы с чертами L2 быстро отправят на респаун.",
+   "deps": [
+    "w_bed"
+   ],
+   "icon": "minecraft:iron_chestplate",
+   "iconFile": "minecraft__item_iron_chestplate.png",
+   "mod": "minecraft",
+   "req": "any"
+  },
+  {
+   "id": "w_diamond",
+   "branch": "world",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "minecraft:story/mine_diamond",
+   "game": "Алмазы!",
+   "title": "Алмазы",
+   "desc": "Нужны для кирки, чар и портала в Сумеречный лес.",
+   "deps": [
+    "w_iron"
+   ],
+   "icon": "minecraft:diamond",
+   "iconFile": "minecraft__item_diamond.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "w_nether",
+   "branch": "world",
+   "col": 1,
+   "tier": 2,
+   "points": 20,
+   "adv": "minecraft:story/enter_the_nether",
+   "game": "Огненные недра",
+   "title": "Незер",
+   "desc": "Портал из обсидиана. В Незере светокамень для Эфира, кварц и логова двух боссов Cataclysm.",
+   "deps": [
+    "w_diamond"
+   ],
+   "icon": "minecraft:flint_and_steel",
+   "iconFile": "minecraft__item_flint_and_steel.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "w_twilight",
+   "branch": "world",
+   "col": 1,
+   "tier": 2,
+   "points": 20,
+   "adv": "twilightforest:root",
+   "game": "The Twilight Forest",
+   "title": "Сумеречный лес",
+   "desc": "Брось алмаз в пруд, обсаженный цветами, и прыгай в портал вечных сумерек.",
+   "deps": [
+    "w_diamond"
+   ],
+   "icon": "twilightforest:twilight_portal_miniature_structure",
+   "iconFile": "twilightforest__item_magic_map_focus.png",
+   "mod": "twilightforest",
+   "req": "any"
+  },
+  {
+   "id": "w_bumble",
+   "branch": "world",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "the_bumblezone:teleportation/teleport_to_bumblezone_pearl",
+   "game": "Вторжение пчеломена!",
+   "title": "Жужжилище",
+   "desc": "Брось эндер-жемчуг в пчелиное гнездо — и ты в измерении пчёл: мёд, соты и очень сердитые рои.",
+   "deps": [],
+   "icon": "minecraft:ender_pearl",
+   "iconFile": "minecraft__item_ender_pearl.png",
+   "mod": "the_bumblezone",
+   "req": "all"
+  },
+  {
+   "id": "w_fortress",
+   "branch": "world",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "minecraft:nether/find_fortress",
+   "game": "Чертоги страха",
+   "title": "Крепость Незера",
+   "desc": "Стержни ифрита для зелий и черепа визер-скелетов для Визера.",
+   "deps": [
+    "w_nether"
+   ],
+   "icon": "minecraft:nether_bricks",
+   "iconFile": "minecraft__item_blaze_rod.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "w_starlight",
+   "branch": "world",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "eternal_starlight:root",
+   "game": "Вечное Звездосветье",
+   "title": "Звездосветье",
+   "desc": "Измерение вечной ночи со своими боссами, падающими звёздами и нереалиевой бронёй.",
+   "deps": [
+    "w_diamond"
+   ],
+   "icon": "eternal_starlight:lunar_log",
+   "iconFile": "eternal_starlight__item_blossom_of_stars.png",
+   "mod": "eternal_starlight",
+   "req": "all"
+  },
+  {
+   "id": "w_netherall",
+   "branch": "world",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "minecraft:nether/explore_nether",
+   "game": "Горящий тур",
+   "title": "Горящий тур",
+   "desc": "Побывай во всех пяти ванильных биомах Незера.",
+   "deps": [
+    "w_fortress"
+   ],
+   "icon": "minecraft:netherite_boots",
+   "iconFile": "minecraft__item_netherite_boots.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "w_end",
+   "branch": "world",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "minecraft:story/enter_the_end",
+   "game": "Конец?",
+   "title": "Энд",
+   "desc": "Найди крепость по очам Края и заполни портал.",
+   "deps": [
+    "w_fortress"
+   ],
+   "icon": "minecraft:end_stone",
+   "iconFile": "minecraft__item_ender_eye.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "w_dragon",
+   "branch": "world",
+   "col": 3,
+   "tier": 4,
+   "points": 80,
+   "adv": "minecraft:end/kill_dragon",
+   "game": "Освободите Энд",
+   "title": "Эндер-дракон",
+   "desc": "Освободи Энд: откроются внешние острова, элитры и уровень мира «Пик».",
+   "deps": [
+    "w_end"
+   ],
+   "icon": "minecraft:dragon_head",
+   "iconFile": "minecraft__item_dragon_breath.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "w_endcity",
+   "branch": "world",
+   "col": 4,
+   "tier": 3,
+   "points": 40,
+   "adv": "minecraft:end/find_end_city",
+   "game": "Будь как дома, путник",
+   "title": "Город Энда",
+   "desc": "Пурпурные башни на внешних островах: шалкеры, сундуки и корабль с элитрами.",
+   "deps": [
+    "w_dragon"
+   ],
+   "icon": "minecraft:purpur_block",
+   "iconFile": "minecraft__item_purpur_block.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "w_elytra",
+   "branch": "world",
+   "col": 4,
+   "tier": 3,
+   "points": 40,
+   "adv": "minecraft:end/elytra",
+   "game": "Где твои крылья?",
+   "title": "Элитры",
+   "desc": "Сними крылья с носа корабля Энда. Дальше весь мир — под тобой.",
+   "deps": [
+    "w_endcity"
+   ],
+   "icon": "minecraft:elytra",
+   "iconFile": "minecraft__item_elytra.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "x_chest",
+   "branch": "explore",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "lootr:1chest",
+   "game": "Крестом отмеченное место",
+   "title": "Первый клад",
+   "desc": "Открой сундук с добычей. С Lootr у каждого игрока в нём свои вещи, так что опоздавших не бывает.",
+   "deps": [],
+   "icon": "lootr:lootr_chest",
+   "iconFile": "minecraft__item_filled_map.png",
+   "mod": "lootr",
+   "req": "all"
+  },
+  {
+   "id": "x_catacombs",
+   "branch": "explore",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "betterdungeons:zombie_dungeon",
+   "game": "Когда был в Риме",
+   "title": "Склеп",
+   "desc": "Найди подземелье зомби из YUNG's Better Dungeons: гробницы, свечи и спавнеры.",
+   "deps": [],
+   "icon": "minecraft:rotten_flesh",
+   "iconFile": "minecraft__item_rotten_flesh.png",
+   "mod": "betterdungeons",
+   "req": "all"
+  },
+  {
+   "id": "x_frost",
+   "branch": "explore",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "yungscavebiomes:frosted_caves",
+   "game": "Охладите ваше путешествие",
+   "title": "Ледяные пещеры",
+   "desc": "Подземный биом под снежными землями: сосульки, голубой лёд и холодный свет.",
+   "deps": [],
+   "icon": "yungscavebiomes:icicle",
+   "iconFile": "yungscavebiomes__item_icicle.png",
+   "mod": "yungscavebiomes",
+   "req": "all"
+  },
+  {
+   "id": "x_temple",
+   "branch": "explore",
+   "col": 1,
+   "tier": 2,
+   "points": 20,
+   "adv": "betterdeserttemples:temple_entry",
+   "game": "Древняя гробница",
+   "title": "Древняя гробница",
+   "desc": "Спустись в пустынный храм YUNG's: ловушки, загадки, а в глубине — фараон.",
+   "deps": [],
+   "icon": "minecraft:golden_sword",
+   "iconFile": "minecraft__item_golden_sword.png",
+   "mod": "betterdeserttemples",
+   "req": "all"
+  },
+  {
+   "id": "x_trials",
+   "branch": "explore",
+   "col": 1,
+   "tier": 2,
+   "points": 20,
+   "adv": "minecraft:adventure/minecraft_trials_edition",
+   "game": "Minecraft: пробное издание",
+   "title": "Залы испытаний",
+   "desc": "Найди подземные залы испытаний: спавнеры, ключи и хранилища с наградой.",
+   "deps": [],
+   "icon": "minecraft:chiseled_tuff",
+   "iconFile": "minecraft__item_trial_key.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "x_pirate",
+   "branch": "explore",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "dungeons_arise:find_undead_pirate_ship",
+   "game": "Smoke On The Water",
+   "title": "Корабль мертвецов",
+   "desc": "Найди в море пиратский корабль нежити из When Dungeons Arise. Команда всё ещё на борту.",
+   "deps": [],
+   "icon": "minecraft:gunpowder",
+   "iconFile": "minecraft__item_oak_boat.png",
+   "mod": "dungeons_arise",
+   "req": "all"
+  },
+  {
+   "id": "x_forge",
+   "branch": "explore",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "cataclysm:find_soul_black_smith",
+   "game": "Кузня душ",
+   "title": "Кузня душ",
+   "desc": "Логово Незеритового чудища в Незере. Дорогу покажет Око чудовища.",
+   "deps": [
+    "w_nether"
+   ],
+   "icon": "minecraft:blackstone",
+   "iconFile": "cataclysm__item_monstrous_eye.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "x_arena",
+   "branch": "explore",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "cataclysm:find_burning_arena",
+   "game": "Огненная арена",
+   "title": "Огненная арена",
+   "desc": "Арена Игниса в Незере. Смотри, но пока не буди.",
+   "deps": [
+    "w_nether"
+   ],
+   "icon": "cataclysm:altar_of_fire",
+   "iconFile": "cataclysm__item_flame_eye.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "x_pyramid",
+   "branch": "explore",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "cataclysm:find_cursed_pyramid",
+   "game": "Проклятая пирамида",
+   "title": "Проклятая пирамида",
+   "desc": "Пирамида Cataclysm в пустыне: ядовитые дротики и спящие Древние Останки.",
+   "deps": [
+    "x_temple"
+   ],
+   "icon": "cataclysm:sandstone_poison_dart_trap",
+   "iconFile": "cataclysm__item_desert_eye.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "x_sunken",
+   "branch": "explore",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "cataclysm:find_sunken_city",
+   "game": "Затопленный город",
+   "title": "Затопленный город",
+   "desc": "Город на дне океана, дом Левиафана. Без водолазного костюма не спуститься.",
+   "deps": [
+    "t_diving"
+   ],
+   "icon": "cataclysm:stone_tiles",
+   "iconFile": "cataclysm__item_abyss_eye.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "x_pharaoh",
+   "branch": "explore",
+   "col": 2,
+   "tier": 3,
+   "points": 40,
+   "adv": "betterdeserttemples:temple_clear",
+   "game": "Вечный сон",
+   "title": "Вечный сон",
+   "desc": "Одолей фараона и сними проклятие с гробницы.",
+   "deps": [
+    "x_temple"
+   ],
+   "icon": "minecraft:totem_of_undying",
+   "iconFile": "minecraft__item_totem_of_undying.png",
+   "mod": "betterdeserttemples",
+   "req": "all"
+  },
+  {
+   "id": "x_vault",
+   "branch": "explore",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "minecraft:adventure/revaulting",
+   "game": "Непросто ларчик открывался",
+   "title": "Зловещее хранилище",
+   "desc": "Открой зловещее хранилище зловещим ключом — его дают за испытание под знамением.",
+   "deps": [
+    "x_trials"
+   ],
+   "icon": "minecraft:ominous_trial_key",
+   "iconFile": "minecraft__item_ominous_trial_key.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "x_prison",
+   "branch": "explore",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "cataclysm:find_frosted_prison",
+   "game": "Замороженная тюрьма",
+   "title": "Морозная тюрьма",
+   "desc": "Ледяная тюрьма, где за Дверью Печати заточён Маледиктус.",
+   "deps": [],
+   "icon": "cataclysm:door_of_seal",
+   "iconFile": "cataclysm__item_cursed_eye.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "x_factory",
+   "branch": "explore",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "cataclysm:find_ancient_factory",
+   "game": "Древняя цивилизация",
+   "title": "Древняя фабрика",
+   "desc": "Подземный завод исчезнувшей цивилизации. Там дремлет Предвестник.",
+   "deps": [],
+   "icon": "cataclysm:emp",
+   "iconFile": "cataclysm__item_mech_eye.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "x_acropolis",
+   "branch": "explore",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "cataclysm:find_acropolis",
+   "game": "Акрополь",
+   "title": "Акрополь",
+   "desc": "Руины над океаном, куда ведёт Око шторма. Там живёт Сцилла.",
+   "deps": [],
+   "icon": "cataclysm:lacrima",
+   "iconFile": "cataclysm__item_storm_eye.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "x_citadel",
+   "branch": "explore",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "cataclysm:find_ruined_citadel",
+   "game": "Разрушенная цитадель",
+   "title": "Разрушенная цитадель",
+   "desc": "Крепость Эндер-хранителя на островах Энда.",
+   "deps": [
+    "w_end"
+   ],
+   "icon": "cataclysm:chiseled_end_stone_bricks",
+   "iconFile": "cataclysm__item_void_eye.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "x_100",
+   "branch": "explore",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "lootr:100loot",
+   "game": "Сотка",
+   "title": "Сотка",
+   "desc": "Открой сто сундуков с добычей.",
+   "deps": [
+    "x_chest"
+   ],
+   "icon": "minecraft:netherite_block",
+   "iconFile": "minecraft__item_netherite_block.png",
+   "mod": "lootr",
+   "req": "all"
+  },
+  {
+   "id": "x_alldungeons",
+   "branch": "explore",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "betterdungeons:all_dungeons",
+   "game": "Профессиональный подземельщик",
+   "title": "Все подземелья",
+   "desc": "Побывай во всех четырёх видах подземелий YUNG's: зомби, скелеты, пауки и малые комнаты.",
+   "deps": [
+    "x_catacombs"
+   ],
+   "icon": "minecraft:diamond_sword",
+   "iconFile": "minecraft__item_diamond_sword.png",
+   "mod": "betterdungeons",
+   "req": "all"
+  },
+  {
+   "id": "b_naga",
+   "branch": "boss",
+   "col": 1,
+   "tier": 3,
+   "points": 40,
+   "adv": "twilightforest:progress_naga",
+   "game": "Время выровнять шансы",
+   "title": "Нага",
+   "desc": "Змея лесного двора — первый босс Сумеречного леса.",
+   "deps": [
+    "w_twilight"
+   ],
+   "icon": "twilightforest:naga_courtyard_miniature_structure",
+   "iconFile": "twilightforest__item_naga_scale.png",
+   "mod": "twilightforest",
+   "req": "any"
+  },
+  {
+   "id": "b_void",
+   "branch": "boss",
+   "col": 1,
+   "tier": 3,
+   "points": 40,
+   "adv": "bosses_of_mass_destruction:adventure/void_blossom_defeat",
+   "game": "Экстремальная прополка",
+   "title": "Цветок пустоты",
+   "desc": "Подземный хищный цветок. Посади пустотную лилию — она укажет, куда копать.",
+   "deps": [
+    "w_iron"
+   ],
+   "icon": "bosses_of_mass_destruction:void_lily",
+   "iconFile": "bosses_of_mass_destruction__block_void_lily.png",
+   "mod": "bosses_of_mass_destruction",
+   "req": "all"
+  },
+  {
+   "id": "b_lich",
+   "branch": "boss",
+   "col": 2,
+   "tier": 3,
+   "points": 40,
+   "adv": "twilightforest:progress_lich",
+   "game": "Вытаскивай своих мертвецов",
+   "title": "Лич",
+   "desc": "Вершина башни лича и его скипетры.",
+   "deps": [
+    "b_naga"
+   ],
+   "icon": "twilightforest:lich_tower_miniature_structure",
+   "iconFile": "twilightforest__item_twilight_scepter.png",
+   "mod": "twilightforest",
+   "req": "all"
+  },
+  {
+   "id": "b_minoshroom",
+   "branch": "boss",
+   "col": 2,
+   "tier": 3,
+   "points": 40,
+   "adv": "twilightforest:progress_labyrinth",
+   "game": "Легендарный Строганов",
+   "title": "Гриботавр",
+   "desc": "Хозяин лабиринта на болоте. С него падает строганов — съешь его, чтобы идти дальше.",
+   "deps": [
+    "b_lich"
+   ],
+   "icon": "twilightforest:minotaur_labyrinth_miniature_structure",
+   "iconFile": "twilightforest__item_cooked_meef.png",
+   "mod": "twilightforest",
+   "req": "all"
+  },
+  {
+   "id": "b_yeti",
+   "branch": "boss",
+   "col": 2,
+   "tier": 3,
+   "points": 40,
+   "adv": "twilightforest:progress_yeti",
+   "game": "Мех альфы",
+   "title": "Альфа-йети",
+   "desc": "Вожак стаи в ледяной пещере снежного леса.",
+   "deps": [
+    "b_lich"
+   ],
+   "icon": "twilightforest:alpha_yeti_fur",
+   "iconFile": "twilightforest__item_alpha_yeti_fur.png",
+   "mod": "twilightforest",
+   "req": "all"
+  },
+  {
+   "id": "b_gauntlet",
+   "branch": "boss",
+   "col": 2,
+   "tier": 3,
+   "points": 40,
+   "adv": "bosses_of_mass_destruction:nether/gauntlet_defeat",
+   "game": "Долой перчатку",
+   "title": "Перчатка Незера",
+   "desc": "Каменная рука на арене среди лавовых озёр Незера.",
+   "deps": [
+    "w_nether"
+   ],
+   "icon": "bosses_of_mass_destruction:gauntlet_blackstone",
+   "iconFile": "bosses_of_mass_destruction__block_gauntlet_blackstone.png",
+   "mod": "bosses_of_mass_destruction",
+   "req": "all"
+  },
+  {
+   "id": "b_monstrosity",
+   "branch": "boss",
+   "col": 2,
+   "tier": 4,
+   "points": 80,
+   "adv": "cataclysm:kill_monstrosity",
+   "game": "Сломанная машина войны Незера",
+   "title": "Незеритовое чудище",
+   "desc": "Сломанная машина войны в Кузне душ.",
+   "deps": [
+    "x_forge"
+   ],
+   "icon": "cataclysm:infernal_forge",
+   "iconFile": "cataclysm__item_lava_power_cell.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "b_wither",
+   "branch": "boss",
+   "col": 2,
+   "tier": 3,
+   "points": 40,
+   "adv": "minecraft:nether/summon_wither",
+   "game": "Чудо-юдо",
+   "title": "Визер",
+   "desc": "Призови и одолей. Звезда Незера нужна для маяка и уровня мира «Вершина».",
+   "deps": [
+    "w_fortress"
+   ],
+   "icon": "minecraft:nether_star",
+   "iconFile": "minecraft__item_nether_star.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "b_gatekeeper",
+   "branch": "boss",
+   "col": 2,
+   "tier": 3,
+   "points": 40,
+   "adv": "eternal_starlight:challenge_gatekeeper",
+   "game": "Разберись с этим!",
+   "title": "Привратник",
+   "desc": "Брось вызов Привратнику у руин портала — он охраняет путь в Звездосветье.",
+   "deps": [
+    "w_starlight"
+   ],
+   "icon": "minecraft:diamond_sword",
+   "iconFile": "eternal_starlight__item_orb_of_prophecy_inventory.png",
+   "mod": "eternal_starlight",
+   "req": "all"
+  },
+  {
+   "id": "b_hydra",
+   "branch": "boss",
+   "col": 3,
+   "tier": 4,
+   "points": 80,
+   "adv": "twilightforest:progress_hydra",
+   "game": "Убийца гидры",
+   "title": "Гидра",
+   "desc": "Трёхголовая хозяйка огненного болота.",
+   "deps": [
+    "b_minoshroom"
+   ],
+   "icon": "twilightforest:hydra_trophy",
+   "iconFile": "twilightforest__item_fiery_blood.png",
+   "mod": "twilightforest",
+   "req": "all"
+  },
+  {
+   "id": "b_knights",
+   "branch": "boss",
+   "col": 3,
+   "tier": 4,
+   "points": 80,
+   "adv": "twilightforest:progress_knights",
+   "game": "Адаптация к карминиту",
+   "title": "Рыцари-призраки",
+   "desc": "Шесть призраков в подземелье крепости гоблинов в тёмном лесу.",
+   "deps": [
+    "b_hydra"
+   ],
+   "icon": "twilightforest:knight_phantom_trophy",
+   "iconFile": "twilightforest__item_knightmetal_ingot.png",
+   "mod": "twilightforest",
+   "req": "all"
+  },
+  {
+   "id": "b_queen",
+   "branch": "boss",
+   "col": 3,
+   "tier": 4,
+   "points": 80,
+   "adv": "twilightforest:progress_glacier",
+   "game": "Чистое небо",
+   "title": "Снежная королева",
+   "desc": "Вершина дворца Авроры на леднике.",
+   "deps": [
+    "b_yeti"
+   ],
+   "icon": "twilightforest:snow_queen_trophy",
+   "iconFile": "twilightforest__item_ice_bomb.png",
+   "mod": "twilightforest",
+   "req": "all"
+  },
+  {
+   "id": "b_ignis",
+   "branch": "boss",
+   "col": 3,
+   "tier": 4,
+   "points": 80,
+   "adv": "cataclysm:kill_ignis",
+   "game": "Потушенный огонь",
+   "title": "Игнис",
+   "desc": "Рыцарь в огненных доспехах. Разбуди его пылающим пеплом на алтаре арены.",
+   "deps": [
+    "x_arena"
+   ],
+   "icon": "cataclysm:bulwark_of_the_flame",
+   "iconFile": "cataclysm__item_ignitium_ingot.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "b_leviathan",
+   "branch": "boss",
+   "col": 3,
+   "tier": 4,
+   "points": 80,
+   "adv": "cataclysm:kill_leviathan",
+   "game": "Межизмеренченский хищник",
+   "title": "Левиафан",
+   "desc": "Положи жертвоприношение бездне на глубинный алтарь затопленного города.",
+   "deps": [
+    "x_sunken"
+   ],
+   "icon": "cataclysm:tidal_claws",
+   "iconFile": "cataclysm__item_abyssal_sacrifice.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "b_harbinger",
+   "branch": "boss",
+   "col": 3,
+   "tier": 4,
+   "points": 80,
+   "adv": "cataclysm:kill_harbinger",
+   "game": "Древняя цивилизация",
+   "title": "Предвестник",
+   "desc": "Страж древней фабрики. Будится звездой Незера.",
+   "deps": [
+    "x_factory"
+   ],
+   "icon": "cataclysm:witherite_ingot",
+   "iconFile": "cataclysm__item_witherite_ingot.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "b_remnant",
+   "branch": "boss",
+   "col": 3,
+   "tier": 4,
+   "points": 80,
+   "adv": "cataclysm:kill_remnant",
+   "game": "Смерть всегда находит способ",
+   "title": "Древние Останки",
+   "desc": "Спят в проклятой пирамиде. Разбудишь пустынным ожерельем — пожалеешь.",
+   "deps": [
+    "x_pyramid"
+   ],
+   "icon": "cataclysm:remnant_skull",
+   "iconFile": "cataclysm__item_remnant_skull.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "b_maledictus",
+   "branch": "boss",
+   "col": 3,
+   "tier": 4,
+   "points": 80,
+   "adv": "cataclysm:kill_maledictus",
+   "game": "Крестовый поход против Проклятия",
+   "title": "Маледиктус",
+   "desc": "Призрак морозной тюрьмы. Дверь Печати открывает странный ключ.",
+   "deps": [
+    "x_prison"
+   ],
+   "icon": "cataclysm:cursed_tombstone",
+   "iconFile": "cataclysm__item_cursed_tombstone.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "b_golem",
+   "branch": "boss",
+   "col": 3,
+   "tier": 4,
+   "points": 80,
+   "adv": "eternal_starlight:kill_golem",
+   "game": "Древняя мудрость",
+   "title": "Звездосветный голем",
+   "desc": "Используй Ищущее око в Звездосветье, держа во второй руке редстоун.",
+   "deps": [
+    "b_gatekeeper"
+   ],
+   "icon": "eternal_starlight:chiseled_golem_steel_block",
+   "iconFile": "eternal_starlight__item_energy_sword.png",
+   "mod": "eternal_starlight",
+   "req": "all"
+  },
+  {
+   "id": "b_urghast",
+   "branch": "boss",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "twilightforest:progress_ur_ghast",
+   "game": "Слёзы огня",
+   "title": "Древний гаст",
+   "desc": "Хозяин тёмной башни и её карминитовых ловушек.",
+   "deps": [
+    "b_knights"
+   ],
+   "icon": "twilightforest:dark_tower_miniature_structure",
+   "iconFile": "twilightforest__item_fiery_tears.png",
+   "mod": "twilightforest",
+   "req": "all"
+  },
+  {
+   "id": "b_guardian",
+   "branch": "boss",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "cataclysm:kill_ender_guardian",
+   "game": "Это точно был шалкер?",
+   "title": "Эндер-хранитель",
+   "desc": "Страж разрушенной цитадели Энда.",
+   "deps": [
+    "x_citadel"
+   ],
+   "icon": "cataclysm:gauntlet_of_guard",
+   "iconFile": "cataclysm__item_gauntlet_of_guard.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "b_scylla",
+   "branch": "boss",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "cataclysm:kill_scylla",
+   "game": "Затишье после бури",
+   "title": "Сцилла",
+   "desc": "Повелительница шторма. Кликни по якорю на вершине Акрополя.",
+   "deps": [
+    "x_acropolis"
+   ],
+   "icon": "cataclysm:essence_of_the_storm",
+   "iconFile": "cataclysm__item_essence_of_the_storm.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "b_tf",
+   "branch": "boss",
+   "col": 4,
+   "tier": 5,
+   "points": 150,
+   "adv": "twilightforest:progress_merge",
+   "game": "Поразительное шоу",
+   "title": "Три короны",
+   "desc": "Гидра, Древний гаст и Снежная королева повержены — Сумеречный лес открывает высокогорье.",
+   "deps": [
+    "b_hydra",
+    "b_urghast",
+    "b_queen"
+   ],
+   "icon": "twilightforest:uberous_soil",
+   "iconFile": "minecraft__item_golden_helmet.png",
+   "mod": "twilightforest",
+   "req": "all"
+  },
+  {
+   "id": "b_cataclysm",
+   "branch": "boss",
+   "col": 4,
+   "tier": 5,
+   "points": 150,
+   "adv": "cataclysm:kill_all_bosses",
+   "game": "А конец ли?",
+   "title": "Конец Катаклизма",
+   "desc": "Все восемь боссов Cataclysm: Чудище, Игнис, Левиафан, Предвестник, Останки, Маледиктус, Эндер-хранитель и Сцилла.",
+   "deps": [
+    "b_guardian",
+    "b_scylla"
+   ],
+   "icon": "cataclysm:music_disc_the_cataclysmfarer",
+   "iconFile": "cataclysm__item_music_disc_the_cataclysmfarer.png",
+   "mod": "cataclysm",
+   "req": "all"
+  },
+  {
+   "id": "p_haven",
+   "branch": "power",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "apotheosis:progression/haven",
+   "game": "Уровень мира: Прибежище",
+   "title": "Первый аффикс",
+   "desc": "Найди предмет с редкостью и свойствами — мир перейдёт на уровень «Прибежище».",
+   "deps": [],
+   "icon": "minecraft:oak_sapling",
+   "iconFile": "minecraft__block_oak_sapling.png",
+   "mod": "apotheosis",
+   "req": "all"
+  },
+  {
+   "id": "p_hostile",
+   "branch": "power",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "l2hostility:hostility/kill_first",
+   "game": "Достойный противник",
+   "title": "Достойный противник",
+   "desc": "Убей моба с чертами. Чем дальше от спавна, тем их больше.",
+   "deps": [],
+   "icon": "minecraft:iron_sword",
+   "iconFile": "l2hostility__item_hostility_orb.png",
+   "mod": "l2hostility",
+   "req": "all"
+  },
+  {
+   "id": "p_detector",
+   "branch": "power",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "l2hostility:hostility/detector",
+   "game": "Компас безопасности",
+   "title": "Компас безопасности",
+   "desc": "Детектор враждебности покажет, насколько опасны мобы вокруг.",
+   "deps": [],
+   "icon": "l2hostility:hostility_detector",
+   "iconFile": "l2hostility__item_hostility_detector.png",
+   "mod": "l2hostility",
+   "req": "all"
+  },
+  {
+   "id": "p_frontier",
+   "branch": "power",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "apotheosis:progression/frontier",
+   "game": "Уровень мира: Рубеж",
+   "title": "Рубеж",
+   "desc": "Полный комплект снаряжения с аффиксами.",
+   "deps": [
+    "p_haven"
+   ],
+   "icon": "minecraft:iron_sword",
+   "iconFile": "minecraft__item_iron_sword.png",
+   "mod": "apotheosis",
+   "req": "all"
+  },
+  {
+   "id": "p_gwfrontier",
+   "branch": "power",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "apotheosis:gateways/frontier",
+   "game": "Покиньте Рубеж",
+   "title": "Врата Рубежа",
+   "desc": "Открой врата и выстои против волн монстров.",
+   "deps": [
+    "p_frontier"
+   ],
+   "icon": "gateways:gate_pearl",
+   "iconFile": "gateways__item_gate_pearl_small.png",
+   "mod": "apotheosis",
+   "req": "all"
+  },
+  {
+   "id": "p_5traits",
+   "branch": "power",
+   "col": 2,
+   "tier": 3,
+   "points": 40,
+   "adv": "l2hostility:hostility/kill_5_traits",
+   "game": "Легендарная битва",
+   "title": "Легендарная битва",
+   "desc": "Одолей моба с пятью чертами.",
+   "deps": [
+    "p_hostile"
+   ],
+   "icon": "minecraft:diamond_sword",
+   "iconFile": "l2hostility__item_chaos_ingot.png",
+   "mod": "l2hostility",
+   "req": "all"
+  },
+  {
+   "id": "p_ascent",
+   "branch": "power",
+   "col": 2,
+   "tier": 3,
+   "points": 40,
+   "adv": "apotheosis:progression/ascent",
+   "game": "Уровень мира: Восхождение",
+   "title": "Восхождение",
+   "desc": "Необычное снаряжение и побеждённый вторженец.",
+   "deps": [
+    "p_frontier"
+   ],
+   "icon": "minecraft:blaze_powder",
+   "iconFile": "minecraft__item_blaze_powder.png",
+   "mod": "apotheosis",
+   "req": "all"
+  },
+  {
+   "id": "p_envy",
+   "branch": "power",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "l2hostility:hostility/envy",
+   "game": "Я хочу это!",
+   "title": "Проклятие зависти",
+   "desc": "Добудь проклятие зависти — одно из проклятий L2 Hostility, которые меняют правила охоты.",
+   "deps": [
+    "p_5traits"
+   ],
+   "icon": "l2hostility:curse_of_envy",
+   "iconFile": "l2hostility__item_curio_curse_of_envy.png",
+   "mod": "l2hostility",
+   "req": "all"
+  },
+  {
+   "id": "p_gwascent",
+   "branch": "power",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "apotheosis:gateways/ascent",
+   "game": "Завершите Восхождение",
+   "title": "Врата Восхождения",
+   "desc": "Врата посерьёзнее: волны сильнее, награда богаче.",
+   "deps": [
+    "p_ascent",
+    "p_gwfrontier"
+   ],
+   "icon": "gateways:gate_pearl",
+   "iconFile": "gateways__item_gate_pearl_med.png",
+   "mod": "apotheosis",
+   "req": "all"
+  },
+  {
+   "id": "p_summit",
+   "branch": "power",
+   "col": 3,
+   "tier": 4,
+   "points": 80,
+   "adv": "apotheosis:progression/summit",
+   "game": "Уровень мира: Вершина",
+   "title": "Вершина",
+   "desc": "Убей Визера и приоденься в редкое.",
+   "deps": [
+    "p_ascent",
+    "b_wither"
+   ],
+   "icon": "minecraft:netherite_sword",
+   "iconFile": "minecraft__item_netherite_ingot.png",
+   "mod": "apotheosis",
+   "req": "all"
+  },
+  {
+   "id": "p_10traits",
+   "branch": "power",
+   "col": 3,
+   "tier": 4,
+   "points": 80,
+   "adv": "l2hostility:hostility/kill_10_traits",
+   "game": "Убийца легенд",
+   "title": "Убийца легенд",
+   "desc": "Одолей моба с десятью чертами.",
+   "deps": [
+    "p_5traits"
+   ],
+   "icon": "minecraft:netherite_sword",
+   "iconFile": "l2hostility__item_miracle_ingot.png",
+   "mod": "l2hostility",
+   "req": "all"
+  },
+  {
+   "id": "p_gwsummit",
+   "branch": "power",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "apotheosis:gateways/summit",
+   "game": "Достигните Вершины",
+   "title": "Врата Вершины",
+   "desc": "Последние врата перед Пиком.",
+   "deps": [
+    "p_summit",
+    "p_gwascent"
+   ],
+   "icon": "gateways:gate_pearl",
+   "iconFile": "gateways__item_gate_pearl_large.png",
+   "mod": "apotheosis",
+   "req": "all"
+  },
+  {
+   "id": "p_pinnacle",
+   "branch": "power",
+   "col": 4,
+   "tier": 5,
+   "points": 150,
+   "adv": "apotheosis:progression/pinnacle",
+   "game": "Уровень мира: Пик",
+   "title": "Пик",
+   "desc": "Освободи Энд и собери эпический комплект.",
+   "deps": [
+    "p_summit",
+    "w_dragon"
+   ],
+   "icon": "minecraft:end_crystal",
+   "iconFile": "minecraft__item_end_crystal.png",
+   "mod": "apotheosis",
+   "req": "all"
+  },
+  {
+   "id": "g_book",
+   "branch": "magic",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "irons_spellbooks:irons_spellbooks/spell_book_equip",
+   "game": "Колдунство",
+   "title": "Книга заклинаний",
+   "desc": "Путь мага в Iron's Spells начинается с первой книжки.",
+   "deps": [],
+   "icon": "irons_spellbooks:copper_spell_book",
+   "iconFile": "irons_spellbooks__item_copper_spell_book.png",
+   "mod": "irons_spellbooks",
+   "req": "all"
+  },
+  {
+   "id": "g_ink",
+   "branch": "magic",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "irons_spellbooks:irons_spellbooks/make_inscription_table",
+   "game": "Чудной писарь",
+   "title": "Начертательный стол",
+   "desc": "Вписывай свитки в книгу заклинаний.",
+   "deps": [
+    "g_book"
+   ],
+   "icon": "irons_spellbooks:inscription_table",
+   "iconFile": "irons_spellbooks__block_inscription_table_top.png",
+   "mod": "irons_spellbooks",
+   "req": "all"
+  },
+  {
+   "id": "g_ars",
+   "branch": "magic",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "ars_nouveau:novice_spell_book",
+   "game": "Нерушимость X",
+   "title": "Ars Nouveau",
+   "desc": "Книга посвящённого: собирай свои заклинания из глифов.",
+   "deps": [],
+   "icon": "ars_nouveau:novice_spell_book",
+   "iconFile": "ars_nouveau__item_worn_notebook.png",
+   "mod": "ars_nouveau",
+   "req": "all"
+  },
+  {
+   "id": "g_source",
+   "branch": "magic",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "ars_nouveau:source_jar",
+   "game": "Не жидкость!",
+   "title": "Кувшин истока",
+   "desc": "Магическая энергия Ars Nouveau — исток — хранится в кувшинах.",
+   "deps": [
+    "g_ars"
+   ],
+   "icon": "ars_nouveau:source_jar",
+   "iconFile": "ars_nouveau__item_source_gem.png",
+   "mod": "ars_nouveau",
+   "req": "all"
+  },
+  {
+   "id": "g_shard",
+   "branch": "magic",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "spectrum:collect_any_basic_shard",
+   "game": "Предвкушение",
+   "title": "Самоцвет Спектра",
+   "desc": "Найди первый самоцвет Spectrum — топаз, аметист или цитрин из жеоды.",
+   "deps": [],
+   "icon": "minecraft:amethyst_shard",
+   "iconFile": "minecraft__item_amethyst_shard.png",
+   "mod": "spectrum",
+   "req": "all"
+  },
+  {
+   "id": "g_scroll",
+   "branch": "magic",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "irons_spellbooks:irons_spellbooks/make_scroll_forge",
+   "game": "Библиотекарь новой эры",
+   "title": "Кузница свитков",
+   "desc": "Создавай свитки заклинаний сам, из чернил и бумаги.",
+   "deps": [
+    "g_ink"
+   ],
+   "icon": "irons_spellbooks:scroll_forge",
+   "iconFile": "irons_spellbooks__item_scroll_fire.png",
+   "mod": "irons_spellbooks",
+   "req": "all"
+  },
+  {
+   "id": "g_mage",
+   "branch": "magic",
+   "col": 2,
+   "tier": 3,
+   "points": 40,
+   "adv": "irons_spellbooks:irons_spellbooks/spell_book_diamond",
+   "game": "Умелый чародей",
+   "title": "Умелый чародей",
+   "desc": "Алмазная книга: больше слотов для заклинаний.",
+   "deps": [
+    "g_ink"
+   ],
+   "icon": "irons_spellbooks:diamond_spell_book",
+   "iconFile": "irons_spellbooks__item_diamond_spell_book.png",
+   "mod": "irons_spellbooks",
+   "req": "all"
+  },
+  {
+   "id": "g_apparatus",
+   "branch": "magic",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "ars_nouveau:enchanting_apparatus",
+   "game": "Механика магического мода",
+   "title": "Чародейский аппарат",
+   "desc": "Сердце мастерской Ars Nouveau.",
+   "deps": [
+    "g_source"
+   ],
+   "icon": "ars_nouveau:enchanting_apparatus",
+   "iconFile": "ars_nouveau__item_source_gem.png",
+   "mod": "ars_nouveau",
+   "req": "all"
+  },
+  {
+   "id": "g_brazier",
+   "branch": "magic",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "ars_nouveau:ritual_brazier",
+   "game": "Наглец",
+   "title": "Ритуальная жаровня",
+   "desc": "Ритуалы Ars Nouveau: от погоды до призыва.",
+   "deps": [
+    "g_source"
+   ],
+   "icon": "ars_nouveau:ritual_brazier",
+   "iconFile": "ars_nouveau__block_ritual_brazier.png",
+   "mod": "ars_nouveau",
+   "req": "all"
+  },
+  {
+   "id": "g_occult",
+   "branch": "magic",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "occultism:occultism/familiar/root",
+   "game": "Occultism: друзья",
+   "title": "Оккультизм",
+   "desc": "Первый ритуал призыва: духи и фамильяры работают на тебя.",
+   "deps": [],
+   "icon": "occultism:pentacle_possess",
+   "iconFile": "occultism__item_ritual_dummy_possess.png",
+   "mod": "occultism",
+   "req": "all"
+  },
+  {
+   "id": "g_pedestal",
+   "branch": "magic",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "spectrum:place_pedestal",
+   "game": "Новый способ создания",
+   "title": "Пьедестал",
+   "desc": "Новый способ создания: пьедестал Spectrum и пигменты.",
+   "deps": [
+    "g_shard"
+   ],
+   "icon": "spectrum:pedestal_basic_topaz",
+   "iconFile": "spectrum__block_pedestal_basic_topaz_breaking.png",
+   "mod": "spectrum",
+   "req": "all"
+  },
+  {
+   "id": "g_orb",
+   "branch": "magic",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "neovitae:neovitae/weak_blood_orb",
+   "game": "Novicius Orb of Vitae",
+   "title": "Кровавая сфера",
+   "desc": "Первая сфера Neo Vitae: магия, которая платит кровью.",
+   "deps": [],
+   "icon": "neovitae:blood_orb_weak",
+   "iconFile": "neovitae__item_blood_orb_weak.png",
+   "mod": "neovitae",
+   "req": "all"
+  },
+  {
+   "id": "g_familiar",
+   "branch": "magic",
+   "col": 3,
+   "tier": 2,
+   "points": 20,
+   "adv": "ars_nouveau:familiar",
+   "game": "Это кажется знакомым...",
+   "title": "Фамильяр",
+   "desc": "Ритуал привязки на жаровне: волшебное существо поможет в бою и в пути.",
+   "deps": [
+    "g_brazier"
+   ],
+   "icon": "ars_nouveau:ritual_binding",
+   "iconFile": "ars_nouveau__item_ritual_binding.png",
+   "mod": "ars_nouveau",
+   "req": "all"
+  },
+  {
+   "id": "g_anvil",
+   "branch": "magic",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "irons_spellbooks:irons_spellbooks/make_arcane_anvil",
+   "game": "Оно фиолетовое!",
+   "title": "Волшебная наковальня",
+   "desc": "Улучшай свитки и вкладывай заклинания в оружие.",
+   "deps": [
+    "g_mage"
+   ],
+   "icon": "irons_spellbooks:arcane_anvil",
+   "iconFile": "irons_spellbooks__block_arcane_anvil.png",
+   "mod": "irons_spellbooks",
+   "req": "all"
+  },
+  {
+   "id": "g_ritual",
+   "branch": "magic",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "neovitae:neovitae/first_ritual",
+   "game": "Ritual Awakening",
+   "title": "Ритуал крови",
+   "desc": "Первый ритуал на главном ритуальном камне Neo Vitae.",
+   "deps": [
+    "g_orb"
+   ],
+   "icon": "neovitae:master_ritual_stone",
+   "iconFile": "neovitae__block_master_ritual_stone.png",
+   "mod": "neovitae",
+   "req": "all"
+  },
+  {
+   "id": "g_temple",
+   "branch": "magic",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "spectrum:build_basic_pedestal_structure",
+   "game": "Сосредоточение магии",
+   "title": "Сосредоточение магии",
+   "desc": "Обнеси пьедестал постройкой из базальта и кальцита — откроются новые рецепты.",
+   "deps": [
+    "g_pedestal"
+   ],
+   "icon": "spectrum:chiseled_polished_basalt",
+   "iconFile": "spectrum__block_chiseled_polished_basalt.png",
+   "mod": "spectrum",
+   "req": "all"
+  },
+  {
+   "id": "g_legend",
+   "branch": "magic",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "irons_spellbooks:irons_spellbooks/ink_legendary",
+   "game": "Первый сорт!",
+   "title": "Легендарные чернила",
+   "desc": "Для самых сильных свитков сезона.",
+   "deps": [
+    "g_anvil"
+   ],
+   "icon": "irons_spellbooks:legendary_ink",
+   "iconFile": "irons_spellbooks__item_legendary_ink.png",
+   "mod": "irons_spellbooks",
+   "req": "all"
+  },
+  {
+   "id": "g_archmage",
+   "branch": "magic",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "ars_nouveau:archmage_spell_book",
+   "game": "Книга заклинаний Архимага",
+   "title": "Книга архимага",
+   "desc": "Вершина Ars Nouveau: книга, в которую помещаются самые длинные заклинания.",
+   "deps": [
+    "g_apparatus"
+   ],
+   "icon": "ars_nouveau:archmage_spell_book",
+   "iconFile": "minecraft__item_enchanted_book.png",
+   "mod": "ars_nouveau",
+   "req": "all"
+  },
+  {
+   "id": "g_spectrum",
+   "branch": "magic",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "spectrum:midgame/build_advanced_pedestal_structure",
+   "game": "Создайте храм Спектра",
+   "title": "Храм Спектра",
+   "desc": "Перестрой постройку вокруг пьедестала в храм из оникса.",
+   "deps": [
+    "g_temple"
+   ],
+   "icon": "spectrum:chiseled_polished_basalt",
+   "iconFile": "spectrum__item_moonstone_core.png",
+   "mod": "spectrum",
+   "req": "all"
+  },
+  {
+   "id": "s_aether",
+   "branch": "sky",
+   "col": 1,
+   "tier": 2,
+   "points": 20,
+   "adv": "aether:enter_aether",
+   "game": "Враждебный рай",
+   "title": "Эфир",
+   "desc": "Рамка из светокамня и ведро воды внутри — и ты над облаками.",
+   "deps": [
+    "w_nether"
+   ],
+   "icon": "minecraft:glowstone",
+   "iconFile": "minecraft__item_glowstone_dust.png",
+   "mod": "aether",
+   "req": "all"
+  },
+  {
+   "id": "s_moa",
+   "branch": "sky",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "aether:incubate_moa",
+   "game": "... Пока они не вылупятся!",
+   "title": "Своя моа",
+   "desc": "Выведи птицу моа в инкубаторе — ездовое животное Эфира.",
+   "deps": [
+    "s_aether"
+   ],
+   "icon": "aether:incubator",
+   "iconFile": "aether__block_utility_incubator_side.png",
+   "mod": "aether",
+   "req": "all"
+  },
+  {
+   "id": "s_slider",
+   "branch": "sky",
+   "col": 2,
+   "tier": 3,
+   "points": 40,
+   "adv": "aether:bronze_dungeon",
+   "game": "Like a Bossaru!",
+   "title": "Слайдер",
+   "desc": "Хозяин бронзовой сокровищницы — живой каменный куб. Бьют его только киркой.",
+   "deps": [
+    "s_aether"
+   ],
+   "icon": "aether:bronze_dungeon_key",
+   "iconFile": "aether__item_miscellaneous_bronze_dungeon_key.png",
+   "mod": "aether",
+   "req": "all"
+  },
+  {
+   "id": "s_balloon",
+   "branch": "sky",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "aeronautics:head_in_the_clouds",
+   "game": "Ветер в волосах",
+   "title": "Воздушный шар",
+   "desc": "Заполни герметичную оболочку горячим воздухом — первый шаг к своему кораблю.",
+   "deps": [
+    "t_brass"
+   ],
+   "icon": "aeronautics:adjustable_burner",
+   "iconFile": "minecraft__item_fire_charge.png",
+   "mod": "aeronautics",
+   "req": "all"
+  },
+  {
+   "id": "s_propeller",
+   "branch": "sky",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "aeronautics:for_every_action",
+   "game": "На каждое действие...",
+   "title": "Пропеллер",
+   "desc": "Поставь и запусти пропеллер: появится тяга.",
+   "deps": [
+    "t_brass"
+   ],
+   "icon": "aeronautics:wooden_propeller",
+   "iconFile": "create__item_propeller.png",
+   "mod": "aeronautics",
+   "req": "all"
+  },
+  {
+   "id": "s_physics",
+   "branch": "sky",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "simulated:applied_kinematics",
+   "game": "Прикладная кинематика",
+   "title": "Физический сборщик",
+   "desc": "Сердце всего, что летает и катится: превращает постройку в движущийся корабль.",
+   "deps": [
+    "t_brass"
+   ],
+   "icon": "simulated:physics_assembler",
+   "iconFile": "create__block_andesite_casing.png",
+   "mod": "simulated",
+   "req": "all"
+  },
+  {
+   "id": "s_levitite",
+   "branch": "sky",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "aeronautics:unidentified_floating_object",
+   "game": "Неопознанный летающий объект",
+   "title": "Левитит",
+   "desc": "Кристалл, которому не нужна опора. Из него строят парящие корабли.",
+   "deps": [
+    "s_balloon"
+   ],
+   "icon": "aeronautics:levitite",
+   "iconFile": "aeronautics__block_levitite.png",
+   "mod": "aeronautics",
+   "req": "all"
+  },
+  {
+   "id": "s_valkyrie",
+   "branch": "sky",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "aether:silver_dungeon",
+   "game": "Дворцовый переворот",
+   "title": "Королева валькирий",
+   "desc": "Серебряная сокровищница и её хозяйка. Сначала придётся победить стражу.",
+   "deps": [
+    "s_slider"
+   ],
+   "icon": "aether:silver_dungeon_key",
+   "iconFile": "aether__item_miscellaneous_silver_dungeon_key.png",
+   "mod": "aether",
+   "req": "all"
+  },
+  {
+   "id": "s_blackmoa",
+   "branch": "sky",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "aether:black_moa",
+   "game": "Let's Fly!",
+   "title": "Чёрная моа",
+   "desc": "Выведи чёрную моа и оседлай её: лучшая летунья Эфира.",
+   "deps": [
+    "s_moa"
+   ],
+   "icon": "minecraft:feather",
+   "iconFile": "minecraft__item_feather.png",
+   "mod": "aether",
+   "req": "all"
+  },
+  {
+   "id": "s_nav",
+   "branch": "sky",
+   "col": 3,
+   "tier": 2,
+   "points": 20,
+   "adv": "simulated:thataway",
+   "game": "Туда нам надо!",
+   "title": "Штурман",
+   "desc": "Навигационный стол: корабль сам держит курс.",
+   "deps": [
+    "s_propeller"
+   ],
+   "icon": "simulated:navigation_table",
+   "iconFile": "minecraft__item_compass_16.png",
+   "mod": "simulated",
+   "req": "all"
+  },
+  {
+   "id": "s_cannon",
+   "branch": "sky",
+   "col": 3,
+   "tier": 2,
+   "points": 20,
+   "adv": "aeronautics:heavier_artillery",
+   "game": "Тяжёлая артиллерия",
+   "title": "Тяжёлая артиллерия",
+   "desc": "Поставь на корабль картофельную пушку. Для воздушных боёв и салютов.",
+   "deps": [
+    "s_propeller"
+   ],
+   "icon": "aeronautics:mounted_potato_cannon",
+   "iconFile": "create__block_fluid_tank.png",
+   "mod": "aeronautics",
+   "req": "all"
+  },
+  {
+   "id": "s_gravitite",
+   "branch": "sky",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "aether:gravitite_armor",
+   "game": "Вопреки гравитации",
+   "title": "Гравититовая броня",
+   "desc": "Полный комплект: высокие прыжки и мягкие приземления.",
+   "deps": [
+    "s_valkyrie"
+   ],
+   "icon": "aether:gravitite_chestplate",
+   "iconFile": "aether__item_armor_gravitite_chestplate.png",
+   "mod": "aether",
+   "req": "all"
+  },
+  {
+   "id": "s_sun",
+   "branch": "sky",
+   "col": 3,
+   "tier": 4,
+   "points": 80,
+   "adv": "aether:gold_dungeon",
+   "game": "Погас...",
+   "title": "Дух Солнца",
+   "desc": "Золотой храм выше всех островов. Горячий приём гарантирован.",
+   "deps": [
+    "s_valkyrie"
+   ],
+   "icon": "aether:gold_dungeon_key",
+   "iconFile": "aether__item_miscellaneous_gold_dungeon_key.png",
+   "mod": "aether",
+   "req": "all"
+  },
+  {
+   "id": "s_storm",
+   "branch": "sky",
+   "col": 3,
+   "tier": 4,
+   "points": 80,
+   "adv": "deep_aether:brass_dungeon",
+   "game": "Storm Ruler",
+   "title": "Око бури",
+   "desc": "Босс латунной сокровищницы из Deep Aether.",
+   "deps": [
+    "s_valkyrie"
+   ],
+   "icon": "deep_aether:brass_dungeon_key",
+   "iconFile": "deep_aether__item_brass_dungeon_key.png",
+   "mod": "deep_aether",
+   "req": "all"
+  },
+  {
+   "id": "s_farflight",
+   "branch": "sky",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "simulated:far_from_home",
+   "game": "Вдали от дома",
+   "title": "Дальний рейс",
+   "desc": "Уведи корабль дальше чем на 5000 блоков. Гран-при дирижаблей — 17–18 октября.",
+   "deps": [
+    "s_nav",
+    "s_levitite"
+   ],
+   "icon": "simulated:navigation_table",
+   "iconFile": "minecraft__item_map.png",
+   "mod": "simulated",
+   "req": "all"
+  },
+  {
+   "id": "s_stratus",
+   "branch": "sky",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "deep_aether:stratus_armor",
+   "game": "Cover Me in Sunshine",
+   "title": "Стратусовая броня",
+   "desc": "Полный комплект брони Deep Aether.",
+   "deps": [
+    "s_storm"
+   ],
+   "icon": "deep_aether:stratus_chestplate",
+   "iconFile": "deep_aether__item_stratus_chestplate.png",
+   "mod": "deep_aether",
+   "req": "all"
+  },
+  {
+   "id": "t_andesite",
+   "branch": "tech",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "create:andesite_alloy",
+   "game": "Союз камня и металла",
+   "title": "Андезитовый сплав",
+   "desc": "Главный материал Create: из него начинаются все механизмы.",
+   "deps": [],
+   "icon": "create:andesite_alloy",
+   "iconFile": "create__item_andesite_alloy.png",
+   "mod": "create",
+   "req": "all"
+  },
+  {
+   "id": "t_wheel",
+   "branch": "tech",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "create:water_wheel",
+   "game": "Обузданная гидравлика",
+   "title": "Водяное колесо",
+   "desc": "Первый источник вращения. Дальше — валы, шестерни и ремни.",
+   "deps": [
+    "t_andesite"
+   ],
+   "icon": "create:water_wheel",
+   "iconFile": "minecraft__item_water_bucket.png",
+   "mod": "create",
+   "req": "all"
+  },
+  {
+   "id": "t_press",
+   "branch": "tech",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "create:mechanical_press",
+   "game": "Бонк!",
+   "title": "Механический пресс",
+   "desc": "Листы металла для всего, что будет дальше.",
+   "deps": [
+    "t_wheel"
+   ],
+   "icon": "create:mechanical_press",
+   "iconFile": "create__item_iron_sheet.png",
+   "mod": "create",
+   "req": "all"
+  },
+  {
+   "id": "t_diving",
+   "branch": "tech",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "create:diving_suit",
+   "game": "Кто проживает на дне океана?",
+   "title": "Водолазный костюм",
+   "desc": "Шлем и баллон с воздухом. Без них в затопленный город к Левиафану не попасть.",
+   "deps": [
+    "t_press"
+   ],
+   "icon": "create:copper_diving_helmet",
+   "iconFile": "create__item_copper_diving_helmet.png",
+   "mod": "create",
+   "req": "all"
+  },
+  {
+   "id": "t_brass",
+   "branch": "tech",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "create:brass",
+   "game": "Реальный сплав",
+   "title": "Латунь",
+   "desc": "Медь и цинк в разогретом смешивателе. Нужна для дирижаблей и умных машин.",
+   "deps": [
+    "t_press"
+   ],
+   "icon": "create:brass_ingot",
+   "iconFile": "create__item_brass_ingot.png",
+   "mod": "create",
+   "req": "all"
+  },
+  {
+   "id": "t_crush",
+   "branch": "tech",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "create:crushing_wheel",
+   "game": "Колёса разрушения",
+   "title": "Дробильные колёса",
+   "desc": "Руды становится вдвое больше: пара колёс перемалывает её в крошку.",
+   "deps": [
+    "t_press"
+   ],
+   "icon": "create:crushing_wheel",
+   "iconFile": "create__item_crushed_raw_iron.png",
+   "mod": "create",
+   "req": "all"
+  },
+  {
+   "id": "t_arm",
+   "branch": "tech",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "create:mechanical_arm",
+   "game": "Золотые руки!",
+   "title": "Механическая рука",
+   "desc": "Перекладывает предметы между машинами за тебя.",
+   "deps": [
+    "t_brass"
+   ],
+   "icon": "create:mechanical_arm",
+   "iconFile": "create__item_brass_hand.png",
+   "mod": "create",
+   "req": "all"
+  },
+  {
+   "id": "t_train",
+   "branch": "tech",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "create:train",
+   "game": "Все на борт!",
+   "title": "Первый поезд",
+   "desc": "Собери состав и проложи ветку между базами.",
+   "deps": [
+    "t_brass"
+   ],
+   "icon": "create:track_station",
+   "iconFile": "minecraft__block_rail.png",
+   "mod": "create",
+   "req": "all"
+  },
+  {
+   "id": "t_steam",
+   "branch": "tech",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "create:steam_engine",
+   "game": "С мёртвой точки!",
+   "title": "Паровой двигатель",
+   "desc": "Мощь для больших заводов.",
+   "deps": [
+    "t_brass"
+   ],
+   "icon": "create:steam_engine",
+   "iconFile": "create__item_blaze_cake.png",
+   "mod": "create",
+   "req": "all"
+  },
+  {
+   "id": "t_precision",
+   "branch": "tech",
+   "col": 3,
+   "tier": 2,
+   "points": 20,
+   "adv": "create:precision_mechanism",
+   "game": "Сложные любопытства",
+   "title": "Точный механизм",
+   "desc": "Сборочная линия из пресса, развёртывателей и пилы — ради одной детали.",
+   "deps": [
+    "t_brass"
+   ],
+   "icon": "create:precision_mechanism",
+   "iconFile": "create__item_precision_mechanism.png",
+   "mod": "create",
+   "req": "all"
+  },
+  {
+   "id": "t_crafter",
+   "branch": "tech",
+   "col": 3,
+   "tier": 2,
+   "points": 20,
+   "adv": "create:mechanical_crafter",
+   "game": "Лень — двигатель прогресса",
+   "title": "Механический крафтер",
+   "desc": "Верстак, который собирает сам, даже большие рецепты.",
+   "deps": [
+    "t_brass"
+   ],
+   "icon": "create:mechanical_crafter",
+   "iconFile": "create__item_electron_tube.png",
+   "mod": "create",
+   "req": "all"
+  },
+  {
+   "id": "t_rail",
+   "branch": "tech",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "create:long_travel",
+   "game": "На дальней станции сойду",
+   "title": "Дальняя дорога",
+   "desc": "Проедь на поезде 5000 блоков. Соединим базы всех команд.",
+   "deps": [
+    "t_train"
+   ],
+   "icon": "create:green_seat",
+   "iconFile": "minecraft__item_minecart.png",
+   "mod": "create",
+   "req": "all"
+  },
+  {
+   "id": "t_longtrain",
+   "branch": "tech",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "create:long_train",
+   "game": "Амбициозные усилия",
+   "title": "Длинный состав",
+   "desc": "Поезд из шести вагонов и больше.",
+   "deps": [
+    "t_train"
+   ],
+   "icon": "minecraft:minecart",
+   "iconFile": "minecraft__item_chest_minecart.png",
+   "mod": "create",
+   "req": "all"
+  },
+  {
+   "id": "t_steammax",
+   "branch": "tech",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "create:steam_engine_maxed",
+   "game": "Полный вперёд!",
+   "title": "Полный вперёд",
+   "desc": "Паровой котёл на полную мощность.",
+   "deps": [
+    "t_steam"
+   ],
+   "icon": "create:steam_engine",
+   "iconFile": "create__block_copper_underside.png",
+   "mod": "create",
+   "req": "all"
+  },
+  {
+   "id": "t_trainportal",
+   "branch": "tech",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "create:train_portal",
+   "game": "Соединитель измерений",
+   "title": "Поезд между мирами",
+   "desc": "Проведи поезд через портал в другое измерение.",
+   "deps": [
+    "t_rail"
+   ],
+   "icon": "minecraft:amethyst_block",
+   "iconFile": "minecraft__item_amethyst_block.png",
+   "mod": "create",
+   "req": "all"
+  },
+  {
+   "id": "t_mek",
+   "branch": "industry",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "mekanism:metallurgic_infuser",
+   "game": "Металлур-что?",
+   "title": "Mekanism",
+   "desc": "Металлургический наполнитель — вход в мир Mekanism.",
+   "deps": [
+    "t_press"
+   ],
+   "icon": "mekanism:metallurgic_infuser",
+   "iconFile": "mekanism__item_alloy_infused.png",
+   "mod": "mekanism",
+   "req": "all"
+  },
+  {
+   "id": "t_gen",
+   "branch": "industry",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "mekanismgenerators:heat_generator",
+   "game": "Ваш первый генератор",
+   "title": "Своя энергия",
+   "desc": "Первый генератор Mekanism — теперь машинам есть чем питаться.",
+   "deps": [
+    "t_mek"
+   ],
+   "icon": "mekanismgenerators:heat_generator",
+   "iconFile": "mekanism__item_energy_tablet.png",
+   "mod": "mekanismgenerators",
+   "req": "all"
+  },
+  {
+   "id": "t_mi",
+   "branch": "industry",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "modern_industrialization:steel_machine_casing",
+   "game": "Рецепт приготовления Стали",
+   "title": "Паровая сталь",
+   "desc": "Modern Industrialization: паровая доменная печь и первая сталь.",
+   "deps": [
+    "t_press"
+   ],
+   "icon": "modern_industrialization:steel_machine_casing",
+   "iconFile": "modern_industrialization__item_steel_ingot.png",
+   "mod": "modern_industrialization",
+   "req": "all"
+  },
+  {
+   "id": "t_pnc",
+   "branch": "industry",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "pneumaticcraft:pressure_chamber",
+   "game": "Сбалансированная система крафта",
+   "title": "Барокамера",
+   "desc": "Многоблочная камера давления PneumaticCraft.",
+   "deps": [
+    "t_press"
+   ],
+   "icon": "pneumaticcraft:pressure_chamber_wall",
+   "iconFile": "pneumaticcraft__item_ingot_iron_compressed.png",
+   "mod": "pneumaticcraft",
+   "req": "all"
+  },
+  {
+   "id": "t_ae2",
+   "branch": "industry",
+   "col": 2,
+   "tier": 3,
+   "points": 40,
+   "adv": "ae2:main/controller",
+   "game": "Сетевой коммуникатор",
+   "title": "ME-сеть",
+   "desc": "Контроллер цифрового хранилища: все вещи базы в одном терминале.",
+   "deps": [
+    "t_gen"
+   ],
+   "icon": "ae2:controller",
+   "iconFile": "ae2__item_fluix_crystal.png",
+   "mod": "ae2",
+   "req": "all"
+  },
+  {
+   "id": "t_miner",
+   "branch": "industry",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "mekanism:digital_miner",
+   "game": "Запертый внутри",
+   "title": "Цифровой шахтёр",
+   "desc": "Робот копает руду сам, пока ты летаешь в Эфир.",
+   "deps": [
+    "t_gen"
+   ],
+   "icon": "mekanism:digital_miner",
+   "iconFile": "minecraft__item_diamond_pickaxe.png",
+   "mod": "mekanism",
+   "req": "all"
+  },
+  {
+   "id": "t_qio",
+   "branch": "industry",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "mekanism:qio_drive_array",
+   "game": "Эй! А где все провода?!",
+   "title": "QIO-хранилище",
+   "desc": "Цифровой склад Mekanism без единого провода.",
+   "deps": [
+    "t_gen"
+   ],
+   "icon": "mekanism:qio_drive_array",
+   "iconFile": "mekanism__block_qio_drive_array_top.png",
+   "mod": "mekanism",
+   "req": "all"
+  },
+  {
+   "id": "t_autocraft",
+   "branch": "industry",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "ae2:main/crafting_cpu",
+   "game": "Создание следующего поколения",
+   "title": "Автокрафт",
+   "desc": "Процессор изготовления: сеть сама собирает нужное.",
+   "deps": [
+    "t_ae2"
+   ],
+   "icon": "ae2:64k_crafting_storage",
+   "iconFile": "ae2__item_engineering_processor.png",
+   "mod": "ae2",
+   "req": "all"
+  },
+  {
+   "id": "t_channels",
+   "branch": "industry",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "ae2:main/network2",
+   "game": "Инженер сети",
+   "title": "Инженер сети",
+   "desc": "Разрасти ME-сеть до сотни с лишним каналов.",
+   "deps": [
+    "t_ae2"
+   ],
+   "icon": "ae2:fluix_smart_cable",
+   "iconFile": "ae2__item_fluix_pearl.png",
+   "mod": "ae2",
+   "req": "all"
+  },
+  {
+   "id": "t_ebf",
+   "branch": "industry",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "modern_industrialization:electric_blast_furnace",
+   "game": "Твой лучший электрический друг",
+   "title": "Электродоменная печь",
+   "desc": "Эпоха электричества в Modern Industrialization.",
+   "deps": [
+    "t_mi"
+   ],
+   "icon": "modern_industrialization:electric_blast_furnace",
+   "iconFile": "modern_industrialization__item_stainless_steel_ingot.png",
+   "mod": "modern_industrialization",
+   "req": "all"
+  },
+  {
+   "id": "t_drone",
+   "branch": "industry",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "pneumaticcraft:logistics_drone",
+   "game": "Clever Little Helper",
+   "title": "Дрон-логист",
+   "desc": "Летающий помощник разносит вещи по базе.",
+   "deps": [
+    "t_pnc"
+   ],
+   "icon": "pneumaticcraft:logistics_drone",
+   "iconFile": "pneumaticcraft__item_logistics_core.png",
+   "mod": "pneumaticcraft",
+   "req": "all"
+  },
+  {
+   "id": "t_atomic",
+   "branch": "industry",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "mekanism:atomic_alloy",
+   "game": "Сплав высшего качества",
+   "title": "Атомный сплав",
+   "desc": "Лучший сплав Mekanism — для машин и брони последнего уровня.",
+   "deps": [
+    "t_mek"
+   ],
+   "icon": "mekanism:alloy_atomic",
+   "iconFile": "mekanism__item_alloy_atomic.png",
+   "mod": "mekanism",
+   "req": "all"
+  },
+  {
+   "id": "t_mekasuit",
+   "branch": "industry",
+   "col": 4,
+   "tier": 5,
+   "points": 150,
+   "adv": "mekanism:mekasuit",
+   "game": "Меканист",
+   "title": "MekaSuit",
+   "desc": "Полный костюм и Meka-Tool — вершина Mekanism.",
+   "deps": [
+    "t_miner"
+   ],
+   "icon": "mekanism:mekasuit_bodyarmor",
+   "iconFile": "mekanism__item_mekasuit_bodyarmor.png",
+   "mod": "mekanism",
+   "req": "all"
+  },
+  {
+   "id": "h_seed",
+   "branch": "farm",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "minecraft:husbandry/plant_seed",
+   "game": "Поле чудес",
+   "title": "Первые грядки",
+   "desc": "Посади семена. Зимой многое не растёт: в сборке сменяются времена года.",
+   "deps": [],
+   "icon": "minecraft:wheat",
+   "iconFile": "minecraft__item_wheat.png",
+   "mod": "minecraft",
+   "req": "any"
+  },
+  {
+   "id": "h_breed",
+   "branch": "farm",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "minecraft:husbandry/breed_an_animal",
+   "game": "Романтический ужин",
+   "title": "Скотный двор",
+   "desc": "Выведи пару животных.",
+   "deps": [],
+   "icon": "minecraft:wheat",
+   "iconFile": "minecraft__item_lead.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "h_fish",
+   "branch": "farm",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "minecraft:husbandry/fishy_business",
+   "game": "На крючке",
+   "title": "Рыбное дело",
+   "desc": "Поймай рыбу удочкой. За весь первый сезон на сервере не поймали ни одной.",
+   "deps": [],
+   "icon": "minecraft:fishing_rod",
+   "iconFile": "minecraft__item_fishing_rod.png",
+   "mod": "minecraft",
+   "req": "any"
+  },
+  {
+   "id": "h_knife",
+   "branch": "farm",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "farmersdelight:main/craft_knife",
+   "game": "Охота и собирательство",
+   "title": "Кухонный нож",
+   "desc": "Farmer's Delight: больше еды из растений и животных.",
+   "deps": [],
+   "icon": "moredelight:wooden_knife",
+   "iconFile": "moredelight__item_wooden_knife.png",
+   "mod": "farmersdelight",
+   "req": "any"
+  },
+  {
+   "id": "h_pot",
+   "branch": "farm",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "farmersdelight:main/place_cooking_pot",
+   "game": "Кушать подано!",
+   "title": "Кушать подано",
+   "desc": "Кухонный котёл: сытные блюда кормят надолго.",
+   "deps": [
+    "h_knife"
+   ],
+   "icon": "farmersdelight:cooking_pot",
+   "iconFile": "farmersdelight__item_cooking_pot.png",
+   "mod": "farmersdelight",
+   "req": "all"
+  },
+  {
+   "id": "h_soil",
+   "branch": "farm",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "farmersdelight:main/get_rich_soil",
+   "game": "Растительная пища",
+   "title": "Плодородная почва",
+   "desc": "Органический компост со временем становится лучшей землёй.",
+   "deps": [
+    "h_seed"
+   ],
+   "icon": "farmersdelight:rich_soil",
+   "iconFile": "farmersdelight__block_rich_soil.png",
+   "mod": "farmersdelight",
+   "req": "all"
+  },
+  {
+   "id": "h_brewery",
+   "branch": "farm",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "brewery:main/brewing_pioneer",
+   "game": "Первый глоток",
+   "title": "Пивоварня",
+   "desc": "Поставь деревянную пивоварню Let's Do Brewery.",
+   "deps": [
+    "h_seed"
+   ],
+   "icon": "brewery:wooden_brewingstation",
+   "iconFile": "brewery__item_wooden_brewingstation.png",
+   "mod": "brewery",
+   "req": "all"
+  },
+  {
+   "id": "h_vinery",
+   "branch": "farm",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "vinery:main/juice_it_up",
+   "game": "Выжимай сок!",
+   "title": "Винодельня",
+   "desc": "Давильный чан: первый виноградный сок.",
+   "deps": [
+    "h_seed"
+   ],
+   "icon": "vinery:grapevine_pot",
+   "iconFile": "vinery__item_red_grape.png",
+   "mod": "vinery",
+   "req": "all"
+  },
+  {
+   "id": "h_feast",
+   "branch": "farm",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "farmersdelight:main/place_feast",
+   "game": "Пир на весь мир",
+   "title": "Пир на весь мир",
+   "desc": "Поставь на стол праздничное блюдо: запечённую курицу, пастуший пирог или фаршированную тыкву.",
+   "deps": [
+    "h_pot"
+   ],
+   "icon": "farmersdelight:roast_chicken_block",
+   "iconFile": "farmersdelight__item_roast_chicken_block.png",
+   "mod": "farmersdelight",
+   "req": "any"
+  },
+  {
+   "id": "h_wine",
+   "branch": "farm",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "vinery:main/the_noble_drop",
+   "game": "Высококачественный глоток",
+   "title": "Благородный глоток",
+   "desc": "Выдержи вино в бочке и налей первую бутылку.",
+   "deps": [
+    "h_vinery"
+   ],
+   "icon": "vinery:red_wine",
+   "iconFile": "vinery__item_red_wine.png",
+   "mod": "vinery",
+   "req": "all"
+  },
+  {
+   "id": "h_beer",
+   "branch": "farm",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "brewery:main/copper_brewmaster",
+   "game": "Намедни пивовар",
+   "title": "Медный пивовар",
+   "desc": "Пивоварня из меди варит лучше и быстрее.",
+   "deps": [
+    "h_brewery"
+   ],
+   "icon": "brewery:copper_brewingstation",
+   "iconFile": "brewery__item_copper_brewingstation.png",
+   "mod": "brewery",
+   "req": "all"
+  },
+  {
+   "id": "h_diet",
+   "branch": "farm",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "minecraft:husbandry/balanced_diet",
+   "game": "Робин-Бобин",
+   "title": "Робин-Бобин",
+   "desc": "Попробуй всю ванильную еду, даже золотое яблоко из сундуков.",
+   "deps": [
+    "h_seed"
+   ],
+   "icon": "minecraft:apple",
+   "iconFile": "minecraft__item_apple.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "h_bake",
+   "branch": "farm",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "farm_and_charm:main/bake_everything",
+   "game": "Искусство выпечки",
+   "title": "Искусство выпечки",
+   "desc": "Испеки всё, что умеет печь Farm & Charm.",
+   "deps": [
+    "h_seed"
+   ],
+   "icon": "farm_and_charm:baked_lamb_ham",
+   "iconFile": "farm_and_charm__item_baked_lamb_ham.png",
+   "mod": "farm_and_charm",
+   "req": "all"
+  },
+  {
+   "id": "h_chef",
+   "branch": "farm",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "farmersdelight:main/master_chef",
+   "game": "Шеф-повар",
+   "title": "Шеф-повар",
+   "desc": "Попробуй все блюда Farmer's Delight.",
+   "deps": [
+    "h_feast"
+   ],
+   "icon": "farmersdelight:honey_glazed_ham",
+   "iconFile": "farmersdelight__item_honey_glazed_ham.png",
+   "mod": "farmersdelight",
+   "req": "all"
+  },
+  {
+   "id": "c_coin",
+   "branch": "trade",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "lightmanscurrency:currency/myfirstpenny",
+   "game": "Мой первый пенни!",
+   "title": "Первая монета",
+   "desc": "Монеты падают с мобов и выдаются за ивенты.",
+   "deps": [],
+   "icon": "lightmanscurrency:coin_copper",
+   "iconFile": "lightmanscurrency__item_coin_copper.png",
+   "mod": "lightmanscurrency",
+   "req": "all"
+  },
+  {
+   "id": "c_villager",
+   "branch": "trade",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "minecraft:adventure/trade",
+   "game": "Не отходя от кассы!",
+   "title": "Сделка с жителем",
+   "desc": "Купи что-нибудь у жителей деревни.",
+   "deps": [],
+   "icon": "minecraft:emerald",
+   "iconFile": "minecraft__item_emerald.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "c_wallet",
+   "branch": "trade",
+   "col": 1,
+   "tier": 1,
+   "points": 10,
+   "adv": "lightmanscurrency:currency/wallet_crafting",
+   "game": "Хранение монет",
+   "title": "Кошелёк",
+   "desc": "Хранит монеты и сам их подбирает.",
+   "deps": [
+    "c_coin"
+   ],
+   "icon": "lightmanscurrency:wallet_copper",
+   "iconFile": "lightmanscurrency__item_wallet_copper.png",
+   "mod": "lightmanscurrency",
+   "req": "all"
+  },
+  {
+   "id": "c_trader",
+   "branch": "trade",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "lightmanscurrency:currency/trader",
+   "game": "Время торговать!",
+   "title": "Своя лавка",
+   "desc": "Поставь торговца и продавай другим командам.",
+   "deps": [
+    "c_coin"
+   ],
+   "icon": "lightmanscurrency:card_display_oak",
+   "iconFile": "lightmanscurrency__item_trading_core.png",
+   "mod": "lightmanscurrency",
+   "req": "all"
+  },
+  {
+   "id": "c_atm",
+   "branch": "trade",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "lightmanscurrency:currency/atm",
+   "game": "Теперь вы думаете как банкир",
+   "title": "Банкомат",
+   "desc": "Обмен монет и банковский счёт.",
+   "deps": [
+    "c_wallet"
+   ],
+   "icon": "lightmanscurrency:atm",
+   "iconFile": "lightmanscurrency__item_atm_card.png",
+   "mod": "lightmanscurrency",
+   "req": "all"
+  },
+  {
+   "id": "c_mint",
+   "branch": "trade",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "lightmanscurrency:currency/coin_mint",
+   "game": "Свежая чеканка!",
+   "title": "Монетный двор",
+   "desc": "Чекань свои монеты из металла.",
+   "deps": [
+    "c_coin"
+   ],
+   "icon": "lightmanscurrency:coinmint",
+   "iconFile": "lightmanscurrency__item_coinpile_gold.png",
+   "mod": "lightmanscurrency",
+   "req": "all"
+  },
+  {
+   "id": "c_village",
+   "branch": "trade",
+   "col": 2,
+   "tier": 3,
+   "points": 40,
+   "adv": "minecraft:adventure/hero_of_the_village",
+   "game": "Герой деревни",
+   "title": "Герой деревни",
+   "desc": "Отбей набег разбойников на деревню.",
+   "deps": [],
+   "icon": "minecraft:white_banner",
+   "iconFile": "minecraft__item_bell.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "c_golem",
+   "branch": "trade",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "minecraft:adventure/summon_iron_golem",
+   "game": "Три закона големотехники",
+   "title": "Железный голем",
+   "desc": "Собери защитника деревни или базы.",
+   "deps": [],
+   "icon": "minecraft:carved_pumpkin",
+   "iconFile": "minecraft__item_carved_pumpkin.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "c_network",
+   "branch": "trade",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "lightmanscurrency:currency/network_trader",
+   "game": "Добро пожаловать в Amazon",
+   "title": "Сетевой торговец",
+   "desc": "Торгуй со всем сервером, не выходя с базы.",
+   "deps": [
+    "c_trader"
+   ],
+   "icon": "lightmanscurrency:item_trader_server_xlrg",
+   "iconFile": "lightmanscurrency__item_coin_emerald.png",
+   "mod": "lightmanscurrency",
+   "req": "all"
+  },
+  {
+   "id": "c_banker",
+   "branch": "trade",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "lightmanscurrency:currency/banker_trade",
+   "game": "Торговля с учреждением",
+   "title": "Банкир",
+   "desc": "Купи что-нибудь у банкира за монеты.",
+   "deps": [
+    "c_atm"
+   ],
+   "icon": "lightmanscurrency:coinblock_netherite",
+   "iconFile": "lightmanscurrency__item_coinpile_netherite.png",
+   "mod": "lightmanscurrency",
+   "req": "all"
+  },
+  {
+   "id": "c_amadron",
+   "branch": "trade",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "pneumaticcraft:amadron_tablet",
+   "game": "Лучше, чем жители деревни.",
+   "title": "Амадрон",
+   "desc": "Планшет доставки: заказывай товары у жителей — привезут дроны.",
+   "deps": [
+    "t_drone"
+   ],
+   "icon": "pneumaticcraft:amadron_tablet",
+   "iconFile": "pneumaticcraft__item_amadron_tablet.png",
+   "mod": "pneumaticcraft",
+   "req": "all"
+  },
+  {
+   "id": "c_beacon",
+   "branch": "trade",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "minecraft:nether/create_beacon",
+   "game": "Желанный свет",
+   "title": "Маяк команды",
+   "desc": "Поставь маяк на базе: свет виден издалека.",
+   "deps": [
+    "b_wither"
+   ],
+   "icon": "minecraft:beacon",
+   "iconFile": "minecraft__block_beacon.png",
+   "mod": "minecraft",
+   "req": "all"
+  },
+  {
+   "id": "c_fullbeacon",
+   "branch": "trade",
+   "col": 4,
+   "tier": 4,
+   "points": 80,
+   "adv": "minecraft:nether/create_full_beacon",
+   "game": "Маяковский",
+   "title": "Маяк на полную",
+   "desc": "Пирамида из 164 блоков — маяк команды на полной мощности.",
+   "deps": [
+    "c_beacon"
+   ],
+   "icon": "minecraft:beacon",
+   "iconFile": "minecraft__block_diamond_block.png",
+   "mod": "minecraft",
+   "req": "all"
+  }
+ ],
+ "bosses": [
+  {
+   "id": "twilightforest:naga",
+   "group": "twilight",
+   "name": "Нага",
+   "where": "Обитает во Дворе Наги, который можно найти в лесу.",
+   "mini": false,
+   "icon": "twilightforest__item_naga_scale.png",
+   "drops": [
+    {
+     "item": "twilightforest:naga_scale",
+     "name": "Чешуя наги",
+     "chance": null,
+     "icon": "twilightforest__item_naga_scale.png"
+    }
+   ],
+   "node": "b_naga",
+   "mod": "twilightforest"
+  },
+  {
+   "id": "twilightforest:lich",
+   "group": "twilight",
+   "name": "Лич",
+   "where": "Можно найти на вершине Башни Лича в лесу.",
+   "mini": false,
+   "icon": "twilightforest__item_twilight_scepter.png",
+   "drops": [
+    {
+     "item": "minecraft:bone",
+     "name": "Кость",
+     "chance": null,
+     "icon": "minecraft__item_bone.png"
+    },
+    {
+     "item": "minecraft:ender_pearl",
+     "name": "Эндер-жемчуг",
+     "chance": null,
+     "icon": "minecraft__item_ender_pearl.png"
+    },
+    {
+     "item": "twilightforest:exanimate_essence",
+     "name": "Exanimate Essence",
+     "chance": null,
+     "icon": "twilightforest__item_exanimate_powder.png"
+    },
+    {
+     "item": "twilightforest:fortification_scepter",
+     "name": "Скипетр защиты",
+     "chance": "25%",
+     "icon": "twilightforest__item_fortification_scepter.png"
+    },
+    {
+     "item": "twilightforest:lifedrain_scepter",
+     "name": "Скипетр похищения жизни",
+     "chance": "25%",
+     "icon": "twilightforest__item_lifedrain_scepter.png"
+    }
+   ],
+   "node": "b_lich",
+   "mod": "twilightforest"
+  },
+  {
+   "id": "twilightforest:minoshroom",
+   "group": "twilight",
+   "name": "Гриботавр",
+   "where": "Находится на дне Лабиринта в болоте.",
+   "mini": false,
+   "icon": "twilightforest__item_cooked_meef.png",
+   "drops": [
+    {
+     "item": "twilightforest:diamond_minotaur_axe",
+     "name": "Алмазный топор минотавра",
+     "chance": null,
+     "icon": "twilightforest__item_diamond_minotaur_axe.png"
+    },
+    {
+     "item": "twilightforest:meef_stroganoff",
+     "name": "Минотаврятина по-строгановски",
+     "chance": null,
+     "icon": "twilightforest__item_meef_stroganoff.png"
+    }
+   ],
+   "node": "b_minoshroom",
+   "mod": "twilightforest"
+  },
+  {
+   "id": "twilightforest:alpha_yeti",
+   "group": "twilight",
+   "name": "Альфа-йети",
+   "where": "Обитает в Логове Йети в снежном лесу.",
+   "mini": false,
+   "icon": "twilightforest__item_alpha_yeti_fur.png",
+   "drops": [
+    {
+     "item": "twilightforest:alpha_yeti_fur",
+     "name": "Шерсть альфа-йети",
+     "chance": null,
+     "icon": "twilightforest__item_alpha_yeti_fur.png"
+    },
+    {
+     "item": "twilightforest:ice_bomb",
+     "name": "Ледяная бомба",
+     "chance": null,
+     "icon": "twilightforest__item_ice_bomb.png"
+    }
+   ],
+   "node": "b_yeti",
+   "mod": "twilightforest"
+  },
+  {
+   "id": "twilightforest:hydra",
+   "group": "twilight",
+   "name": "Гидра",
+   "where": "Обитает в Логове Гидры в огненном болоте.",
+   "mini": false,
+   "icon": "twilightforest__item_fiery_blood.png",
+   "drops": [
+    {
+     "item": "twilightforest:fiery_blood",
+     "name": "Огненная кровь",
+     "chance": null,
+     "icon": "twilightforest__item_fiery_blood.png"
+    },
+    {
+     "item": "twilightforest:hydra_chop",
+     "name": "Мясо гидры",
+     "chance": null,
+     "icon": "twilightforest__item_hydra_chop.png"
+    }
+   ],
+   "node": "b_hydra",
+   "mod": "twilightforest"
+  },
+  {
+   "id": "twilightforest:knight_phantom",
+   "group": "twilight",
+   "name": "Рыцари-призраки",
+   "where": "Найдите их на нижнем уровне Крепости рыцарей-гоблинов в тёмном лесу.",
+   "mini": true,
+   "icon": "twilightforest__item_knightmetal_ingot.png",
+   "drops": [
+    {
+     "item": "twilightforest:knightmetal_axe",
+     "name": "Рыцарометаллический топор",
+     "chance": null,
+     "icon": "twilightforest__item_knightmetal_axe.png"
+    },
+    {
+     "item": "twilightforest:knightmetal_pickaxe",
+     "name": "Рыцарометаллическая кирка",
+     "chance": null,
+     "icon": "twilightforest__item_knightmetal_pickaxe.png"
+    },
+    {
+     "item": "twilightforest:knightmetal_sword",
+     "name": "Рыцарометаллический меч",
+     "chance": null,
+     "icon": "twilightforest__item_knightmetal_sword.png"
+    },
+    {
+     "item": "twilightforest:phantom_chestplate",
+     "name": "Призрачный нагрудник",
+     "chance": null,
+     "icon": "twilightforest__item_phantom_chestplate.png"
+    },
+    {
+     "item": "twilightforest:phantom_helmet",
+     "name": "Призрачный шлем",
+     "chance": null,
+     "icon": "twilightforest__item_phantom_helmet.png"
+    }
+   ],
+   "node": "b_knights",
+   "mod": "twilightforest"
+  },
+  {
+   "id": "twilightforest:snow_queen",
+   "group": "twilight",
+   "name": "Снежная королева",
+   "where": "Находится на вершине Дворца Авроры в леднике.",
+   "mini": false,
+   "icon": "twilightforest__item_ice_bomb.png",
+   "drops": [
+    {
+     "item": "minecraft:packed_ice",
+     "name": "Плотный лёд",
+     "chance": null,
+     "icon": "minecraft__item_packed_ice.png"
+    },
+    {
+     "item": "minecraft:snowball",
+     "name": "Снежок",
+     "chance": null,
+     "icon": "minecraft__item_snowball.png"
+    },
+    {
+     "item": "twilightforest:seeker_bow",
+     "name": "Лук искателя",
+     "chance": "50%",
+     "icon": "twilightforest__item_seeker_bow.png"
+    },
+    {
+     "item": "twilightforest:triple_bow",
+     "name": "Тройной лук",
+     "chance": "50%",
+     "icon": "twilightforest__item_triple_bow.png"
+    }
+   ],
+   "node": "b_queen",
+   "mod": "twilightforest"
+  },
+  {
+   "id": "twilightforest:ur_ghast",
+   "group": "twilight",
+   "name": "Древний гаст",
+   "where": "Можно найти на вершине Тёмной Башни в тёмном лесу.",
+   "mini": false,
+   "icon": "twilightforest__item_fiery_tears.png",
+   "drops": [
+    {
+     "item": "twilightforest:carminite",
+     "name": "Карминит",
+     "chance": null,
+     "icon": "twilightforest__item_carminite.png"
+    },
+    {
+     "item": "twilightforest:fiery_tears",
+     "name": "Огненные слёзы",
+     "chance": null,
+     "icon": "twilightforest__item_fiery_tears.png"
+    }
+   ],
+   "node": "b_urghast",
+   "mod": "twilightforest"
+  },
+  {
+   "id": "cataclysm:netherite_monstrosity",
+   "group": "cataclysm",
+   "name": "Незеритовое чудище",
+   "where": "Следуйте за Оком чудовища в Кузницу Душ в Незере.",
+   "mini": false,
+   "icon": "cataclysm__item_lava_power_cell.png",
+   "drops": [
+    {
+     "item": "cataclysm:infernal_forge",
+     "name": "Незеритовый горн",
+     "chance": null,
+     "icon": "cataclysm__item_infernal_forge.png"
+    },
+    {
+     "item": "cataclysm:lava_power_cell",
+     "name": "Лавовая батарея",
+     "chance": null,
+     "icon": "cataclysm__item_lava_power_cell.png"
+    },
+    {
+     "item": "cataclysm:monstrous_horn",
+     "name": "Чудовищный рог",
+     "chance": null,
+     "icon": "cataclysm__item_monstrous_horn.png"
+    },
+    {
+     "item": "cataclysm:music_disc_netherite_monstrosity",
+     "name": "Пластинка",
+     "chance": "10%",
+     "icon": "cataclysm__item_music_disc_netherite_monstrosity.png"
+    }
+   ],
+   "node": "b_monstrosity",
+   "mod": "cataclysm"
+  },
+  {
+   "id": "cataclysm:ignis",
+   "group": "cataclysm",
+   "name": "Игнис",
+   "where": "Найдите Пылающую арену с помощью Ока огня, победите Огненных ревенантов и щёлкните ПКМ Пылающим пеплом по Огненному алтарю.",
+   "mini": false,
+   "icon": "cataclysm__item_ignitium_ingot.png",
+   "drops": [
+    {
+     "item": "cataclysm:ignitium_ingot",
+     "name": "Игнитовый слиток",
+     "chance": null,
+     "icon": "cataclysm__item_ignitium_ingot.png"
+    },
+    {
+     "item": "cataclysm:music_disc_ignis",
+     "name": "Пластинка",
+     "chance": "10%",
+     "icon": "cataclysm__item_music_disc_ignis.png"
+    }
+   ],
+   "node": "b_ignis",
+   "mod": "cataclysm"
+  },
+  {
+   "id": "cataclysm:the_leviathan",
+   "group": "cataclysm",
+   "name": "Левиафан",
+   "where": "Возложите Жертвоприношение бездне на Глубинный алтарь в Затонувшем городе, путь к которому вам укажет Око глубины.",
+   "mini": false,
+   "icon": "cataclysm__item_abyssal_sacrifice.png",
+   "drops": [
+    {
+     "item": "cataclysm:abyssal_egg",
+     "name": "Яйцо из глубины",
+     "chance": null,
+     "icon": "minecraft__block_dragon_egg.png"
+    },
+    {
+     "item": "cataclysm:music_disc_the_leviathan",
+     "name": "Пластинка",
+     "chance": "10%",
+     "icon": "cataclysm__item_music_disc_the_leviathan.png"
+    },
+    {
+     "item": "cataclysm:tidal_claws",
+     "name": "Приливные когти",
+     "chance": null,
+     "icon": "cataclysm__item_tidal_claws.png"
+    },
+    {
+     "item": "cataclysm_spellbooks:leviathans_blessing",
+     "name": "Leviathan's Blessing",
+     "chance": "30%",
+     "icon": "cataclysm_spellbooks__item_leviathans_blessing.png"
+    }
+   ],
+   "node": "b_leviathan",
+   "mod": "cataclysm"
+  },
+  {
+   "id": "cataclysm:the_harbinger",
+   "group": "cataclysm",
+   "name": "Предвестник",
+   "where": "Найдите Древнюю фабрику с помощью Ока меха и используйте Звезду Незера для пробуждения босса.",
+   "mini": false,
+   "icon": "cataclysm__item_witherite_ingot.png",
+   "drops": [
+    {
+     "item": "cataclysm:music_disc_the_harbinger",
+     "name": "Пластинка",
+     "chance": "10%",
+     "icon": "cataclysm__item_music_disc_the_harbinger.png"
+    },
+    {
+     "item": "cataclysm:witherite_block",
+     "name": "Визеритовый блок",
+     "chance": null,
+     "icon": "cataclysm__block_witherite_block.png"
+    }
+   ],
+   "node": "b_harbinger",
+   "mod": "cataclysm"
+  },
+  {
+   "id": "cataclysm:ancient_remnant",
+   "group": "cataclysm",
+   "name": "Древние Останки",
+   "where": "Найдите спящего босса в Проклятой пирамиде с помощью Ока пустыни и используйте Пустынное ожерелье, получаемое из подозрительного песка.",
+   "mini": false,
+   "icon": "cataclysm__item_sandstorm_in_a_bottle.png",
+   "drops": [
+    {
+     "item": "cataclysm:ancient_metal_block",
+     "name": "Блок из древнего металла",
+     "chance": null,
+     "icon": "cataclysm__block_ancient_metal_block.png"
+    },
+    {
+     "item": "cataclysm:music_disc_ancient_remnant",
+     "name": "Пластинка",
+     "chance": "10%",
+     "icon": "cataclysm__item_music_disc_ancient_remnant.png"
+    },
+    {
+     "item": "cataclysm:remnant_skull",
+     "name": "Останки черепа",
+     "chance": null,
+     "icon": "cataclysm__item_remnant_skull.png"
+    },
+    {
+     "item": "cataclysm:sandstorm_in_a_bottle",
+     "name": "Песчаная буря в бутылке",
+     "chance": null,
+     "icon": "cataclysm__item_sandstorm_in_a_bottle.png"
+    },
+    {
+     "item": "cataclysm_spellbooks:desert_spell_book",
+     "name": "Desert Spellbook",
+     "chance": "50%",
+     "icon": "cataclysm_spellbooks__item_desert_spell_book.png"
+    }
+   ],
+   "node": "b_remnant",
+   "mod": "cataclysm"
+  },
+  {
+   "id": "cataclysm:maledictus",
+   "group": "cataclysm",
+   "name": "Маледиктус",
+   "where": "Кликните по Проклятому надгробию за Дверью Печати, открываемой Странным ключом, в Морозной тюрьме, путь к которой вам укажет Око проклятия.",
+   "mini": false,
+   "icon": "cataclysm__item_cursium_ingot.png",
+   "drops": [
+    {
+     "item": "cataclysm:cursium_ingot",
+     "name": "Проклятый слиток",
+     "chance": null,
+     "icon": "cataclysm__item_cursium_ingot.png"
+    },
+    {
+     "item": "cataclysm:music_disc_maledictus",
+     "name": "Пластинка",
+     "chance": "10%",
+     "icon": "cataclysm__item_music_disc_maledictus.png"
+    }
+   ],
+   "node": "b_maledictus",
+   "mod": "cataclysm"
+  },
+  {
+   "id": "cataclysm:ender_guardian",
+   "group": "cataclysm",
+   "name": "Эндер-хранитель",
+   "where": "Следуйте за Оком пустоты в Разрушенную Цитадель в Энде.",
+   "mini": false,
+   "icon": "cataclysm__item_void_core.png",
+   "drops": [
+    {
+     "item": "cataclysm:gauntlet_of_guard",
+     "name": "Перчатка защиты",
+     "chance": null,
+     "icon": "cataclysm__item_gauntlet_of_guard.png"
+    },
+    {
+     "item": "cataclysm:music_disc_ender_guardian",
+     "name": "Пластинка",
+     "chance": "10%",
+     "icon": "cataclysm__item_music_disc_ender_guardian.png"
+    }
+   ],
+   "node": "b_guardian",
+   "mod": "cataclysm"
+  },
+  {
+   "id": "cataclysm:scylla",
+   "group": "cataclysm",
+   "name": "Сцилла",
+   "where": "Кликните по якорю на вершине Акрополя, который можно найти с помощью Ока шторма в Верхнем мире.",
+   "mini": false,
+   "icon": "cataclysm__item_essence_of_the_storm.png",
+   "drops": [
+    {
+     "item": "cataclysm:essence_of_the_storm",
+     "name": "Эссенция шторма",
+     "chance": null,
+     "icon": "cataclysm__item_essence_of_the_storm.png"
+    },
+    {
+     "item": "cataclysm:lacrima",
+     "name": "Лакрима",
+     "chance": null,
+     "icon": "cataclysm__item_lacrima.png"
+    },
+    {
+     "item": "cataclysm:music_disc_scylla",
+     "name": "Пластинка",
+     "chance": "10%",
+     "icon": "cataclysm__item_music_disc_scylla.png"
+    }
+   ],
+   "node": "b_scylla",
+   "mod": "cataclysm"
+  },
+  {
+   "id": "aether:slider",
+   "group": "aether",
+   "name": "Слайдер",
+   "where": "Находится в Бронзовом Подземелье.",
+   "mini": false,
+   "icon": "aether__item_miscellaneous_bronze_dungeon_key.png",
+   "drops": [
+    {
+     "item": "aether:bronze_dungeon_key",
+     "name": "Бронзовый Ключ",
+     "chance": null,
+     "icon": "aether__item_miscellaneous_bronze_dungeon_key.png"
+    },
+    {
+     "item": "aether:carved_stone",
+     "name": "Резной Камень",
+     "chance": null,
+     "icon": "aether__block_dungeon_carved_stone.png"
+    }
+   ],
+   "node": "s_slider",
+   "mod": "aether"
+  },
+  {
+   "id": "aether:valkyrie_queen",
+   "group": "aether",
+   "name": "Королева Валькирий",
+   "where": "Находится в Серебрянном Подземелье.",
+   "mini": false,
+   "icon": "aether__item_miscellaneous_silver_dungeon_key.png",
+   "drops": [
+    {
+     "item": "aether:silver_dungeon_key",
+     "name": "Серебряный Ключ",
+     "chance": null,
+     "icon": "aether__item_miscellaneous_silver_dungeon_key.png"
+    },
+    {
+     "item": "minecraft:golden_sword",
+     "name": "Золотой меч",
+     "chance": null,
+     "icon": "minecraft__item_golden_sword.png"
+    }
+   ],
+   "node": "s_valkyrie",
+   "mod": "aether"
+  },
+  {
+   "id": "aether:sun_spirit",
+   "group": "aether",
+   "name": "Дух Солнца",
+   "where": "Находится в Золотом Подземелье.",
+   "mini": false,
+   "icon": "aether__item_miscellaneous_gold_dungeon_key.png",
+   "drops": [
+    {
+     "item": "aether:gold_dungeon_key",
+     "name": "Золотой Ключ",
+     "chance": null,
+     "icon": "aether__item_miscellaneous_gold_dungeon_key.png"
+    },
+    {
+     "item": "aether:sun_altar",
+     "name": "Алтарь Солнца",
+     "chance": null,
+     "icon": "aether__block_utility_sun_altar_side.png"
+    }
+   ],
+   "node": "s_sun",
+   "mod": "aether"
+  },
+  {
+   "id": "deep_aether:eots_controller",
+   "group": "aether",
+   "name": "Око бури",
+   "where": "Находится в Латунной Темнице высоко в небе Эфира.",
+   "mini": false,
+   "icon": "deep_aether__item_brass_dungeon_key.png",
+   "drops": [
+    {
+     "item": "aether:cold_aercloud",
+     "name": "Холодное Облако",
+     "chance": null,
+     "icon": "aether__block_natural_cold_aercloud.png"
+    },
+    {
+     "item": "deep_aether:brass_dungeon_key",
+     "name": "Brass Key",
+     "chance": null,
+     "icon": "deep_aether__item_brass_dungeon_key.png"
+    }
+   ],
+   "node": "s_storm",
+   "mod": "deep_aether"
+  },
+  {
+   "id": "eternal_starlight:the_gatekeeper",
+   "group": "starlight",
+   "name": "Привратник",
+   "where": "Найдите его у руин портала в Звездосветье в Верхнем мире.",
+   "mini": false,
+   "icon": "eternal_starlight__item_orb_of_prophecy_inventory.png",
+   "drops": [
+    {
+     "item": "eternal_starlight:book",
+     "name": "Мерцающая дощечка",
+     "chance": null,
+     "icon": "eternal_starlight__item_book.png"
+    },
+    {
+     "item": "eternal_starlight:glistering_bow",
+     "name": "Сверкающий лук",
+     "chance": "8%",
+     "icon": "eternal_starlight__item_glistering_bow.png"
+    },
+    {
+     "item": "eternal_starlight:glistering_greatsword",
+     "name": "Большой сверкающий меч",
+     "chance": "8%",
+     "icon": "eternal_starlight__item_glistering_greatsword.png"
+    },
+    {
+     "item": "eternal_starlight:glistering_morning_star",
+     "name": "Сверкающая денница",
+     "chance": "8%",
+     "icon": "eternal_starlight__item_glistering_morning_star.png"
+    },
+    {
+     "item": "eternal_starlight:glistering_sword",
+     "name": "Сверкающий меч",
+     "chance": "8%",
+     "icon": "eternal_starlight__item_glistering_sword.png"
+    }
+   ],
+   "node": "b_gatekeeper",
+   "mod": "eternal_starlight"
+  },
+  {
+   "id": "eternal_starlight:starlight_golem",
+   "group": "starlight",
+   "name": "Звездосветный голем",
+   "where": "Используйте Ищущее око в Звездосветье, держа в другой руке редстоуновую пыль.",
+   "mini": false,
+   "icon": "eternal_starlight__item_energy_sword.png",
+   "drops": [
+    {
+     "item": "eternal_starlight:aethersent_ingot",
+     "name": "Эфиросцентный слиток",
+     "chance": "16%",
+     "icon": "eternal_starlight__item_aethersent_ingot.png"
+    },
+    {
+     "item": "eternal_starlight:amaramber_arrow",
+     "name": "Амарянтарная стрела",
+     "chance": "30%",
+     "icon": "eternal_starlight__item_amaramber_arrow.png"
+    },
+    {
+     "item": "eternal_starlight:deepsilver_ingot",
+     "name": "Слиток глубинного серебра",
+     "chance": "30%",
+     "icon": "eternal_starlight__item_deepsilver_ingot.png"
+    },
+    {
+     "item": "eternal_starlight:energy_sword",
+     "name": "Энергомеч",
+     "chance": "75%",
+     "icon": "eternal_starlight__item_energy_sword.png"
+    },
+    {
+     "item": "eternal_starlight:forge_armor_trim_smithing_template",
+     "name": "Кузнечный шаблон",
+     "chance": null,
+     "icon": "eternal_starlight__item_forge_armor_trim_smithing_template.png"
+    }
+   ],
+   "node": "b_golem",
+   "mod": "eternal_starlight"
+  },
+  {
+   "id": "eternal_starlight:lunar_monstrosity",
+   "group": "starlight",
+   "name": "Лунное чудовище",
+   "where": "Используйте Ищущее око в Звездосветье, держа в другой руке лианы.",
+   "mini": false,
+   "icon": "eternal_starlight__item_crescent_spear_inventory.png",
+   "drops": [
+    {
+     "item": "eternal_starlight:aethersent_ingot",
+     "name": "Эфиросцентный слиток",
+     "chance": "16%",
+     "icon": "eternal_starlight__item_aethersent_ingot.png"
+    },
+    {
+     "item": "eternal_starlight:amaramber_arrow",
+     "name": "Амарянтарная стрела",
+     "chance": "30%",
+     "icon": "eternal_starlight__item_amaramber_arrow.png"
+    },
+    {
+     "item": "eternal_starlight:crescent_pendant",
+     "name": "Подвеска с полумесяцем",
+     "chance": null,
+     "icon": "eternal_starlight__item_crescent_pendant.png"
+    },
+    {
+     "item": "eternal_starlight:crescent_spear",
+     "name": "Копьё полумесяца",
+     "chance": "75%",
+     "icon": "eternal_starlight__item_crescent_spear_inventory.png"
+    },
+    {
+     "item": "eternal_starlight:deepsilver_ingot",
+     "name": "Слиток глубинного серебра",
+     "chance": "30%",
+     "icon": "eternal_starlight__item_deepsilver_ingot.png"
+    }
+   ],
+   "node": null,
+   "mod": "eternal_starlight"
+  },
+  {
+   "id": "bosses_of_mass_destruction:void_blossom",
+   "group": "bomd",
+   "name": "Цветок пустоты",
+   "where": "Отыщите его глубоко в пещерах, посадив Пустотную лилию, которая укажет в сторону босса.",
+   "mini": false,
+   "icon": "bosses_of_mass_destruction__item_crystal_fruit.png",
+   "drops": [
+    {
+     "item": "bosses_of_mass_destruction:crystal_fruit",
+     "name": "Кристальный фрукт",
+     "chance": null,
+     "icon": "bosses_of_mass_destruction__item_crystal_fruit.png"
+    },
+    {
+     "item": "bosses_of_mass_destruction:void_thorn",
+     "name": "Пустотный шип",
+     "chance": null,
+     "icon": "bosses_of_mass_destruction__item_void_thorn.png"
+    }
+   ],
+   "node": "b_void",
+   "mod": "bosses_of_mass_destruction"
+  },
+  {
+   "id": "bosses_of_mass_destruction:gauntlet",
+   "group": "bomd",
+   "name": "Перчатка незера",
+   "where": "Найдите большую арену в озёрах лавы Незера и разрушьте Древний резной чернит в её центре.",
+   "mini": false,
+   "icon": "bosses_of_mass_destruction__item_blazing_eye.png",
+   "drops": [
+    {
+     "item": "bosses_of_mass_destruction:blazing_eye",
+     "name": "Пылающее око",
+     "chance": null,
+     "icon": "bosses_of_mass_destruction__item_blazing_eye.png"
+    },
+    {
+     "item": "minecraft:ancient_debris",
+     "name": "Древние обломки",
+     "chance": null,
+     "icon": "minecraft__item_ancient_debris.png"
+    }
+   ],
+   "node": "b_gauntlet",
+   "mod": "bosses_of_mass_destruction"
+  },
+  {
+   "id": "bosses_of_mass_destruction:lich",
+   "group": "bomd",
+   "name": "Ночной лич",
+   "where": "Найдите Башню Лича с помощью Звезды души, выпадающей с маленьким шансом из нежити. Для призыва босса потребуется 4 Звёзды души.",
+   "mini": false,
+   "icon": "bosses_of_mass_destruction__item_ancient_anima.png",
+   "drops": [
+    {
+     "item": "bosses_of_mass_destruction:ancient_anima",
+     "name": "Древняя душа",
+     "chance": null,
+     "icon": "bosses_of_mass_destruction__item_ancient_anima.png"
+    },
+    {
+     "item": "minecraft:bone",
+     "name": "Кость",
+     "chance": null,
+     "icon": "minecraft__item_bone.png"
+    },
+    {
+     "item": "minecraft:diamond",
+     "name": "Алмаз",
+     "chance": null,
+     "icon": "minecraft__item_diamond.png"
+    },
+    {
+     "item": "minecraft:enchanted_book",
+     "name": "Чародейская книга",
+     "chance": null,
+     "icon": "minecraft__item_enchanted_book.png"
+    }
+   ],
+   "node": null,
+   "mod": "bosses_of_mass_destruction"
+  },
+  {
+   "id": "bosses_of_mass_destruction:obsidilith",
+   "group": "bomd",
+   "name": "Обсидилит",
+   "where": "Вставьте Око эндера в Обсидиановый алтарь на вершине гигантского парящего сооружения в Энде.",
+   "mini": false,
+   "icon": "bosses_of_mass_destruction__item_obsidian_heart.png",
+   "drops": [
+    {
+     "item": "bosses_of_mass_destruction:obsidian_heart",
+     "name": "Обсидиановое сердце",
+     "chance": null,
+     "icon": "bosses_of_mass_destruction__item_obsidian_heart.png"
+    },
+    {
+     "item": "minecraft:obsidian",
+     "name": "Обсидиан",
+     "chance": null,
+     "icon": "minecraft__item_obsidian.png"
+    },
+    {
+     "item": "minecraft:purpur_block",
+     "name": "Пурпур",
+     "chance": null,
+     "icon": "minecraft__item_purpur_block.png"
+    }
+   ],
+   "node": null,
+   "mod": "bosses_of_mass_destruction"
+  },
+  {
+   "id": "ars_nouveau:wilden_boss",
+   "group": "magic",
+   "name": "Дикая химера",
+   "where": "Проведите ритуал «Дань уважения диким».",
+   "mini": false,
+   "icon": "ars_nouveau__item_wilden_tribute.png",
+   "drops": [
+    {
+     "item": "ars_nouveau:wilden_tribute",
+     "name": "Дань уважения диким",
+     "chance": null,
+     "icon": "ars_nouveau__item_wilden_tribute.png"
+    }
+   ],
+   "node": null,
+   "mod": "ars_nouveau"
+  },
+  {
+   "id": "irons_spellbooks:dead_king",
+   "group": "magic",
+   "name": "Мёртвый король",
+   "where": "Отыщите его в Катакомбах, куда указывает Капризный компас.",
+   "mini": false,
+   "icon": "irons_spellbooks__item_necronomicon_spell_book.png",
+   "drops": [
+    {
+     "item": "irons_spellbooks:arcane_essence",
+     "name": "Эссенция волшебства",
+     "chance": null,
+     "icon": "irons_spellbooks__item_arcane_essence.png"
+    },
+    {
+     "item": "irons_spellbooks:blank_rune",
+     "name": "Пустая руна",
+     "chance": "75%",
+     "icon": "irons_spellbooks__item_blank_rune.png"
+    },
+    {
+     "item": "irons_spellbooks:blood_staff",
+     "name": "Кровавый посох",
+     "chance": "50%",
+     "icon": "irons_spellbooks__item_blood_staff.png"
+    },
+    {
+     "item": "irons_spellbooks:epic_ink",
+     "name": "Эпические чернила",
+     "chance": "76%",
+     "icon": "irons_spellbooks__item_epic_ink.png"
+    },
+    {
+     "item": "irons_spellbooks:legendary_ink",
+     "name": "Легендарные чернила",
+     "chance": "76%",
+     "icon": "irons_spellbooks__item_legendary_ink.png"
+    }
+   ],
+   "node": null,
+   "mod": "irons_spellbooks"
+  },
+  {
+   "id": "irons_spellbooks:fire_boss",
+   "group": "magic",
+   "name": "Эхо Тайроса",
+   "where": "Используйте Cinderous Soulcaller в Цитадели, найденной с помощью Древней карты в Незере.",
+   "mini": false,
+   "icon": "irons_spellbooks__item_cinder_essence.png",
+   "drops": [
+    {
+     "item": "irons_spellbooks:arcane_essence",
+     "name": "Эссенция волшебства",
+     "chance": null,
+     "icon": "irons_spellbooks__item_arcane_essence.png"
+    },
+    {
+     "item": "irons_spellbooks:betrayer_signet",
+     "name": "Перстень предателя",
+     "chance": "50%",
+     "icon": "irons_spellbooks__item_mageslayer_ring.png"
+    },
+    {
+     "item": "irons_spellbooks:cinder_essence",
+     "name": "Пепельная эссенция",
+     "chance": null,
+     "icon": "irons_spellbooks__item_cinder_essence.png"
+    },
+    {
+     "item": "irons_spellbooks:decrepit_key",
+     "name": "Ветхий ключ",
+     "chance": null,
+     "icon": "irons_spellbooks__item_decrepit_key.png"
+    },
+    {
+     "item": "irons_spellbooks:decrepit_scythe",
+     "name": "Ветхая коса",
+     "chance": "50%",
+     "icon": "irons_spellbooks__item_decrepit_scythe.png"
+    }
+   ],
+   "node": null,
+   "mod": "irons_spellbooks"
+  },
+  {
+   "id": "minecraft:elder_guardian",
+   "group": "vanilla",
+   "name": "Древний страж",
+   "where": "Сторожит океанский монумент и насылает усталость на всех вокруг.",
+   "mini": true,
+   "icon": "minecraft__item_prismarine_shard.png",
+   "drops": [
+    {
+     "item": "minecraft:wet_sponge",
+     "name": "Мокрая губка",
+     "chance": null,
+     "icon": "minecraft__item_wet_sponge.png"
+    },
+    {
+     "item": "minecraft:prismarine_shard",
+     "name": "Осколок призмарина",
+     "chance": null,
+     "icon": "minecraft__item_prismarine_shard.png"
+    },
+    {
+     "item": "minecraft:tide_armor_trim_smithing_template",
+     "name": "Кузнечный шаблон",
+     "chance": null,
+     "icon": "minecraft__item_tide_armor_trim_smithing_template.png"
+    }
+   ],
+   "node": null,
+   "mod": "minecraft"
+  },
+  {
+   "id": "minecraft:warden",
+   "group": "vanilla",
+   "name": "Хранитель",
+   "where": "Просыпается в древнем городе глубокой тьмы, если шуметь рядом со скалк-крикунами. Не видит, но слышит всё.",
+   "mini": false,
+   "icon": "minecraft__item_echo_shard.png",
+   "drops": [
+    {
+     "item": "minecraft:sculk_catalyst",
+     "name": "Скалковый катализатор",
+     "chance": null,
+     "icon": "minecraft__item_sculk_catalyst.png"
+    },
+    {
+     "item": "minecraft:echo_shard",
+     "name": "Осколок эха",
+     "chance": null,
+     "icon": "minecraft__item_echo_shard.png"
+    }
+   ],
+   "node": null,
+   "mod": "minecraft"
+  },
+  {
+   "id": "minecraft:wither",
+   "group": "vanilla",
+   "name": "Визер",
+   "where": "Призывается: четыре блока песка душ буквой Т и три черепа визер-скелетов сверху.",
+   "mini": false,
+   "icon": "minecraft__item_nether_star.png",
+   "drops": [
+    {
+     "item": "minecraft:nether_star",
+     "name": "Звезда Незера",
+     "chance": null,
+     "icon": "minecraft__item_nether_star.png"
+    }
+   ],
+   "node": "b_wither",
+   "mod": "minecraft"
+  },
+  {
+   "id": "minecraft:ender_dragon",
+   "group": "vanilla",
+   "name": "Эндер-дракон",
+   "where": "Ждёт на главном острове Энда, за кристаллами на обсидиановых колоннах.",
+   "mini": false,
+   "icon": "minecraft__item_dragon_breath.png",
+   "drops": [
+    {
+     "item": "minecraft:dragon_egg",
+     "name": "Яйцо дракона",
+     "chance": null,
+     "icon": "minecraft__item_dragon_egg.png"
+    },
+    {
+     "item": "minecraft:dragon_breath",
+     "name": "Дыхание дракона",
+     "chance": null,
+     "icon": "minecraft__item_dragon_breath.png"
+    },
+    {
+     "item": "minecraft:elytra",
+     "name": "Элитры",
+     "chance": null,
+     "icon": "minecraft__item_elytra.png"
+    }
+   ],
+   "node": "w_dragon",
+   "mod": "minecraft"
+  }
+ ],
+ "bossGroups": [
+  {
+   "id": "twilight",
+   "name": "Сумеречный лес"
+  },
+  {
+   "id": "cataclysm",
+   "name": "Cataclysm"
+  },
+  {
+   "id": "aether",
+   "name": "Эфир"
+  },
+  {
+   "id": "starlight",
+   "name": "Звездосветье"
+  },
+  {
+   "id": "bomd",
+   "name": "Bosses of Mass Destruction"
+  },
+  {
+   "id": "magic",
+   "name": "Магия"
+  },
+  {
+   "id": "vanilla",
+   "name": "Minecraft"
+  }
+ ],
+ "chapters": [
+  {
+   "id": "3188AC6C440F7520",
+   "title": "Первые шаги",
+   "group": "",
+   "order": 0,
+   "quests": 14,
+   "icon": "minecraft__item_wooden_pickaxe.png"
+  },
+  {
+   "id": "0CF7A598566497C7",
+   "title": "Перфекционист",
+   "group": "",
+   "order": 1,
+   "quests": 16,
+   "icon": "craftoria_core__item_logo.png"
+  },
+  {
+   "id": "2E72024B18414A17",
+   "title": "Вечность",
+   "group": "",
+   "order": 2,
+   "quests": 16,
+   "icon": "mekanism_extras__item_alloy_spectrum.png"
+  },
+  {
+   "id": "0CB064DDBC477A56",
+   "title": "Кулинарное искусство",
+   "group": "5016E3C5975D88DE",
+   "order": 0,
+   "quests": 1,
+   "icon": "farmersdelight__block_cooking_pot_side.png"
+  },
+  {
+   "id": "0138B258F57524B9",
+   "title": "Земледелие",
+   "group": "5016E3C5975D88DE",
+   "order": 1,
+   "quests": 1,
+   "icon": "farmersdelight__block_wild_carrots.png"
+  },
+  {
+   "id": "1910D05CD66EC477",
+   "title": "Рыбалка",
+   "group": "5016E3C5975D88DE",
+   "order": 2,
+   "quests": 11,
+   "icon": "starcatcher__item_starcatcher_rod_uncast.png"
+  },
+  {
+   "id": "70FFEE37C7ABD690",
+   "title": "Applied Energistics",
+   "group": "04696DE4EC4D4A94",
+   "order": 0,
+   "quests": 120,
+   "icon": "ae2__item_fluix_crystal.png"
+  },
+  {
+   "id": "679ED31B5B1D91DA",
+   "title": "Replication",
+   "group": "04696DE4EC4D4A94",
+   "order": 1,
+   "quests": 9,
+   "icon": "replication__block_replicator.png"
+  },
+  {
+   "id": "61F4FCD929EE04DC",
+   "title": "Apotheosis",
+   "group": "07A79347BA55DCA4",
+   "order": 0,
+   "quests": 27,
+   "icon": "apotheosis__items_gems_default.png"
+  },
+  {
+   "id": "216D532684E20496",
+   "title": "Боссы",
+   "group": "07A79347BA55DCA4",
+   "order": 1,
+   "quests": 21,
+   "icon": "cataclysm__item_monstrous_eye.png"
+  },
+  {
+   "id": "5158EB105DEA1F80",
+   "title": "Immersive Aircraft",
+   "group": "07A79347BA55DCA4",
+   "order": 2,
+   "quests": 6,
+   "icon": "immersive_aircraft__item_biplane.png"
+  },
+  {
+   "id": "26E59C8DBA7F6FE3",
+   "title": "Буйство монстров",
+   "group": "07A79347BA55DCA4",
+   "order": 3,
+   "quests": 17,
+   "icon": "minecraft__item_zombie_head.png"
+  },
+  {
+   "id": "2A4C06811555B5D0",
+   "title": "Relics & Artifacts",
+   "group": "07A79347BA55DCA4",
+   "order": 4,
+   "quests": 71,
+   "icon": "relics__item_kinetic_belt.png"
+  },
+  {
+   "id": "0644AB97E8D8839B",
+   "title": "Create",
+   "group": "066C799B2F5452CD",
+   "order": 0,
+   "quests": 109,
+   "icon": "minecraft__item_painting.png"
+  },
+  {
+   "id": "37D7FA3DAE36E099",
+   "title": "Just Dire Things",
+   "group": "066C799B2F5452CD",
+   "order": 1,
+   "quests": 58,
+   "icon": "justdirethings__block_blockswappert2_side.png"
+  },
+  {
+   "id": "40CEA39FE5F5225D",
+   "title": "Mekanism: Промышленность",
+   "group": "066C799B2F5452CD",
+   "order": 2,
+   "quests": 54,
+   "icon": "mekanism__block_steel_casing.png"
+  },
+  {
+   "id": "09343C303E49C46F",
+   "title": "Mekanism: Энергия",
+   "group": "066C799B2F5452CD",
+   "order": 3,
+   "quests": 26,
+   "icon": "mekanismgenerators__block_model_advanced_solar_generator.png"
+  },
+  {
+   "id": "58ABCA8D818937AA",
+   "title": "Mekanism: Логистика",
+   "group": "066C799B2F5452CD",
+   "order": 4,
+   "quests": 21,
+   "icon": "mekanism__block_models_multipart_basic_logistical_transporter_vertical.png"
+  },
+  {
+   "id": "2D12E0E71DEC99E9",
+   "title": "MI: Паровая эпоха",
+   "group": "066C799B2F5452CD",
+   "order": 5,
+   "quests": 41,
+   "icon": "modern_industrialization__item_coke.png"
+  },
+  {
+   "id": "53A9F74C4BFE02D2",
+   "title": "MI: Эпоха электричества",
+   "group": "066C799B2F5452CD",
+   "order": 6,
+   "quests": 53,
+   "icon": "modern_industrialization__item_motor.png"
+  },
+  {
+   "id": "587D73D979FA9D28",
+   "title": "MI: Квантовая эпоха",
+   "group": "066C799B2F5452CD",
+   "order": 7,
+   "quests": 26,
+   "icon": "modern_industrialization__item_singularity.png"
+  },
+  {
+   "id": "001B56BD678E7745",
+   "title": "Powah",
+   "group": "066C799B2F5452CD",
+   "order": 8,
+   "quests": 15,
+   "icon": "powah__block_thermo_generator_spirited_top.png"
+  },
+  {
+   "id": "04AD21E8ACC60AFD",
+   "title": "PneumaticCraft",
+   "group": "066C799B2F5452CD",
+   "order": 9,
+   "quests": 76,
+   "icon": "pneumaticcraft__item_pressure_gauge.png"
+  },
+  {
+   "id": "0597AF3E8B286CFA",
+   "title": "Ars Nouveau",
+   "group": "01BEAD68B1D370D3",
+   "order": 0,
+   "quests": 91,
+   "icon": "ars_nouveau__item_worn_notebook.png"
+  },
+  {
+   "id": "3B4FADE31FB88E9F",
+   "title": "Iron's Spells",
+   "group": "01BEAD68B1D370D3",
+   "order": 1,
+   "quests": 92,
+   "icon": "irons_spellbooks__item_diamond_spell_book.png"
+  },
+  {
+   "id": "0A7BE8A17BDD53E9",
+   "title": "Neo Vitae",
+   "group": "01BEAD68B1D370D3",
+   "order": 2,
+   "quests": 40,
+   "icon": "neovitae__block_altar.png"
+  },
+  {
+   "id": "7269FD2B5B0F0424",
+   "title": "Occultism",
+   "group": "01BEAD68B1D370D3",
+   "order": 3,
+   "quests": 66,
+   "icon": "occultism__item_boo.png"
+  },
+  {
+   "id": "5A3894BACC5E8994",
+   "title": "Theurgy",
+   "group": "01BEAD68B1D370D3",
+   "order": 4,
+   "quests": 38,
+   "icon": "theurgy__block_liquefaction_cauldron.png"
+  }
+ ],
+ "chapterGroups": [
+  {
+   "id": "5016E3C5975D88DE",
+   "name": "Сельское хозяйство"
+  },
+  {
+   "id": "04696DE4EC4D4A94",
+   "name": "Логистика"
+  },
+  {
+   "id": "07A79347BA55DCA4",
+   "name": "Приключения"
+  },
+  {
+   "id": "066C799B2F5452CD",
+   "name": "Технологии"
+  },
+  {
+   "id": "01BEAD68B1D370D3",
+   "name": "Магия"
+  }
+ ],
+ "events": [
+  {
+   "id": "rush",
+   "kind": "auto",
+   "metric": "milestones",
+   "start": "2026-10-01T00:00:00+03:00",
+   "end": "2026-10-03T23:59:59+03:00",
+   "title": "Стартовый рывок",
+   "desc": "Первые три дня сезона: какая команда откроет больше вех. Каждая веха считается один раз на команду."
+  },
+  {
+   "id": "hunt",
+   "kind": "auto",
+   "metric": "bosses",
+   "start": "2026-10-08T00:00:00+03:00",
+   "end": "2026-10-14T23:59:59+03:00",
+   "title": "Охота на боссов",
+   "desc": "Вторая неделя: больше всего боссов, которых игроки команды победили впервые. Повторные победы не считаются."
+  },
+  {
+   "id": "books",
+   "kind": "auto",
+   "metric": "quests",
+   "start": "2026-10-15T00:00:00+03:00",
+   "end": "2026-10-21T23:59:59+03:00",
+   "title": "Книжный марафон",
+   "desc": "Третья неделя: больше всего квестов книги, выполненных командой за эти дни."
+  },
+  {
+   "id": "dragon",
+   "kind": "race",
+   "node": "w_dragon",
+   "start": "2026-10-01T00:00:00+03:00",
+   "end": "2026-10-21T23:59:59+03:00",
+   "title": "Гонка к дракону",
+   "desc": "Кто первым освободит Энд. Места — по времени победы над Эндер-драконом."
+  },
+  {
+   "id": "grandprix",
+   "kind": "live",
+   "start": "2026-10-17T20:00:00+03:00",
+   "end": "2026-10-17T22:00:00+03:00",
+   "title": "Гран-при дирижаблей",
+   "desc": "Гонка команд на своих дирижаблях из Create: Aeronautics по трассе над облаками. Экипаж — до трёх игроков."
+  },
+  {
+   "id": "arena",
+   "kind": "live",
+   "start": "2026-10-18T20:00:00+03:00",
+   "end": "2026-10-18T22:00:00+03:00",
+   "title": "Турнир арены",
+   "desc": "Бои команд на выбывание: сначала 2×2, в финале 3×3."
+  }
+ ],
+ "teamRules": {
+  "eventPoints": [
+   150,
+   90,
+   50
+  ],
+  "eventParticipation": 20,
+  "questPoints": 2,
+  "chapterBonus": 25
+ },
+ "skillCats": [
+  {
+   "id": "adventurer_skills:adventurer_skills",
+   "name": "Приключения"
+  },
+  {
+   "id": "puffish_skills:mining",
+   "name": "Добыча"
+  },
+  {
+   "id": "irons_skills:magic1",
+   "name": "Магия I"
+  },
+  {
+   "id": "irons_skills:magic2",
+   "name": "Магия II"
+  },
+  {
+   "id": "irons_skills:school1",
+   "name": "Основная школа"
+  },
+  {
+   "id": "irons_skills:school2",
+   "name": "Вторая школа"
+  }
+ ],
+ "worldTiers": {
+  "haven": "Прибежище",
+  "frontier": "Рубеж",
+  "ascent": "Восхождение",
+  "summit": "Вершина",
+  "pinnacle": "Пик"
+ },
+ "origins": {
+  "neoorigins:human": "Человек",
+  "neoorigins:merling": "Мерлинг",
+  "neoorigins:avian": "Авиан",
+  "neoorigins:blazeling": "Блейзлинг",
+  "neoorigins:elytrian": "Элитриец",
+  "neoorigins:enderian": "Эндерианец",
+  "neoorigins:arachnid": "Арахнид",
+  "neoorigins:shulk": "Шулк",
+  "neoorigins:phantom": "Фантом",
+  "neoorigins:feline": "Кошачий",
+  "neoorigins:golem": "Голем",
+  "neoorigins:caveborn": "Пещернорождённый",
+  "neoorigins:sylvan": "Сильван",
+  "neoorigins:draconic": "Драконид",
+  "neoorigins:revenant": "Ревенант",
+  "neoorigins:tiny": "Малыш",
+  "neoorigins:cave_dragon": "Пещерный дракон",
+  "neoorigins:forest_dragon": "Лесной дракон",
+  "neoorigins:sea_dragon": "Морской дракон",
+  "neoorigins:abyssal": "Обитатель бездны",
+  "neoorigins:voidwalker": "Странник пустоты",
+  "neoorigins:stoneguard": "Каменный страж",
+  "neoorigins:verdant": "Вердант",
+  "neoorigins:umbral": "Умбрал",
+  "neoorigins:inchling": "Инчлинг",
+  "neoorigins:sporeling": "Споровик",
+  "neoorigins:frostborn": "Хладорождённый",
+  "neoorigins:strider": "Лавомерка",
+  "neoorigins:siren": "Сирена",
+  "neoorigins:piglin": "Пиглин",
+  "neoorigins:hiveling": "Улейник",
+  "neoorigins:cinderborn": "Пеплорождённый",
+  "neoorigins:sculkborn": "Скалкорождённый",
+  "neoorigins:enderite": "Эндерит",
+  "neoorigins:class_warrior": "Воин",
+  "neoorigins:class_archer": "Лучник",
+  "neoorigins:class_miner": "Шахтёр",
+  "neoorigins:class_beastmaster": "Повелитель зверей",
+  "neoorigins:class_explorer": "Исследователь",
+  "neoorigins:class_sentinel": "Страж",
+  "neoorigins:class_herbalist": "Травник",
+  "neoorigins:class_scout": "Разведчик",
+  "neoorigins:class_berserker": "Берсерк",
+  "neoorigins:class_titan": "Титан",
+  "neoorigins:class_rogue": "Разбойник",
+  "neoorigins:class_lumberjack": "Дровосек",
+  "neoorigins:class_blacksmith": "Кузнец",
+  "neoorigins:class_cook": "Повар",
+  "neoorigins:class_merchant": "Торговец",
+  "neoorigins:class_cleric": "Священник",
+  "neoorigins:class_nitwit": "Дурачок",
+  "neoorigins:class_fisher": "Рыбак",
+  "neoorigins:class_mason": "Каменщик",
+  "neoorigins:class_paladin": "Паладин",
+  "neoorigins:necromancer": "Некромант",
+  "neoorigins:gorgon": "Горгона",
+  "neoorigins:automaton": "Автоматон",
+  "neoorigins:kraken": "Кракен",
+  "neoorigins:warden": "Хранитель",
+  "neoorigins:dwarf": "Дворф",
+  "neoorigins:breeze": "Бриз",
+  "neoorigins:vampire": "Вампир",
+  "neoorigins:monster_tamer": "Укротитель монстров",
+  "neoorigins:earth_mage": "Маг Земли",
+  "neoorigins:water_mage": "Маг Воды",
+  "neoorigins:fire_mage": "Маг Огня",
+  "neoorigins:air_mage": "Маг Воздуха",
+  "neoorigins:gravity_mage": "Маг Гравитации",
+  "neoorigins:darkness_mage": "Маг Тьмы",
+  "neoorigins:wraith": "Рейф",
+  "neoorigins:skeleton": "Скелет",
+  "neoorigins:slime": "Слизень"
+ },
+ "fun": [
+  {
+   "id": "f_mysh",
+   "adv": "minecraft:adventure/avoid_vibration",
+   "game": "мыш (кродеться)",
+   "desc": "Прокрадись мимо скалкового датчика или Хранителя. Да, в русской версии игры оно так и называется.",
+   "mod": "minecraft",
+   "iconFile": "minecraft__item_sculk_sensor.png",
+   "req": "all"
+  },
+  {
+   "id": "f_shiny",
+   "adv": "minecraft:nether/distract_piglin",
+   "game": "Бранзулетка!",
+   "desc": "Отвлеки злого пиглина золотом. Работает и на людях.",
+   "mod": "minecraft",
+   "iconFile": "minecraft__item_gold_ingot.png",
+   "req": "any"
+  },
+  {
+   "id": "f_koschei",
+   "adv": "minecraft:nether/charge_respawn_anchor",
+   "game": "Ларец Кощея",
+   "desc": "Заряди якорь возрождения до упора. Смерть — на конце иглы.",
+   "mod": "minecraft",
+   "iconFile": "minecraft__item_respawn_anchor.png",
+   "req": "all"
+  },
+  {
+   "id": "f_barbos",
+   "adv": "minecraft:husbandry/whole_pack",
+   "game": "Барбоскины",
+   "desc": "Приручи волков всех окрасов. Кормить их тоже тебе.",
+   "mod": "minecraft",
+   "iconFile": "minecraft__item_bone.png",
+   "req": "all"
+  },
+  {
+   "id": "f_trident",
+   "adv": "minecraft:adventure/throw_trident",
+   "game": "Попасть впросак",
+   "desc": "Метни трезубец во что-нибудь. Шутка про трезубец, в общем.",
+   "mod": "minecraft",
+   "iconFile": "minecraft__item_trident.png",
+   "req": "all"
+  },
+  {
+   "id": "f_ghast",
+   "adv": "minecraft:nether/uneasy_alliance",
+   "game": "Война миров",
+   "desc": "Затащи гаста в верхний мир и одолей его там. Зачем — не спрашивай.",
+   "mod": "minecraft",
+   "iconFile": "minecraft__item_ghast_tear.png",
+   "req": "all"
+  },
+  {
+   "id": "f_return",
+   "adv": "minecraft:nether/return_to_sender",
+   "game": "Вернуть отправителю",
+   "desc": "Убей гаста его же огненным шаром. Теннис по-незерски.",
+   "mod": "minecraft",
+   "iconFile": "minecraft__item_fire_charge.png",
+   "req": "all"
+  },
+  {
+   "id": "f_home",
+   "adv": "minecraft:nether/ride_strider_in_overworld_lava",
+   "game": "Совсем как дома",
+   "desc": "Прокатись на страйдере по лаве верхнего мира. Скучает по дому.",
+   "mod": "minecraft",
+   "iconFile": "minecraft__item_warped_fungus_on_a_stick.png",
+   "req": "all"
+  },
+  {
+   "id": "f_bird",
+   "adv": "minecraft:adventure/spyglass_at_parrot",
+   "game": "Это птица?",
+   "desc": "Посмотри на попугая в подзорную трубу. Да, это птица.",
+   "mod": "minecraft",
+   "iconFile": "minecraft__item_spyglass.png",
+   "req": "all"
+  },
+  {
+   "id": "f_cliffs",
+   "adv": "minecraft:adventure/fall_from_world_height",
+   "game": "Пещеры и скалы",
+   "desc": "Упади с самого верха мира до самого дна — и выживи. Лифт для смелых.",
+   "mod": "minecraft",
+   "iconFile": "minecraft__item_water_bucket.png",
+   "req": "all"
+  },
+  {
+   "id": "f_express",
+   "adv": "create:train_roadkill",
+   "game": "Убийство «Восточным экспрессом»",
+   "desc": "Сбей моба поездом. Машинист, вы уволены.",
+   "mod": "create",
+   "iconFile": "minecraft__item_diamond_sword.png",
+   "req": "all"
+  },
+  {
+   "id": "f_crash",
+   "adv": "create:train_crash",
+   "game": "Приехали...",
+   "desc": "Столкни два поезда. Расписание — для слабых.",
+   "mod": "create",
+   "iconFile": "create__item_incomplete_track.png",
+   "req": "all"
+  },
+  {
+   "id": "f_blind",
+   "adv": "create:train_crash_backwards",
+   "game": "Слепая зона",
+   "desc": "Врежься в поезд, сдавая назад. Зеркала заднего вида не завезли.",
+   "mod": "create",
+   "iconFile": "create__item_incomplete_track.png",
+   "req": "all"
+  },
+  {
+   "id": "f_choco",
+   "adv": "create:chocolate_bucket",
+   "game": "Не слипнется!",
+   "desc": "Набери ведро жидкого шоколада. Ешь аккуратно.",
+   "mod": "create",
+   "iconFile": "create__item_chocolate_bucket.png",
+   "req": "all"
+  },
+  {
+   "id": "f_potato",
+   "adv": "create:potato_cannon_collide",
+   "game": "Картофегиляция",
+   "desc": "Столкни в воздухе снаряды двух картофельных пушек. Салют из овощей.",
+   "mod": "create",
+   "iconFile": "minecraft__item_carrot.png",
+   "req": "all"
+  },
+  {
+   "id": "f_bach",
+   "adv": "create:pipe_organ",
+   "game": "Иоганн Бах",
+   "desc": "Собери орган из паровых свистков. Соседи будут в восторге.",
+   "mod": "create",
+   "iconFile": "create__block_whistle_particle.png",
+   "req": "all"
+  },
+  {
+   "id": "f_crank",
+   "adv": "create:hand_crank_000",
+   "game": "Кручу-верчу",
+   "desc": "Крути ручку, пока не проголодаешься. Качалка по-механически.",
+   "mod": "create",
+   "iconFile": "create__block_axis.png",
+   "req": "all"
+  },
+  {
+   "id": "f_tomato",
+   "adv": "farmersdelight:main/hit_raider_with_rotten_tomato",
+   "game": "Фуу! Позор!",
+   "desc": "Попади тухлым помидором в разбойника. Критика — дело тонкое.",
+   "mod": "farmersdelight",
+   "iconFile": "farmersdelight__item_rotten_tomato.png",
+   "req": "all"
+  },
+  {
+   "id": "f_framed",
+   "adv": "lootr:1frame",
+   "game": "Не выходя за рамки",
+   "desc": "Забери добычу из рамки Lootr. Тебя подставили!",
+   "mod": "lootr",
+   "iconFile": "minecraft__item_item_frame.png",
+   "req": "all"
+  },
+  {
+   "id": "f_bees",
+   "adv": "the_bumblezone:effects/bee_hit_wrath_of_the_hive",
+   "game": "ТОЛЬКО НЕ ПЧЁЛЫ!!!",
+   "desc": "Разозли весь улей в Жужжилище. А теперь беги.",
+   "mod": "the_bumblezone",
+   "iconFile": "minecraft__item_bee_spawn_egg.png",
+   "req": "all"
+  },
+  {
+   "id": "f_dora",
+   "adv": "the_bumblezone:tools/honey_compass_use",
+   "game": "Даша шмелешественница",
+   "desc": "Найди улей по медовому компасу.",
+   "mod": "the_bumblezone",
+   "iconFile": "the_bumblezone__item_honey_compass_honey_compass.png",
+   "req": "all"
+  },
+  {
+   "id": "f_beemovie",
+   "adv": "the_bumblezone:beehemoth/tamed_beehemoth",
+   "game": "Би Муви, но на 300% крупнее",
+   "desc": "Приручи бегемотопчелу. Седло в комплект не входит.",
+   "mod": "the_bumblezone",
+   "iconFile": "the_bumblezone__item_beehemoth_spawn_egg.png",
+   "req": "all"
+  },
+  {
+   "id": "f_sixties",
+   "adv": "the_bumblezone:decor/craft_string_curtain_recipe",
+   "game": "Шестидесятые звонили, просили передать!",
+   "desc": "Скрафти шторку из ниток. Хиппи одобряют.",
+   "mod": "the_bumblezone",
+   "iconFile": "the_bumblezone__item_string_curtain_white.png",
+   "req": "any"
+  },
+  {
+   "id": "f_monster",
+   "adv": "occultism:occultism/familiar/cthulhu",
+   "game": "Вы изверг!",
+   "desc": "Обидь маленького фамильяра-Ктулху. Как тебе не стыдно?",
+   "mod": "occultism",
+   "iconFile": "minecraft__item_ink_sac.png",
+   "req": "all"
+  },
+  {
+   "id": "f_pink",
+   "adv": "aeronautics:now_available_in_pink",
+   "game": "Теперь в розовом!",
+   "desc": "Сделай розовый перламутровый левитит. Дирижабль мечты.",
+   "mod": "aeronautics",
+   "iconFile": "aeronautics__block_pearlescent_levitite.png",
+   "req": "all"
+  }
+ ],
+ "awards": [
+  {
+   "id": "kamikaze",
+   "key": "deaths",
+   "title": "Камикадзе",
+   "desc": "больше всех смертей",
+   "iconFile": "minecraft__item_bone.png",
+   "mode": "max",
+   "units": [
+    "смерть",
+    "смерти",
+    "смертей"
+   ]
+  },
+  {
+   "id": "creeper",
+   "key": "creeper",
+   "title": "Крипер-магнит",
+   "desc": "больше всех взрывов крипера",
+   "iconFile": "minecraft__item_gunpowder.png",
+   "mode": "max",
+   "units": [
+    "взрыв",
+    "взрыва",
+    "взрывов"
+   ]
+  },
+  {
+   "id": "newton",
+   "key": "fall",
+   "title": "Ньютон",
+   "desc": "больше всех метров падения",
+   "iconFile": "minecraft__item_apple.png",
+   "mode": "max",
+   "units": [
+    "метр",
+    "метра",
+    "метров"
+   ]
+  },
+  {
+   "id": "sleepy",
+   "key": "sleeps",
+   "title": "Лунатик",
+   "desc": "больше всех ночей в кровати",
+   "iconFile": "minecraft__item_clock_00.png",
+   "mode": "max",
+   "units": [
+    "ночь",
+    "ночи",
+    "ночей"
+   ]
+  },
+  {
+   "id": "insomnia",
+   "key": "awake",
+   "title": "Бессонница",
+   "desc": "дольше всех не спит прямо сейчас",
+   "iconFile": "minecraft__item_phantom_membrane.png",
+   "mode": "max",
+   "units": [
+    "час",
+    "часа",
+    "часов"
+   ]
+  },
+  {
+   "id": "bunny",
+   "key": "jumps",
+   "title": "Попрыгунчик",
+   "desc": "больше всех прыжков",
+   "iconFile": "minecraft__item_rabbit_foot.png",
+   "mode": "max",
+   "units": [
+    "прыжок",
+    "прыжка",
+    "прыжков"
+   ]
+  },
+  {
+   "id": "ninja",
+   "key": "sneak",
+   "title": "Ниндзя",
+   "desc": "больше всех минут крадучись",
+   "iconFile": "minecraft__item_ink_sac.png",
+   "mode": "max",
+   "units": [
+    "минута",
+    "минуты",
+    "минут"
+   ]
+  },
+  {
+   "id": "chests",
+   "key": "chests",
+   "title": "Сундучник",
+   "desc": "больше всех открытых сундуков",
+   "iconFile": "minecraft__item_bundle.png",
+   "mode": "max",
+   "units": [
+    "раз",
+    "раза",
+    "раз"
+   ]
+  },
+  {
+   "id": "cake",
+   "key": "cake",
+   "title": "Сладкоежка",
+   "desc": "больше всех кусков торта",
+   "iconFile": "minecraft__item_cake.png",
+   "mode": "max",
+   "units": [
+    "кусок",
+    "куска",
+    "кусков"
+   ]
+  },
+  {
+   "id": "pig",
+   "key": "pig",
+   "title": "Свинопас",
+   "desc": "больше всех метров верхом на свинье",
+   "iconFile": "minecraft__item_carrot_on_a_stick.png",
+   "mode": "max",
+   "units": [
+    "метр",
+    "метра",
+    "метров"
+   ]
+  },
+  {
+   "id": "trader",
+   "key": "trades",
+   "title": "Барыга",
+   "desc": "больше всех сделок с жителями",
+   "iconFile": "minecraft__item_emerald.png",
+   "mode": "max",
+   "units": [
+    "сделка",
+    "сделки",
+    "сделок"
+   ]
+  },
+  {
+   "id": "bell",
+   "key": "bells",
+   "title": "Звонарь",
+   "desc": "больше всех ударов в колокол",
+   "iconFile": "minecraft__item_bell.png",
+   "mode": "max",
+   "units": [
+    "раз",
+    "раза",
+    "раз"
+   ]
+  },
+  {
+   "id": "dj",
+   "key": "records",
+   "title": "Диджей",
+   "desc": "больше всех поставленных пластинок",
+   "iconFile": "minecraft__item_music_disc_cat.png",
+   "mode": "max",
+   "units": [
+    "пластинка",
+    "пластинки",
+    "пластинок"
+   ]
+  },
+  {
+   "id": "litter",
+   "key": "drops",
+   "title": "Мусорщик",
+   "desc": "больше всех выброшенных вещей",
+   "iconFile": "minecraft__item_rotten_flesh.png",
+   "mode": "max",
+   "units": [
+    "вещь",
+    "вещи",
+    "вещей"
+   ]
+  },
+  {
+   "id": "punchbag",
+   "key": "hurt",
+   "title": "Груша для битья",
+   "desc": "больше всех полученного урона",
+   "iconFile": "minecraft__item_leather.png",
+   "mode": "max",
+   "units": [
+    "сердце",
+    "сердца",
+    "сердец"
+   ]
+  },
+  {
+   "id": "fisher",
+   "key": "fish",
+   "title": "Рыбнадзор",
+   "desc": "больше всех рыбы (в первом сезоне — ни одной)",
+   "iconFile": "minecraft__item_tropical_fish.png",
+   "mode": "max",
+   "units": [
+    "рыба",
+    "рыбы",
+    "рыб"
+   ]
+  }
+ ],
+ "shame": {
+  "minecraft:zombified_piglin": "не надо было трогать того пиглина",
+  "minecraft:bee": "пчёлы не простили",
+  "minecraft:goat": "бодаться с козлом — плохая идея",
+  "minecraft:llama": "лама плюнула в последний раз",
+  "minecraft:trader_llama": "лама торговца не шутила",
+  "minecraft:pufferfish": "объятия с иглобрюхом",
+  "minecraft:iron_golem": "голем не оценил",
+  "minecraft:wolf": "собака оказалась не своя",
+  "minecraft:silverfish": "чешуйницы из камня",
+  "minecraft:slime": "слизни затоптали",
+  "minecraft:magma_cube": "лавовый кубик отомстил",
+  "minecraft:polar_bear": "медведь не хотел обниматься",
+  "minecraft:dolphin": "дельфин — не друг",
+  "minecraft:endermite": "эндермит, серьёзно?",
+  "minecraft:snow_golem": "снеговик победил",
+  "minecraft:phantom": "надо было поспать",
+  "minecraft:creeper": "классика жанра",
+  "minecraft:witch": "ведьма знает толк в зельях",
+  "minecraft:player": "дружеский огонь",
+  "minecraft:chicken": "как, КАК?",
+  "minecraft:rabbit": "кролик-убийца существует",
+  "minecraft:vex": "досады досадили",
+  "minecraft:pillager": "разбойники, классика",
+  "minecraft:drowned": "утопленник с трезубцем",
+  "minecraft:warden": "Хранитель всё слышал"
+ }
+}
