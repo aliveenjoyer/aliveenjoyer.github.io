@@ -1,9 +1,10 @@
 /* Season 1 recap. Builds on style.css: same palette, fonts and components, plus the motion. */
 .s1 { --boss: #d95ad0; --boss-dark: #6b1f66; --paper: #e9dfc6; --ink: #2a2140; }
 
-/* ---------------- reveal on scroll (only when JS runs, so nothing hides without it) ---------------- */
-.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; transition-delay: calc(var(--i, 0) * 70ms); }
-.js .reveal.in { opacity: 1; transform: none; }
+/* ---------------- reveal on scroll (only once season1.js is running, so nothing hides if it never arrives) ---------------- */
+.reveal-on .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; transition-delay: calc(var(--i, 0) * 70ms); }
+.reveal-on .reveal.in { opacity: 1; transform: none; }
+@media print { .reveal-on .reveal { opacity: 1; transform: none; } }
 
 /* ---------------- hero ---------------- */
 .s1-hero { min-height: min(92vh, 60rem); display: flex; align-items: center; padding-bottom: clamp(3rem, 8vh, 6rem); }
@@ -314,7 +315,7 @@
 /* ---------------- no motion: final states, no movement ---------------- */
 @media (prefers-reduced-motion: reduce) {
   .s1 *, .s1 *::before, .s1 *::after { animation: none !important; transition: none !important; }
-  .js .reveal { opacity: 1; transform: none; }
+  .reveal-on .reveal { opacity: 1; transform: none; }
   .s1-save-bar i { width: 100%; }
   .s1-roll { transform: none; }
   .s1-credits { height: auto; -webkit-mask-image: none; mask-image: none; padding: 1rem 0; }

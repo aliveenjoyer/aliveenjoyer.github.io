@@ -14,8 +14,10 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%2315122a'/%3E%3Crect x='3' y='0' width='2' height='1' fill='%23574e70'/%3E%3Crect x='2' y='1' width='4' height='1' fill='%23574e70'/%3E%3Crect x='2' y='2' width='4' height='4' fill='%23f4b860'/%3E%3Crect x='3' y='3' width='2' height='2' fill='%23fff1cf'/%3E%3Crect x='2' y='6' width='4' height='1' fill='%23574e70'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20260924a">
+<!-- fonts load without blocking the page: if Google is slow, text shows in the fallback font and swaps later -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap"></noscript>
+<link rel="stylesheet" href="style.css?v=20260924b">
 <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -41,10 +43,30 @@
       <span class="flow" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
       <a class="s2-card" href="#season2">
         <span class="s2-tag">Сезон 2 · 1 октября</span>
-        <span class="s2-count" data-to="2026-10-01T00:00:00+03:00" aria-hidden="true"><b data-u="d">00</b><i>дн</i><b data-u="h">00</b><i>ч</i><b data-u="m">00</b><i>мин</i><b data-u="s">00</b><i>с</i></span>
+        <span class="s2-count" data-to="2026-10-01T00:00:00+03:00" aria-hidden="true"><em class="s2-when">1 октября, 00:00 МСК</em></span>
         <span class="s2-line">Что-то поднимается над облаками<span class="s2-cursor" aria-hidden="true">_</span></span>
       </a>
     </div>
+    <script>
+    /* The countdown ticks from here, not from teaser.js: it must work even when a slow network drops the scripts.
+       Plain ES5 so old phones run it too; without JavaScript the card shows the start date instead. */
+    (function () {
+      var c = document.querySelector(".s2-count"), to = c ? Date.parse(c.getAttribute("data-to")) : NaN;
+      if (isNaN(to)) return;
+      var two = function (n) { return (n < 10 ? "0" : "") + n; };
+      c.innerHTML = "<b></b><i>дн</i><b></b><i>ч</i><b></b><i>мин</i><b></b><i>с</i>";
+      var b = c.getElementsByTagName("b");
+      (function tick() {
+        var left = to - Date.now();
+        if (left <= 0) { c.textContent = "Сезон 2 начался"; c.className += " s2-live"; return; }
+        b[0].textContent = two(Math.floor(left / 864e5));
+        b[1].textContent = two(Math.floor(left / 36e5) % 24);
+        b[2].textContent = two(Math.floor(left / 6e4) % 60);
+        b[3].textContent = two(Math.floor(left / 1e3) % 60);
+        setTimeout(tick, 1000 - (Date.now() % 1000) + 5);
+      })();
+    })();
+    </script>
     <div class="actions">
       <a class="btn" href="#apply">Подать заявку</a>
       <a class="btn btn-quiet" href="season2-map.html">Карта сезона 2</a>
@@ -477,7 +499,7 @@
   <img alt="">
 </dialog>
 
-<script src="app.js?v=20260922a" defer></script>
-<script src="teaser.js?v=20260924a" defer></script>
+<script src="app.js?v=20260924a" defer></script>
+<script src="teaser.js?v=20260924b" defer></script>
 </body>
 </html>

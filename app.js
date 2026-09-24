@@ -298,7 +298,8 @@
 
   form.addEventListener("input", (ev) => {
     const n = ev.target.name;
-    if (n && form.querySelector(`.err[data-for="${n}"]`)?.textContent) {
+    const shown = n && form.querySelector(`.err[data-for="${n}"]`);
+    if (shown && shown.textContent) {
       const e = validate(collect());
       setErr(n, e[n]);
     }

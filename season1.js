@@ -154,7 +154,14 @@
     }), { threshold, rootMargin: "0px 0px -8% 0px" });
     els.forEach((el) => io.observe(el));
   };
-  onSeen($$(".reveal"), (el) => el.classList.add("in"), 0.15);
+  // what is already on screen stays put; the CSS hides the rest only after this line runs (.reveal-on)
+  const reveals = $$(".reveal");
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    const later = reveals.filter((el) => el.getBoundingClientRect().top > window.innerHeight * 0.92);
+    reveals.forEach((el) => { if (!later.includes(el)) el.classList.add("in"); });
+    document.documentElement.classList.add("reveal-on");
+    onSeen(later, (el) => el.classList.add("in"), 0.15);
+  }
   onSeen($$("[data-count]"), count, 0.6);
   onSeen($$(".s1-boss"), (el) => el.classList.add("dead"), 0.55);
 

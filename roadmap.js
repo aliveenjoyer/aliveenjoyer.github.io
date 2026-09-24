@@ -1176,6 +1176,10 @@
       if (Date.now() < start || document.hidden || card.open) return;
       P = await loadProgress(R); renderAll();
     }, 60000);
+  }).catch(() => {
+    // the map data did not arrive (a dropped or throttled connection): say so instead of leaving empty sections
+    const sum = $(".rm-sum");
+    if (sum) sum.innerHTML = 'Карта не загрузилась: похоже, оборвалась связь. <a href="">Обновить страницу</a>';
   });
 
   /* ---------- the creeper in the footer: better not touch ---------- */

@@ -1,6 +1,6 @@
 (() => {
   "use strict";
-  // Season 2 teaser on the main page: countdown, sky, leaked numbers, intercepted transmissions, classified files
+  // Season 2 teaser on the main page: sky, leaked numbers, the season map, intercepted transmissions, classified files
   // (three of them open on their own on set days), a race picker, boss silhouettes and a couple of easter eggs.
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const SVG = "http://www.w3.org/2000/svg";
@@ -19,7 +19,6 @@
     }));
     return svg;
   };
-  const pad = (n) => String(n).padStart(2, "0");
   const plural = (n, one, few, many) => {
     const a = n % 10, b = n % 100;
     return a === 1 && b !== 11 ? one : a >= 2 && a <= 4 && (b < 10 || b >= 20) ? few : many;
@@ -43,28 +42,21 @@
     }), { threshold, rootMargin: "0px 0px -8% 0px" });
     els.forEach((el) => io.observe(el));
   };
-  $$(".rv").forEach((el) => {
+  // Blocks that are already on screen stay as they are; only the ones further down are hidden and rise in.
+  // The CSS hides nothing until .rv-on is set here, so a script that never arrives leaves the teaser readable.
+  const rvs = $$(".rv");
+  rvs.forEach((el) => {
     const sibs = Array.from(el.parentElement.children).filter((c) => c.classList.contains("rv"));
     el.style.setProperty("--i", Math.min(8, sibs.indexOf(el)));
   });
-  onSeen($$(".rv"), (el) => el.classList.add("in"), 0.15);
-
-  /* ---------- countdown to 1 October, Moscow midnight ---------- */
-  const count = $(".s2-count");
-  if (count) {
-    const to = new Date(count.dataset.to).getTime();
-    const cell = (u) => count.querySelector(`[data-u="${u}"]`);
-    const tick = () => {
-      const left = to - Date.now();
-      if (left <= 0) { count.textContent = "Сезон 2 начался"; count.classList.add("s2-live"); return; }
-      cell("d").textContent = pad(Math.floor(left / 864e5));
-      cell("h").textContent = pad(Math.floor(left / 36e5) % 24);
-      cell("m").textContent = pad(Math.floor(left / 6e4) % 60);
-      cell("s").textContent = pad(Math.floor(left / 1e3) % 60);
-      setTimeout(tick, 1000 - (Date.now() % 1000) + 5);
-    };
-    tick();
+  if (!reduceMotion && "IntersectionObserver" in window) {
+    const later = rvs.filter((el) => el.getBoundingClientRect().top > window.innerHeight * 0.92);
+    rvs.forEach((el) => { if (!later.includes(el)) el.classList.add("in"); });
+    document.documentElement.classList.add("rv-on");
+    onSeen(later, (el) => el.classList.add("in"), 0.15);
   }
+
+  // The countdown to 1 October lives in a small inline script in index.html, so it ticks even if this file is late.
 
   /* ---------- sky: an airship with a logbook, and a moon that turns red if you insist ---------- */
   const ship = $(".s2-ship");

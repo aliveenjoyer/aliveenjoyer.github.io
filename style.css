@@ -374,8 +374,11 @@ footer p { margin: 0 0 .4rem; }
 }
 
 /* ---------------- season 2 teaser: the richer part ---------------- */
-.js .rv { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; transition-delay: calc(var(--i, 0) * 70ms); }
-.js .rv.in { opacity: 1; transform: none; }
+/* hidden only once teaser.js is running (it sets .rv-on), so the teaser stays readable if the script never arrives */
+.rv-on .rv { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; transition-delay: calc(var(--i, 0) * 70ms); }
+.rv-on .rv.in { opacity: 1; transform: none; }
+@media print { .rv-on .rv { opacity: 1; transform: none; } }
+.s2-count .s2-when { font-style: normal; font-size: 12px; line-height: 1.6; color: var(--pearl); }
 .s2-lead { color: var(--mist); max-width: var(--text); }
 .s2-h3 { font-family: var(--pixel); font-weight: 400; font-size: 16px; line-height: 1.5; color: var(--lantern); margin: 3rem 0 .8rem; }
 .s2-moon, .s2-ship { pointer-events: auto; cursor: pointer; }
@@ -496,7 +499,7 @@ footer p { margin: 0 0 .4rem; }
 .s2-more { margin-top: 1rem; }
 
 @media (prefers-reduced-motion: reduce) {
-  .js .rv { opacity: 1; transform: none; transition: none; }
+  .rv-on .rv { opacity: 1; transform: none; transition: none; }
   .s2-term-cursor, .s2-boss:hover .s2-sil, .s2-boss.open .s2-sil { animation: none; }
   .s2-map-bar span i, .s2-map-shot img { transition: none; }
   .s2-map-shot:hover img { transform: none; }
