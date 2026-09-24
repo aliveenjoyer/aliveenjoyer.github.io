@@ -1,7 +1,14 @@
 /* ---------------- season 2 map ---------------- */
 .rm-hero { position: relative; overflow: hidden; padding: clamp(3rem, 9vh, 6rem) 0 clamp(2.5rem, 6vh, 4rem);
-  background: radial-gradient(50rem 26rem at 80% 10%, rgba(143, 211, 255, .12), transparent 70%),
-              radial-gradient(40rem 24rem at 10% 90%, rgba(178, 140, 255, .12), transparent 70%), var(--void); }
+  /* the season map as a journey: islands from the first camp up to the End portal, joined by a golden trail */
+  background: linear-gradient(90deg, rgba(21, 18, 42, .82) 0%, rgba(21, 18, 42, .55) 38%, rgba(21, 18, 42, 0) 66%),
+              url(img/map/hero.webp) right bottom / cover no-repeat, var(--void); }
+@media (max-width: 760px) {
+  .rm-hero { background: linear-gradient(180deg, rgba(21, 18, 42, 0) 55%, rgba(21, 18, 42, .5) 100%),
+    linear-gradient(180deg, var(--void) 0%, rgba(21, 18, 42, 0) 35%) 0 100% / 100% 46% no-repeat,
+    url(img/map/hero-960.webp) 90% 100% / auto 46% no-repeat, var(--void); }
+}
+.rm-hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 5rem; background: linear-gradient(rgba(21, 18, 42, 0), var(--void)); pointer-events: none; }
 .rm-stars { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .rm-hero-text { position: relative; z-index: 1; max-width: var(--wide); margin: 0 auto; padding: 0 var(--gutter); }
 .rm-hero h1 { font-size: 32px; line-height: 1.2; color: var(--pearl); text-shadow: .035em .035em 0 #3b3063, .07em .07em 0 #2a2350; margin: .4rem 0 0; }
@@ -392,8 +399,12 @@ body.rm main section { scroll-margin-top: 2.5rem; }
 body.rm main section { scroll-margin-top: 3.6rem; }
 
 /* part dividers */
-.rm-part { display: flex; align-items: center; gap: .9rem; max-width: calc(var(--wide) + 2 * var(--gutter)); margin: clamp(4.5rem, 10vw, 8rem) auto 0; padding: 0 var(--gutter); }
+.rm-part { display: flex; flex-wrap: wrap; align-items: center; gap: .9rem; max-width: calc(var(--wide) + 2 * var(--gutter)); margin: clamp(4.5rem, 10vw, 8rem) auto 0; padding: 0 var(--gutter); }
 .rm-part::after { content: ""; flex: 1; height: 2px; background: linear-gradient(90deg, var(--gc), transparent); opacity: .55; }
+/* each part opens with its own scene from the same sky */
+.rm-part-art { flex: 1 0 100%; width: 100%; height: clamp(8rem, 18vw, 14rem); object-fit: cover; object-position: center 55%;
+  border-bottom: 3px solid var(--gc); box-shadow: 0 1.4rem 2.4rem -1.8rem var(--gc); }
+.rm-part[data-g="4"] .rm-part-art { object-position: center 70%; }
 .rm-part-n { display: grid; place-items: center; min-width: 2.6rem; height: 2.6rem; padding: 0 .4rem; font-family: var(--pixel); font-size: 12px; color: var(--void); background: var(--gc); box-shadow: 0 0 1.2rem -.2rem var(--gc); }
 .rm-part b { font-family: var(--pixel); font-weight: 400; font-size: 16px; color: var(--gc); line-height: 1.4; }
 .rm-part small { color: var(--mist); font-size: .98rem; }
