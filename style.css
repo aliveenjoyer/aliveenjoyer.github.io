@@ -430,11 +430,75 @@ footer p { margin: 0 0 .4rem; }
 .s2-origin:hover { border-color: var(--slate); transform: translateY(-3px); }
 .s2-origin:focus-visible { outline: 3px solid var(--lantern); outline-offset: 3px; }
 .s2-origin[aria-pressed="true"] { border-color: var(--lantern); box-shadow: 0 0 1.4rem -.4rem rgba(244, 184, 96, .6); }
-.s2-emblem { grid-row: 1 / 3; display: block; width: 40px; height: 40px; }
+.s2-emblem { grid-row: 1 / 4; display: block; width: 40px; height: 40px; }
 .s2-emblem svg { width: 100%; height: 100%; display: block; }
 .s2-origin b { font-size: 1.1rem; color: var(--pearl); }
 .s2-origin span:not(.s2-emblem) { color: var(--mist); font-size: .95rem; line-height: 1.35; }
 .s2-origin-note { color: var(--mist); font-size: .95rem; margin-top: 1rem; min-height: 1.5em; }
+
+/* the files, split: open ones and the ones still waiting for their day */
+.s2-sub { display: flex; align-items: center; gap: .7rem; margin: 1.8rem 0 0; font-family: var(--pixel); font-weight: 400; font-size: 12px; line-height: 1.5;
+  text-transform: uppercase; color: var(--pearl); }
+.s2-sub .s2-n { font-weight: 400; min-width: 1.9rem; padding: .3rem .4rem .2rem; font-size: 8px; line-height: 1; text-align: center; color: var(--void); background: var(--copper); }
+.s2-sub-locked { margin-top: 2.6rem; color: var(--mist); }
+.s2-sub-locked .s2-n { background: var(--blood); }
+.s2-sub + .s2-files { margin-top: 1rem; }
+.s2-sub-locked + .s2-howto { margin: .6rem 0 0; }
+.s2-howto + .s2-files-locked { margin-top: 1rem; }
+
+/* who will you be born as: six races up close, then all 55, then the class */
+.s2-origins { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 900px) { .s2-origins { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .s2-origins { grid-template-columns: 1fr; } }
+.s2-origin { grid-template-rows: auto auto 1fr; align-items: start; }
+.s2-origin .s2-emblem { align-self: start; margin-top: .15rem; }
+.s2-origin em { grid-column: 2; margin-top: .35rem; font-style: normal; font-size: .85rem; color: var(--lantern); }
+.s2-imp { display: inline-block; flex: none; width: 22px; height: 6px; margin-right: .5rem; vertical-align: .08em;
+  background: linear-gradient(90deg, var(--ic, var(--lantern)) 0 calc(var(--n, 0) * 8px), transparent 0) no-repeat,
+              rgba(255, 255, 255, .14);
+  -webkit-mask: repeating-linear-gradient(90deg, #000 0 6px, transparent 6px 8px); mask: repeating-linear-gradient(90deg, #000 0 6px, transparent 6px 8px); }
+.s2-imp[data-imp="1"] { --n: 1; --ic: var(--copper); }
+.s2-imp[data-imp="2"] { --n: 2; --ic: var(--lantern); }
+.s2-imp[data-imp="3"] { --n: 3; --ic: var(--blood); }
+.s2-origin-facts { list-style: none; margin: 1.2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: .8rem; }
+.s2-origin-facts li { padding: .8rem 1rem; color: var(--mist); font-size: .95rem; line-height: 1.5; border-left: 3px solid var(--copper); background: rgba(30, 26, 54, .6); }
+.s2-origin-facts b { color: var(--pearl); }
+.s2-all { margin-top: 1.2rem; border: 2px solid var(--slate); background: #16132b; }
+.s2-all > summary { cursor: pointer; list-style: none; display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem .9rem; padding: .9rem 1.1rem;
+  font-family: var(--pixel); font-size: 12px; line-height: 1.6; text-transform: uppercase; color: var(--lantern); }
+.s2-all > summary::-webkit-details-marker { display: none; }
+.s2-all > summary::before { content: "▸"; font-family: var(--book); font-size: 1.1rem; line-height: 1; transition: transform .2s; }
+.s2-all[open] > summary::before { transform: rotate(90deg); }
+.s2-all > summary span { font-family: var(--book); font-size: .95rem; text-transform: none; color: var(--mist); }
+.s2-all > summary:hover { background: rgba(244, 184, 96, .06); }
+.s2-all > summary:focus-visible { outline: 3px solid var(--lantern); outline-offset: 2px; }
+.s2-race-groups { padding: .4rem 1.1rem 1.3rem; }
+.s2-race-groups h4 { margin: 1.3rem 0 .6rem; font-family: var(--pixel); font-weight: 400; font-size: 8px; line-height: 1.6; text-transform: uppercase; color: var(--mist); }
+.s2-race-groups h4 small { color: var(--lantern); font-size: 8px; margin-left: .4rem; }
+.s2-race-groups ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: .6rem; }
+.s2-race { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: 24px 1fr auto; gap: .2rem .7rem; align-items: center; align-content: start; width: 100%; height: 100%;
+  padding: .7rem .8rem; background: var(--deep); border: 2px solid transparent; transition: border-color .2s; }
+.s2-race img, .s2-class img { width: 24px; height: 24px; image-rendering: pixelated; }
+.s2-race b { font-size: 1rem; color: var(--pearl); }
+.s2-race .s2-imp { margin: 0; }
+.s2-race span { grid-column: 1 / -1; color: var(--mist); font-size: .9rem; line-height: 1.45; }
+.s2-race .s2-born { grid-column: 1 / -1; font-size: .8rem; color: var(--copper); }
+.s2-race:hover, .s2-class:hover { border-color: var(--slate); }
+.s2-race:focus-visible, .s2-class:focus-visible { outline: 3px solid var(--lantern); outline-offset: 2px; }
+.s2-race[aria-pressed="true"], .s2-class[aria-pressed="true"] { border-color: var(--lantern); box-shadow: 0 0 1.2rem -.4rem rgba(244, 184, 96, .6); }
+.s2-classes { display: grid; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); gap: .5rem; margin-top: 1rem; }
+.s2-class { all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; gap: .6rem; padding: .5rem .7rem; background: var(--deep); border: 2px solid transparent;
+  font-size: .95rem; line-height: 1.25; color: var(--pearl); transition: border-color .2s; }
+.s2-class b { font-weight: 400; }
+.s2-class-desc { margin: .9rem 0 0; min-height: 1.6em; color: var(--mist); font-size: .95rem; }
+.s2-fate { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.2rem; margin-top: 1.2rem; }
+.s2-fate .s2-origin-note { margin: 0; flex: 1 1 18rem; color: var(--lantern); }
+.s2-roll:disabled { opacity: .6; cursor: progress; }
+@media (max-width: 560px) {
+  .s2-race-groups { padding: .2rem .7rem 1rem; }
+  .s2-classes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: reduce) { .s2-all > summary::before { transition: none; } }
 
 /* bosses */
 .s2-bosses { list-style: none; margin: 1rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: .9rem; }

@@ -17,7 +17,7 @@
 <!-- fonts load without blocking the page: if Google is slow, text shows in the fallback font and swaps later -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap"></noscript>
-<link rel="stylesheet" href="style.css?v=20260924b">
+<link rel="stylesheet" href="style.css?v=20260925a">
 <script>document.documentElement.classList.add("js")</script>
 </head>
 <body>
@@ -327,8 +327,9 @@
     </div>
 
     <h3 class="s2-h3">Досье</h3>
-    <p class="s2-howto">Наведи на&nbsp;досье или нажми на&nbsp;него, чтобы расшифровать. Три новых откроются сами — 26, 28 и&nbsp;30&nbsp;сентября.</p>
-    <ul class="s2-files">
+    <p class="s2-howto">Наведи на&nbsp;досье или нажми на&nbsp;него, чтобы расшифровать.</p>
+    <h4 class="s2-sub">Рассекречено <b class="s2-n" data-for="open">8</b></h4>
+    <ul class="s2-files s2-files-open">
       <li class="s2-file rv"><span class="s2-no">Досье 01</span><span class="s2-secret">Секретно</span><h3>Над облаками</h3>
         <p data-secret>Выше облаков есть земля: острова без опоры, храмы и&nbsp;те, кто их&nbsp;охраняет. Дверь туда — рамка, которая светится.</p></li>
       <li class="s2-file rv"><span class="s2-no">Досье 02</span><span class="s2-secret">Секретно</span><h3>Машины</h3>
@@ -343,6 +344,12 @@
         <p data-secret>Своя команда, общая земля и&nbsp;общий прогресс. Каждый босс, мир и&nbsp;победа — очки в&nbsp;зачёт. И&nbsp;монеты, за&nbsp;которые продаётся почти всё.</p></li>
       <li class="s2-file rv"><span class="s2-no">Досье 07</span><span class="s2-secret">Секретно</span><h3>Ивенты</h3>
         <p data-secret>Гонка дирижаблей там, где раньше летали только птицы. Неделя охоты на&nbsp;боссов. Турнир на&nbsp;арене. Финал — 17–18 октября.</p></li>
+      <li class="s2-file rv"><span class="s2-no">Досье 08</span><span class="s2-secret">Секретно</span><h3>Магия</h3>
+        <p data-secret>Книги заклинаний, школы магии, руны и&nbsp;призыв духов. А&nbsp;шесть рас — маги от&nbsp;рождения: огонь, вода, земля, воздух, гравитация и&nbsp;тьма.</p></li>
+    </ul>
+    <h4 class="s2-sub s2-sub-locked">Ещё засекречено <b class="s2-n" data-for="locked">4</b></h4>
+    <p class="s2-howto">Три досье откроются сами — 26, 28 и&nbsp;30&nbsp;сентября — и&nbsp;переедут наверх. Последнее ждёт старта.</p>
+    <ul class="s2-files s2-files-locked">
       <li class="s2-file rv" data-unlock="2026-09-26T00:00:00+03:00" data-enc="0JIg0LPQvtGA0L7QtNCw0YUg0L/QvtGP0LLRj9GC0YHRjyDRgtC1LCDQutGC0L4g0YDQsNC30LTQsNGR0YIg0LfQsNC00LDQvdC40Y8uINCd0LUg0LLRgdC1INC40Lcg0L3QuNGFINC70Y7QtNC4LiDQntC00L3QuCDQv9C70LDRgtGP0YIg0LfQvtC70L7RgtC+0LwsINC00YDRg9Cz0LjQtSDigJQg0YfQtdC8LdGC0L4g0L/QvtGF0YPQttC1Lg=="><span class="s2-no">Досье 09</span><span class="s2-secret">Секретно</span><h3>Гильдии</h3>
         <p data-secret>Откроется позже.</p></li>
       <li class="s2-file rv" data-unlock="2026-09-28T00:00:00+03:00" data-enc="0JLQvtC30LTRg9GI0L3Ri9C5INGI0LDRgCwg0L/RgNC+0L/QtdC70LvQtdGAINC4INC90LXQvNC90L7Qs9C+INGB0LzQtdC70L7RgdGC0LguINCf0LXRgNCy0YvQuSDQutC+0YDQsNCx0LvRjCwg0LrQvtGC0L7RgNGL0Lkg0L/QvtC00L3QuNC80LXRgtGB0Y8g0LIg0L3QtdCx0L4sINGD0LLQuNC00LjRgiDQstC10YHRjCDRgdC10YDQstC10YAu"><span class="s2-no">Досье 10</span><span class="s2-secret">Секретно</span><h3>Флот</h3>
@@ -353,17 +360,127 @@
         <p data-secret>Об этом нельзя рассказывать до старта сезона, даже намёком.</p></li>
     </ul>
 
-    <h3 class="s2-h3">Кем ты родишься?</h3>
-    <p class="s2-howto">Из&nbsp;55 рас показываем шесть. К&nbsp;расе ещё выбирается класс — один из&nbsp;двадцати, от&nbsp;паладина до&nbsp;повара. Есть даже класс «Дурачок». Выбери расу — посмотрим 1&nbsp;октября, повезло ли с&nbsp;судьбой.</p>
+    <h3 class="s2-h3">Кем ты&nbsp;родишься?</h3>
+    <p class="s2-howto">В&nbsp;первый день каждый выбирает расу — одну из&nbsp;55 — и&nbsp;класс — один из&nbsp;20. Шесть рас крупным планом, остальные в&nbsp;полном списке ниже. Описания — по&nbsp;текстам самого мода.</p>
     <div class="s2-origins">
-      <button type="button" class="s2-origin rv" data-origin="sky"><b>Небесный</b><span>Небо — дом. Земля — временно.</span></button>
-      <button type="button" class="s2-origin rv" data-origin="sea"><b>Морской</b><span>Дышит под водой. Суша — не&nbsp;его стихия.</span></button>
-      <button type="button" class="s2-origin rv" data-origin="web"><b>Паучий</b><span>Стены — не&nbsp;препятствие.</span></button>
-      <button type="button" class="s2-origin rv" data-origin="fire"><b>Огненный</b><span>Огонь не&nbsp;страшен. Вода — очень даже.</span></button>
-      <button type="button" class="s2-origin rv" data-origin="scale"><b>Драконий</b><span>Чешуя крепче брони. Характер тоже.</span></button>
-      <button type="button" class="s2-origin rv" data-origin="shade"><b>Тень</b><span>Сильнее там, где темно.</span></button>
+      <button type="button" class="s2-origin rv" data-origin="sky" data-id="elytrian"><b>Элитриец</b><span>Летает, как на&nbsp;элитрах, только без элитр, и&nbsp;не&nbsp;разбивается о&nbsp;стены. Хрупкий и&nbsp;не&nbsp;носит тяжёлую броню.</span><em><i class="s2-imp" data-imp="2"></i>средняя сложность</em></button>
+      <button type="button" class="s2-origin rv" data-origin="sea" data-id="merling"><b>Мерлинг</b><span>Дышит под водой, плавает быстрее всех и&nbsp;видит в&nbsp;глубине. На&nbsp;суше медлителен и&nbsp;засыхает.</span><em><i class="s2-imp" data-imp="2"></i>средняя сложность · рождается в&nbsp;океане</em></button>
+      <button type="button" class="s2-origin rv" data-origin="web" data-id="arachnid"><b>Арахнид</b><span>Лазает по&nbsp;любым стенам, ходит по&nbsp;паутине и&nbsp;стреляет ею&nbsp;во&nbsp;врагов. Уязвим к&nbsp;чарам «Бич членистоногих».</span><em><i class="s2-imp" data-imp="2"></i>средняя сложность</em></button>
+      <button type="button" class="s2-origin rv" data-origin="fire" data-id="blazeling"><b>Блейзлинг</b><span>Огонь и&nbsp;лава ему не&nbsp;страшны, в&nbsp;темноте видит как днём. Вода и&nbsp;дождь для него — яд.</span><em><i class="s2-imp" data-imp="3"></i>высокая сложность · рождается в&nbsp;Незере</em></button>
+      <button type="button" class="s2-origin rv" data-origin="scale" data-id="draconic"><b>Драконид</b><span>Драконья кровь: не&nbsp;горит в&nbsp;огне и&nbsp;пугает зверей. Но&nbsp;драконье пламя быстро съедает выносливость.</span><em><i class="s2-imp" data-imp="3"></i>высокая сложность</em></button>
+      <button type="button" class="s2-origin rv" data-origin="shade" data-id="umbral"><b>Умбрал</b><span>Дитя тени: мечет тёмные сферы, уходит рывком и&nbsp;отражает стрелы. Быстр в&nbsp;темноте, горит на&nbsp;солнце.</span><em><i class="s2-imp" data-imp="2"></i>средняя сложность</em></button>
     </div>
-    <p class="s2-origin-note" aria-live="polite">Описания предварительные — точные силы узнаешь на&nbsp;старте.</p>
+    <ul class="s2-origin-facts">
+      <li class="rv"><b>Путь эволюции.</b> После 1000, 2500 и&nbsp;5000 побеждённых мобов раса усиливается, а&nbsp;на&nbsp;третьей ступени выходит на&nbsp;апекс.</li>
+      <li class="rv"><b>Место рождения.</b> Морские расы появляются в&nbsp;океане, Блейзлинг — в&nbsp;Незере, Эндерианец — в&nbsp;Энде. Остальные — на&nbsp;обычном спавне.</li>
+      <li class="rv"><b>Выбор надолго.</b> Передумать можно только сферой происхождения: первый раз бесплатно, дальше за&nbsp;уровни опыта.</li>
+    </ul>
+    <details class="s2-all">
+      <summary>Все 55 рас <span>по&nbsp;стихиям, с&nbsp;силами и&nbsp;слабостями</span></summary>
+      <div class="s2-race-groups">
+        <div class="s2-race-group"><h4>Небо и&nbsp;ветер <small>5</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="avian"><img src="img/origins/avian.png" width="16" height="16" alt=""><b>Авиан</b><i class="s2-imp" data-imp="1" title="Сложность: лёгкая"></i><span>Крылатый народ: не&nbsp;разбивается при падении, умеет плавно планировать и&nbsp;почти не&nbsp;тратит сытость.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="elytrian"><img src="img/origins/elytrian.png" width="16" height="16" alt=""><b>Элитриец</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Летает, как на&nbsp;элитрах, только без элитр, и&nbsp;не&nbsp;разбивается о&nbsp;стены. Хрупкий и&nbsp;не&nbsp;носит тяжёлую броню.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="hiveling"><img src="img/origins/hiveling.png" width="16" height="16" alt=""><b>Улейник</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Пчелиный народ: летает, жалит ядом и&nbsp;ускоряет рост посевов. Крылья хрупкие, а&nbsp;голод вечный.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="breeze"><img src="img/origins/breeze.png" width="16" height="16" alt=""><b>Бриз</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Дитя ветра из&nbsp;Камер испытаний: быстрый, парит в&nbsp;воздухе и&nbsp;бьёт порывами ветра. Лёгкий и&nbsp;хрупкий.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="air_mage"><img src="img/origins/air_mage.png" width="16" height="16" alt=""><b>Маг Воздуха</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Бросает ветровые заряды, закручивает ураганы и&nbsp;взлетает на&nbsp;восходящих потоках. Лёгок как ветер, хрупок как лист.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Вода <small>5</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="merling"><img src="img/origins/merling.png" width="16" height="16" alt=""><b>Мерлинг</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Дышит под водой, плавает быстрее всех и&nbsp;видит в&nbsp;глубине. На&nbsp;суше медлителен и&nbsp;засыхает.</span><small class="s2-born">рождается в&nbsp;океане</small></button></li>
+          <li><button type="button" class="s2-race" data-id="siren"><img src="img/origins/siren.png" width="16" height="16" alt=""><b>Сирена</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Морская чаровница: очаровывает существ и&nbsp;исцеляется в&nbsp;воде. Хрупкая, а&nbsp;на&nbsp;суше медленная и&nbsp;засыхает.</span><small class="s2-born">рождается в&nbsp;океане</small></button></li>
+          <li><button type="button" class="s2-race" data-id="kraken"><img src="img/origins/kraken.png" width="16" height="16" alt=""><b>Кракен</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Глубоководный хищник: щупальца, чернильные залпы и&nbsp;призванные стражи. На&nbsp;суше беспомощен, страдает от&nbsp;солнца.</span><small class="s2-born">рождается в&nbsp;океане</small></button></li>
+          <li><button type="button" class="s2-race" data-id="abyssal"><img src="img/origins/abyssal.png" width="16" height="16" alt=""><b>Обитатель бездны</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Бронированный житель глубин: быстр в&nbsp;воде и&nbsp;зовёт стражей на&nbsp;помощь. На&nbsp;суше медлителен и&nbsp;засыхает.</span><small class="s2-born">рождается в&nbsp;океане</small></button></li>
+          <li><button type="button" class="s2-race" data-id="water_mage"><img src="img/origins/water_mage.png" width="16" height="16" alt=""><b>Маг Воды</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Управляет приливами и&nbsp;исцеляющими течениями. В&nbsp;океане как дома, а&nbsp;в&nbsp;сухих пустошах увядает.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Огонь и&nbsp;Незер <small>6</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="blazeling"><img src="img/origins/blazeling.png" width="16" height="16" alt=""><b>Блейзлинг</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Огонь и&nbsp;лава ему не&nbsp;страшны, в&nbsp;темноте видит как днём. Вода и&nbsp;дождь для него — яд.</span><small class="s2-born">рождается в&nbsp;Незере</small></button></li>
+          <li><button type="button" class="s2-race" data-id="cinderborn"><img src="img/origins/cinderborn.png" width="16" height="16" alt=""><b>Пеплорождённый</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Вулканический элементаль: не&nbsp;горит, пугает зверей и&nbsp;лечится лавой. Вода губит его без остатка.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="strider"><img src="img/origins/strider.png" width="16" height="16" alt=""><b>Лавомерка</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Коренной житель Незера: ходит по&nbsp;лаве и&nbsp;лечится её&nbsp;теплом. Холодный верхний мир и&nbsp;вода для него губительны.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="piglin"><img src="img/origins/piglin.png" width="16" height="16" alt=""><b>Пиглин</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Одержимый золотом воин Незера: дома силён, и&nbsp;сородичи его боятся. Вдали от&nbsp;Незера слабеет.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="draconic"><img src="img/origins/draconic.png" width="16" height="16" alt=""><b>Драконид</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Драконья кровь: не&nbsp;горит в&nbsp;огне и&nbsp;пугает зверей. Но&nbsp;драконье пламя быстро съедает выносливость.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="fire_mage"><img src="img/origins/fire_mage.png" width="16" height="16" alt=""><b>Маг Огня</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Швыряет огненные шары и&nbsp;поджигает любого, кто его ударит. Огонь ему не&nbsp;вредит, а&nbsp;вода губит.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Энд и&nbsp;пустота <small>5</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="enderian"><img src="img/origins/enderian.png" width="16" height="16" alt=""><b>Эндерианец</b><i class="s2-imp" data-imp="1" title="Сложность: лёгкая"></i><span>Телепортируется туда, куда смотрит, и&nbsp;уворачивается от&nbsp;стрел; эндермены его не&nbsp;трогают. Вода жжёт как кислота.</span><small class="s2-born">рождается в&nbsp;Энде</small></button></li>
+          <li><button type="button" class="s2-race" data-id="enderite"><img src="img/origins/enderite.png" width="16" height="16" alt=""><b>Эндерит</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Мастер телепортации и&nbsp;фазового перехода, мягко спускается с&nbsp;любой высоты. Боится воды и&nbsp;дневного света.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="voidwalker"><img src="img/origins/voidwalker.png" width="16" height="16" alt=""><b>Странник пустоты</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Проходит сквозь блоки, совершает короткие прыжки и&nbsp;ходит незамеченным. Бегает без устали, но&nbsp;вода для него мучение.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="shulk"><img src="img/origins/shulk.png" width="16" height="16" alt=""><b>Шулк</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Бронирован как шалкер: прячется в&nbsp;панцирь и&nbsp;подбрасывает врагов левитацией. Медленный, но&nbsp;непоколебимый.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="gravity_mage"><img src="img/origins/gravity_mage.png" width="16" height="16" alt=""><b>Маг Гравитации</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Затягивает врагов в&nbsp;сингулярность или отбрасывает прочь. Сам почти теряет связь с&nbsp;землёй.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Тьма и&nbsp;нежить <small>10</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="umbral"><img src="img/origins/umbral.png" width="16" height="16" alt=""><b>Умбрал</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Дитя тени: мечет тёмные сферы, уходит рывком и&nbsp;отражает стрелы. Быстр в&nbsp;темноте, горит на&nbsp;солнце.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="phantom"><img src="img/origins/phantom.png" width="16" height="16" alt=""><b>Фантом</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Призрак ночи: летает на&nbsp;крыльях и&nbsp;крепнет с&nbsp;каждым убийством. Горит на&nbsp;солнце и&nbsp;не&nbsp;может спать.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="revenant"><img src="img/origins/revenant.png" width="16" height="16" alt=""><b>Ревенант</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Скиталец-нежить: проходит сквозь материю, метает гниль, не&nbsp;тонет и&nbsp;видит в&nbsp;темноте. Медленно лечится и&nbsp;горит на&nbsp;солнце.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="vampire"><img src="img/origins/vampire.png" width="16" height="16" alt=""><b>Вампир</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Ночной хищник: быстрый и&nbsp;сильный. Солнце и&nbsp;вода обжигают, а&nbsp;силы даёт только сырое мясо.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="wraith"><img src="img/origins/wraith.png" width="16" height="16" alt=""><b>Рейф</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Измученный дух: проходит сквозь любые блоки, кроме обсидиана. Держать форму — значит голодать, солнце обжигает.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="skeleton"><img src="img/origins/skeleton.png" width="16" height="16" alt=""><b>Скелет</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Ходячий мешок костей: быстрый и&nbsp;меткий с&nbsp;луком. Хрупкий, прячется от&nbsp;солнца и&nbsp;ест только всякую гадость.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="necromancer"><img src="img/origins/necromancer.png" width="16" height="16" alt=""><b>Некромант</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Призывает скелетов-иссушителей и&nbsp;лучников себе на&nbsp;службу. Но&nbsp;его жизнь связана с&nbsp;их&nbsp;судьбой.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="sculkborn"><img src="img/origins/sculkborn.png" width="16" height="16" alt=""><b>Скалкорождённый</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Выходец из&nbsp;глубокой тьмы: бронированный, стойкий и&nbsp;бьёт звуком. Медленный, слабеет на&nbsp;поверхности и&nbsp;под солнцем.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="warden"><img src="img/origins/warden.png" width="16" height="16" alt=""><b>Хранитель</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Чувствует мир через вибрации, бьёт звуковым зарядом издалека и&nbsp;таранит как стенобитное орудие. Медленный, страдает от&nbsp;солнца.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="darkness_mage"><img src="img/origins/darkness_mage.png" width="16" height="16" alt=""><b>Маг Тьмы</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Призывает теневые сферы и&nbsp;скользит сквозь мрак. Смертоносен ночью, а&nbsp;солнце выжигает его силу.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Земля, камень и&nbsp;лес <small>10</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="sylvan"><img src="img/origins/sylvan.png" width="16" height="16" alt=""><b>Сильван</b><i class="s2-imp" data-imp="1" title="Сложность: лёгкая"></i><span>Дух древнего леса: быстр среди деревьев, дружит со&nbsp;зверями и&nbsp;опутывает врагов корнями. Лечится дождём, в&nbsp;Незере горит.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="verdant"><img src="img/origins/verdant.png" width="16" height="16" alt=""><b>Вердант</b><i class="s2-imp" data-imp="1" title="Сложность: лёгкая"></i><span>Живое воплощение зелёного мира: неутомим и&nbsp;в&nbsp;мире с&nbsp;дикой природой. Скверна Незера губит его.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="sporeling"><img src="img/origins/sporeling.png" width="16" height="16" alt=""><b>Споровик</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Грибное существо с&nbsp;ядовитыми спорами: процветает во&nbsp;тьме и&nbsp;на&nbsp;грибных полях, увядает на&nbsp;солнце.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="caveborn"><img src="img/origins/caveborn.png" width="16" height="16" alt=""><b>Пещернорождённый</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Вырос в&nbsp;глубокой тьме: ест камень и&nbsp;вгрызается в&nbsp;руду голыми руками. Под солнцем увядает.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="stoneguard"><img src="img/origins/stoneguard.png" width="16" height="16" alt=""><b>Каменный страж</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Живой камень: колет шипами обидчиков, добывает породу руками и&nbsp;зажигает факелы во&nbsp;тьме. Медленный, но&nbsp;незыблемый.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="golem"><img src="img/origins/golem.png" width="16" height="16" alt=""><b>Голем</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Ходячая крепость из&nbsp;железа: почти несокрушим, но&nbsp;медлителен и&nbsp;боится жара.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="gorgon"><img src="img/origins/gorgon.png" width="16" height="16" alt=""><b>Горгона</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Взгляд обращает в&nbsp;камень, кулаки крушат всё вокруг. Но&nbsp;каменная тяжесть замедляет каждый шаг.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="dwarf"><img src="img/origins/dwarf.png" width="16" height="16" alt=""><b>Дворф</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Подземный мастер: крепкий, в&nbsp;броне и&nbsp;неутомим у&nbsp;горна. Коротконогий и&nbsp;медленный на&nbsp;поверхности.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="earth_mage"><img src="img/origins/earth_mage.png" width="16" height="16" alt=""><b>Маг Земли</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Сотрясает землю под врагами и&nbsp;возводит каменные стены одним жестом. Вода и&nbsp;высота — его враги.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="frostborn"><img src="img/origins/frostborn.png" width="16" height="16" alt=""><b>Хладорождённый</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Элементаль льда: замораживает врагов и&nbsp;процветает в&nbsp;тайге. Огонь и&nbsp;Незер для него разрушительны.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Малые, звери и&nbsp;механизмы <small>7</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="tiny"><img src="img/origins/tiny.png" width="16" height="16" alt=""><b>Малыш</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Маленький, быстрый и&nbsp;цепкий: лазает где угодно и&nbsp;притягивает предметы. Бьёт легко, как пёрышко.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="inchling"><img src="img/origins/inchling.png" width="16" height="16" alt=""><b>Инчлинг</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Ростом в&nbsp;четверть человека: легко взбирается по&nbsp;стенам и&nbsp;удивительно быстр. Тело хрупкое.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="feline"><img src="img/origins/feline.png" width="16" height="16" alt=""><b>Кошачий</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Человек-кошка: видит ночью, прыгает из&nbsp;засады и&nbsp;всегда приземляется на&nbsp;лапы. Ненавидит воду и&nbsp;быстро устаёт.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="arachnid"><img src="img/origins/arachnid.png" width="16" height="16" alt=""><b>Арахнид</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Лазает по&nbsp;любым стенам, ходит по&nbsp;паутине и&nbsp;стреляет ею&nbsp;во&nbsp;врагов. Уязвим к&nbsp;чарам «Бич членистоногих».</span></button></li>
+          <li><button type="button" class="s2-race" data-id="slime"><img src="img/origins/slime.png" width="16" height="16" alt=""><b>Слизень</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Живое желе, которому нужна влага: отскакивает при падении, а&nbsp;вместо смерти делится надвое, если хорошо увлажнён.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="monster_tamer"><img src="img/origins/monster_tamer.png" width="16" height="16" alt=""><b>Укротитель монстров</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Подчиняет своей воле враждебных мобов. В&nbsp;одиночку слаб, со&nbsp;стаей за&nbsp;спиной — грозная сила.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="automaton"><img src="img/origins/automaton.png" width="16" height="16" alt=""><b>Автоматон</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Механизм: не&nbsp;тонет и&nbsp;не&nbsp;голодает. Зелья лечения ему бесполезны, а&nbsp;раны заживают очень медленно.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Боевые искусства <small>6</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="asura"><img src="img/origins/asura.png" width="16" height="16" alt=""><b>Асура</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Хрупкий берсерк: чем ближе смерть, тем он&nbsp;быстрее и&nbsp;сильнее. В&nbsp;ярости пьёт жизнь ударами и&nbsp;не&nbsp;падает, пока бушует.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="windwalker"><img src="img/origins/windwalker.png" width="16" height="16" alt=""><b>Ходящий по&nbsp;ветру</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Мастер невесомости: отталкивается от&nbsp;воздуха, взбегает по&nbsp;стенам и&nbsp;не&nbsp;боится падений. Сил в&nbsp;бою не&nbsp;прибавляет.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="qi_cultivator"><img src="img/origins/qi_cultivator.png" width="16" height="16" alt=""><b>Практик ци</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Бьёт ладонью на&nbsp;расстоянии и&nbsp;закаляет тело силой ци. Запас восполняет медитацией, а&nbsp;без ци&nbsp;он&nbsp;просто монах.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="golden_body"><img src="img/origins/golden_body.png" width="16" height="16" alt=""><b>Золотое тело</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Живая стена: закован в&nbsp;броню, неподвижен и&nbsp;возвращает удары обидчикам. Платит за&nbsp;это ловкостью.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="iron_monk"><img src="img/origins/iron_monk.png" width="16" height="16" alt=""><b>Железный монах</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Монах-защитник: блок и&nbsp;удар тратят один запас выносливости. Выдохся — открыт для любого удара.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="sword_immortal"><img src="img/origins/sword_immortal.png" width="16" height="16" alt=""><b>Бессмертный мечник</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Летает на&nbsp;своём клинке, мечет ци&nbsp;меча и&nbsp;мелькает по&nbsp;полю боя. Без меча в&nbsp;руке — обычный смертный.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Без особенностей <small>1</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="human"><img src="img/origins/human.png" width="16" height="16" alt=""><b>Человек</b><i class="s2-imp" data-imp="0" title="Сложность: без особенностей"></i><span>Никаких особых сил, зато и&nbsp;никаких слабостей. Для тех, кто любит классику.</span></button></li>
+        </ul></div>
+      </div>
+    </details>
+    <h4 class="s2-sub">И&nbsp;класс — один из&nbsp;20</h4>
+    <div class="s2-classes">
+      <button type="button" class="s2-class" data-id="warrior" title="Бьёт сильнее в ближнем бою и почти не отлетает от ударов."><img src="img/origins/class_warrior.png" width="16" height="16" alt=""><b>Воин</b></button>
+      <button type="button" class="s2-class" data-id="archer" title="Меткий стрелок с проворными ногами."><img src="img/origins/class_archer.png" width="16" height="16" alt=""><b>Лучник</b></button>
+      <button type="button" class="s2-class" data-id="miner" title="Копает быстрее и без устали."><img src="img/origins/class_miner.png" width="16" height="16" alt=""><b>Шахтёр</b></button>
+      <button type="button" class="s2-class" data-id="beastmaster" title="Питомцы получают эффекты его зелий, а сами зелья действуют дольше."><img src="img/origins/class_beastmaster.png" width="16" height="16" alt=""><b>Повелитель зверей</b></button>
+      <button type="button" class="s2-class" data-id="explorer" title="Начинает готовым к приключениям и редко устаёт."><img src="img/origins/class_explorer.png" width="16" height="16" alt=""><b>Исследователь</b></button>
+      <button type="button" class="s2-class" data-id="sentinel" title="Встроенная броня, шипы и непоколебимая стойкость."><img src="img/origins/class_sentinel.png" width="16" height="16" alt=""><b>Страж</b></button>
+      <button type="button" class="s2-class" data-id="herbalist" title="Посевы растут быстрее, урожай богаче, а яд почти не действует."><img src="img/origins/class_herbalist.png" width="16" height="16" alt=""><b>Травник</b></button>
+      <button type="button" class="s2-class" data-id="scout" title="Видит ночью, двигается быстро и ступает уверенно."><img src="img/origins/class_scout.png" width="16" height="16" alt=""><b>Разведчик</b></button>
+      <button type="button" class="s2-class" data-id="berserker" title="Меняет сытость на сокрушительную силу."><img src="img/origins/class_berserker.png" width="16" height="16" alt=""><b>Берсерк</b></button>
+      <button type="button" class="s2-class" data-id="titan" title="Огромный: больше здоровья, дальше удар, выше рост."><img src="img/origins/class_titan.png" width="16" height="16" alt=""><b>Титан</b></button>
+      <button type="button" class="s2-class" data-id="rogue" title="Невидим, пока крадётся, и страшно бьёт со спины."><img src="img/origins/class_rogue.png" width="16" height="16" alt=""><b>Разбойник</b></button>
+      <button type="button" class="s2-class" data-id="lumberjack" title="Валит дерево целиком одним ударом и получает больше досок."><img src="img/origins/class_lumberjack.png" width="16" height="16" alt=""><b>Дровосек</b></button>
+      <button type="button" class="s2-class" data-id="blacksmith" title="Куёт снаряжение получше и чинит выгоднее."><img src="img/origins/class_blacksmith.png" width="16" height="16" alt=""><b>Кузнец</b></button>
+      <button type="button" class="s2-class" data-id="cook" title="Его еда сытнее, а копчение даёт больше опыта."><img src="img/origins/class_cook.png" width="16" height="16" alt=""><b>Повар</b></button>
+      <button type="button" class="s2-class" data-id="merchant" title="Жители не закрывают с ним сделки, а бродячие торговцы привозят редкий товар."><img src="img/origins/class_merchant.png" width="16" height="16" alt=""><b>Торговец</b></button>
+      <button type="button" class="s2-class" data-id="cleric" title="Лучше зачаровывает, а его зелья действуют дольше."><img src="img/origins/class_cleric.png" width="16" height="16" alt=""><b>Священник</b></button>
+      <button type="button" class="s2-class" data-id="nitwit" title="Ничего особенного не умеет. Иногда самый простой путь — самый верный."><img src="img/origins/class_nitwit.png" width="16" height="16" alt=""><b>Дурачок</b></button>
+      <button type="button" class="s2-class" data-id="fisher" title="Черпает удачу из приливов, плавает как тюлень и начинает с благословенной удочкой."><img src="img/origins/class_fisher.png" width="16" height="16" alt=""><b>Рыбак</b></button>
+      <button type="button" class="s2-class" data-id="mason" title="Быстрее ломает камень, мозоли служат бронёй, а кирка всегда под рукой."><img src="img/origins/class_mason.png" width="16" height="16" alt=""><b>Каменщик</b></button>
+      <button type="button" class="s2-class" data-id="paladin" title="Нежить боится его касания, иссушение его не берёт, а свет маяка лечит."><img src="img/origins/class_paladin.png" width="16" height="16" alt=""><b>Паладин</b></button>
+    </div>
+    <p class="s2-class-desc" aria-live="polite">Нажми на&nbsp;класс, чтобы узнать, что он&nbsp;умеет.</p>
+    <div class="s2-fate">
+      <button type="button" class="btn btn-quiet s2-roll">Бросить кости</button>
+      <p class="s2-origin-note" aria-live="polite">Выбери расу и&nbsp;класс — запомним на&nbsp;этом устройстве, а&nbsp;1&nbsp;октября проверим, повезло&nbsp;ли с&nbsp;судьбой.</p>
+    </div>
 
     <h3 class="s2-h3">Они ждут</h3>
     <ul class="s2-bosses">
@@ -500,6 +617,6 @@
 </dialog>
 
 <script src="app.js?v=20260924a" defer></script>
-<script src="teaser.js?v=20260924b" defer></script>
+<script src="teaser.js?v=20260925a" defer></script>
 </body>
 </html>

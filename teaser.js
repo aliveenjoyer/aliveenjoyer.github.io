@@ -111,7 +111,8 @@
     card.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); fn(); } });
   };
 
-  /* ---------- classified files ---------- */
+  /* ---------- classified files: open ones on top, the rest move up on their day ---------- */
+  const openFiles = $(".s2-files-open"), lockedFiles = $(".s2-files-locked");
   $$(".s2-file").forEach((card) => {
     const p = card.querySelector("[data-secret]");
     if (!p) return;
@@ -129,6 +130,7 @@
       }
       real = decode(card.dataset.enc);
       card.classList.add("s2-new");
+      if (openFiles && card.parentElement === lockedFiles) openFiles.appendChild(card);
     }
     const target = denied ? "Доступ закрыт до 1 октября." : real;
     const sr = document.createElement("span"); sr.className = "sr"; sr.textContent = denied ? "Засекречено до 1 октября." : real;
@@ -143,6 +145,10 @@
         if (denied) setTimeout(() => { vis.textContent = redact(real); card.classList.remove("open"); opened = false; }, 2400);
       });
     });
+  });
+  $$(".s2-n").forEach((n) => {
+    const list = n.dataset.for === "open" ? openFiles : lockedFiles;
+    if (list) n.textContent = list.children.length;
   });
 
   /* ---------- intercepted transmissions: typed out once they scroll into view ---------- */
@@ -166,7 +172,7 @@
     if (!reduceMotion) onSeen([term], () => type(0), 0.3); else term.appendChild(cursor);
   }
 
-  /* ---------- who will you be born as: remembered on this device ---------- */
+  /* ---------- who will you be born as: a race and a class, remembered on this device ---------- */
   const EMBLEMS = {
     sky: [["........", ".a....a.", "aa....aa", "aaa..aaa", ".aaaaaa.", "..aaaa..", "...aa...", "........"], { a: "#b9a6ff" }],
     sea: [["........", "..a.....", ".aaa..a.", "aa.aaaa.", "........", "..a.....", ".aaa..a.", "aa.aaaa."], { a: "#6cd3b6" }],
@@ -177,22 +183,58 @@
   };
   const picker = $(".s2-origins");
   if (picker) {
-    const note = $(".s2-origin-note");
-    const say = (name) => { note.textContent = `Твой выбор — ${name}. Запомнили на этом устройстве. Проверим 1 октября.`; };
-    let saved = null;
-    try { saved = localStorage.getItem("s2-origin"); } catch (e) { saved = null; }
+    const note = $(".s2-origin-note"), classDesc = $(".s2-class-desc");
+    // the six large cards and the full list share race ids, so a choice lights up in both places
+    const races = $$(".s2-origin, .s2-race"), classes = $$(".s2-class");
+    const listed = $$(".s2-race");
+    const nameOf = (el) => el.querySelector("b").textContent;
+    const raceEl = (id) => races.find((r) => r.dataset.id === id);
+    const classEl = (id) => classes.find((c) => c.dataset.id === id);
+    // the first version of the picker kept one of six themes; they map onto these races
+    const OLD = { sky: "elytrian", sea: "merling", web: "arachnid", fire: "blazeling", scale: "draconic", shade: "umbral" };
+    let hero = {};
+    try {
+      hero = JSON.parse(localStorage.getItem("s2-hero") || "{}") || {};
+      if (!hero.race && OLD[localStorage.getItem("s2-origin")]) hero.race = OLD[localStorage.getItem("s2-origin")];
+    } catch (e) { hero = {}; }
+    const save = () => { try { localStorage.setItem("s2-hero", JSON.stringify(hero)); } catch (e) { /* private mode: just not remembered */ } };
+    const describe = (c) => {
+      if (!c || !classDesc) return;
+      const t = c.getAttribute("title");
+      classDesc.textContent = `${nameOf(c)} — ${t.charAt(0).toLowerCase()}${t.slice(1)}`;
+    };
+    const show = () => {
+      races.forEach((r) => r.setAttribute("aria-pressed", String(r.dataset.id === hero.race)));
+      classes.forEach((c) => c.setAttribute("aria-pressed", String(c.dataset.id === hero.cls)));
+      const r = raceEl(hero.race), c = classEl(hero.cls);
+      if (r && c) note.textContent = `Твой герой: ${nameOf(r)} · ${nameOf(c)}. Запомнили на этом устройстве. Проверим 1 октября.`;
+      else if (r) note.textContent = `Раса — ${nameOf(r)}. Осталось выбрать класс.`;
+      else if (c) note.textContent = `Класс — ${nameOf(c)}. Осталось выбрать расу.`;
+    };
     $$(".s2-origin", picker).forEach((b) => {
       const e = EMBLEMS[b.dataset.origin];
       if (e) { const em = document.createElement("span"); em.className = "s2-emblem"; em.appendChild(sprite(e[0], e[1])); b.prepend(em); }
-      const name = b.querySelector("b").textContent;
-      if (saved === b.dataset.origin) { b.setAttribute("aria-pressed", "true"); say(name); }
-      else b.setAttribute("aria-pressed", "false");
-      b.addEventListener("click", () => {
-        $$(".s2-origin", picker).forEach((o) => o.setAttribute("aria-pressed", "false"));
-        b.setAttribute("aria-pressed", "true");
-        try { localStorage.setItem("s2-origin", b.dataset.origin); } catch (err) { /* private mode: just not remembered */ }
-        say(name);
-      });
+    });
+    races.forEach((r) => r.addEventListener("click", () => { hero.race = r.dataset.id; save(); show(); }));
+    classes.forEach((c) => c.addEventListener("click", () => { hero.cls = c.dataset.id; save(); show(); describe(c); }));
+    describe(classEl(hero.cls));
+    show();
+
+    // leave it to fate: names flicker for a moment, then a random race and class stay
+    const roll = $(".s2-roll");
+    if (roll && listed.length && classes.length) roll.addEventListener("click", () => {
+      const any = (list) => list[Math.floor(Math.random() * list.length)];
+      let left = reduceMotion ? 0 : 14;
+      roll.disabled = true;
+      const spin = () => {
+        const r = any(listed), c = any(classes);
+        if (left-- > 0) { note.textContent = `${nameOf(r)} · ${nameOf(c)}`; setTimeout(spin, 70); return; }
+        hero = { race: r.dataset.id, cls: c.dataset.id };
+        save(); show(); describe(c);
+        note.textContent = `Судьба выбрала: ${nameOf(r)} · ${nameOf(c)}. Запомнили на этом устройстве. Не нравится — брось ещё раз.`;
+        roll.disabled = false;
+      };
+      spin();
     });
   }
 
