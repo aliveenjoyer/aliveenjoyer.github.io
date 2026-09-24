@@ -2,12 +2,21 @@
   const API = "https://173-249-26-11.sslip.io:8444/api";
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---------- ceiling lamps: the only ambient motion ---------- */
+  /* ---------- the sky over the hero: twinkling stars and blocky clouds drifting by ---------- */
   const canvas = document.querySelector(".ceiling");
   if (canvas) {
     const ctx = canvas.getContext("2d");
     const colors = ["#ddf5f0", "#f4b860", "#f7a8c8", "#b9a6ff", "#ddf5f0"];
-    let dots = [], w = 0, h = 0, running = true, raf = 0;
+    let dots = [], clouds = [], w = 0, h = 0, running = true, raf = 0, last = 0;
+    // a cloud is a few stacked slabs of square cells, the way Minecraft draws them; lower slabs are wider
+    const cloud = (x) => {
+      const cell = w < 700 ? 8 : 12, cols = 6 + ((Math.random() * 10) | 0), rows = 2 + ((Math.random() * 2) | 0);
+      const slabs = Array.from({ length: rows }, (_, r) => {
+        const inset = r === rows - 1 ? 0 : 1 + ((Math.random() * 2) | 0) * (rows - 1 - r);
+        return [inset, Math.max(3, cols - inset * 2 - ((Math.random() * 2) | 0))];
+      });
+      return { x, y: h * (0.3 + Math.random() * 0.65), cell, cols, slabs, v: 5 + Math.random() * 9, a: 0.07 + Math.random() * 0.1 };
+    };
     const seed = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       w = canvas.clientWidth; h = canvas.clientHeight;
@@ -19,8 +28,11 @@
         return { x: Math.random() * w, y, s: Math.random() < 0.15 ? 3 : 2, c: colors[(Math.random() * colors.length) | 0],
                  p: Math.random() * Math.PI * 2, v: 0.25 + Math.random() * 0.6, base: 0.25 + 0.55 * (1 - y / h) };
       });
+      clouds = Array.from({ length: Math.max(4, Math.round(w / 240)) }, () => cloud(Math.random() * (w + 300) - 250));
     };
     const draw = (t) => {
+      const dt = last ? Math.min(0.1, (t - last) / 1000) : 0;
+      last = t;
       ctx.clearRect(0, 0, w, h);
       for (const d of dots) {
         const a = reduceMotion ? d.base : d.base * (0.55 + 0.45 * Math.sin(d.p + t * 0.001 * d.v));
@@ -28,6 +40,13 @@
         ctx.fillStyle = d.c;
         ctx.fillRect(Math.round(d.x), Math.round(d.y), d.s, d.s);
       }
+      ctx.fillStyle = "#ece6f7";
+      clouds.forEach((c, i) => {
+        c.x += c.v * dt;
+        if (c.x > w + 20) { clouds[i] = cloud(-c.cols * c.cell - 20 - Math.random() * 200); return; }
+        ctx.globalAlpha = c.a;
+        c.slabs.forEach(([inset, cols], r) => ctx.fillRect(Math.round(c.x + inset * c.cell), Math.round(c.y + r * c.cell), cols * c.cell, c.cell));
+      });
       ctx.globalAlpha = 1;
       if (!reduceMotion && running) raf = requestAnimationFrame(draw);
     };
@@ -288,7 +307,7 @@
     if (first) form.elements[first].focus();
   };
   const plainText = (d) =>
-    `Заявка в вайтлист Whispers in the Void\nНик: ${d.nick}\nВозраст: ${d.age}\nКонтакт: ${d.contact}\nTwitch: ${d.twitch || "—"}\nОткуда знаю о сервере: ${d.source || "—"}\nО себе: ${d.about}`;
+    `Заявка в вайтлист, сезон 2 «Echoes in the Sky»\nНик: ${d.nick}\nВозраст: ${d.age}\nКонтакт: ${d.contact}\nTwitch: ${d.twitch || "—"}\nОткуда знаю о сервере: ${d.source || "—"}\nО себе: ${d.about}`;
   const show = (html, bad) => {
     result.innerHTML = html;
     result.classList.toggle("bad", !!bad);

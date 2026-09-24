@@ -88,6 +88,24 @@
     });
   }
 
+  // the floating island with the glowing frame from file 01: a glowstone portal, a pale tree and a few flowers
+  const island = $(".s2-island");
+  if (island) {
+    island.appendChild(sprite([
+      "............................LLll...........", "..........................lLlllLll.........", "........................lllllLlllLll.......",
+      "......yyyyyy...........lLlllllllllll.......", "......yPpppy...........llllLlllLllll.......", "......ypPppy............lllllllLlll........",
+      "......yppPpy..............llwwll...........", "......ypppPy................ww.............", "......yPpppy................ww.............",
+      "......yppPpy................ww.............", "......yyyyyy..........f.....ww....f........", "..ggggggggggggggggggggggggggggggggggggggg..",
+      ".gGgggGgggggggGgggggGggggggGgggggGgggggGg..", ".ddDdddddDdddddddDddddddDdddddDddddddDddd..", "..dddddDdddddddDddddddddDddddddDddddddd....",
+      "...sddddddsdddddddsdddddddsdddddddsddd.....", "....ssSssssssSssssssSsssssssSsssssss.......", ".....sssSssssssssSssssssssSssssssss........",
+      "......v.ssssSssssssssSssssssSssss.v........", "......v..sssssssSsssssssSsssssss..v........", "......v...ssssSssssssSsssssssss............",
+      "...........sssssssSsssssssss...............", "............ssssSssssssss..................", ".............sssssSsss.....................",
+      "..............ssssss.......................", "...............sss.........................",
+    ], { g: "#6fcf6a", G: "#4c9c50", d: "#8a5a3a", D: "#5e3b27", s: "#5d5878", S: "#403b5c", y: "#f4d27a", p: "#6fb8ff", P: "#c4e6ff",
+         w: "#d8b98a", l: "#bfe8a0", L: "#8fd07a", v: "#4c9c50", f: "#ee8793" }));
+    island.addEventListener("click", () => toast("Рамка из светокамня. Налей в неё воды — и узнаешь, куда она ведёт."));
+  }
+
   /* ---------- decrypting text: shared by the files and the boss names ---------- */
   const GLYPHS = "█▓▒░#%&@$*+=?/<>";
   const scramble = (el, target, done) => {
