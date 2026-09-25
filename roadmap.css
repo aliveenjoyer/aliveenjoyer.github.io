@@ -190,6 +190,7 @@
 .rm-nav a[aria-current] { color: var(--lantern); border-bottom-color: var(--lantern); }
 .rm-nav a:focus-visible { outline: 3px solid var(--lantern); outline-offset: -3px; }
 @media (min-width: 900px) { .rm-nav a { font-size: 12px; padding: .95rem 1rem .8rem; } }
+@media (min-width: 900px) and (max-width: 1440px) { .rm-nav a { font-size: 10px; padding: .95rem .62rem .8rem; } }   /* the tour button stays on screen at 1280 */
 body.rm main section { scroll-margin-top: 2.5rem; }
 
 .rm-feed li { cursor: pointer; }
@@ -217,6 +218,30 @@ body.rm main section { scroll-margin-top: 2.5rem; }
 .rm-boss.done .rm-boss-st { color: var(--pearl); }
 .rm-boss-drops { grid-column: 2; display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .2rem; }
 .rm-boss-drops img { width: 20px; height: 20px; image-rendering: pixelated; opacity: .85; }
+
+/* worlds: how to get into each one; the card lights up once someone has been there */
+.rm-worlds { list-style: none; margin: 1.2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); gap: .9rem; }
+.rm-world { display: flex; flex-direction: column; gap: .6rem; padding: .95rem 1rem 1rem; background: var(--deep); border-left: 4px solid var(--c); }
+.rm-world-head { display: grid; grid-template-columns: 52px 1fr; gap: .8rem; align-items: center; }
+.rm-world-ic { display: grid; place-items: center; width: 52px; height: 52px; background: #1a1630; border: 2px dashed color-mix(in srgb, var(--c) 55%, transparent); }
+.rm-world-ic img { width: 32px; height: 32px; image-rendering: pixelated; }
+.rm-world.done .rm-world-ic { border-style: solid; border-color: var(--c); background: color-mix(in srgb, var(--c) 18%, #1a1630); box-shadow: 0 0 1rem -.3rem var(--c); }
+.rm-world-tt { display: flex; flex-direction: column; gap: .2rem; min-width: 0; }
+.rm-world-tt h3 { margin: 0; font-size: 1.2rem; line-height: 1.2; }
+.rm-world-tt small { font-family: var(--pixel); font-size: 8px; line-height: 1.8; color: var(--c); }
+.rm-world-how { margin: 0; padding-left: 1.35rem; color: var(--pearl); }
+.rm-world-how li { margin: .25rem 0; line-height: 1.45; }
+.rm-world-how li::marker { color: var(--c); font-weight: 600; }
+.rm-world-find, .rm-world-in { margin: 0; color: var(--mist); font-size: .95rem; line-height: 1.45; }
+.rm-world-find b, .rm-world-in b { color: var(--pearl); font-weight: 600; }
+.rm-world-foot { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem .8rem; padding-top: .6rem; border-top: 1px solid var(--slate); }
+.rm-world-st { color: var(--mist); font-size: .92rem; }
+.rm-world.done .rm-world-st { color: var(--pearl); }
+.rm-world-go { all: unset; box-sizing: border-box; cursor: pointer; font-family: var(--pixel); font-size: 8px; line-height: 1; padding: .6rem .65rem .5rem; color: var(--c);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--c) 60%, transparent); }
+.rm-world-go:hover { background: color-mix(in srgb, var(--c) 16%, transparent); }
+.rm-world-go:focus-visible { outline: 3px solid var(--lantern); outline-offset: 2px; }
+.rm-worlds-note { margin-top: 1rem; }
 
 /* quest book */
 .rm-qcols { display: grid; grid-template-columns: minmax(0, 1fr) 20rem; gap: 2rem 3rem; align-items: start; margin-top: 1.2rem; }

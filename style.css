@@ -336,8 +336,8 @@ footer p { margin: 0 0 .4rem; }
 .s2-file { position: relative; background: var(--deep); padding: 1.1rem 1.2rem 1.25rem; border-left: 3px solid var(--slate); cursor: pointer; transition: border-color .25s, background-color .25s; }
 .s2-file:hover, .s2-file.open { border-left-color: var(--lantern); background: #231e3f; }
 .s2-file:focus-visible { outline: 3px solid var(--lantern); outline-offset: 3px; }
-.s2-no { font-family: var(--pixel); font-size: 8px; letter-spacing: .08em; text-transform: uppercase; color: var(--mist); }
-.s2-secret { position: absolute; right: .8rem; top: .75rem; font-family: var(--pixel); font-size: 8px; line-height: 1; text-transform: uppercase; color: var(--blood);
+.s2-no { font-family: var(--pixel); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--mist); }
+.s2-secret { position: absolute; right: .8rem; top: .75rem; font-family: var(--pixel); font-size: 9px; line-height: 1; text-transform: uppercase; color: var(--blood);
   border: 2px solid var(--blood); padding: .3rem .35rem .2rem; transform: rotate(6deg); opacity: .85; transition: opacity .3s; }
 .s2-file.open .s2-secret { opacity: .25; }
 .s2-file h3 { margin: .55rem 0 .55rem; font-size: 1.25rem; line-height: 1.25; padding-right: 4.5rem; }

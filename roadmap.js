@@ -198,7 +198,7 @@
     return { updated: 0, done: {}, fun: {}, bosses: {}, teams: [], events: {}, heroes: [], stats: null };
   }
 
-  fetch("roadmap.json?v=20260924d").then((r) => r.json()).then(async (R) => {
+  fetch("roadmap.json?v=20260926a").then((r) => r.json()).then(async (R) => {
     const nodes = R.nodes, byId = Object.fromEntries(nodes.map((n) => [n.id, n]));
     const branches = Object.fromEntries(R.branches.map((b) => [b.id, b]));
     const bossGroups = Object.fromEntries(R.bossGroups.map((g) => [g.id, g]));
@@ -455,6 +455,50 @@
       });
     }
 
+    /* ---------- worlds: how to get into each one by yourself; its milestone gives the points and who was first ---------- */
+    function renderWorlds() {
+      const box = $(".rm-worlds");
+      if (!box || !R.worlds) return;
+      box.textContent = "";
+      let visited = 0;
+      const line = (cls, label, text) => { const p = el("p", cls); p.appendChild(el("b", null, label + " ")); p.appendChild(document.createTextNode(text)); return p; };
+      R.worlds.forEach((w) => {
+        const n = byId[w.node];
+        if (!n) return;
+        const who = state[w.node].who;
+        if (who.length) visited++;
+        const li = el("li", "rm-world" + (who.length ? " done" : ""));
+        li.style.setProperty("--c", branches[n.branch].color);
+        const head = el("div", "rm-world-head");
+        const ic = el("span", "rm-world-ic");
+        ic.appendChild(icon(n.iconFile, 32));
+        head.appendChild(ic);
+        const tt = el("div", "rm-world-tt");
+        tt.appendChild(el("h3", null, w.name));
+        tt.appendChild(el("small", null, `${w.mod} · ${n.points} ${plural(n.points, "очко", "очка", "очков")} за вход`));
+        head.appendChild(tt);
+        li.appendChild(head);
+        const how = el("ol", "rm-world-how");
+        w.how.forEach((s) => how.appendChild(el("li", null, s)));
+        li.appendChild(how);
+        if (w.find) li.appendChild(line("rm-world-find", "Где взять:", w.find));
+        li.appendChild(line("rm-world-in", "Там:", w.inside));
+        const foot = el("div", "rm-world-foot");
+        foot.appendChild(el("span", "rm-world-st", who.length
+          ? `Побывали: ${who.length} · первым — ${who[0][0]}, ${fmtDate(who[0][1])}`
+          : "Пока здесь никого не было"));
+        const go = el("button", "rm-world-go", "Веха на карте");
+        go.type = "button";
+        go.addEventListener("click", () => openCard(w.node));
+        foot.appendChild(go);
+        li.appendChild(foot);
+        box.appendChild(li);
+      });
+      $(".rm-worlds-sum").textContent = visited
+        ? `Открыто ${visited} из ${R.worlds.length} миров. Ниже — как попасть в каждый самому; за первый вход веха на карте и очки команде.`
+        : `${R.worlds.length} миров, кроме Верхнего, и как попасть в каждый самому. За первый вход — веха на карте и очки команде.`;
+    }
+
     /* ---------- quest book ---------- */
     const liveNow = () => DEMO || params.has("test") || Date.now() >= start;
     function chapterBest(c) {
@@ -569,17 +613,19 @@
         const qs = t.total * rules.questPoints + chaptersDone * rules.chapterBonus;
         const evList = [];
         R.events.forEach((e) => {
-          if (!eventOver(e)) return;
+          if (e.kind === "sky" || !eventOver(e)) return;
           const i = ((P.events || {})[e.id] || []).findIndex((r) => r[0] === t.name);
           if (i < 0) return;
           const pts = i < rules.eventPoints.length ? rules.eventPoints[i] : rules.eventParticipation;
-          ev += pts; evList.push([e, i + 1, pts]);
+          ev += pts; evList.push(`${e.title} — ${i + 1}`);
         });
+        const sky = t.sky || [];
+        if (sky.length) { ev += sky.reduce((s, x) => s + x[1], 0); evList.push(`Осколки неба ×${sky.length}`); }
         return { t, ms, msN, firsts, qs, qN: t.total, chaptersDone, ev, evList, total: ms + qs + ev };
       }).sort((a, b) => b.total - a.total);
     }
     function renderTeams() {
-      $(".rm-teams-rule").textContent = `Веха засчитывается команде один раз, а первой команде на сервере — в полтора раза больше. Квест книги — ${rules.questPoints} очка, закрытая глава — ещё ${rules.chapterBonus}. Ивенты — ${rules.eventPoints.join(" / ")} очков за первые три места и ${rules.eventParticipation} за участие.`;
+      $(".rm-teams-rule").textContent = `Веха засчитывается команде один раз, а первой команде на сервере — в полтора раза больше. Квест книги — ${rules.questPoints} очка, закрытая глава — ещё ${rules.chapterBonus}. Ивенты — ${rules.eventPoints.join(" / ")} очков за первые три места и ${rules.eventParticipation} за участие. Небесный осколок — ${rules.skyPoints.event} очков, с гиганта — ${rules.skyPoints.event * rules.skyPoints.giant}, с острова первого дня — ${rules.skyPoints.scatter}.`;
       const ol = $(".rm-standings");
       ol.textContent = "";
       const rows = teamScores();
@@ -600,7 +646,7 @@
         const add = (cls, label, v, note) => { const s = el("span", cls); s.append(label + " "); s.appendChild(el("b", null, fmtNum(v))); if (note) s.append(` (${note})`); lg.appendChild(s); };
         add("ms", "Вехи", r.ms, `${r.msN}${r.firsts ? `, первыми — ${r.firsts}` : ""}`);
         add("qs", "Квесты", r.qs, `${r.qN}${r.chaptersDone ? ` и ${r.chaptersDone} ${plural(r.chaptersDone, "глава", "главы", "глав")}` : ""}`);
-        add("ev", "Ивенты", r.ev, r.evList.map(([e, place]) => `${e.title} — ${place}`).join(", "));
+        add("ev", "Ивенты", r.ev, r.evList.join(", "));
         parts.appendChild(lg); li.appendChild(parts);
         const pt = el("span", "pt", fmtNum(r.total)); pt.appendChild(el("small", null, plural(r.total, "очко", "очка", "очков"))); li.appendChild(pt);
         ol.appendChild(li);
@@ -608,12 +654,13 @@
     }
 
     /* ---------- team events ---------- */
-    const KIND = { auto: ["Считает сервер", "#8fd3ff"], race: ["Гонка", "#ee7a8e"], live: ["Живой ивент", "#f4b860"] };
+    const KIND = { auto: ["Считает сервер", "#8fd3ff"], race: ["Гонка", "#ee7a8e"], live: ["Живой ивент", "#f4b860"], sky: ["Каждую субботу", "#9fe3d8"] };
     const METRIC = { milestones: ["веха", "вехи", "вех"], bosses: ["босс", "босса", "боссов"], quests: ["квест", "квеста", "квестов"] };
     const day = (iso) => new Date(iso).toLocaleDateString("ru-RU", { day: "numeric", month: "long", timeZone: "Europe/Moscow" });
     function eventWhen(e) {
       if (e.kind === "live") return `${day(e.start)}, ${new Date(e.start).toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Moscow" })} МСК`;
       if (e.kind === "race") return "весь сезон";
+      if (e.kind === "sky") return "по субботам, 18:00 МСК";
       return `${day(e.start).split(" ")[0]}–${day(e.end)}`;
     }
     function renderEvents() {
@@ -629,7 +676,7 @@
         li.appendChild(el("h3", null, e.title));
         li.appendChild(el("p", null, e.desc));
         const left = (ms) => { const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24; return d ? `${d} ${plural(d, "день", "дня", "дней")}` : `${h} ч`; };
-        li.appendChild(el("span", "rm-ev-state", st === "soon" ? `Начнётся через ${left(a - t)}` : st === "live" ? (e.kind === "live" ? "Идёт прямо сейчас" : `Идёт · осталось ${left(b - t)}`) : "Итоги"));
+        li.appendChild(el("span", "rm-ev-state", st === "soon" ? `Начнётся через ${left(a - t)}` : st === "live" ? (e.kind === "live" ? "Идёт прямо сейчас" : e.kind === "sky" ? "Идёт весь сезон" : `Идёт · осталось ${left(b - t)}`) : "Итоги"));
         const rows = ((P.events || {})[e.id] || []).slice(0, 3);
         if (rows.length) {
           const list = el("ol");
@@ -637,12 +684,12 @@
             const item = el("li"); item.style.setProperty("--tc", (teamsByName[r[0]] || {}).color || "#b7aecb");
             item.appendChild(el("span", "rm-ev-place", String(i + 1)));
             item.appendChild(el("span", null, r[0]));
-            item.appendChild(el("span", "rm-ev-val", e.kind === "auto" ? `${r[1]} ${plural(r[1], ...METRIC[e.metric])}` : e.kind === "race" ? fmtDate(r[2]) : `${r[1]} место`));
+            item.appendChild(el("span", "rm-ev-val", e.kind === "auto" ? `${r[1]} ${plural(r[1], ...METRIC[e.metric])}` : e.kind === "race" ? fmtDate(r[2]) : e.kind === "sky" ? `${r[1]} ${plural(r[1], "очко", "очка", "очков")}` : `${r[1]} место`));
             list.appendChild(item);
           });
           li.appendChild(list);
-        } else if (st !== "soon") li.appendChild(el("p", null, e.kind === "live" ? "Итоги появятся после ивента." : "Пока ни одной команды."));
-        li.appendChild(el("span", "rm-ev-prize", `Места: ${rules.eventPoints.join(" / ")} · участие: ${rules.eventParticipation}`));
+        } else if (st !== "soon") li.appendChild(el("p", null, e.kind === "live" ? "Итоги появятся после ивента." : e.kind === "sky" ? "Пока ни одного осколка." : "Пока ни одной команды."));
+        li.appendChild(el("span", "rm-ev-prize", e.kind === "sky" ? `Осколок: ${rules.skyPoints.event} очков, с гиганта — ${rules.skyPoints.event * rules.skyPoints.giant} · острова первого дня: ${rules.skyPoints.scatter}` : `Места: ${rules.eventPoints.join(" / ")} · участие: ${rules.eventParticipation}`));
         ol.appendChild(li);
       });
     }
@@ -1162,7 +1209,7 @@
     /* ---------- render all ---------- */
     function renderAll() {
       computeState(); renderStatus(); renderFilters(); renderBoard(); renderList(); renderNext(); renderTeams(); renderEvents();
-      renderBosses(); renderQuests(); renderHeroes(); renderFeedScore(); renderStats(); renderFun(); clampAll(); spy();
+      renderWorlds(); renderBosses(); renderQuests(); renderHeroes(); renderFeedScore(); renderStats(); renderFun(); clampAll(); spy();
     }
     renderTiers();
     renderAll();
