@@ -532,9 +532,7 @@ footer p { margin: 0 0 .4rem; }
   background: radial-gradient(40rem 22rem at 100% 0%, rgba(181, 140, 240, .13), transparent 70%), var(--deep); }
 .s2-emp .s2-map-k { background: #b58cf0; }
 .s2-emp .s2-map-live { color: #b58cf0; }
-.s2-emp-shot { display: grid; place-items: center; padding: 1rem; background: radial-gradient(closest-side, rgba(181, 140, 240, .2), transparent), #120f24; }
-.s2-emp-shot img { width: min(100%, 17.5rem); height: auto; }
-.s2-emp-shot::after { content: "Рендер мира"; background: #b58cf0; }
+.s2-emp-shot::after { content: "Кадр из игры"; background: #b58cf0; }
 .s2-emp-shot:hover { border-color: #b58cf0; }
 
 /* the season in dates */

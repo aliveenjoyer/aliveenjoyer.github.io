@@ -17,14 +17,18 @@
 <!-- fonts load without blocking the page: if Google is slow, text shows in the fallback font and swaps later -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap"></noscript>
-<link rel="stylesheet" href="style.css?v=20260927a">
-<link rel="stylesheet" href="empyrean.css?v=20260927a">
+<link rel="stylesheet" href="style.css?v=20260927b">
+<link rel="stylesheet" href="empyrean.css?v=20260927b">
 <script>document.documentElement.classList.add("js")</script>
 </head>
 <body class="emp">
 <a class="skip" href="#lore">К рассказу о мире</a>
 
 <header class="emp-hero">
+  <figure class="emp-hero-shot">
+    <img src="img/emp/shot-sunset-1600.webp" srcset="img/emp/shot-sunset-960.webp 960w, img/emp/shot-sunset-1600.webp 1600w" sizes="100vw" width="1600" height="847"
+         alt="Закат в Эмпирее: огромное небесное древо с плакучей кроной на своём острове, самолёт на вершине утёса, в воздухе летят лепестки">
+  </figure>
   <div class="emp-hero-in">
     <div>
       <nav class="news emp-crumbs" aria-label="Путь по сайту"><a href="index.html">Главная</a><span aria-hidden="true">›</span><a href="index.html#season2">Echoes in&nbsp;the&nbsp;Sky</a><span aria-hidden="true">›</span><b aria-current="page">Эмпирей</b></nav>
@@ -43,10 +47,6 @@
         <a class="btn btn-quiet" href="season2-map.html#worlds">Карта сезона</a>
       </div>
     </div>
-    <figure class="emp-tree">
-      <img src="img/emp/tree-1100.webp" srcset="img/emp/tree-640.webp 640w, img/emp/tree-1100.webp 1100w" sizes="(max-width: 900px) 26rem, 34rem" width="1100" height="1645"
-           alt="Древо Эмпирея на своём острове: белый ствол с корнями-контрфорсами, дверь Порога, площадь с аметистовым кольцом и крона, в которой светятся огоньки">
-    </figure>
   </div>
 </header>
 
@@ -95,23 +95,12 @@
   <section id="gates">
     <p class="emp-k">Как попасть</p>
     <h2>Небесные врата</h2>
-    <div class="emp-split">
-      <div>
-        <ol class="emp-path" aria-label="Как открыть врата">
-          <li><span class="n">1</span><div><h3>Сложи рамку</h3><p>Замкнутый контур из&nbsp;<b>аметистовых блоков</b> любой формы: прямоугольник, арка, кольцо. В&nbsp;самой рамке — хотя бы <b>два морских фонаря</b> (углы тоже считаются), внутри пусто.</p></div></li>
-          <li><span class="n">2</span><div><h3>Разбуди её осколком</h3><p>Нажми по&nbsp;рамке <b>Небесным осколком</b>. Осколок уйдёт, а&nbsp;внутри побежит завеса воды и&nbsp;искр.</p></div></li>
-          <li><span class="n">3</span><div><h3>Шагни в&nbsp;завесу</h3><p>Все врата ведут на&nbsp;<b>Пристань</b> у&nbsp;Древа. Обратно — через врата на&nbsp;Пристани или любые врата, построенные в&nbsp;самом Эмпирее: они вернут к&nbsp;вратам, с&nbsp;которых начинался путь.</p></div></li>
-        </ol>
-        <p class="emp-hint">Небесные осколки лежат в&nbsp;главных сундуках летающих островов «Осколков неба», а&nbsp;в&nbsp;самом Эмпирее их откалывает Раскол. Небо над Эмпиреем откроется на&nbsp;второй неделе сезона — до&nbsp;того врата спят.</p>
-      </div>
-      <figure class="emp-fig">
-        <button class="zoom" data-full="img/emp/pier-1200.webp" aria-label="Открыть крупно">
-          <img src="img/emp/pier-700.webp" srcset="img/emp/pier-700.webp 700w, img/emp/pier-1200.webp 1200w" sizes="(max-width: 1000px) 100vw, 560px" width="1200" height="855" loading="lazy"
-               alt="Пристань: длинный белый причал над пустотой от края утёса, мачты с цепями, фонари на цепях и круглая площадь со Знаком Отзвука из аметиста">
-        </button>
-        <figcaption>Пристань. Сюда ведут все врата: причал Слушателей над пустотой, мачты для&nbsp;дирижаблей, на&nbsp;площади — Знак Отзвука. Отсюда виден весь мир, от&nbsp;моря до&nbsp;кроны Древа.</figcaption>
-      </figure>
-    </div>
+    <ol class="emp-path" aria-label="Как открыть врата">
+      <li><span class="n">1</span><div><h3>Сложи рамку</h3><p>Замкнутый контур из&nbsp;<b>аметистовых блоков</b> любой формы: прямоугольник, арка, кольцо. В&nbsp;самой рамке — хотя бы <b>два морских фонаря</b> (углы тоже считаются), внутри пусто.</p></div></li>
+      <li><span class="n">2</span><div><h3>Разбуди её осколком</h3><p>Нажми по&nbsp;рамке <b>Небесным осколком</b>. Осколок уйдёт, а&nbsp;внутри побежит завеса воды и&nbsp;искр.</p></div></li>
+      <li><span class="n">3</span><div><h3>Шагни в&nbsp;завесу</h3><p>Все врата ведут на&nbsp;<b>Пристань</b> у&nbsp;Древа. Обратно — через врата на&nbsp;Пристани или любые врата, построенные в&nbsp;самом Эмпирее: они вернут к&nbsp;вратам, с&nbsp;которых начинался путь.</p></div></li>
+    </ol>
+    <p class="emp-hint">Небесные осколки лежат в&nbsp;главных сундуках летающих островов «Осколков неба», а&nbsp;в&nbsp;самом Эмпирее их откалывает Раскол. Небо над Эмпиреем откроется на&nbsp;второй неделе сезона — до&nbsp;того врата спят.</p>
   </section>
 
   <!-- ============================================================ FLOORS -->
@@ -126,6 +115,22 @@
       <li style="--c: var(--copper)"><span class="h">170–420</span><div><b>Отмели</b><span>Недавнее: обрывки чужих миров вперемешку, сторожевые звонницы, водопады, бьющие в&nbsp;чаши.</span></div></li>
       <li style="--c: #6c8fd3"><span class="h">0–100</span><div><b>Море Отзвуков</b><span>То, что утонуло вчера и&nbsp;всплывает сейчас. Туман, утонувшие руины, ловчие столпы, а&nbsp;ночью по&nbsp;столпам лезут Вернувшиеся.</span></div></li>
     </ol>
+    <div class="emp-duo">
+      <figure class="emp-fig">
+        <button class="zoom" data-full="img/emp/shot-pillars-1600.webp" aria-label="Открыть крупно">
+          <img src="img/emp/shot-pillars-800.webp" srcset="img/emp/shot-pillars-800.webp 800w, img/emp/shot-pillars-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" width="1600" height="847" loading="lazy"
+               alt="Дирижабль тёмным силуэтом летит между двумя исполинскими скалами, свисающими с неба; на камне светятся ягоды, внизу облака">
+        </button>
+        <figcaption>Изнанка: между днищами материков свисают скалы в&nbsp;сотни блоков, на&nbsp;камне светятся ягоды, внизу только облака.</figcaption>
+      </figure>
+      <figure class="emp-fig">
+        <button class="zoom" data-full="img/emp/shot-wings-1600.webp" aria-label="Открыть крупно">
+          <img src="img/emp/shot-wings-800.webp" srcset="img/emp/shot-wings-800.webp 800w, img/emp/shot-wings-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" width="1600" height="847" loading="lazy"
+               alt="Игрок с большими крыльями летит сквозь туман к парящим островам, рядом кружит аллей">
+        </button>
+        <figcaption>Туман над архипелагом. Острова тянутся к&nbsp;солнцу, а&nbsp;рядом с&nbsp;игроком кружат небесные существа.</figcaption>
+      </figure>
+    </div>
   </section>
 
   <!-- ============================================================ PLACES -->
@@ -198,18 +203,18 @@
     </div>
     <div class="emp-duo">
       <figure class="emp-fig">
-        <button class="zoom" data-full="img/emp/garden-day-1200.webp" aria-label="Открыть крупно">
-          <img src="img/emp/garden-day-700.webp" srcset="img/emp/garden-day-700.webp 700w, img/emp/garden-day-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 50vw" width="1200" height="863" loading="lazy"
-               alt="Луг на высоких землях днём: из травы растут кристаллы из зелёного, розового и фиолетового стекла с друзами на концах, рядом берёзы под снегом">
+        <button class="zoom" data-full="img/emp/shot-underside-1600.webp" aria-label="Открыть крупно">
+          <img src="img/emp/shot-underside-800.webp" srcset="img/emp/shot-underside-800.webp 800w, img/emp/shot-underside-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" width="1600" height="847" loading="lazy"
+               alt="Зелёный дирижабль у ленты водопада под днищами островов: сталактиты с огоньками светящихся ягод, фиолетовые искры в воздухе">
         </button>
-        <figcaption>Кристаллический сад днём: шипы цветного стекла вокруг светящегося ядра, на&nbsp;концах — друзы из&nbsp;модов.</figcaption>
+        <figcaption>Под островами: огоньки светящихся ягод, водопад в&nbsp;сотни блоков и&nbsp;искры, которые переливаются в&nbsp;воздухе.</figcaption>
       </figure>
       <figure class="emp-fig">
-        <button class="zoom" data-full="img/emp/garden-night-1200.webp" aria-label="Открыть крупно">
-          <img src="img/emp/garden-night-700.webp" srcset="img/emp/garden-night-700.webp 700w, img/emp/garden-night-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 50vw" width="1200" height="749" loading="lazy"
-               alt="Тот же луг ночью: кристаллы светятся зелёным и розовым, свет ложится на траву вокруг">
+        <button class="zoom" data-full="img/emp/shot-fog-1600.webp" aria-label="Открыть крупно">
+          <img src="img/emp/shot-fog-800.webp" srcset="img/emp/shot-fog-800.webp 800w, img/emp/shot-fog-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" width="1600" height="847" loading="lazy"
+               alt="Солнце сквозь дымку, парящие острова со светящимися лозами снизу и аллей рядом">
         </button>
-        <figcaption>Он же ночью. Вокруг всего светящегося поднимаются искры и&nbsp;переливаются цветами.</figcaption>
+        <figcaption>Утро в&nbsp;дымке: светящиеся лозы под островами и&nbsp;аллей, один из&nbsp;восемнадцати видов небесных существ.</figcaption>
       </figure>
     </div>
     <ul class="emp-cards">
@@ -293,7 +298,7 @@
 
 <footer>
   <p>Эмпирей — мир сезона 2 «Echoes in&nbsp;the&nbsp;Sky» Minecraft-сервера AliveEnjoyer. <a href="index.html">Главная</a> · <a href="season2-map.html">Карта сезона</a> · <a href="season1.html">Итоги сезона 1</a></p>
-  <p class="fine">Иллюстрации — изометрические рендеры настоящего мира сервера.</p>
+  <p class="fine">Скриншоты — из&nbsp;игры на&nbsp;нашем сервере, с&nbsp;шейдерами из&nbsp;сборки.</p>
 </footer>
 
 <dialog class="viewer" aria-label="Изображение крупно">
