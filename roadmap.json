@@ -1991,6 +1991,130 @@
    "req": "all"
   },
   {
+   "id": "s_empyrean",
+   "branch": "sky",
+   "col": 2,
+   "tier": 3,
+   "points": 40,
+   "adv": "wis:empyrean/root",
+   "game": "Эмпирей",
+   "title": "Эмпирей",
+   "desc": "Пробуди аметистовые врата Небесным осколком и шагни в завесу. Небо над Эмпиреем открывается на второй неделе.",
+   "deps": [],
+   "icon": "minecraft:amethyst_block",
+   "iconFile": "minecraft__block_amethyst_block.png",
+   "mod": "wis",
+   "req": "all"
+  },
+  {
+   "id": "s_emp_eye",
+   "branch": "sky",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "wis:empyrean/observatory",
+   "game": "Нижнее Око",
+   "title": "Нижнее Око",
+   "desc": "Найди обсерваторию, что висит под материком и смотрит вниз, на море.",
+   "deps": [
+    "s_empyrean"
+   ],
+   "icon": "minecraft:spyglass",
+   "iconFile": "minecraft__item_spyglass.png",
+   "mod": "wis",
+   "req": "all"
+  },
+  {
+   "id": "s_emp_socket",
+   "branch": "sky",
+   "col": 2,
+   "tier": 2,
+   "points": 20,
+   "adv": "wis:empyrean/socket",
+   "game": "Осколок вспомнил",
+   "title": "Осколок вспомнил",
+   "desc": "Вставь Небесный осколок в гнездо Нижнего Ока. Каждый осколок зажигает часть кроны Древа.",
+   "deps": [
+    "s_emp_eye"
+   ],
+   "icon": "minecraft:lodestone",
+   "iconFile": "minecraft__block_lodestone_top.png",
+   "mod": "wis",
+   "req": "all"
+  },
+  {
+   "id": "s_emp_city",
+   "branch": "sky",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "wis:empyrean/high_bell",
+   "game": "Высокий Звон",
+   "title": "Высокий Звон",
+   "desc": "Дойди до города Слушателей, где раскололи колокола. Там тихо.",
+   "deps": [
+    "s_empyrean"
+   ],
+   "icon": "minecraft:bell",
+   "iconFile": "minecraft__item_bell.png",
+   "mod": "wis",
+   "req": "all"
+  },
+  {
+   "id": "s_emp_part",
+   "branch": "sky",
+   "col": 3,
+   "tier": 3,
+   "points": 40,
+   "adv": "wis:empyrean/part",
+   "game": "Часть колокола",
+   "title": "Часть колокола",
+   "desc": "Принеси к Порогу Древа Язык, Голос или Венец Колокола Тишины.",
+   "deps": [
+    "s_emp_socket"
+   ],
+   "icon": "minecraft:lightning_rod",
+   "iconFile": "minecraft__item_echo_shard.png",
+   "mod": "wis",
+   "req": "all"
+  },
+  {
+   "id": "s_emp_threshold",
+   "branch": "sky",
+   "col": 3,
+   "tier": 4,
+   "points": 80,
+   "adv": "wis:empyrean/threshold",
+   "game": "Порог",
+   "title": "Порог",
+   "desc": "Ударь в собранный Колокол Тишины: ствол Древа откроется.",
+   "deps": [
+    "s_emp_part"
+   ],
+   "icon": "minecraft:chiseled_tuff_bricks",
+   "iconFile": "minecraft__block_chiseled_tuff_bricks.png",
+   "mod": "wis",
+   "req": "all"
+  },
+  {
+   "id": "s_emp_silence",
+   "branch": "sky",
+   "col": 4,
+   "tier": 5,
+   "points": 150,
+   "adv": "wis:empyrean/silence",
+   "game": "Тишина",
+   "title": "Тишина",
+   "desc": "Одолей Первого Звонаря в кроне Древа Эмпирея. После этого Древо зацветёт.",
+   "deps": [
+    "s_emp_threshold"
+   ],
+   "icon": "minecraft:nether_star",
+   "iconFile": "minecraft__item_nether_star.png",
+   "mod": "wis",
+   "req": "all"
+  },
+  {
    "id": "t_andesite",
    "branch": "tech",
    "col": 1,
@@ -5016,6 +5140,19 @@
    ],
    "find": "В Незере такой портал никуда не ведёт: нужно именно дно Верхнего мира.",
    "inside": "Тёмное измерение под бедроком: свои биомы, руды и опасности."
+  },
+  {
+   "id": "empyrean",
+   "name": "Эмпирей",
+   "mod": "Echoes in the Sky",
+   "node": "s_empyrean",
+   "how": [
+    "Сложи замкнутую рамку из аметистовых блоков любой формы: внутри пусто, в самой рамке хотя бы два морских фонаря (углы тоже считаются).",
+    "Нажми по рамке Небесным осколком. Осколок уйдёт, а внутри побежит завеса воды и искр.",
+    "Шагни в завесу: все врата ведут на Пристань у Древа. Обратно — через врата на конце причала."
+   ],
+   "find": "Небесные осколки лежат в главных сундуках летающих островов «Осколков неба». Небо над Эмпиреем откроется на второй неделе сезона, до того врата спят.",
+   "inside": "Мир в высоту: море внизу, отмели, изнанка материков и высокие земли, водопады в сотни блоков, восходящие потоки, города Слушателей. В центре — Древо Эмпирея, а в его кроне ждёт Первый Звонарь."
   },
   {
    "id": "end",
