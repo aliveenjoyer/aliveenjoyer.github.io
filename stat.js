@@ -16,7 +16,7 @@
   if (location.hostname !== "aliveenjoyer.github.io" && !test) return;
 
   var path = location.pathname;
-  var page = /season2-map/.test(path) ? "map" : /season1/.test(path) ? "s1" : "home";
+  var page = /season2-map/.test(path) ? "map" : /season1/.test(path) ? "s1" : /empyrean/.test(path) ? "emp" : "home";
   var isNew = 9;
   if (store) { isNew = get("ae-seen") ? 0 : 1; set("ae-seen", "1"); }
   var ref = (document.referrer || "").replace(/^[a-z]+:\/\/([^\/:?#]+).*$/i, "$1");

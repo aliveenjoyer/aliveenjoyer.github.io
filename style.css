@@ -527,6 +527,16 @@ footer p { margin: 0 0 .4rem; }
 .s2-map-shot:hover { border-color: var(--copper); }
 .s2-map-shot:hover img { transform: scale(1.035); }
 
+/* the season's own world (empyrean.html): the same card in the Listeners' amethyst */
+.s2-emp { border-color: #b58cf0; box-shadow: 0 0 2.4rem -1.1rem #b58cf0, .3rem .3rem 0 #0d0b1b;
+  background: radial-gradient(40rem 22rem at 100% 0%, rgba(181, 140, 240, .13), transparent 70%), var(--deep); }
+.s2-emp .s2-map-k { background: #b58cf0; }
+.s2-emp .s2-map-live { color: #b58cf0; }
+.s2-emp-shot { display: grid; place-items: center; padding: 1rem; background: radial-gradient(closest-side, rgba(181, 140, 240, .2), transparent), #120f24; }
+.s2-emp-shot img { width: min(100%, 17.5rem); height: auto; }
+.s2-emp-shot::after { content: "Рендер мира"; background: #b58cf0; }
+.s2-emp-shot:hover { border-color: #b58cf0; }
+
 /* the season in dates */
 .s2-plan { list-style: none; margin: 1.4rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 1.4rem .9rem; }
 .s2-plan li { position: relative; padding-top: 1.2rem; border-top: 2px solid var(--slate); }

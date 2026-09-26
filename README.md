@@ -3,6 +3,7 @@
 Сезонный Minecraft-сервер AliveEnjoyer, модератора Twitch-каналов sashawaify, QissMe_, skipsleeps, aiihosh1no и ezdok_nakomaze. Discord: https://discord.gg/sashawaify
 
 - Сезон 2 «Echoes in the Sky»: Minecraft 1.21.1, сборка на основе Craftoria, 1–21 октября 2026. Главная страница и карта сезона (`season2-map.html`).
+- Эмпирей — авторский мир второго сезона (`empyrean.html`): лор, места, путь к Первому Звонарю. Иллюстрации — изометрические рендеры настоящего мира сервера.
 - Сезон 1 «Whispers in the Void»: хоррор-сборка на Minecraft 1.20.1, 11–19 сентября 2026. Архив на главной и итоги (`season1.html`).
 
 Сайт: https://aliveenjoyer.github.io/ (старый адрес mikolakiyv.github.io/whispers-in-the-void переадресует сюда)
