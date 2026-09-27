@@ -654,13 +654,13 @@
     }
 
     /* ---------- team events ---------- */
-    const KIND = { auto: ["Считает сервер", "#8fd3ff"], race: ["Гонка", "#ee7a8e"], live: ["Живой ивент", "#f4b860"], sky: ["Каждую субботу", "#9fe3d8"] };
+    const KIND = { auto: ["Считает сервер", "#8fd3ff"], race: ["Гонка", "#ee7a8e"], live: ["Живой ивент", "#f4b860"], sky: ["Каждый денту", "#9fe3d8"] };
     const METRIC = { milestones: ["веха", "вехи", "вех"], bosses: ["босс", "босса", "боссов"], quests: ["квест", "квеста", "квестов"] };
     const day = (iso) => new Date(iso).toLocaleDateString("ru-RU", { day: "numeric", month: "long", timeZone: "Europe/Moscow" });
     function eventWhen(e) {
       if (e.kind === "live") return `${day(e.start)}, ${new Date(e.start).toLocaleTimeString("ru-RU", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Moscow" })} МСК`;
       if (e.kind === "race") return "весь сезон";
-      if (e.kind === "sky") return "по субботам, 18:00 МСК";
+      if (e.kind === "sky") return "каждый день, 18:00 МСК";
       return `${day(e.start).split(" ")[0]}–${day(e.end)}`;
     }
     function renderEvents() {
