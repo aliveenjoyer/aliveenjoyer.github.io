@@ -187,7 +187,7 @@
         const p = await r.json();
         // the test world before 1 October is not the season; ?test=1 shows it anyway
         if (!params.has("test")) {
-          const since = Date.parse(R.season.start) / 1000;
+          const since = Date.parse(R.season.live || R.season.start) / 1000;
           for (const map of [p.done, p.fun || {}]) for (const k in map) { map[k] = map[k].filter((e) => e[1] >= since); if (!map[k].length) delete map[k]; }
           for (const k in p.bosses || {}) { const b = p.bosses[k]; b.by = b.by.filter((e) => e[2] >= since); b.kills = b.by.reduce((n, e) => n + e[1], 0); if (!b.by.length) delete p.bosses[k]; }
           if (Date.now() < since * 1000) { p.teams = []; p.stats = null; p.heroes = []; p.events = {}; }
@@ -198,7 +198,7 @@
     return { updated: 0, done: {}, fun: {}, bosses: {}, teams: [], events: {}, heroes: [], stats: null };
   }
 
-  fetch("roadmap.json?v=20260926a").then((r) => r.json()).then(async (R) => {
+  fetch("roadmap.json?v=20260928a").then((r) => r.json()).then(async (R) => {
     const nodes = R.nodes, byId = Object.fromEntries(nodes.map((n) => [n.id, n]));
     const branches = Object.fromEntries(R.branches.map((b) => [b.id, b]));
     const bossGroups = Object.fromEntries(R.bossGroups.map((g) => [g.id, g]));

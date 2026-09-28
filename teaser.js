@@ -259,7 +259,10 @@
   if (mapBox) {
     const live = $(".s2-map-live", mapBox);
     const start = Date.parse(mapBox.dataset.start), end = Date.parse(mapBox.dataset.end), now = Date.now();
-    if (now < start) {
+    // a quiet launch (28.09, the owner: «официальный старт оставь от первого числа, это тихий запуск»): the world is
+    // live and counting from data-live, while the countdown and «День N» still follow the official data-start
+    const from = mapBox.dataset.live ? Math.min(Date.parse(mapBox.dataset.live), start) : start;
+    if (now < from) {
       // whole days, like the countdown in the header
       const d = Math.floor((start - now) / 864e5);
       live.textContent = `До старта ${d ? `${d} ${plural(d, "день", "дня", "дней")}` : "меньше суток"}. Прогресс появится 1 октября, а пока есть демо: так карта будет выглядеть в разгар сезона.`;
@@ -269,7 +272,7 @@
           fetch(mapBox.dataset.json).then((r) => r.json()),
           fetch("https://173-249-26-11.sslip.io:8444/api/roadmap", { cache: "no-store" }).then((r) => r.json()),
         ]).then(([R, P]) => {
-          const since = start / 1000, byId = {}, total = {}, got = {};
+          const since = from / 1000, byId = {}, total = {}, got = {};
           R.nodes.forEach((n) => { byId[n.id] = n; total[n.branch] = (total[n.branch] || 0) + 1; });
           let opened = 0, last = null;
           Object.entries(P.done || {}).forEach(([id, who]) => {
@@ -282,7 +285,10 @@
           $$(".s2-map-bar span", mapBox).forEach((s) => s.querySelector("i").style.setProperty("--p", `${(100 * (got[s.dataset.b] || 0)) / (total[s.dataset.b] || 1)}%`));
           const all = R.nodes.length;
           if (Date.now() > end) live.textContent = `Сезон завершён: открыто ${opened} из ${all} вех.`;
-          else {
+          else if (Date.now() < start) {
+            const d = Math.floor((start - Date.now()) / 864e5);
+            live.textContent = `До официального старта ${d ? `${d} ${plural(d, "день", "дня", "дней")}` : "меньше суток"}, а на сервере уже играют: открыто ${opened} из ${all} вех.` + (last ? ` Последняя новая — «${last.title}» (${last.nick}).` : "");
+          } else {
             const day = Math.min(21, Math.floor((Date.now() - start) / 864e5) + 1);
             live.textContent = `День ${day} из 21: открыто ${opened} из ${all} вех.` + (last ? ` Последняя новая — «${last.title}» (${last.nick}).` : "");
           }
