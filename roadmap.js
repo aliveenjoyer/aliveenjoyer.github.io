@@ -198,7 +198,7 @@
     return { updated: 0, done: {}, fun: {}, bosses: {}, teams: [], events: {}, heroes: [], stats: null };
   }
 
-  fetch("roadmap.json?v=20260928a").then((r) => r.json()).then(async (R) => {
+  fetch("roadmap.json?v=20261001a").then((r) => r.json()).then(async (R) => {
     const nodes = R.nodes, byId = Object.fromEntries(nodes.map((n) => [n.id, n]));
     const branches = Object.fromEntries(R.branches.map((b) => [b.id, b]));
     const bossGroups = Object.fromEntries(R.bossGroups.map((g) => [g.id, g]));
