@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Завод ОЛИВКИ · Echoes in the Sky</title>
+<meta name="description" content="Как устроен подземный завод команды ОЛИВКА: 3D-модель из блоков мира и экскурсия по машинам.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap">
+<link rel="stylesheet" href="zavod/zavod.css?v=7">
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a href="./">← Echoes in the Sky</a><span class="updated" id="updated">Модель обновляется каждые 6 часов</span></div>
+
+  <header>
+    <div class="eyebrow">Заводы команд · гайд</div>
+    <h1>Завод ОЛИВКИ</h1>
+    <p class="lead">Под цветочным лугом спрятан завод: копатель добывает руду, линия Mekanism удваивает её, реактор Powah даёт энергию. Модель собрана из настоящих блоков мира. Пройди экскурсию или кликай машины сам.</p>
+    <div class="facts" id="facts"></div>
+  </header>
+
+  <div class="bench">
+    <div class="stagecol">
+      <div class="viewer" id="viewer">
+        <div class="load" id="load">Загружаю модель…</div>
+        <div class="labels" id="labels" aria-hidden="true"></div>
+        <div class="tip" id="tip" hidden></div>
+        <div class="compass" aria-hidden="true" title="Север"><svg id="needle" viewBox="0 0 40 40"><path d="M20 7 25 21 20 18.5 15 21Z" fill="#ee8793"/><path d="M20 33 15 21 20 23.5 25 21Z" fill="#8f86a8"/><text x="20" y="6.2" text-anchor="middle" font-size="7.5" fill="#ece6f7" font-family="Spectral, Georgia, serif">С</text></svg></div>
+        <div class="whint" id="whint" hidden>Чтобы приблизить, держи Ctrl и крути колесо</div>
+        <div class="card" id="card" hidden role="dialog" aria-live="polite">
+          <button class="x" type="button" id="cardClose" aria-label="Закрыть">×</button>
+          <h3 id="cardTitle"></h3>
+          <div class="role" id="cardRole"></div>
+          <p id="cardText"></p>
+          <ul id="cardFacts"></ul>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="layers" role="group" aria-label="Слой">
+          <span>Слой</span>
+          <button class="btn" type="button" data-cut="104" id="lTop">Поверхность</button>
+          <button class="btn" type="button" data-cut="62" id="lStore">Склад</button>
+          <button class="btn" type="button" data-cut="57" id="lFactory">Цех</button>
+        </div>
+        <div class="cut"><input type="range" id="cutRange" min="50" max="104" step="1" value="57" aria-label="Срез по высоте"><output id="cutOut" for="cutRange">y 57 · цех</output></div>
+        <div class="toggles">
+          <label><input type="checkbox" id="tFlows" checked> Потоки</label>
+          <label><input type="checkbox" id="tPins" checked> Подписи</label>
+          <label><input type="checkbox" id="tRock" checked> Скала</label>
+          <label><input type="checkbox" id="tSpin"> Вращение</label>
+          <button class="btn small" type="button" id="resetView">⟲ Вернуть вид</button>
+        </div>
+        <span class="hint">Крути мышью или пальцем · Ctrl + колесо или щипок: приблизить · клик по машине: что это</span>
+      </div>
+      <div class="legend">
+        <span><i style="background:#9fb8c9"></i>машины Mekanism</span>
+        <span><i style="background:#2b2733;outline:1px solid #6b6080"></i>реактор и копатель</span>
+        <span><i style="background:#5fb88d"></i>транспортёры</span>
+        <span><i style="background:#d2483f"></i>кабели энергии</span>
+        <span><i style="background:#4f7fe0"></i>трубы газа</span>
+        <span><i style="background:#7cb8ec"></i>трубы воды</span>
+        <span><i style="background:#5ccfcf"></i>сундуки</span>
+      </div>
+    </div>
+
+    <aside class="guide" aria-label="Гайд по заводу">
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" id="tabTour" aria-selected="true" aria-controls="paneTour">Экскурсия</button>
+        <button class="tab" role="tab" id="tabList" aria-selected="false" aria-controls="paneList">Все машины</button>
+      </div>
+      <div class="pane" id="paneTour" role="tabpanel" aria-labelledby="tabTour">
+        <div class="stepnum" id="stepNum">Шаг 1</div>
+        <h2 id="stepTitle">Завод под лугом</h2>
+        <div class="steptext" id="stepText"><p>Загружаю данные…</p></div>
+        <div class="chips" id="stepChips"></div>
+        <div class="flowkey" id="flowKey"></div>
+        <div class="nav">
+          <button class="btn" type="button" id="prev">← Назад</button>
+          <div class="dots" id="dots"></div>
+          <button class="btn" type="button" id="next">Далее →</button>
+        </div>
+      </div>
+      <div class="pane" id="paneList" role="tabpanel" aria-labelledby="tabList" hidden>
+        <div class="mlist" id="mlist"></div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="plan" id="plan" aria-labelledby="planTitle">
+    <div class="planhead">
+      <h2 id="planTitle">Схема цеха</h2>
+      <p>Вид сверху, север вверху. Номера те же, что на подписях в 3D. Цветные точки между машинами — транспортёры, кабели и трубы. Клик по машине покажет её в модели.</p>
+    </div>
+    <div class="planbody">
+      <svg id="planSvg" role="group" aria-label="План цеха"></svg>
+      <ol class="pkey" id="planKey"></ol>
+    </div>
+  </section>
+
+  <footer>
+    <span id="foot1">Модель: область вокруг базы, высоты 44–104, только видимые грани блоков.</span>
+    <span>Скрытая страница. Данные снимаются с сервера автоматически каждые 6 часов.</span>
+  </footer>
+</div>
+<script src="zavod/three.min.js"></script>
+<script src="zavod/OrbitControls.js"></script>
+<script src="zavod/zavod.js?v=12"></script>
+</body>
+</html>
