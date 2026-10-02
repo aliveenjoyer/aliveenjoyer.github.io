@@ -6,7 +6,7 @@
   var load = $('load'), viewer = $('viewer');
   var ROLE = {
     ore: ['Переработка руды', '#f4b860'], fuel: ['Топливо реактора', '#9ad46a'], energy: ['Энергия', '#ee8793'], gas: ['Вода и газы', '#7cc7ff'],
-    logistics: ['Сортировка', '#6cd3b6'], store: ['Сундуки', '#a9b6c8'], craft: ['Мастерская', '#c69ae0']
+    logistics: ['Сортировка', '#6cd3b6'], store: ['Сундуки', '#a9b6c8'], craft: ['Мастерская', '#c69ae0'], plan: ['Проект', '#7fe3ff']
   };
   var ORDER = ['ore', 'fuel', 'energy', 'gas', 'logistics', 'store', 'craft'];
   var DESC = {
@@ -98,6 +98,7 @@
 
   function init(D) {
     var OX = D.origin[0], OY = D.origin[1], OZ = D.origin[2], st = D.stats || {};
+    var hooks = {};   // filled by a plugin (the local studio): cardExtra(t) -> extra card lines, keys[mode](event)
 
     // ------------------------------------------------ header
     $('updated').textContent = 'Снято ' + new Date(D.updated).toLocaleString('ru-RU', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Moscow' }) + ' МСК · обновляется каждые 6 часов';
@@ -203,18 +204,20 @@
     [M.miner, hub, M.purifier, M.separator, M.pump, clumps, M.crusher, M.enricher, M.smelter, ingots, M.uSorter, M.usmelter, supply, M.reactor, M.cube, solar, M.gasgen, M.jSorter, junk, stock]
       .concat(ORDER.reduce(function (a, role) { return a.concat(top.filter(function (t) { return t.role === role; })); }, []))
       .forEach(function (t) { if (t && !t.n && !t.parent) t.n = ++num; });
-    function badge(t) { return t.n ? '<b class="num" style="background:' + t.color + '">' + t.n + '</b>' : '<i style="background:' + t.color + '"></i>'; }
+    function badge(t) { var tag = t.n || t.badge; return tag ? '<b class="num" style="background:' + t.color + '">' + esc(tag) + '</b>' : '<i style="background:' + t.color + '"></i>'; }
 
     // invisible hit boxes for hover and click
     var hitMat = new THREE.MeshBasicMaterial({ visible: false }), hits = new THREE.Group();
-    things.forEach(function (t) {
-      if (t.members) return;
+    function addHits(t) {
+      t.hitMeshes = [];
       t.boxes.forEach(function (q) {
         var h = new THREE.Mesh(box, hitMat);
         h.position.set(q.x + q.sx / 2, q.y - CY + q.sy / 2, q.z + q.sz / 2); h.scale.set(q.sx + .1, q.sy + .1, q.sz + .1);
-        h.userData = { t: t, y: q.y }; hits.add(h);
+        h.userData = { t: t, y: q.y }; hits.add(h); t.hitMeshes.push(h);
       });
-    });
+    }
+    function dropThing(t) { (t.hitMeshes || []).forEach(function (h) { hits.remove(h); }); t.hitMeshes = []; t.dead = true; }
+    things.forEach(function (t) { if (!t.members) addHits(t); });
     scene.add(hits);
 
     // ------------------------------------------------ miner zone: a dashed square on the miner's floor
@@ -311,9 +314,9 @@
       list.forEach(function (t) {
         if (!t) return;
         var el = document.createElement('div');
-        var compact = !focus && t.n;
-        el.className = 'pin' + (focus ? ' focus' : '') + (compact ? ' compact' : ''); el.style.setProperty('--c', t.color); el.hidden = true;
-        el.innerHTML = (t.n ? '<b class="num">' + t.n + '</b>' : '<i></i>') + (compact ? '' : esc(t.name));
+        var tag = t.n || t.badge, compact = !focus && tag;
+        el.className = 'pin' + (focus ? ' focus' : '') + (compact ? ' compact' : '') + (t.kind === 'plan' ? ' ghost' : ''); el.style.setProperty('--c', t.color); el.hidden = true;
+        el.innerHTML = (tag ? '<b class="num">' + esc(tag) + '</b>' : '<i></i>') + (compact ? '' : esc(t.name));
         labels.appendChild(el); pins.push({ t: t, el: el, w: 0, h: 0 });
       });
       dirty = true;
@@ -412,12 +415,13 @@
       $('cardTitle').textContent = t.name;
       var role = ROLE[t.role] || ROLE.craft;
       $('cardRole').innerHTML = '<span class="badge"><i style="background:' + role[1] + '"></i>' + role[0] + '</span>';
-      $('cardText').textContent = t.kind === 'store' ? (STORE_DESC[t.name] || STORE_DESC['Сундуки']) : (DESC[t.kind] || '');
+      $('cardText').textContent = t.desc || (t.kind === 'store' ? (STORE_DESC[t.name] || STORE_DESC['Сундуки']) : (DESC[t.kind] || ''));
       var f = [];
       if (t.up) f.push('Ускорители: ' + t.up[0] + ' · энергоулучшения: ' + t.up[1]);
       if (t.tier && SLOTS[t.tier] && t.name.indexOf('фабрика') >= 0) f.push(SLOTS[t.tier] + ' ' + plural(SLOTS[t.tier], 'операция', 'операции', 'операций') + ' одновременно');
       t.info.forEach(function (s) { f.push(cap(s)); });
       if (t.kind === 'store') f.push(t.count + ' ' + plural(t.count, 'сундук', 'сундука', 'сундуков') + (t.groups ? ' в ' + t.groups + ' ' + plural(t.groups, 'группе', 'группах', 'группах') : ''));
+      if (hooks.cardExtra) f = f.concat(hooks.cardExtra(t) || []);
       $('cardFacts').innerHTML = f.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('');
       card.hidden = false;
     }
@@ -526,13 +530,14 @@
       Array.prototype.forEach.call(dots.children, function (el, k) { if (k === step) el.setAttribute('aria-current', 'step'); else el.removeAttribute('aria-current'); });
       $('prev').disabled = step === 0; $('next').textContent = step === STEPS.length - 1 ? 'Сначала ↺' : 'Далее →';
       if (zone) zone.visible = !!s.zone;
-      setCut(s.cut); setHighlight(focus); applyFlows(); card.hidden = true;
+      setCut(s.cut); setHighlight(focus); applyFlows(s.flows || []); card.hidden = true;
       makePins((s.pins || focus).filter(Boolean), true);
       planFocus(focus, s.flows || []);
       if (s.frame) flyTo(s.frame.filter(Boolean), s.dir, s.pad, instant); else factoryView(focus, instant);
     }
     var ALL = [[M.miner, hub, 'ore'], [hub, M.purifier, 'ore'], [M.purifier, M.crusher, 'ore', .8], [M.crusher, M.enricher, 'ore'], [M.enricher, M.smelter, 'ore'], [M.smelter, ingots, 'ore']];
-    function applyFlows() { setFlows(mode === 'tour' ? (STEPS[step].flows || []) : ALL); }
+    var curFlows = [];
+    function applyFlows(list) { if (list) curFlows = list; setFlows(curFlows); }
     $('prev').addEventListener('click', function () { go(step - 1); });
     $('next').addEventListener('click', function () { go(step === STEPS.length - 1 ? 0 : step + 1); });
     function select(t) {
@@ -546,7 +551,7 @@
     document.addEventListener('keydown', function (e) {
       if (e.altKey || e.ctrlKey || e.metaKey || /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName || '')) return;
       if (e.key === 'Escape' && !card.hidden) { closeCard(); return; }
-      if (mode !== 'tour') return;
+      if (mode !== 'tour') { if (hooks.keys && hooks.keys[mode]) hooks.keys[mode](e); return; }
       if (e.key === 'ArrowRight') { go(step === STEPS.length - 1 ? 0 : step + 1); e.preventDefault(); }
       else if (e.key === 'ArrowLeft' && step > 0) { go(step - 1); e.preventDefault(); }
     });
@@ -566,21 +571,26 @@
       var b = e.target.closest('.mrow'); if (b) select(things[+b.dataset.i]);
     });
     var freePins = top.filter(function (t) { return KEY[t.kind] || (t.kind === 'store' && t.name !== 'Сундуки') || t.members; });
+    var extraModes = {};
     function setMode(m) {
-      mode = m;
-      $('tabTour').setAttribute('aria-selected', String(m === 'tour')); $('tabList').setAttribute('aria-selected', String(m === 'list'));
-      $('paneTour').hidden = m !== 'tour'; $('paneList').hidden = m !== 'list';
+      var prev = mode; mode = m;
+      if (prev !== m && extraModes[prev] && extraModes[prev].leave) extraModes[prev].leave();
+      Array.prototype.forEach.call(document.querySelectorAll('.tabs [data-mode]'), function (b) { b.setAttribute('aria-selected', String(b.getAttribute('data-mode') === m)); });
+      Array.prototype.forEach.call(document.querySelectorAll('.guide .pane[data-mode]'), function (p) { p.hidden = p.getAttribute('data-mode') !== m; });
+      card.hidden = true;
       if (m === 'tour') { go(step); return; }
       if (zone) zone.visible = false;
-      setHighlight([]); makePins(freePins, false); applyFlows(); card.hidden = true; planFocus([], []);
+      if (extraModes[m]) { extraModes[m].enter(); return; }
+      setHighlight([]); makePins(freePins, false); applyFlows(ALL); planFocus([], []);
       if (cut > 62) setCut(57);
       factoryView([]);
     }
-    $('tabTour').addEventListener('click', function () { setMode('tour'); });
-    $('tabList').addEventListener('click', function () { setMode('list'); });
+    Array.prototype.forEach.call(document.querySelectorAll('.tabs [data-mode]'), function (b) {
+      b.addEventListener('click', function () { setMode(b.getAttribute('data-mode')); });
+    });
 
     // ------------------------------------------------ plan: the factory floor from above, north up, numbered like the pins
-    var planEl = $('plan'), planSvg = $('planSvg'), planPos = {}, U = 10;
+    var planEl = $('plan'), planSvg = $('planSvg'), planPos = {}, U = 10, planFrame = null;
     function r1(v) { return Math.round(v * 10) / 10; }
     (function buildPlan() {
       var items = top.filter(function (t) { return t.n && t.floor <= 56 && t.kind !== 'solar'; });
@@ -637,12 +647,13 @@
         out.push(g);
       });
       var Wp = (x1 - x0) * U, Hp = (z1 - z0) * U;
+      planFrame = { x0: x0, z0: z0, w: Wp, h: Hp };
       out.push('<g class="pl-north" transform="translate(' + (Wp - 6) + ' 7)"><path d="M0 -5.5 3 2 0 .6 -3 2Z"/><text y="8.5">С</text></g>');
       var defs = '<defs>' + Object.keys(FLOW).map(function (k) {
         return '<marker id="pa-' + k + '" viewBox="0 0 6 6" refX="4.5" refY="3" markerWidth="3.6" markerHeight="3.6" orient="auto"><path d="M0 0 6 3 0 6Z" fill="' + FLOW[k] + '"/></marker>';
       }).join('') + '</defs>';
       planSvg.setAttribute('viewBox', '-1 -1 ' + (Wp + 2) + ' ' + (Hp + 2));
-      planSvg.innerHTML = defs + out.join('') + '<g id="planFlows"></g>';
+      planSvg.innerHTML = defs + out.join('') + '<g id="planGhosts"></g><g id="planFlows"></g>';
       $('planKey').innerHTML = top.filter(function (t) { return t.n; }).sort(function (a, b) { return a.n - b.n; }).map(function (t) {
         return '<li><button class="pk" type="button" data-i="' + t.i + '">' + badge(t) + '<span>' + esc(t.name) + '</span>' + (t.floor > 56 ? '<small>над цехом</small>' : '') + '</button></li>';
       }).join('');
@@ -665,6 +676,25 @@
         html += '<path class="pl-flow" d="M' + r1(ax) + ' ' + r1(ay) + 'Q' + r1(mx) + ' ' + r1(my) + ' ' + r1(bx) + ' ' + r1(by) + '" stroke="' + FLOW[f[2]] + '" marker-end="url(#pa-' + f[2] + ')"/>';
       });
       var fl = $('planFlows'); if (fl) fl.innerHTML = html;
+    }
+    // planned items on the plan: dashed outlines with their letters; the view grows to fit them
+    function planGhosts(list) {
+      var g = $('planGhosts'); if (!g || !planFrame) return;
+      var f = planFrame, mx = 0, mz = 0, Mx = f.w, Mz = f.h, html = '';
+      list.forEach(function (t) {
+        var sx = 0, sz = 0;
+        t.boxes.forEach(function (q) {
+          var x = (q.x - f.x0) * U, y = (q.z - f.z0) * U, w = q.sx * U, h = q.sz * U;
+          mx = Math.min(mx, x - U); mz = Math.min(mz, y - U); Mx = Math.max(Mx, x + w + U); Mz = Math.max(Mz, y + h + U);
+          html += '<rect class="pl-ghost' + (t.remove ? ' rm' : '') + (t.thin ? ' thin' : '') + '" data-i="' + t.i + '" x="' + r1(x + .9) + '" y="' + r1(y + .9) + '" width="' + r1(w - 1.8) + '" height="' + r1(h - 1.8) + '" rx="1.6" style="stroke:' + t.color + '"/>';
+          sx += x + w / 2; sz += y + h / 2;
+        });
+        var c = [sx / t.boxes.length, sz / t.boxes.length];
+        if (!t.thin) planPos[t.i] = c;
+        if (t.badge && !t.thin) html += '<text class="pl-gtext" x="' + r1(c[0]) + '" y="' + r1(c[1]) + '" style="fill:' + t.color + '">' + esc(t.badge) + '</text>';
+      });
+      planSvg.setAttribute('viewBox', (mx - 1) + ' ' + (mz - 1) + ' ' + (Mx - mx + 2) + ' ' + (Mz - mz + 2));
+      g.innerHTML = html;
     }
     function planPick(e) {
       var g = e.target.closest && e.target.closest('[data-i]');
@@ -691,6 +721,16 @@
     resize();
     camera.position.set(60, 55, 80); controls.target.set(0, -2, 0);
     go(0, true);
+    if (window.ZAVOD_PLUGIN) window.ZAVOD_PLUGIN({
+      THREE: THREE, D: D, scene: scene, camera: camera, controls: controls, things: things, top: top, M: M, S: S, CY: CY,
+      FLOW: FLOW, FLOWNAME: FLOWNAME, ROLE: ROLE, FDIR: FDIR, box: box, edgeGeo: edgeGeo, hooks: hooks,
+      esc: esc, plural: plural, fmt: fmt, badge: badge,
+      add: function (t) { var r = finish(t); addHits(r); return r; }, drop: dropThing,
+      setCut: setCut, getCut: function () { return cut; }, setHighlight: setHighlight, applyFlows: applyFlows, makePins: makePins,
+      flyTo: flyTo, factoryView: factoryView, openCard: openCard, closeCard: function () { card.hidden = true; }, select: select,
+      planFocus: planFocus, planGhosts: planGhosts, registerMode: function (m, h) { extraModes[m] = h; }, setMode: setMode,
+      getMode: function () { return mode; }, redraw: function () { dirty = true; }
+    });
     if (/debug/.test(location.hash)) window.__z = { camera: camera, controls: controls, things: things, go: go, flyTo: flyTo, setCut: setCut, steps: STEPS, redraw: function () { dirty = true; } };
     var last = 0;
     function loop(now) {

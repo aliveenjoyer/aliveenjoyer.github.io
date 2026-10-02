@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap">
-<link rel="stylesheet" href="zavod/zavod.css?v=7">
+<link rel="stylesheet" href="zavod/zavod.css?v=8">
 </head>
 <body>
 <div class="wrap">
@@ -68,10 +68,10 @@
 
     <aside class="guide" aria-label="Гайд по заводу">
       <div class="tabs" role="tablist">
-        <button class="tab" role="tab" id="tabTour" aria-selected="true" aria-controls="paneTour">Экскурсия</button>
-        <button class="tab" role="tab" id="tabList" aria-selected="false" aria-controls="paneList">Все машины</button>
+        <button class="tab" role="tab" id="tabTour" data-mode="tour" aria-selected="true" aria-controls="paneTour">Экскурсия</button>
+        <button class="tab" role="tab" id="tabList" data-mode="list" aria-selected="false" aria-controls="paneList">Все машины</button>
       </div>
-      <div class="pane" id="paneTour" role="tabpanel" aria-labelledby="tabTour">
+      <div class="pane" id="paneTour" data-mode="tour" role="tabpanel" aria-labelledby="tabTour">
         <div class="stepnum" id="stepNum">Шаг 1</div>
         <h2 id="stepTitle">Завод под лугом</h2>
         <div class="steptext" id="stepText"><p>Загружаю данные…</p></div>
@@ -83,7 +83,7 @@
           <button class="btn" type="button" id="next">Далее →</button>
         </div>
       </div>
-      <div class="pane" id="paneList" role="tabpanel" aria-labelledby="tabList" hidden>
+      <div class="pane" id="paneList" data-mode="list" role="tabpanel" aria-labelledby="tabList" hidden>
         <div class="mlist" id="mlist"></div>
       </div>
     </aside>
@@ -107,6 +107,6 @@
 </div>
 <script src="zavod/three.min.js"></script>
 <script src="zavod/OrbitControls.js"></script>
-<script src="zavod/zavod.js?v=12"></script>
+<script src="zavod/zavod.js?v=13"></script>
 </body>
 </html>

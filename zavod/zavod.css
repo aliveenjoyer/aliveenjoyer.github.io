@@ -139,6 +139,11 @@ header { display: grid; gap: .8rem; }
 @keyframes plflow { to { stroke-dashoffset: -5.4; } }
 .pl-north path { fill: var(--blood); }
 .pl-north text { font: 600 5px/1 var(--book); fill: var(--pearl); text-anchor: middle; }
+.pl-ghost { fill: rgba(127, 227, 255, .14); stroke-width: 1; stroke-dasharray: 2 1.4; cursor: pointer; }
+.pl-ghost.thin { fill: none; stroke-width: .8; stroke-dasharray: 1 1; }
+.pl-ghost.rm { fill: rgba(238, 135, 147, .2); }
+.pl-gtext { font: 700 5px/1 var(--book); text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.pin.ghost { border-style: dashed; }
 .pkey { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .15rem .8rem; }
 .pk { width: 100%; display: flex; align-items: center; gap: .5rem; background: none; border: 0; color: var(--pearl); font: inherit; font-size: .93rem; text-align: left; padding: .28rem .4rem; border-radius: 6px; cursor: pointer; }
 .pk:hover, .pk.on { background: var(--deeper); }
