@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Зрители тратят баллы канала на Twitch, и у стримера в Deadlock нажимается клавиша. Бесплатная программа для Windows.">
+<meta name="theme-color" content="#14110e">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Chatlock для Deadlock">
+<meta property="og:description" content="Зрители тратят баллы канала на Twitch, и у стримера в Deadlock нажимается клавиша. Бесплатная программа для Windows.">
+<meta property="og:url" content="https://aliveenjoyer.github.io/chatlock/">
+<link rel="canonical" href="https://aliveenjoyer.github.io/chatlock/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23f4a63a%22%20d%3D%22M5%200h19v13l-5%205h-8l-7%206v-6H0V5z%22%2F%3E%3C%2Fsvg%3E">
+<style>img { max-width: 100%; } [hidden] { display: none !important; }</style>
+<title>Chatlock для Deadlock</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@400;600;700&family=Sofia+Sans+Condensed:wght@600;700;800&family=Sofia+Sans+Extra+Condensed:wght@800;900&display=swap">
+<style>
+  /* Layout: a poster headline beside one live demo (first you are the viewer, then the streamer);
+     under an art-deco double rule, quiet left-aligned sections. One look, dark by choice: it is the
+     look of the program's own panel and of the game it is made for. */
+  :root {
+    color-scheme: dark;
+    --soot: #14110e; --pit: #0e0c0a; --lamp: #2a2016; --plate: #1d1915; --plate-2: #262019; --line: #382f25; --line-2: #4d4133;
+    --ink: #efdebf; --dim: #a89c87;
+    --amber: #f4a63a; --sapphire: #6b9cf2; --soul: #56d6b8; --stop: #e5533d;
+    --display: "Sofia Sans Extra Condensed", Bahnschrift, "Arial Narrow", sans-serif;
+    --narrow: "Sofia Sans Condensed", Bahnschrift, "Arial Narrow", sans-serif;
+    --body: "Sofia Sans", "Segoe UI", system-ui, sans-serif;
+    --cut-s: polygon(7px 0, 100% 0, 100% calc(100% - 7px), calc(100% - 7px) 100%, 0 100%, 0 7px);
+    --cut-m: polygon(11px 0, 100% 0, 100% calc(100% - 11px), calc(100% - 11px) 100%, 0 100%, 0 11px);
+    --cut-l: polygon(18px 0, 100% 0, 100% calc(100% - 18px), calc(100% - 18px) 100%, 0 100%, 0 18px);
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: radial-gradient(1200px 640px at 16% -12%, var(--lamp), transparent 70%) var(--soot); color: var(--ink); font: 17px/1.55 var(--body); }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
+  :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 0 48px; }
+
+  /* ---- the top ---- */
+  .top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 28px; padding-block: 18px 6px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; font: 800 24px/1 var(--narrow); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; }
+  /* The mark: a key cap that is also a chat bubble. */
+  .brand i { width: 24px; height: 24px; background: var(--amber); clip-path: polygon(5px 0, 100% 0, 100% 13px, 19px 18px, 11px 18px, 4px 24px, 4px 18px, 0 18px, 0 5px); }
+  .top nav { margin-left: auto; display: flex; flex-wrap: wrap; gap: 4px 24px; font-size: 15.5px; color: var(--dim); }
+  .top nav a { text-decoration: none; padding-block: 4px; }
+  .top nav a:hover { color: var(--ink); }
+
+  /* ---- the hero: the thesis and the proof ---- */
+  .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 520px); gap: 36px 56px; align-items: start; padding-block: 30px 46px; }
+  /* Three lines, broken by hand; the size keeps the longest of them inside its column. */
+  h1 { margin: 0; font: 900 clamp(60px, 8.2vw, 112px)/.84 var(--display); text-transform: uppercase; }
+  .lead { margin: 24px 0 0; max-width: 33em; font-size: 19px; }
+  .acts { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 26px; }
+  .btn { display: inline-flex; align-items: center; min-height: 50px; padding: 6px 26px; border: 0; cursor: pointer; text-decoration: none; background: var(--amber); color: var(--soot);
+    font: 800 20px/1 var(--narrow); letter-spacing: .05em; text-transform: uppercase; clip-path: var(--cut-m); }
+  .btn:hover { filter: brightness(1.1); }
+  .more { color: var(--dim); text-underline-offset: 4px; }
+  .more:hover { color: var(--ink); }
+  .fine { margin: 16px 0 0; color: var(--dim); font-size: 15px; }
+  .fine a, footer a { color: var(--ink); text-underline-offset: 3px; }
+  .fine a:hover, footer a:hover { color: var(--amber); }
+
+  /* The art-deco double rule of the panel. */
+  .rule { height: 6px; border-top: 2px solid var(--amber); border-bottom: 1px solid var(--line-2); }
+
+  /* ---- the demo ---- */
+  .demo { padding: 2px; background: var(--amber); clip-path: var(--cut-l); }
+  .demo-in { display: grid; gap: 14px; padding: 18px 18px 14px; background: var(--plate);
+    clip-path: polygon(17px 0, 100% 0, 100% calc(100% - 17px), calc(100% - 17px) 100%, 0 100%, 0 17px); }
+  .dh { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+  .dh b { font: 700 23px/1.1 var(--narrow); }
+  .bal { margin-left: auto; color: var(--soul); font: 700 20px/1 var(--narrow); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .bal .soul { margin-left: .35em; }
+  .soul::before { content: ""; display: inline-block; width: .5em; height: .5em; margin-right: .38em; background: currentColor; transform: translateY(-.08em) rotate(45deg); }
+  .hint { margin: 0; color: var(--dim); font-size: 14.5px; line-height: 1.4; }
+
+  .tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .tile { display: grid; gap: 6px; padding: 10px 12px 9px; text-align: left; cursor: pointer; background: var(--plate-2); border: 1px solid var(--line-2); font: 700 17px/1.1 var(--narrow); }
+  .tile span { color: var(--soul); font-variant-numeric: tabular-nums; }
+  .tile:hover { border-color: var(--amber); }
+  .tile:active { transform: translateY(1px); }
+  .tile:disabled { opacity: .45; cursor: default; border-color: var(--line-2); transform: none; }
+
+  /* The streamer's screen, top to bottom: the card that pops up on the stream, a line of the
+     game's chat, the crosshair, and the input display with the keys. */
+  .screen { position: relative; height: 262px; overflow: hidden; border: 1px solid var(--line-2); background: linear-gradient(180deg, var(--pit), var(--soot) 62%, var(--lamp)); }
+  .screen .tag { position: absolute; left: 12px; top: 9px; color: var(--dim); font-size: 13.5px; }
+  .aim { position: absolute; left: 50%; top: 47%; width: 22px; height: 22px; transform: translate(-50%, -50%); opacity: .55;
+    background: linear-gradient(var(--ink), var(--ink)) center / 2px 100% no-repeat, linear-gradient(var(--ink), var(--ink)) center / 100% 2px no-repeat; }
+  .gchat { position: absolute; left: 12px; top: 76px; right: 12px; margin: 0; font-size: 14.5px; line-height: 1.3; }
+  .gchat b { color: var(--sapphire); font-weight: 600; }
+  .pad { position: absolute; left: 12px; bottom: 12px; display: flex; align-items: flex-end; gap: 12px; }
+  .keys { display: grid; gap: 5px; }
+  .keys div, .mouse { display: flex; gap: 5px; }
+  /* A key on the streamer's input display: an outline at rest, amber and a little lower while down. */
+  .k { position: relative; display: grid; place-items: center; width: 34px; height: 32px; background: var(--line-2); color: var(--dim); font: 700 15px/1 var(--narrow); clip-path: var(--cut-s); transition: transform .06s; }
+  .k::before { content: ""; position: absolute; inset: 1px; background: var(--pit); clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px); }
+  .k span { position: relative; }
+  .k.w1 { width: 58px; } .k.w3 { width: 112px; } .k.m { width: 30px; height: 46px; }
+  .k.down { transform: translateY(2px); background: var(--amber); color: var(--soot); }
+  .k.down::before { background: var(--amber); }
+  .ocard { position: absolute; right: 12px; top: 12px; max-width: 62%; padding: 2px; background: var(--amber); clip-path: var(--cut-m); opacity: 0; transform: translateY(-8px); transition: opacity .2s, transform .2s; }
+  .ocard.show { opacity: 1; transform: none; }
+  .ocard.fx { background: var(--sapphire); }
+  .ocard-in { display: flex; align-items: center; gap: 10px; padding: 7px 14px 7px 7px; background: var(--soot); clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px); }
+  .ocard .ok { flex: none; display: grid; place-items: center; min-width: 38px; height: 38px; padding: 0 8px; background: var(--amber); color: var(--soot); font: 800 19px/1 var(--narrow); clip-path: var(--cut-s); }
+  .ocard.fx .ok { background: var(--sapphire); }
+  .ocard .ot { min-width: 0; font: 700 17px/1.15 var(--narrow); overflow-wrap: anywhere; }
+  .ocard .ot small { display: block; color: var(--dim); font: 400 13px/1.3 var(--body); }
+  .curtain { position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; text-align: center; background: color-mix(in srgb, var(--pit) 86%, transparent); color: var(--dim); font: 700 22px/1.2 var(--narrow); }
+  .curtain.stop { color: var(--stop); }
+
+  .sctl { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; color: var(--dim); font-size: 14.5px; }
+  .sctl span { margin-right: 4px; }
+  .quiet { padding: 6px 12px; cursor: pointer; background: none; border: 1px solid var(--line-2); color: var(--ink); font-size: 14.5px; }
+  .quiet:hover { border-color: var(--dim); }
+  .quiet[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--soot); }
+  .halt { padding: 7px 18px; cursor: pointer; border: 0; background: var(--stop); color: var(--soot); font: 800 16px/1 var(--narrow); letter-spacing: .08em; text-transform: uppercase; clip-path: var(--cut-s); }
+  .halt[aria-pressed="true"] { background: var(--amber); }
+
+  .feed { margin: 0; padding: 0; list-style: none; font-size: 14.5px; line-height: 1.35; }
+  .feed li { display: grid; grid-template-columns: 42px minmax(0, .9fr) minmax(0, 1fr) minmax(0, 1.5fr); gap: 0 10px; padding: 6px 0; border-top: 1px solid var(--line); }
+  .feed .t { color: var(--dim); font-variant-numeric: tabular-nums; }
+  .feed .w { overflow-wrap: anywhere; }
+  .feed .a { color: var(--dim); overflow-wrap: anywhere; }
+  .feed .r { color: var(--soul); overflow-wrap: anywhere; }
+  .feed .r.no { color: var(--dim); }
+  .feed .r.no b { color: var(--stop); font-weight: 400; }
+
+  /* ---- the sections ---- */
+  .sec { padding-block: 58px 6px; }
+  h2 { margin: 0 0 12px; font: 900 clamp(42px, 5.6vw, 68px)/.9 var(--display); text-transform: uppercase; text-wrap: balance; }
+  .intro { margin: 0 0 30px; max-width: 37em; color: var(--dim); font-size: 18.5px; }
+  h3 { margin: 0 0 6px; font: 700 22px/1.15 var(--narrow); }
+  .sec p { margin: 0; }
+  .cols3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px 36px; margin: 0; padding: 0; list-style: none; }
+  .cols2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 48px; }
+  .cols3 p, .cols2 p, .points p { color: var(--dim); font-size: 16.5px; }
+
+  /* A real sequence, so it is numbered. */
+  .steps { counter-reset: step; }
+  .steps li { counter-increment: step; }
+  .steps li::before { content: counter(step); display: block; margin-bottom: 4px; color: var(--amber); font: 900 62px/.9 var(--display); }
+
+  .wall { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; padding: 0; list-style: none; }
+  .cap { position: relative; display: grid; place-items: center; min-width: 46px; height: 44px; padding: 0 12px; background: var(--c, var(--amber)); color: var(--c, var(--amber)); font: 700 19px/1 var(--narrow); clip-path: var(--cut-s); }
+  .cap::before { content: ""; position: absolute; inset: 1px; background: var(--plate-2); clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px); }
+  .cap span { position: relative; }
+  .cap.fx { --c: var(--sapphire); }
+  .cap.no { --c: var(--line-2); color: var(--dim); text-decoration: line-through; }
+  .legend { margin: 0 0 22px; color: var(--dim); font-size: 15.5px; }
+  .keys-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 30px 56px; align-items: start; }
+  .points { display: grid; gap: 20px; }
+
+  /* The panel, drawn with the panel's own shapes. */
+  .ctl { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 34px 56px; align-items: start; }
+  .mini { padding: 14px 16px 10px; background: var(--soot); border: 1px solid var(--line-2); font: 14px/1.3 var(--narrow); }
+  .mini-top { display: flex; align-items: center; gap: 12px; padding-bottom: 9px; border-bottom: 2px solid var(--amber); }
+  .mini-top .brand { font-size: 16px; gap: 7px; }
+  .mini-top .brand i { width: 17px; height: 17px; clip-path: polygon(4px 0, 100% 0, 100% 9px, 13px 13px, 8px 13px, 3px 17px, 3px 13px, 0 13px, 0 4px); }
+  .mini-top b { color: var(--amber); font-size: 19px; }
+  .mini-top .halt { margin-left: auto; font-size: 14px; cursor: default; }
+  .mrow { display: grid; grid-template-columns: 30px 78px minmax(0, 1fr) auto; align-items: center; gap: 0 10px; padding: 7px 0; border-bottom: 1px solid var(--line); }
+  .mrow.off > * { opacity: .5; }
+  .sw { position: relative; width: 30px; height: 16px; border: 1px solid var(--amber); }
+  .sw::after { content: ""; position: absolute; top: 2px; right: 2px; width: 10px; height: 10px; background: var(--amber); }
+  .mrow.off .sw { border-color: var(--line-2); }
+  .mrow.off .sw::after { right: auto; left: 2px; background: var(--dim); }
+  .mrow .cap { min-width: 0; height: 26px; padding: 0 6px; font-size: 14px; }
+  .mrow .nm { font: 400 15px/1.2 var(--body); }
+  .mrow .pr { color: var(--soul); font-variant-numeric: tabular-nums; }
+  .mini .feed { margin-top: 8px; font: 13.5px/1.35 var(--body); }
+  .mini .feed li:first-child { border-top: 0; }
+
+  .get { display: grid; gap: 10px; justify-items: start; margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--line-2); }
+  .get p { color: var(--dim); max-width: 36em; }
+
+  footer { margin-top: 60px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--dim); font-size: 14.5px; }
+  footer p { margin: 0 0 6px; max-width: 60em; }
+
+  @media (max-width: 1100px) { .hero { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 960px) {
+    .ctl, .keys-grid { grid-template-columns: minmax(0, 1fr); }
+    .cols3 { grid-template-columns: minmax(0, 1fr); }
+    .steps li { display: grid; grid-template-columns: 54px minmax(0, 1fr); gap: 0 6px; }
+    .steps li::before { grid-row: span 2; }
+  }
+  @media (max-width: 640px) {
+    .cols2 { grid-template-columns: minmax(0, 1fr); }
+    /* A short page on a phone is scrolled, not navigated. */
+    .top nav { display: none; }
+    .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .demo-in { padding-inline: 12px; }
+    .ocard { top: 34px; left: 12px; max-width: none; }
+    .gchat { top: 100px; }
+    .aim { display: none; }
+    .feed li { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
+    .feed .t { display: none; }
+    .feed .r { grid-column: 1 / -1; }
+  }
+  @media (prefers-reduced-motion: reduce) { .k, .ocard { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="brand"><i aria-hidden="true"></i>Chatlock</span>
+    <nav aria-label="Разделы страницы">
+      <a href="#how">Как работает</a>
+      <a href="#keys">Что может чат</a>
+      <a href="#control">Контроль</a>
+      <a href="#honest">Риски</a>
+      <a href="#start">Запуск</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1>Чат жмёт<br>твои клавиши<br>в&nbsp;Deadlock</h1>
+        <p class="lead">Зрители тратят баллы канала на Twitch, а у тебя в игре нажимается F, пробел или Q. Chatlock сам ставит награды на канал, следит за очередью и возвращает баллы, если нажать не получилось.</p>
+        <div class="acts">
+          <a class="btn" data-download href="https://github.com/aliveenjoyer/chatlock/releases/latest/download/Chatlock.zip">Скачать Chatlock</a>
+          <a class="more" href="#start">Как запустить</a>
+        </div>
+        <p class="fine">Для Windows 10 и 11. Бесплатно. Версия <span data-version>1.4.0</span>. Разработчик: <a href="https://github.com/aliveenjoyer">aliveenjoyer</a>.</p>
+      </div>
+
+      <div class="demo" id="demo">
+        <div class="demo-in">
+          <div class="dh">
+            <b>Попробуй: ты зритель</b>
+            <span class="bal" aria-live="polite">у тебя <span class="soul" id="points">1000</span></span>
+          </div>
+          <p class="hint">Купи награду и смотри на экран стримера. Здесь всё понарошку: эта страница ничего никуда не нажимает.</p>
+
+          <div class="tiles" id="tiles">
+            <button type="button" class="tile" data-reward="f"><b>Нажать F</b><span class="soul">300</span></button>
+            <button type="button" class="tile" data-reward="space"><b>Нажать пробел</b><span class="soul">200</span></button>
+            <button type="button" class="tile" data-reward="q"><b>Нажать Q</b><span class="soul">200</span></button>
+            <button type="button" class="tile" data-reward="qhold"><b>Зажать Q</b><span class="soul">300</span></button>
+            <button type="button" class="tile" data-reward="lmb"><b>Нажать ЛКМ</b><span class="soul">300</span></button>
+            <button type="button" class="tile" data-reward="chat"><b>Написать в чат</b><span class="soul">300</span></button>
+          </div>
+
+          <div class="screen" id="screen">
+            <span class="tag">Экран стримера</span>
+            <i class="aim" aria-hidden="true"></i>
+            <p class="gchat" id="gchat" hidden></p>
+            <div class="pad" aria-hidden="true">
+              <div class="keys">
+                <div><span class="k" data-k="Q"><span>Q</span></span><span class="k"><span>W</span></span><span class="k"><span>E</span></span><span class="k"><span>R</span></span></div>
+                <div><span class="k"><span>A</span></span><span class="k"><span>S</span></span><span class="k"><span>D</span></span><span class="k" data-k="F"><span>F</span></span></div>
+                <div><span class="k w1"><span>Shift</span></span><span class="k w3" data-k="SPACE"><span>Пробел</span></span></div>
+              </div>
+              <div class="mouse"><span class="k m" data-k="LMB"><span>Л</span></span><span class="k m"><span>П</span></span></div>
+            </div>
+            <div class="ocard" id="ocard"><div class="ocard-in"><span class="ok" id="ocardKey">Q</span><span class="ot"><span id="ocardWho">Гриб_Айви жмёт Q</span><small id="ocardWhat">Нажать Q</small></span></div></div>
+            <div class="curtain" id="curtain" hidden></div>
+          </div>
+
+          <div class="sctl">
+            <span>А это кнопки стримера:</span>
+            <button type="button" class="quiet" id="minimize" aria-pressed="false">Свернуть игру</button>
+            <button type="button" class="halt" id="halt" aria-pressed="false">Пауза</button>
+            <button type="button" class="quiet" id="refill" hidden>Выдать ещё 1000 баллов</button>
+          </div>
+
+          <ul class="feed" id="feed" aria-live="polite" aria-label="Кто что нажал">
+            <li><span class="t">21:40</span><span class="w">Гриб_Айви</span><span class="a">Нажать Q</span><span class="r">нажато: Q</span></li>
+            <li><span class="t">21:39</span><span class="w">mo_and_krill</span><span class="a">Нажать F</span><span class="r no"><b>игра не в фокусе</b>, баллы возвращены</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="rule" aria-hidden="true"></div>
+
+    <section class="sec" id="how">
+      <h2>Как это работает</h2>
+      <p class="intro">Зрителям ничего ставить не нужно. Программа стоит только у тебя и делает три вещи по порядку.</p>
+      <ol class="cols3 steps">
+        <li><h3>Зритель покупает награду</h3><p>Обычная награда за баллы канала: «Нажать F» за 300. Выбрал, подтвердил, больше ничего вводить не надо.</p></li>
+        <li><h3>Chatlock проверяет момент</h3><p>Окно Deadlock впереди, пауза не стоит, предел нажатий в минуту не превышен. Проверка идёт вплотную к самому нажатию.</p></li>
+        <li><h3>Клавиша нажата или баллы вернулись</h3><p>Нажалось: имя зрителя всплывает на стриме, а запрос ждёт в очереди наград на Twitch. Не нажалось: баллы возвращаются сами. Награда старше 30 секунд уже не срабатывает, так что поздних нажатий не бывает.</p></li>
+      </ol>
+    </section>
+
+    <section class="sec" id="keys">
+      <h2>Что может чат</h2>
+      <p class="intro">Только то, что ты сам положил в список. Зритель выбирает награду, а не клавишу.</p>
+      <div class="keys-grid">
+        <div>
+          <ul class="wall" aria-label="Что можно назначить на награду">
+            <li class="cap"><span>Q</span></li><li class="cap"><span>W</span></li><li class="cap"><span>E</span></li><li class="cap"><span>R</span></li><li class="cap"><span>F</span></li><li class="cap"><span>1</span></li><li class="cap"><span>2</span></li><li class="cap"><span>3</span></li><li class="cap"><span>4</span></li>
+            <li class="cap"><span>Пробел</span></li><li class="cap"><span>Shift</span></li><li class="cap"><span>Ctrl</span></li><li class="cap"><span>ЛКМ</span></li><li class="cap"><span>ПКМ</span></li>
+            <li class="cap fx"><span>Чат игры</span></li><li class="cap fx"><span>Скример</span></li>
+          </ul>
+          <p class="legend">Любая буква и цифра, пробел, Shift, Ctrl и кнопки мыши. Синим отмечено то, что не клавиша.</p>
+          <ul class="wall" aria-label="Чего в списке нет">
+            <li class="cap no"><span>Win</span></li><li class="cap no"><span>Alt</span></li><li class="cap no"><span>Tab</span></li><li class="cap no"><span>Esc</span></li><li class="cap no"><span>Enter</span></li><li class="cap no"><span>F1–F12</span></li>
+          </ul>
+          <p class="legend">Этих клавиш в программе нет совсем: свернуть игру или закрыть матч чат не сможет.</p>
+        </div>
+        <div class="points">
+          <div><h3>Нажать или зажать</h3><p>Короткое нажатие или удержание до 10 секунд. Зажатая Q в Deadlock даёт тяжёлый удар.</p></div>
+          <div><h3>Строка в чат игры</h3><p>Зритель пишет до 50 символов, и строка уходит в чат матча от твоего имени. Ссылки и оскорбления отсеиваются, а в меню, магазине и консоли строка не пишется. Выключено, пока сам не включишь.</p></div>
+          <div><h3>Скример</h3><p>Страшная картинка на весь экран и крик. Тоже выключен, пока сам не включишь.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="control">
+      <h2>Руль у тебя</h2>
+      <p class="intro">Вся панель помещается на одном экране: слева награды, справа лента, сверху большая кнопка паузы.</p>
+      <div class="ctl">
+        <div class="mini" role="img" aria-label="Панель Chatlock: состояние «Чат жмёт», кнопка «Пауза», список наград с ценами и лента нажатий">
+          <div class="mini-top"><span class="brand"><i></i>Chatlock</span><b>Чат жмёт</b><span class="halt">Пауза</span></div>
+          <div class="mrow"><i class="sw"></i><span class="cap"><span>F</span></span><span class="nm">Нажать F</span><span class="pr soul">300</span></div>
+          <div class="mrow"><i class="sw"></i><span class="cap"><span>Пробел</span></span><span class="nm">Нажать пробел</span><span class="pr soul">200</span></div>
+          <div class="mrow"><i class="sw"></i><span class="cap"><span>Q</span></span><span class="nm">Нажать Q</span><span class="pr soul">200</span></div>
+          <div class="mrow off"><i class="sw"></i><span class="cap fx"><span>Чат игры</span></span><span class="nm">Написать в чат игры</span><span class="pr soul">300</span></div>
+          <ul class="feed">
+            <li><span class="t">21:41</span><span class="w">Kelvin42</span><span class="a">Нажать пробел</span><span class="r">нажато: Пробел</span></li>
+            <li><span class="t">21:40</span><span class="w">Гриб_Айви</span><span class="a">Нажать Q</span><span class="r">нажато: Q</span></li>
+            <li><span class="t">21:39</span><span class="w">mo_and_krill</span><span class="a">Нажать F</span><span class="r no"><b>игра не в фокусе</b>, баллы возвращены</span></li>
+          </ul>
+        </div>
+        <div class="points">
+          <div><h3>Пауза одной кнопкой</h3><p>Она есть и в панели, и в окне программы. Награды на Twitch приостанавливаются, баллы за всё, что не успело нажаться, возвращаются.</p></div>
+          <div><h3>Только в игре</h3><p>Свернул Deadlock или переключился в браузер: ничего не нажмётся. В чат, в браузер и в поле с паролем нажатия зрителей не попадут.</p></div>
+          <div><h3>Твой темп</h3><p>Общий предел нажатий в минуту, а у каждой клавиши своё «как часто». Цена любой награды меняется в одной строке.</p></div>
+          <div><h3>Баллы можно вернуть</h3><p>Не нажалось: они возвращаются сами. Нажалось: запрос остаётся в очереди наград на Twitch, и лишний можно отклонить там же. Кому это ни к чему, включает списание сразу.</p></div>
+          <div><h3>Видно на стриме</h3><p>Оверлей для OBS показывает, кто что нажал.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="honest">
+      <h2>Что стоит знать заранее</h2>
+      <p class="intro">Четыре вещи, о которых лучше услышать до установки, а не после.</p>
+      <div class="cols2">
+        <div><h3>Античит</h3><p>Chatlock не читает память игры и ничего в неё не внедряет. Он нажимает клавиши обычным вводом Windows, как программы для макросов, и игра видит, что нажатие программное. Подтверждённых банов за такое в Deadlock найти не удалось, но Valve правил не публикует, а античит обновляется. Риск для аккаунта небольшой, но он есть.</p></div>
+        <div><h3>Союзники</h3><p>В обычном матче случайные нажатия мешают твоей команде, и на тебя могут пожаловаться. Лучше включать это в играх с ботами или с друзьями.</p></div>
+        <div><h3>Нужны баллы канала</h3><p>Они есть у компаньонов и партнёров Twitch. Без них работают только проверка из панели и выдуманные демо-зрители.</p></div>
+        <div><h3>Фанатская программа</h3><p>К Valve и Twitch отношения не имеет. Исходники тех двух частей, что нажимают клавиши и рисуют поверх экрана, лежат в архиве рядом с программой: их может прочитать кто угодно.</p></div>
+      </div>
+    </section>
+
+    <section class="sec" id="start">
+      <h2>Запуск за три шага</h2>
+      <ol class="cols3 steps">
+        <li><h3>Скачай и распакуй архив</h3><p>Целиком, в любую папку. Прямо из архива не запускай: программе нужны файлы, которые лежат рядом.</p></li>
+        <li><h3>Запусти Chatlock.exe</h3><p>Откроются маленькое окно программы и панель в браузере. Windows может спросить, запускать ли программу без подписи: «Подробнее», потом «Выполнить в любом случае».</p></li>
+        <li><h3>Войди в Twitch по коду</h3><p>Страница с кодом откроется сама. Подтверди его под аккаунтом стримера, и награды появятся на канале.</p></li>
+      </ol>
+      <div class="get">
+        <a class="btn" data-download href="https://github.com/aliveenjoyer/chatlock/releases/latest/download/Chatlock.zip">Скачать Chatlock&nbsp;<span data-version>1.4.0</span></a>
+        <p>Архив весит около <span data-size>33</span> МБ и ничего не устанавливает: распаковал и запустил. Новые версии программа скачивает сама и ставит при следующем запуске, не посреди стрима. Удалить её так же просто, как папку.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Разработчик: <a href="https://github.com/aliveenjoyer">aliveenjoyer</a>. Все версии Chatlock лежат <a href="https://github.com/aliveenjoyer/chatlock/releases">на GitHub</a>.</p>
+    <p>Chatlock <span data-version>1.4.0</span>. Фанатская программа для стримов Deadlock, к Valve и Twitch отношения не имеет. Deadlock принадлежит Valve, Twitch принадлежит Twitch Interactive.</p>
+  </footer>
+</div>
+
+<script>
+// Where the archive lives: the latest release of the program on GitHub, whatever its version.
+// tools\build-landing.mjs can point the page at another address.
+const DOWNLOAD_URL = 'https://github.com/aliveenjoyer/chatlock/releases/latest/download/Chatlock.zip';
+for (const link of document.querySelectorAll('[data-download]')) link.href = DOWNLOAD_URL;
+
+// The version and the size of the archive are asked from GitHub, so the page need not be
+// published again for every release. No answer: the numbers written in the page stay.
+const repo = /^https:\/\/github\.com\/([\w.-]+\/[\w.-]+)\/releases\//.exec(DOWNLOAD_URL)?.[1];
+if (repo) {
+  fetch(`https://api.github.com/repos/${repo}/releases/latest`, { headers: { Accept: 'application/vnd.github+json' } })
+    .then((res) => (res.ok ? res.json() : null))
+    .then((release) => {
+      const version = /^v?(\d+\.\d+\.\d+)$/.exec(release?.tag_name ?? '')?.[1];
+      if (!version) return;
+      for (const node of document.querySelectorAll('[data-version]')) node.textContent = version;
+      const archive = release.assets?.find((asset) => DOWNLOAD_URL.endsWith(`/${asset.name}`));
+      if (archive?.size > 0) for (const node of document.querySelectorAll('[data-size]')) node.textContent = Math.round(archive.size / 1048576);
+    })
+    .catch(() => {});
+}
+
+// The demo. The visitor is a viewer with points; the two buttons under the screen are the
+// streamer's. Nothing leaves the page: it only shows the rules the real program follows.
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const REWARDS = {
+    f: { title: 'Нажать F', cost: 300, key: 'F', label: 'F' },
+    space: { title: 'Нажать пробел', cost: 200, key: 'SPACE', label: 'Пробел' },
+    q: { title: 'Нажать Q', cost: 200, key: 'Q', label: 'Q' },
+    qhold: { title: 'Зажать Q', cost: 300, key: 'Q', label: 'Q', hold: 900 },
+    lmb: { title: 'Нажать ЛКМ', cost: 300, key: 'LMB', label: 'ЛКМ' },
+    chat: { title: 'Написать в чат', cost: 300, chat: true },
+  };
+  const LINES = ['гг вп', 'стример, сзади!', 'всем привет из чата', 'это не я пишу, это чат'];
+  const CHEAPEST = Math.min(...Object.values(REWARDS).map((r) => r.cost));
+  let points = 1000;
+  let paused = false;
+  let minimized = false;
+  let touched = false;
+  let said = 0;
+  let cardTimer;
+  let chatTimer;
+
+  const clock = () => new Date().toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+  const span = (cls, text) => { const s = document.createElement('span'); s.className = cls; s.textContent = text; return s; };
+
+  function line(who, what, result, refusedWhy) {
+    const li = document.createElement('li');
+    const r = span(refusedWhy ? 'r no' : 'r', '');
+    if (refusedWhy) { const b = document.createElement('b'); b.textContent = refusedWhy; r.append(b, ', баллы возвращены'); } else r.textContent = result;
+    li.append(span('t', clock()), span('w', who), span('a', what), r);
+    $('feed').prepend(li);
+    while ($('feed').children.length > 3) $('feed').lastElementChild.remove();
+  }
+
+  function show() {
+    $('points').textContent = points;
+    for (const tile of document.querySelectorAll('.tile')) tile.disabled = points < REWARDS[tile.dataset.reward].cost;
+    $('refill').hidden = points >= CHEAPEST;
+    const curtain = $('curtain');
+    curtain.hidden = !(paused || minimized);
+    curtain.classList.toggle('stop', paused);
+    curtain.textContent = paused ? 'Пауза: ничего не нажимается' : 'Игра свёрнута, впереди браузер';
+  }
+
+  // The card that pops up on the stream: who did what. `who` is the phrase for the first line.
+  function card(reward, who, what) {
+    const box = $('ocard');
+    box.classList.toggle('fx', Boolean(reward.chat));
+    $('ocardKey').textContent = reward.chat ? '…' : reward.label;
+    $('ocardWho').textContent = who;
+    $('ocardWhat').textContent = what;
+    box.classList.add('show');
+    clearTimeout(cardTimer);
+    cardTimer = setTimeout(() => box.classList.remove('show'), 2600);
+  }
+
+  function tap(reward) {
+    const key = document.querySelector(`.k[data-k="${reward.key}"]`);
+    key.classList.add('down');
+    setTimeout(() => key.classList.remove('down'), reward.hold ?? 170);
+  }
+
+  /** The visitor's own purchase, carried out. Returns what the feed says about it. */
+  function carryOut(reward) {
+    if (reward.chat) {
+      const text = LINES[said++ % LINES.length];
+      const chat = $('gchat');
+      chat.replaceChildren(Object.assign(document.createElement('b'), { textContent: '[Все] Стример: ' }), text);
+      chat.hidden = false;
+      clearTimeout(chatTimer);
+      chatTimer = setTimeout(() => { chat.hidden = true; }, 4200);
+      card(reward, 'Ты пишешь в чат игры', `«${text}»`);
+      return 'написано в чат';
+    }
+    tap(reward);
+    card(reward, `Ты ${reward.hold ? 'держишь' : 'жмёшь'} ${reward.label}`, reward.title);
+    return `${reward.hold ? 'удержано' : 'нажато'}: ${reward.label}`;
+  }
+
+  function buy(id) {
+    const reward = REWARDS[id];
+    if (points < reward.cost) return;
+    touched = true;
+    points -= reward.cost;
+    show();
+    const why = paused ? 'стоит пауза' : minimized ? 'игра не в фокусе' : null;
+    if (why) {
+      line('Ты', reward.title, '', why);
+      setTimeout(() => { points += reward.cost; show(); }, 450);
+      return;
+    }
+    line('Ты', reward.title, carryOut(reward));
+  }
+
+  $('tiles').addEventListener('click', (ev) => {
+    const tile = ev.target.closest('.tile');
+    if (tile && !tile.disabled) buy(tile.dataset.reward);
+  });
+  $('minimize').addEventListener('click', () => {
+    touched = true;
+    minimized = !minimized;
+    $('minimize').setAttribute('aria-pressed', String(minimized));
+    $('minimize').textContent = minimized ? 'Развернуть игру' : 'Свернуть игру';
+    show();
+  });
+  $('halt').addEventListener('click', () => {
+    touched = true;
+    paused = !paused;
+    $('halt').setAttribute('aria-pressed', String(paused));
+    $('halt').textContent = paused ? 'Продолжить' : 'Пауза';
+    show();
+  });
+  $('refill').addEventListener('click', () => { points = 1000; show(); });
+  show();
+
+  // One move by a made-up viewer shortly after the page opens, so the screen is seen working
+  // before anything is clicked. Not for those who asked for less motion, nor once the visitor has begun.
+  const still = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  if (!still) {
+    setTimeout(() => {
+      if (touched) return;
+      tap(REWARDS.q);
+      card(REWARDS.q, 'Гриб_Айви жмёт Q', REWARDS.q.title);
+    }, 1300);
+  }
+})();
+</script>
+</body>
+</html>
