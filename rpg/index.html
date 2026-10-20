@@ -30,6 +30,7 @@ body{margin:0}
 <script>
 addEventListener("message", function (e) {
   if (e.origin === "https://173-249-26-11.sslip.io:8446" && e.data && e.data.rpg === "height") {
+    window.lastRpg = e.data;
     document.getElementById("game").style.height = Math.max(900, Number(e.data.h) || 0) + "px";
   }
 });
