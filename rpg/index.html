@@ -4,21 +4,35 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Колесо хаоса · RPG</title>
-<meta http-equiv="refresh" content="0; url=https://173-249-26-11.sslip.io:8446/game">
-<link rel="canonical" href="https://173-249-26-11.sslip.io:8446/game">
+<meta name="theme-color" content="#121510">
+<title>Колесо хаоса · стрим, чат и RPG</title>
+<link rel="icon" href="https://173-249-26-11.sslip.io:8446/art/chaos-hub.webp">
 <style>
-html{background:#121510;color:#efe2c2;font:17px/1.5 Georgia,"Times New Roman",serif}
-body{margin:0;min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}
-a{color:#7fe0bf;font-size:20px}
-p{color:#b9ad90;margin:8px 0 0}
+html{background:#121510;color:#efe2c2;font:15px/1.4 "Bahnschrift","Arial Narrow",Arial,sans-serif}
+body{margin:0}
+.top{display:grid;grid-template-columns:minmax(0,calc(66vh * 16 / 9)) 340px;justify-content:center;gap:12px;padding:12px 12px 0;max-width:1760px;margin:0 auto}
+.player{aspect-ratio:16/9;background:#000;border-radius:6px;overflow:hidden;box-shadow:inset 0 0 0 1px #6e5326,0 10px 30px rgba(0,0,0,.45)}
+.chat{border-radius:6px;overflow:hidden;background:#1a1f17;box-shadow:inset 0 0 0 1px #6e5326,0 10px 30px rgba(0,0,0,.45);min-height:300px}
+.player iframe,.chat iframe{display:block;width:100%;height:100%;border:0}
+.game{display:block;width:100%;border:0;min-height:1100px;margin-top:4px}
+.note{text-align:center;color:#b3a98f;font-size:12px;padding:8px 12px 20px}
+.note a{color:#ecd08a}
+@media (max-width:900px){.top{grid-template-columns:1fr;padding:8px 8px 0}.chat{height:420px}}
 </style>
 </head>
 <body>
-<div>
-<a id="go" href="https://173-249-26-11.sslip.io:8446/game">Открыть страницу RPG «Колесо хаоса»</a>
-<p>Перенаправляем… если не открылось само — нажми ссылку.</p>
+<div class="top">
+  <div class="player"><iframe src="https://player.twitch.tv/?channel=aliveenjoyer&parent=aliveenjoyer.github.io&muted=true" title="Стрим aliveenjoyer" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+  <div class="chat"><iframe src="https://www.twitch.tv/embed/aliveenjoyer/chat?parent=aliveenjoyer.github.io&darkpopout" title="Чат стрима"></iframe></div>
 </div>
-<script>location.replace("https://173-249-26-11.sslip.io:8446/game" + (location.search || "") + (location.hash || ""));</script>
+<iframe class="game" id="game" src="https://173-249-26-11.sslip.io:8446/game" title="Колесо хаоса · RPG" allow="clipboard-write"></iframe>
+<p class="note">Игра без стрима — <a href="https://173-249-26-11.sslip.io:8446/game">отдельной страницей</a>. Вход через Twitch откроется во всплывающем окне.</p>
+<script>
+addEventListener("message", function (e) {
+  if (e.origin === "https://173-249-26-11.sslip.io:8446" && e.data && e.data.rpg === "height") {
+    document.getElementById("game").style.height = Math.max(900, Number(e.data.h) || 0) + "px";
+  }
+});
+</script>
 </body>
 </html>
