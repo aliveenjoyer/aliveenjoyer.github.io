@@ -13,7 +13,7 @@
   if (/[?&]nostat=0/.test(q)) set("ae-nostat", null);
   var test = /[?&]stat=test/.test(q);
   if (get("ae-nostat") && !test) return;
-  if (location.hostname !== "aliveenjoyer.github.io" && !test) return;
+  if (!/^(www\.)?aliveenjoyer\.(art|github\.io)$/.test(location.hostname) && !test) return;
 
   var path = location.pathname;
   var page = /season2-map/.test(path) ? "map" : /season1/.test(path) ? "s1" : /empyrean/.test(path) ? "emp" : "home";
