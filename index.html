@@ -111,38 +111,30 @@ button { font: inherit; color: inherit; }
 .btn[aria-disabled="true"] { pointer-events: none; color: var(--gray); border-style: dashed; }
 .btn svg { width: 16px; height: 16px; flex: none; }
 
-/* the Ring: browser fighting game, the site's headline feature */
-.nav a.nav-ring { color: var(--ember); font-weight: 600; }
-.nav a.nav-ring:hover { color: #ff8a70; }
+/* the Ring, a row inside the RPG tile: browser fighting game */
 .ring {
-  position: relative;
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); align-items: center; gap: 16px 28px;
-  margin-top: clamp(28px, 5vh, 48px);
-  padding: clamp(22px, 3vw, 34px) clamp(22px, 3.4vw, 44px);
-  border-radius: 28px;
-  border: 1px solid rgba(255, 120, 90, .24);
-  background:
-    radial-gradient(60% 130% at 78% 70%, rgba(255, 90, 60, .24), transparent 62%),
-    linear-gradient(180deg, #140908, #0a0605);
-  overflow: hidden;
-  overflow: clip;
-  transition: border-color .2s, box-shadow .2s;
+  grid-column: 1 / -1;
+  display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; align-items: center; gap: 8px 24px;
+  padding: 6px 24px 6px 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 120, 90, .22);
+  background: radial-gradient(40% 160% at 12% 60%, rgba(255, 90, 60, .18), transparent 70%), rgba(255, 255, 255, .02);
+  transition: border-color .2s;
 }
-.ring:hover { border-color: rgba(255, 120, 90, .55); box-shadow: 0 0 60px -20px rgba(255, 90, 60, .45); }
-.ring-new { display: inline-block; font-size: 12px; font-weight: 600; color: #200803; background: var(--ember); padding: 2px 10px; border-radius: 99px; }
-.ring h2 { margin: 12px 0 0; font-family: "Pixelify Sans", "Geist", sans-serif; font-weight: 700; font-size: clamp(44px, 5.2vw, 64px); line-height: .9; letter-spacing: .01em; color: #ffe3bd; text-shadow: 0 0 26px rgba(255, 90, 60, .5); }
-.ring-line { margin: 12px 0 0; font-size: clamp(18px, 1.6vw, 21px); font-weight: 600; letter-spacing: -.01em; }
-.ring-sub { margin: 6px 0 0; max-width: 44ch; color: var(--gray-2); font-size: 15px; line-height: 1.45; }
-.ring .btn { margin-top: 18px; --c: var(--ember); }
-.ring-stage { --s: 1.7; position: relative; height: 230px; }
-.ring-stage::before { content: ""; position: absolute; left: 8%; right: 8%; bottom: 14px; height: 22px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, .55), transparent); }
-.ring-stage::after { content: ""; position: absolute; left: 2%; right: 2%; bottom: 24px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 190, 150, .35), transparent); }
-.fx { position: absolute; bottom: 24px; background-repeat: no-repeat; image-rendering: pixelated; }
-.fx-lesh { background-image: url("assets/fx-lesh.png"); right: 50%; margin-right: -6px; }
-.fx-trooper { background-image: url("assets/fx-trooper.png"); left: 50%; margin-left: -4px; transform: scaleX(-1); }
+.ring:hover { border-color: rgba(255, 120, 90, .5); }
+.ring-title { margin: 0; display: flex; align-items: center; gap: 10px; font-family: "Pixelify Sans", "Geist", sans-serif; font-weight: 700; font-size: 28px; line-height: 1; color: #ffe3bd; text-shadow: 0 0 18px rgba(255, 90, 60, .45); }
+.ring-new { font-family: "Geist", sans-serif; font-size: 11px; font-weight: 600; line-height: 17px; color: #200803; background: var(--ember); padding: 0 8px; border-radius: 99px; text-shadow: none; }
+.ring-line { margin: 6px 0 0; max-width: 54ch; color: var(--gray-2); font-size: 14.5px; line-height: 1.45; }
+.ring .btn { --c: var(--ember); }
+.ring-stage { --s: 1; position: relative; height: 126px; }
+.ring-stage::before { content: ""; position: absolute; left: 10%; right: 10%; bottom: 8px; height: 14px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, .55), transparent); }
+.ring-stage::after { content: ""; position: absolute; left: 0; right: 0; bottom: 14px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 190, 150, .35), transparent); }
+.fx { position: absolute; bottom: 14px; background-repeat: no-repeat; image-rendering: pixelated; }
+.fx-lesh { background-image: url("assets/fx-lesh.png"); right: 50%; margin-right: -4px; }
+.fx-trooper { background-image: url("assets/fx-trooper.png"); left: 50%; margin-left: -3px; transform: scaleX(-1); }
 @media (max-width: 760px) {
-  .ring { grid-template-columns: minmax(0, 1fr); }
-  .ring-stage { --s: 1.35; order: -1; height: 170px; margin: -6px 0 -4px; }
+  .ring { grid-template-columns: minmax(0, 1fr); padding: 8px 16px 16px; gap: 6px; }
+  .ring .btn { justify-self: start; margin-top: 8px; }
 }
 
 /* project index */
@@ -288,7 +280,6 @@ main.wrap { overflow-x: clip; }
       <a href="#chatlock">Chatlock</a>
       <a href="#music">Now Playing</a>
     </nav>
-    <a class="nav-ring" href="https://rpg.aliveenjoyer.art/ring">Ринг</a>
     <a href="minecraft/">Minecraft</a>
     <a href="https://twitch.tv/aliveenjoyer">Twitch</a>
   </div>
@@ -308,20 +299,6 @@ main.wrap { overflow-x: clip; }
     <img src="assets/hero.webp" width="1920" height="1072" alt="Четыре стеклянных объекта: фиолетовый пузырь чата, янтарная клавиша, бирюзовое колесо и розовая пластинка" fetchpriority="high" onload="this.classList.add('in')">
   </div>
 </section>
-
-<a class="ring" href="https://rpg.aliveenjoyer.art/ring" aria-labelledby="h-ring">
-  <div>
-    <span class="ring-new">Новое</span>
-    <h2 id="h-ring">Ринг</h2>
-    <p class="ring-line">Подерись с Трупером прямо сейчас.</p>
-    <p class="ring-sub">Пиксельный файтинг по Deadlock прямо в браузере. 45 бойцов, без входа и без стрима.</p>
-    <span class="btn solid">В бой</span>
-  </div>
-  <div class="ring-stage" aria-hidden="true">
-    <div class="fx fx-lesh"></div>
-    <div class="fx fx-trooper"></div>
-  </div>
-</a>
 
 <nav class="index" aria-label="Все проекты">
   <a href="#rpg" style="--c: var(--teal)"><img src="assets/rpg-orb.webp" width="52" height="52" alt=""><span><b>Чат-RPG</b><small>герой качается в чате</small></span></a>
@@ -353,6 +330,17 @@ main.wrap { overflow-x: clip; }
       <li style="--c: var(--violet)"><img src="assets/rpg-mask.webp" width="64" height="64" alt="" loading="lazy"><b>Битвы</b><span>Бьёшь боссов, несёшь урну своим, хлещешь врагов кнутом. Если не успеют парировать.</span></li>
       <li style="--c: var(--gold)"><img src="assets/rpg-crown.webp" width="64" height="64" alt="" loading="lazy"><b>Награды</b><span>VIP за удачу, души за угаданный исход моего матча и Великий хаос в финале сезона.</span></li>
     </ul>
+    <a class="ring" href="https://rpg.aliveenjoyer.art/ring">
+      <div class="ring-stage" aria-hidden="true">
+        <div class="fx fx-lesh"></div>
+        <div class="fx fx-trooper"></div>
+      </div>
+      <div>
+        <p class="ring-title">Ринг <span class="ring-new">Новое</span></p>
+        <p class="ring-line">Пиксельный файтинг по Deadlock. Выбирай любого из 45 бойцов и дерись с Трупером прямо сейчас, без входа.</p>
+      </div>
+      <span class="btn solid">В бой</span>
+    </a>
   </section>
 
   <section class="tile" id="chat" style="--c: var(--violet)" aria-labelledby="h-chat">
