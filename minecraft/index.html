@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Echoes in the Sky — второй сезон Minecraft-сервера AliveEnjoyer</title>
+<meta name="description" content="Echoes in the Sky — второй сезон Minecraft-сервера AliveEnjoyer для зрителей Twitch-стримеров. Старт 1 октября: 21 день над облаками, 55 рас, командный зачёт и ивенты. Вход по вайтлисту.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Echoes in the Sky — сезон 2 · старт 1 октября">
+<meta property="og:description" content="21 день над облаками: острова в небе, дирижабли, 55 рас, командный зачёт и красная луна. Карта сезона уже открыта. Сервер AliveEnjoyer, играем со зрителями.">
+<meta property="og:image" content="https://aliveenjoyer.github.io/minecraft/img/og-s2.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#15122a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%2315122a'/%3E%3Crect x='3' y='0' width='2' height='1' fill='%23574e70'/%3E%3Crect x='2' y='1' width='4' height='1' fill='%23574e70'/%3E%3Crect x='2' y='2' width='4' height='4' fill='%23f4b860'/%3E%3Crect x='3' y='3' width='2' height='2' fill='%23fff1cf'/%3E%3Crect x='2' y='6' width='4' height='1' fill='%23574e70'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- fonts load without blocking the page: if Google is slow, text shows in the fallback font and swaps later -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap"></noscript>
+<link rel="stylesheet" href="style.css?v=20260927b">
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<a class="skip" href="#apply">Перейти к заявке</a>
+
+<header class="hero">
+  <canvas class="ceiling" aria-hidden="true"></canvas>
+  <div class="s2-sky" aria-hidden="true"><span class="s2-ship"></span></div>
+  <div class="hero-text">
+    <p class="kicker hero-kicker">Сезон 2 · 1–21 октября · Minecraft-сервер AliveEnjoyer</p>
+    <h1>Echoes in&nbsp;the&nbsp;Sky</h1>
+    <p class="lede">Второй сезон начнётся над облаками: острова в&nbsp;небе, дирижабли, 55 рас и&nbsp;командный зачёт. Три недели, финал 17–18 октября.</p>
+    <a class="s2-card" href="#season2">
+      <span class="s2-tag">До старта</span>
+      <span class="sr">Старт 1 октября в 00:00 по Москве.</span><span class="s2-count" data-to="2026-10-01T00:00:00+03:00" aria-hidden="true"><em class="s2-when">1 октября, 00:00 МСК</em></span>
+      <span class="s2-line">Что-то поднимается над облаками<span class="s2-cursor" aria-hidden="true">_</span></span>
+    </a>
+    <script>
+    /* The countdown ticks from here, not from teaser.js: it must work even when a slow network drops the scripts.
+       Plain ES5 so old phones run it too; without JavaScript the card shows the start date instead. */
+    (function () {
+      var c = document.querySelector(".s2-count"), to = c ? Date.parse(c.getAttribute("data-to")) : NaN;
+      if (isNaN(to)) return;
+      var two = function (n) { return (n < 10 ? "0" : "") + n; };
+      c.innerHTML = "<b></b><i>дн</i><b></b><i>ч</i><b></b><i>мин</i><b></b><i>с</i>";
+      var b = c.getElementsByTagName("b");
+      (function tick() {
+        var left = to - Date.now();
+        if (left <= 0) { c.textContent = "Сезон 2 начался"; c.className += " s2-live"; return; }
+        b[0].textContent = two(Math.floor(left / 864e5));
+        b[1].textContent = two(Math.floor(left / 36e5) % 24);
+        b[2].textContent = two(Math.floor(left / 6e4) % 60);
+        b[3].textContent = two(Math.floor(left / 1e3) % 60);
+        setTimeout(tick, 1000 - (Date.now() % 1000) + 5);
+      })();
+    })();
+    </script>
+    <div class="actions">
+      <a class="btn" href="#apply">Подать заявку</a>
+      <a class="btn btn-quiet" href="#install">Скачать сборку</a>
+      <a class="btn btn-quiet" href="season2-map.html">Карта сезона</a>
+      <a class="btn btn-quiet" href="empyrean.html">Эмпирей</a>
+      <a class="btn btn-quiet" href="#season2">Что известно</a>
+      <a class="btn btn-quiet" href="https://discord.gg/sashawaify" target="_blank" rel="noopener">Discord</a>
+    </div>
+    <div class="hero-s1"><a class="season-banner" href="season1.html"><span class="sb-tag">Сезон 1 закрыт</span><span class="sb-text">Смотри итоги: боссы, рекорды гонок и&nbsp;зал славы</span><span class="sb-go" aria-hidden="true">→</span></a></div>
+    <p class="hosts">Сервер <b>AliveEnjoyer</b>, модератора этих Twitch-каналов. Играем со&nbsp;зрителями, вход по&nbsp;вайтлисту.</p>
+    <ul class="streamers" aria-label="Twitch-каналы, где AliveEnjoyer модератор">
+      <li><a href="https://www.twitch.tv/sashawaify" target="_blank" rel="noopener">sashawaify</a></li>
+      <li><a href="https://www.twitch.tv/qissme_" target="_blank" rel="noopener">QissMe_</a></li>
+      <li><a href="https://www.twitch.tv/skipsleeps" target="_blank" rel="noopener">skipsleeps</a></li>
+      <li><a href="https://www.twitch.tv/aiihosh1no" target="_blank" rel="noopener">aiihosh1no</a></li>
+      <li><a href="https://www.twitch.tv/ezdok_nakomaze" target="_blank" rel="noopener">ezdok_nakomaze</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section class="s2" id="season2">
+    <p class="kicker">Засекречено до&nbsp;1 октября</p>
+    <h2><span class="s2-glitch" data-text="Сезон 2">Сезон 2</span></h2>
+    <p class="s2-intro">21 день. Всё открыто с&nbsp;первой минуты. Легко не&nbsp;будет.</p>
+    <p class="s2-lead">Первый сезон мы&nbsp;провели под землёй. Второй начнётся там, куда в&nbsp;первом никто не&nbsp;долетел, — над облаками. Кое-что уже просочилось наружу.</p>
+
+    <div class="s2-leak rv">
+      <p class="s2-leak-h">Утечка из&nbsp;сборки<span class="s2-secret">Не для печати</span></p>
+      <dl>
+        <div><dt>Модов</dt><dd>540</dd></div>
+        <div><dt>Квестов</dt><dd>1136</dd></div>
+        <div><dt>Рас</dt><dd>55</dd></div>
+        <div><dt>Классов</dt><dd>20</dd></div>
+        <div><dt>Боссов</dt><dd>34</dd></div>
+        <div><dt>Дней</dt><dd>21</dd></div>
+      </dl>
+      <p class="s2-leak-f">Модов в&nbsp;два раза больше, чем в&nbsp;первом сезоне, квестов — в&nbsp;три с&nbsp;половиной. Цифры сверены с&nbsp;тестовой сборкой: к&nbsp;старту модов может стать чуть больше или меньше.</p>
+    </div>
+
+    <div class="s2-map rv" data-start="2026-10-01T00:00:00+03:00" data-live="2026-09-28T15:35:00+03:00" data-end="2026-10-21T23:59:59+03:00" data-json="roadmap.json?v=20260928a">
+      <div class="s2-map-text">
+        <p class="s2-map-k">Рассекречено</p>
+        <h3 class="s2-map-h">Карта сезона</h3>
+        <p>157 вех в&nbsp;десяти путях — от&nbsp;первой ночи до&nbsp;Эндер-дракона. Каждая веха — достижение в&nbsp;игре, поэтому сервер сам отмечает, кто и&nbsp;когда её&nbsp;открыл. Там&nbsp;же командный зачёт, ивенты, бестиарий из&nbsp;34&nbsp;боссов, книга квестов, герои сезона и&nbsp;зал позора.</p>
+        <div class="s2-map-bar" role="img" aria-label="Десять путей карты: Мир — 13 вех, Исследование — 18, Боссы — 23, Сила — 13, Магия — 19, Небо — 16, Механика — 15, Индустрия — 13, Хозяйство — 14, Торговля — 13">
+          <span data-b="world" style="--n:13;--c:#7bd37a"><i></i></span><span data-b="explore" style="--n:18;--c:#f0975a"><i></i></span><span data-b="boss" style="--n:23;--c:#ee7a8e"><i></i></span><span data-b="power" style="--n:13;--c:#6cd3b6"><i></i></span><span data-b="magic" style="--n:19;--c:#b28cff"><i></i></span><span data-b="sky" style="--n:16;--c:#8fd3ff"><i></i></span><span data-b="tech" style="--n:15;--c:#f4c35f"><i></i></span><span data-b="industry" style="--n:13;--c:#a9b6c8"><i></i></span><span data-b="farm" style="--n:14;--c:#c98a5a"><i></i></span><span data-b="trade" style="--n:13;--c:#e6d77a"><i></i></span>
+        </div>
+        <ul class="s2-map-paths" aria-hidden="true">
+          <li style="--c:#7bd37a">Мир</li><li style="--c:#f0975a">Исследование</li><li style="--c:#ee7a8e">Боссы</li><li style="--c:#6cd3b6">Сила</li><li style="--c:#b28cff">Магия</li>
+          <li style="--c:#8fd3ff">Небо</li><li style="--c:#f4c35f">Механика</li><li style="--c:#a9b6c8">Индустрия</li><li style="--c:#c98a5a">Хозяйство</li><li style="--c:#e6d77a">Торговля</li>
+        </ul>
+        <p class="s2-map-live" aria-live="polite">Прогресс появится 1&nbsp;октября. А&nbsp;пока есть демо: так карта будет выглядеть в&nbsp;разгар сезона.</p>
+        <div class="actions">
+          <a class="btn" href="season2-map.html">Открыть карту</a>
+          <a class="btn btn-quiet" href="season2-map.html?demo=1">Демо середины сезона</a>
+        </div>
+      </div>
+      <a class="s2-map-shot" href="season2-map.html?demo=1">
+        <img src="img/s2-map.webp" srcset="img/s2-map-640.webp 640w, img/s2-map.webp 1280w" sizes="(max-width: 1000px) 100vw, 640px" width="1280" height="718" loading="lazy"
+             alt="Демо карты сезона: пути Мир, Исследование, Боссы и Сила по неделям, открытые вехи подсвечены цветом пути">
+      </a>
+    </div>
+
+    <div class="s2-map s2-emp rv">
+      <div class="s2-map-text">
+        <p class="s2-map-k">Фишка сезона</p>
+        <h3 class="s2-map-h">Эмпирей</h3>
+        <p>Свой мир сервера, которого нет ни&nbsp;в&nbsp;одной сборке. Небесный архипелаг над&nbsp;Морем Отзвуков, водопады в&nbsp;сотни блоков, белое Древо до&nbsp;облаков и&nbsp;Первый Звонарь в&nbsp;его кроне. На&nbsp;скалах руды и&nbsp;кристаллы всех модов, деревья растут сами, в&nbsp;толще островов — шахты крылатых гномов, а&nbsp;в&nbsp;небе летают киты.</p>
+        <p class="s2-map-live">Открыт с&nbsp;первого дня сезона. Придумал и&nbsp;построил AliveEnjoyer.</p>
+        <div class="actions">
+          <a class="btn" href="empyrean.html">Открыть Эмпирей</a>
+          <a class="btn btn-quiet" href="empyrean.html#gates">Как попасть</a>
+        </div>
+      </div>
+      <a class="s2-map-shot s2-emp-shot" href="empyrean.html">
+        <img src="img/emp/shot-sunset-960.webp" srcset="img/emp/shot-sunset-960.webp 960w, img/emp/shot-sunset-1600.webp 1600w" sizes="(max-width: 1000px) 100vw, 640px" width="1600" height="847" loading="lazy"
+             alt="Закат в Эмпирее: огромное небесное древо на своём острове и самолёт на вершине утёса">
+      </a>
+    </div>
+
+    <div class="s2-term rv">
+      <p class="s2-term-top"><i></i><i></i><i></i><span>Перехваченные передачи</span></p>
+      <div class="s2-term-body">
+        <p class="s2-head">&gt; перехват 21.09 · 23:14</p>
+        <p>…острова висят над облаками. Без опоры. На&nbsp;одном — храм, в&nbsp;храме горит свет…</p>
+        <p class="s2-head">&gt; перехват 22.09 · 02:07</p>
+        <p>Луна опять красная. Закрывайте ворота. Они идут волнами, до&nbsp;самого утра.</p>
+        <p class="s2-head">&gt; перехват 22.09 · 04:51</p>
+        <p>Шестерни держат. Корабль поднялся выше облаков. Главное — не&nbsp;смотреть вниз.</p>
+        <p class="s2-head">&gt; перехват 22.09 · 06:30</p>
+        <p>Сегодня выбирали, кем родиться. У&nbsp;меня теперь жабры. Дома сухо. Это ненадолго.</p>
+        <p class="s2-head">&gt; перехват ██.██ · ██:██</p>
+        <p>Если вы это читаете — старт 1&nbsp;октября. Не&nbsp;опаздывайте, связь пропа…</p>
+      </div>
+    </div>
+
+    <h3 class="s2-h3">Досье</h3>
+    <p class="s2-howto">Наведи на&nbsp;досье или нажми на&nbsp;него, чтобы расшифровать.</p>
+    <h4 class="s2-sub">Рассекречено <b class="s2-n" data-for="open">8</b></h4>
+    <ul class="s2-files s2-files-open">
+      <li class="s2-file rv"><span class="s2-no">Досье 01</span><span class="s2-secret">Секретно</span><h3>Над облаками</h3>
+        <p data-secret>Выше облаков есть земля: острова без опоры, храмы и&nbsp;те, кто их&nbsp;охраняет. Дверь туда — рамка, которая светится.</p></li>
+      <li class="s2-file rv"><span class="s2-no">Досье 02</span><span class="s2-secret">Секретно</span><h3>Машины</h3>
+        <p data-secret>Шестерни, поезда, реакторы и&nbsp;цифровые склады. А&nbsp;потом — пропеллеры и&nbsp;воздушные шары. Ваши машины оторвутся от&nbsp;земли.</p></li>
+      <li class="s2-file rv"><span class="s2-no">Досье 03</span><span class="s2-secret">Секретно</span><h3>Кем родиться</h3>
+        <p data-secret>В&nbsp;первый день каждый выбирает расу: крылья, жабры, чешуя или тень. У&nbsp;каждой свои силы — и&nbsp;свои слабости.</p></li>
+      <li class="s2-file rv"><span class="s2-no">Досье 04</span><span class="s2-secret">Секретно</span><h3>Путь героя</h3>
+        <p data-secret>Двадцать классов и&nbsp;ветки навыков. Оружие с&nbsp;редкостью, камнями и&nbsp;случайными свойствами. Мечи научатся комбо, а&nbsp;ты — перекатам.</p></li>
+      <li class="s2-file rv"><span class="s2-no">Досье 05</span><span class="s2-secret">Секретно</span><h3>Красная луна</h3>
+        <p data-secret>Иногда луна краснеет, и&nbsp;ночь становится длинной. А&nbsp;иногда они приходят сами — волнами, до&nbsp;утра. Стены лучше строить заранее.</p></li>
+      <li class="s2-file rv"><span class="s2-no">Досье 06</span><span class="s2-secret">Секретно</span><h3>Команды и&nbsp;золото</h3>
+        <p data-secret>Своя команда, общая земля и&nbsp;общий прогресс. Каждый босс, мир и&nbsp;победа — очки в&nbsp;зачёт. И&nbsp;монеты, за&nbsp;которые продаётся почти всё.</p></li>
+      <li class="s2-file rv"><span class="s2-no">Досье 07</span><span class="s2-secret">Секретно</span><h3>Ивенты</h3>
+        <p data-secret>Гонка дирижаблей там, где раньше летали только птицы. Неделя охоты на&nbsp;боссов. Турнир на&nbsp;арене. Финал — 17–18 октября.</p></li>
+      <li class="s2-file rv"><span class="s2-no">Досье 08</span><span class="s2-secret">Секретно</span><h3>Магия</h3>
+        <p data-secret>Книги заклинаний, школы магии, руны и&nbsp;призыв духов. А&nbsp;шесть рас — маги от&nbsp;рождения: огонь, вода, земля, воздух, гравитация и&nbsp;тьма.</p></li>
+    </ul>
+    <h4 class="s2-sub s2-sub-locked">Ещё засекречено <b class="s2-n" data-for="locked">4</b></h4>
+    <p class="s2-howto">Три досье откроются сами — 26, 28 и&nbsp;30&nbsp;сентября — и&nbsp;переедут наверх. Последнее ждёт старта.</p>
+    <ul class="s2-files s2-files-locked">
+      <li class="s2-file rv" data-unlock="2026-09-26T00:00:00+03:00" data-enc="0JIg0LPQvtGA0L7QtNCw0YUg0L/QvtGP0LLRj9GC0YHRjyDRgtC1LCDQutGC0L4g0YDQsNC30LTQsNGR0YIg0LfQsNC00LDQvdC40Y8uINCd0LUg0LLRgdC1INC40Lcg0L3QuNGFINC70Y7QtNC4LiDQntC00L3QuCDQv9C70LDRgtGP0YIg0LfQvtC70L7RgtC+0LwsINC00YDRg9Cz0LjQtSDigJQg0YfQtdC8LdGC0L4g0L/QvtGF0YPQttC1Lg=="><span class="s2-no">Досье 09</span><span class="s2-secret">Секретно</span><h3>Гильдии</h3>
+        <p data-secret>Откроется позже.</p></li>
+      <li class="s2-file rv" data-unlock="2026-09-28T00:00:00+03:00" data-enc="0JLQvtC30LTRg9GI0L3Ri9C5INGI0LDRgCwg0L/RgNC+0L/QtdC70LvQtdGAINC4INC90LXQvNC90L7Qs9C+INGB0LzQtdC70L7RgdGC0LguINCf0LXRgNCy0YvQuSDQutC+0YDQsNCx0LvRjCwg0LrQvtGC0L7RgNGL0Lkg0L/QvtC00L3QuNC80LXRgtGB0Y8g0LIg0L3QtdCx0L4sINGD0LLQuNC00LjRgiDQstC10YHRjCDRgdC10YDQstC10YAu"><span class="s2-no">Досье 10</span><span class="s2-secret">Секретно</span><h3>Флот</h3>
+        <p data-secret>Откроется позже.</p></li>
+      <li class="s2-file rv" data-unlock="2026-09-30T00:00:00+03:00" data-enc="0J/QtdGA0LLQsNGPINC90L7Rh9GMIOKAlCDRgdCw0LzQsNGPINC00LvQuNC90L3QsNGPLiDQn9C+0YHRgtCw0LLRjCDQutGA0L7QstCw0YLRjCDQtNC+INC30LDQutCw0YLQsCDQuCDQvdC1INC+0YLRhdC+0LTQuCDQtNCw0LvQtdC60L4g0L7RgiDRgdCy0L7QuNGFLiDQm9GD0L3QsCDQsdGD0LTQtdGCINC+0LHRi9GH0L3QvtC5LiDQndCw0LLQtdGA0L3QvtC1Lg=="><span class="s2-no">Досье 11</span><span class="s2-secret">Секретно</span><h3>Первая ночь</h3>
+        <p data-secret>Откроется позже.</p></li>
+      <li class="s2-file s2-deny rv" data-unlock="2026-10-01T00:00:00+03:00" data-title="0K3RhdC+INCR0LXQt9C00L3Riw==" data-enc="0JHQtdC30LTQvdCwINC/0LXRgNCy0L7Qs9C+INGB0LXQt9C+0L3QsCDQvdC1INC+0YLQv9GD0YHRgtC40LvQsCDQstCw0YE6INC10ZEg0Y3RhdC+INC/0L7QtNC90Y/Qu9C+0YHRjCDQsiDQvdC10LHQviDQstC80LXRgdGC0LUg0YEg0LrQtdC8LdGC0L4g0LjQtyDQuNCz0YDQvtC60L7Qsi4g0KHRgNC10LTQuCDQstCw0YEg4oCUINCe0LTQtdGA0LbQuNC80YvQuS4g0KLQuNGF0L4g0LLRgNC10LTQuNGCLCDRiNC10L/Rh9C10YIsINCz0LDRgdC40YIg0YHQstC10YIg4oCUINC4INC90LjQutGC0L4g0L3QtSDQstC40LTQuNGCINC70LjRhtCwLiDQotCw0LwsINCz0LTQtSDQv9GA0L7RiNC70LAg0JHQtdC30LTQvdCwLCDQvtGB0YLQsNGR0YLRgdGPINGN0YXQvi4g0J3QsNC50LTQuNGC0LUg0LXQs9C+LCDQv9GA0L7RgtGA0YPQsdC40YLQtSDRgNGP0LTQvtC8INCyINC60L7Qt9C40Lkg0YDQvtCzINC4INGB0L7QsdC10YDQuNGC0LUg0J7RgdC60L7Qu9C60Lgg0L/RgNCw0LLQtNGLLiDQotGA0Lgg0L7RgdC60L7Qu9C60LAg4oCUINC/0YDQsNCy0L4g0YPQtNCw0YDQuNGC0Ywg0LIg0JrQvtC70L7QutC+0Lsg0K3RhdCwINC90LAg0J3QtdCx0LXRgdC90L7QvCDRgdGD0LTQtSDQvdCw0LQg0YHQv9Cw0LLQvdC+0LwuINCd0L4g0L7RiNC40LHQutCwINC00L7RgNC+0LPQviDRgdGC0L7QuNGCOiDQutCw0LbQtNGL0Lkg0L7RiNC40LHQvtGH0L3Ri9C5INC/0YDQuNCz0L7QstC+0YAg0LTQtdC70LDQtdGCINCR0LXQt9C00L3RgyDRgdC40LvRjNC90LXQtSwg0LAg0J/QvtGA0YfQsCDQvdC10LHQsCDRgNCw0YHRgtGR0YIg0YEg0LrQsNC20LTQvtC5INCy0YvRhdC+0LTQutC+0Lkg0J7QtNC10YDQttC40LzQvtCz0L4uINCU0L7QudC00ZHRgiDQtNC+IDEwMCUg4oCUINC/0L7QsdC10LTQuNGCINCR0LXQt9C00L3QsC4="><span class="s2-no">Досье 12</span><span class="s2-secret">Совершенно секретно</span><h3>████████</h3>
+        <p data-secret>Об этом нельзя рассказывать до старта сезона, даже намёком.</p></li>
+    </ul>
+
+    <h3 class="s2-h3">Кем ты&nbsp;родишься?</h3>
+    <p class="s2-howto">В&nbsp;первый день каждый выбирает расу — одну из&nbsp;55 — и&nbsp;класс — один из&nbsp;20. Шесть рас крупным планом, остальные в&nbsp;полном списке ниже. Описания — по&nbsp;текстам самого мода.</p>
+    <div class="s2-origins">
+      <button type="button" class="s2-origin rv" data-origin="sky" data-id="elytrian"><b>Элитриец</b><span>Летает, как на&nbsp;элитрах, только без элитр, и&nbsp;не&nbsp;разбивается о&nbsp;стены. Хрупкий и&nbsp;не&nbsp;носит тяжёлую броню.</span><em><i class="s2-imp" data-imp="2"></i>средняя сложность</em></button>
+      <button type="button" class="s2-origin rv" data-origin="sea" data-id="merling"><b>Мерлинг</b><span>Дышит под водой, плавает быстрее всех и&nbsp;видит в&nbsp;глубине. На&nbsp;суше медлителен и&nbsp;засыхает.</span><em><i class="s2-imp" data-imp="2"></i>средняя сложность · рождается в&nbsp;океане</em></button>
+      <button type="button" class="s2-origin rv" data-origin="web" data-id="arachnid"><b>Арахнид</b><span>Лазает по&nbsp;любым стенам, ходит по&nbsp;паутине и&nbsp;стреляет ею&nbsp;во&nbsp;врагов. Уязвим к&nbsp;чарам «Бич членистоногих».</span><em><i class="s2-imp" data-imp="2"></i>средняя сложность</em></button>
+      <button type="button" class="s2-origin rv" data-origin="fire" data-id="blazeling"><b>Блейзлинг</b><span>Огонь и&nbsp;лава ему не&nbsp;страшны, в&nbsp;темноте видит как днём. Вода и&nbsp;дождь для него — яд.</span><em><i class="s2-imp" data-imp="3"></i>высокая сложность · рождается в&nbsp;Незере</em></button>
+      <button type="button" class="s2-origin rv" data-origin="scale" data-id="draconic"><b>Драконид</b><span>Драконья кровь: не&nbsp;горит в&nbsp;огне и&nbsp;пугает зверей. Но&nbsp;драконье пламя быстро съедает выносливость.</span><em><i class="s2-imp" data-imp="3"></i>высокая сложность</em></button>
+      <button type="button" class="s2-origin rv" data-origin="shade" data-id="umbral"><b>Умбрал</b><span>Дитя тени: мечет тёмные сферы, уходит рывком и&nbsp;отражает стрелы. Быстр в&nbsp;темноте, горит на&nbsp;солнце.</span><em><i class="s2-imp" data-imp="2"></i>средняя сложность</em></button>
+    </div>
+    <ul class="s2-origin-facts">
+      <li class="rv"><b>Путь эволюции.</b> После 1000, 2500 и&nbsp;5000 побеждённых мобов раса усиливается, а&nbsp;на&nbsp;третьей ступени выходит на&nbsp;апекс.</li>
+      <li class="rv"><b>Место рождения.</b> Морские расы появляются в&nbsp;океане, Блейзлинг — в&nbsp;Незере, Эндерианец — в&nbsp;Энде. Остальные — на&nbsp;обычном спавне.</li>
+      <li class="rv"><b>Выбор надолго.</b> Передумать можно только сферой происхождения: первый раз бесплатно, дальше за&nbsp;уровни опыта.</li>
+    </ul>
+    <details class="s2-all">
+      <summary>Все 55 рас <span>по&nbsp;стихиям, с&nbsp;силами и&nbsp;слабостями</span></summary>
+      <div class="s2-race-groups">
+        <div class="s2-race-group"><h4>Небо и&nbsp;ветер <small>5</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="avian"><img src="img/origins/avian.png" width="16" height="16" alt=""><b>Авиан</b><i class="s2-imp" data-imp="1" title="Сложность: лёгкая"></i><span>Крылатый народ: не&nbsp;разбивается при падении, умеет плавно планировать и&nbsp;почти не&nbsp;тратит сытость.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="elytrian"><img src="img/origins/elytrian.png" width="16" height="16" alt=""><b>Элитриец</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Летает, как на&nbsp;элитрах, только без элитр, и&nbsp;не&nbsp;разбивается о&nbsp;стены. Хрупкий и&nbsp;не&nbsp;носит тяжёлую броню.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="hiveling"><img src="img/origins/hiveling.png" width="16" height="16" alt=""><b>Улейник</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Пчелиный народ: летает, жалит ядом и&nbsp;ускоряет рост посевов. Крылья хрупкие, а&nbsp;голод вечный.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="breeze"><img src="img/origins/breeze.png" width="16" height="16" alt=""><b>Бриз</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Дитя ветра из&nbsp;Камер испытаний: быстрый, парит в&nbsp;воздухе и&nbsp;бьёт порывами ветра. Лёгкий и&nbsp;хрупкий.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="air_mage"><img src="img/origins/air_mage.png" width="16" height="16" alt=""><b>Маг Воздуха</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Бросает ветровые заряды, закручивает ураганы и&nbsp;взлетает на&nbsp;восходящих потоках. Лёгок как ветер, хрупок как лист.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Вода <small>5</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="merling"><img src="img/origins/merling.png" width="16" height="16" alt=""><b>Мерлинг</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Дышит под водой, плавает быстрее всех и&nbsp;видит в&nbsp;глубине. На&nbsp;суше медлителен и&nbsp;засыхает.</span><small class="s2-born">рождается в&nbsp;океане</small></button></li>
+          <li><button type="button" class="s2-race" data-id="siren"><img src="img/origins/siren.png" width="16" height="16" alt=""><b>Сирена</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Морская чаровница: очаровывает существ и&nbsp;исцеляется в&nbsp;воде. Хрупкая, а&nbsp;на&nbsp;суше медленная и&nbsp;засыхает.</span><small class="s2-born">рождается в&nbsp;океане</small></button></li>
+          <li><button type="button" class="s2-race" data-id="kraken"><img src="img/origins/kraken.png" width="16" height="16" alt=""><b>Кракен</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Глубоководный хищник: щупальца, чернильные залпы и&nbsp;призванные стражи. На&nbsp;суше беспомощен, страдает от&nbsp;солнца.</span><small class="s2-born">рождается в&nbsp;океане</small></button></li>
+          <li><button type="button" class="s2-race" data-id="abyssal"><img src="img/origins/abyssal.png" width="16" height="16" alt=""><b>Обитатель бездны</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Бронированный житель глубин: быстр в&nbsp;воде и&nbsp;зовёт стражей на&nbsp;помощь. На&nbsp;суше медлителен и&nbsp;засыхает.</span><small class="s2-born">рождается в&nbsp;океане</small></button></li>
+          <li><button type="button" class="s2-race" data-id="water_mage"><img src="img/origins/water_mage.png" width="16" height="16" alt=""><b>Маг Воды</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Управляет приливами и&nbsp;исцеляющими течениями. В&nbsp;океане как дома, а&nbsp;в&nbsp;сухих пустошах увядает.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Огонь и&nbsp;Незер <small>6</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="blazeling"><img src="img/origins/blazeling.png" width="16" height="16" alt=""><b>Блейзлинг</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Огонь и&nbsp;лава ему не&nbsp;страшны, в&nbsp;темноте видит как днём. Вода и&nbsp;дождь для него — яд.</span><small class="s2-born">рождается в&nbsp;Незере</small></button></li>
+          <li><button type="button" class="s2-race" data-id="cinderborn"><img src="img/origins/cinderborn.png" width="16" height="16" alt=""><b>Пеплорождённый</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Вулканический элементаль: не&nbsp;горит, пугает зверей и&nbsp;лечится лавой. Вода губит его без остатка.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="strider"><img src="img/origins/strider.png" width="16" height="16" alt=""><b>Лавомерка</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Коренной житель Незера: ходит по&nbsp;лаве и&nbsp;лечится её&nbsp;теплом. Холодный верхний мир и&nbsp;вода для него губительны.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="piglin"><img src="img/origins/piglin.png" width="16" height="16" alt=""><b>Пиглин</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Одержимый золотом воин Незера: дома силён, и&nbsp;сородичи его боятся. Вдали от&nbsp;Незера слабеет.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="draconic"><img src="img/origins/draconic.png" width="16" height="16" alt=""><b>Драконид</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Драконья кровь: не&nbsp;горит в&nbsp;огне и&nbsp;пугает зверей. Но&nbsp;драконье пламя быстро съедает выносливость.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="fire_mage"><img src="img/origins/fire_mage.png" width="16" height="16" alt=""><b>Маг Огня</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Швыряет огненные шары и&nbsp;поджигает любого, кто его ударит. Огонь ему не&nbsp;вредит, а&nbsp;вода губит.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Энд и&nbsp;пустота <small>5</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="enderian"><img src="img/origins/enderian.png" width="16" height="16" alt=""><b>Эндерианец</b><i class="s2-imp" data-imp="1" title="Сложность: лёгкая"></i><span>Телепортируется туда, куда смотрит, и&nbsp;уворачивается от&nbsp;стрел; эндермены его не&nbsp;трогают. Вода жжёт как кислота.</span><small class="s2-born">рождается в&nbsp;Энде</small></button></li>
+          <li><button type="button" class="s2-race" data-id="enderite"><img src="img/origins/enderite.png" width="16" height="16" alt=""><b>Эндерит</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Мастер телепортации и&nbsp;фазового перехода, мягко спускается с&nbsp;любой высоты. Боится воды и&nbsp;дневного света.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="voidwalker"><img src="img/origins/voidwalker.png" width="16" height="16" alt=""><b>Странник пустоты</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Проходит сквозь блоки, совершает короткие прыжки и&nbsp;ходит незамеченным. Бегает без устали, но&nbsp;вода для него мучение.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="shulk"><img src="img/origins/shulk.png" width="16" height="16" alt=""><b>Шулк</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Бронирован как шалкер: прячется в&nbsp;панцирь и&nbsp;подбрасывает врагов левитацией. Медленный, но&nbsp;непоколебимый.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="gravity_mage"><img src="img/origins/gravity_mage.png" width="16" height="16" alt=""><b>Маг Гравитации</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Затягивает врагов в&nbsp;сингулярность или отбрасывает прочь. Сам почти теряет связь с&nbsp;землёй.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Тьма и&nbsp;нежить <small>10</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="umbral"><img src="img/origins/umbral.png" width="16" height="16" alt=""><b>Умбрал</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Дитя тени: мечет тёмные сферы, уходит рывком и&nbsp;отражает стрелы. Быстр в&nbsp;темноте, горит на&nbsp;солнце.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="phantom"><img src="img/origins/phantom.png" width="16" height="16" alt=""><b>Фантом</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Призрак ночи: летает на&nbsp;крыльях и&nbsp;крепнет с&nbsp;каждым убийством. Горит на&nbsp;солнце и&nbsp;не&nbsp;может спать.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="revenant"><img src="img/origins/revenant.png" width="16" height="16" alt=""><b>Ревенант</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Скиталец-нежить: проходит сквозь материю, метает гниль, не&nbsp;тонет и&nbsp;видит в&nbsp;темноте. Медленно лечится и&nbsp;горит на&nbsp;солнце.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="vampire"><img src="img/origins/vampire.png" width="16" height="16" alt=""><b>Вампир</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Ночной хищник: быстрый и&nbsp;сильный. Солнце и&nbsp;вода обжигают, а&nbsp;силы даёт только сырое мясо.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="wraith"><img src="img/origins/wraith.png" width="16" height="16" alt=""><b>Рейф</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Измученный дух: проходит сквозь любые блоки, кроме обсидиана. Держать форму — значит голодать, солнце обжигает.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="skeleton"><img src="img/origins/skeleton.png" width="16" height="16" alt=""><b>Скелет</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Ходячий мешок костей: быстрый и&nbsp;меткий с&nbsp;луком. Хрупкий, прячется от&nbsp;солнца и&nbsp;ест только всякую гадость.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="necromancer"><img src="img/origins/necromancer.png" width="16" height="16" alt=""><b>Некромант</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Призывает скелетов-иссушителей и&nbsp;лучников себе на&nbsp;службу. Но&nbsp;его жизнь связана с&nbsp;их&nbsp;судьбой.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="sculkborn"><img src="img/origins/sculkborn.png" width="16" height="16" alt=""><b>Скалкорождённый</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Выходец из&nbsp;глубокой тьмы: бронированный, стойкий и&nbsp;бьёт звуком. Медленный, слабеет на&nbsp;поверхности и&nbsp;под солнцем.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="warden"><img src="img/origins/warden.png" width="16" height="16" alt=""><b>Хранитель</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Чувствует мир через вибрации, бьёт звуковым зарядом издалека и&nbsp;таранит как стенобитное орудие. Медленный, страдает от&nbsp;солнца.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="darkness_mage"><img src="img/origins/darkness_mage.png" width="16" height="16" alt=""><b>Маг Тьмы</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Призывает теневые сферы и&nbsp;скользит сквозь мрак. Смертоносен ночью, а&nbsp;солнце выжигает его силу.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Земля, камень и&nbsp;лес <small>10</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="sylvan"><img src="img/origins/sylvan.png" width="16" height="16" alt=""><b>Сильван</b><i class="s2-imp" data-imp="1" title="Сложность: лёгкая"></i><span>Дух древнего леса: быстр среди деревьев, дружит со&nbsp;зверями и&nbsp;опутывает врагов корнями. Лечится дождём, в&nbsp;Незере горит.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="verdant"><img src="img/origins/verdant.png" width="16" height="16" alt=""><b>Вердант</b><i class="s2-imp" data-imp="1" title="Сложность: лёгкая"></i><span>Живое воплощение зелёного мира: неутомим и&nbsp;в&nbsp;мире с&nbsp;дикой природой. Скверна Незера губит его.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="sporeling"><img src="img/origins/sporeling.png" width="16" height="16" alt=""><b>Споровик</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Грибное существо с&nbsp;ядовитыми спорами: процветает во&nbsp;тьме и&nbsp;на&nbsp;грибных полях, увядает на&nbsp;солнце.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="caveborn"><img src="img/origins/caveborn.png" width="16" height="16" alt=""><b>Пещернорождённый</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Вырос в&nbsp;глубокой тьме: ест камень и&nbsp;вгрызается в&nbsp;руду голыми руками. Под солнцем увядает.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="stoneguard"><img src="img/origins/stoneguard.png" width="16" height="16" alt=""><b>Каменный страж</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Живой камень: колет шипами обидчиков, добывает породу руками и&nbsp;зажигает факелы во&nbsp;тьме. Медленный, но&nbsp;незыблемый.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="golem"><img src="img/origins/golem.png" width="16" height="16" alt=""><b>Голем</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Ходячая крепость из&nbsp;железа: почти несокрушим, но&nbsp;медлителен и&nbsp;боится жара.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="gorgon"><img src="img/origins/gorgon.png" width="16" height="16" alt=""><b>Горгона</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Взгляд обращает в&nbsp;камень, кулаки крушат всё вокруг. Но&nbsp;каменная тяжесть замедляет каждый шаг.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="dwarf"><img src="img/origins/dwarf.png" width="16" height="16" alt=""><b>Дворф</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Подземный мастер: крепкий, в&nbsp;броне и&nbsp;неутомим у&nbsp;горна. Коротконогий и&nbsp;медленный на&nbsp;поверхности.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="earth_mage"><img src="img/origins/earth_mage.png" width="16" height="16" alt=""><b>Маг Земли</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Сотрясает землю под врагами и&nbsp;возводит каменные стены одним жестом. Вода и&nbsp;высота — его враги.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="frostborn"><img src="img/origins/frostborn.png" width="16" height="16" alt=""><b>Хладорождённый</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Элементаль льда: замораживает врагов и&nbsp;процветает в&nbsp;тайге. Огонь и&nbsp;Незер для него разрушительны.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Малые, звери и&nbsp;механизмы <small>7</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="tiny"><img src="img/origins/tiny.png" width="16" height="16" alt=""><b>Малыш</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Маленький, быстрый и&nbsp;цепкий: лазает где угодно и&nbsp;притягивает предметы. Бьёт легко, как пёрышко.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="inchling"><img src="img/origins/inchling.png" width="16" height="16" alt=""><b>Инчлинг</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Ростом в&nbsp;четверть человека: легко взбирается по&nbsp;стенам и&nbsp;удивительно быстр. Тело хрупкое.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="feline"><img src="img/origins/feline.png" width="16" height="16" alt=""><b>Кошачий</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Человек-кошка: видит ночью, прыгает из&nbsp;засады и&nbsp;всегда приземляется на&nbsp;лапы. Ненавидит воду и&nbsp;быстро устаёт.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="arachnid"><img src="img/origins/arachnid.png" width="16" height="16" alt=""><b>Арахнид</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Лазает по&nbsp;любым стенам, ходит по&nbsp;паутине и&nbsp;стреляет ею&nbsp;во&nbsp;врагов. Уязвим к&nbsp;чарам «Бич членистоногих».</span></button></li>
+          <li><button type="button" class="s2-race" data-id="slime"><img src="img/origins/slime.png" width="16" height="16" alt=""><b>Слизень</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Живое желе, которому нужна влага: отскакивает при падении, а&nbsp;вместо смерти делится надвое, если хорошо увлажнён.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="monster_tamer"><img src="img/origins/monster_tamer.png" width="16" height="16" alt=""><b>Укротитель монстров</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Подчиняет своей воле враждебных мобов. В&nbsp;одиночку слаб, со&nbsp;стаей за&nbsp;спиной — грозная сила.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="automaton"><img src="img/origins/automaton.png" width="16" height="16" alt=""><b>Автоматон</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Механизм: не&nbsp;тонет и&nbsp;не&nbsp;голодает. Зелья лечения ему бесполезны, а&nbsp;раны заживают очень медленно.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Боевые искусства <small>6</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="asura"><img src="img/origins/asura.png" width="16" height="16" alt=""><b>Асура</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Хрупкий берсерк: чем ближе смерть, тем он&nbsp;быстрее и&nbsp;сильнее. В&nbsp;ярости пьёт жизнь ударами и&nbsp;не&nbsp;падает, пока бушует.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="windwalker"><img src="img/origins/windwalker.png" width="16" height="16" alt=""><b>Ходящий по&nbsp;ветру</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Мастер невесомости: отталкивается от&nbsp;воздуха, взбегает по&nbsp;стенам и&nbsp;не&nbsp;боится падений. Сил в&nbsp;бою не&nbsp;прибавляет.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="qi_cultivator"><img src="img/origins/qi_cultivator.png" width="16" height="16" alt=""><b>Практик ци</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Бьёт ладонью на&nbsp;расстоянии и&nbsp;закаляет тело силой ци. Запас восполняет медитацией, а&nbsp;без ци&nbsp;он&nbsp;просто монах.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="golden_body"><img src="img/origins/golden_body.png" width="16" height="16" alt=""><b>Золотое тело</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Живая стена: закован в&nbsp;броню, неподвижен и&nbsp;возвращает удары обидчикам. Платит за&nbsp;это ловкостью.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="iron_monk"><img src="img/origins/iron_monk.png" width="16" height="16" alt=""><b>Железный монах</b><i class="s2-imp" data-imp="2" title="Сложность: средняя"></i><span>Монах-защитник: блок и&nbsp;удар тратят один запас выносливости. Выдохся — открыт для любого удара.</span></button></li>
+          <li><button type="button" class="s2-race" data-id="sword_immortal"><img src="img/origins/sword_immortal.png" width="16" height="16" alt=""><b>Бессмертный мечник</b><i class="s2-imp" data-imp="3" title="Сложность: высокая"></i><span>Летает на&nbsp;своём клинке, мечет ци&nbsp;меча и&nbsp;мелькает по&nbsp;полю боя. Без меча в&nbsp;руке — обычный смертный.</span></button></li>
+        </ul></div>
+        <div class="s2-race-group"><h4>Без особенностей <small>1</small></h4><ul>
+          <li><button type="button" class="s2-race" data-id="human"><img src="img/origins/human.png" width="16" height="16" alt=""><b>Человек</b><i class="s2-imp" data-imp="0" title="Сложность: без особенностей"></i><span>Никаких особых сил, зато и&nbsp;никаких слабостей. Для тех, кто любит классику.</span></button></li>
+        </ul></div>
+      </div>
+    </details>
+    <h4 class="s2-sub">И&nbsp;класс — один из&nbsp;20</h4>
+    <div class="s2-classes">
+      <button type="button" class="s2-class" data-id="warrior" title="Бьёт сильнее в ближнем бою и почти не отлетает от ударов."><img src="img/origins/class_warrior.png" width="16" height="16" alt=""><b>Воин</b></button>
+      <button type="button" class="s2-class" data-id="archer" title="Меткий стрелок с проворными ногами."><img src="img/origins/class_archer.png" width="16" height="16" alt=""><b>Лучник</b></button>
+      <button type="button" class="s2-class" data-id="miner" title="Копает быстрее и без устали."><img src="img/origins/class_miner.png" width="16" height="16" alt=""><b>Шахтёр</b></button>
+      <button type="button" class="s2-class" data-id="beastmaster" title="Питомцы получают эффекты его зелий, а сами зелья действуют дольше."><img src="img/origins/class_beastmaster.png" width="16" height="16" alt=""><b>Повелитель зверей</b></button>
+      <button type="button" class="s2-class" data-id="explorer" title="Начинает готовым к приключениям и редко устаёт."><img src="img/origins/class_explorer.png" width="16" height="16" alt=""><b>Исследователь</b></button>
+      <button type="button" class="s2-class" data-id="sentinel" title="Встроенная броня, шипы и непоколебимая стойкость."><img src="img/origins/class_sentinel.png" width="16" height="16" alt=""><b>Страж</b></button>
+      <button type="button" class="s2-class" data-id="herbalist" title="Посевы растут быстрее, урожай богаче, а яд почти не действует."><img src="img/origins/class_herbalist.png" width="16" height="16" alt=""><b>Травник</b></button>
+      <button type="button" class="s2-class" data-id="scout" title="Видит ночью, двигается быстро и ступает уверенно."><img src="img/origins/class_scout.png" width="16" height="16" alt=""><b>Разведчик</b></button>
+      <button type="button" class="s2-class" data-id="berserker" title="Меняет сытость на сокрушительную силу."><img src="img/origins/class_berserker.png" width="16" height="16" alt=""><b>Берсерк</b></button>
+      <button type="button" class="s2-class" data-id="titan" title="Огромный: больше здоровья, дальше удар, выше рост."><img src="img/origins/class_titan.png" width="16" height="16" alt=""><b>Титан</b></button>
+      <button type="button" class="s2-class" data-id="rogue" title="Невидим, пока крадётся, и страшно бьёт со спины."><img src="img/origins/class_rogue.png" width="16" height="16" alt=""><b>Разбойник</b></button>
+      <button type="button" class="s2-class" data-id="lumberjack" title="Валит дерево целиком одним ударом и получает больше досок."><img src="img/origins/class_lumberjack.png" width="16" height="16" alt=""><b>Дровосек</b></button>
+      <button type="button" class="s2-class" data-id="blacksmith" title="Куёт снаряжение получше и чинит выгоднее."><img src="img/origins/class_blacksmith.png" width="16" height="16" alt=""><b>Кузнец</b></button>
+      <button type="button" class="s2-class" data-id="cook" title="Его еда сытнее, а копчение даёт больше опыта."><img src="img/origins/class_cook.png" width="16" height="16" alt=""><b>Повар</b></button>
+      <button type="button" class="s2-class" data-id="merchant" title="Жители не закрывают с ним сделки, а бродячие торговцы привозят редкий товар."><img src="img/origins/class_merchant.png" width="16" height="16" alt=""><b>Торговец</b></button>
+      <button type="button" class="s2-class" data-id="cleric" title="Лучше зачаровывает, а его зелья действуют дольше."><img src="img/origins/class_cleric.png" width="16" height="16" alt=""><b>Священник</b></button>
+      <button type="button" class="s2-class" data-id="nitwit" title="Ничего особенного не умеет. Иногда самый простой путь — самый верный."><img src="img/origins/class_nitwit.png" width="16" height="16" alt=""><b>Дурачок</b></button>
+      <button type="button" class="s2-class" data-id="fisher" title="Черпает удачу из приливов, плавает как тюлень и начинает с благословенной удочкой."><img src="img/origins/class_fisher.png" width="16" height="16" alt=""><b>Рыбак</b></button>
+      <button type="button" class="s2-class" data-id="mason" title="Быстрее ломает камень, мозоли служат бронёй, а кирка всегда под рукой."><img src="img/origins/class_mason.png" width="16" height="16" alt=""><b>Каменщик</b></button>
+      <button type="button" class="s2-class" data-id="paladin" title="Нежить боится его касания, иссушение его не берёт, а свет маяка лечит."><img src="img/origins/class_paladin.png" width="16" height="16" alt=""><b>Паладин</b></button>
+    </div>
+    <p class="s2-class-desc" aria-live="polite">Нажми на&nbsp;класс, чтобы узнать, что он&nbsp;умеет.</p>
+    <div class="s2-fate">
+      <button type="button" class="btn btn-quiet s2-roll">Бросить кости</button>
+      <p class="s2-origin-note" aria-live="polite">Выбери расу и&nbsp;класс — запомним на&nbsp;этом устройстве, а&nbsp;1&nbsp;октября проверим, повезло&nbsp;ли с&nbsp;судьбой.</p>
+    </div>
+
+    <h3 class="s2-h3">Они ждут</h3>
+    <ul class="s2-bosses">
+      <li class="s2-boss rv" data-boss="valkyrie"><span class="s2-sil"></span><b class="s2-bname">Королева валькирий</b><span>Правит островами над облаками. Не&nbsp;любит, когда её&nbsp;будят.</span></li>
+      <li class="s2-boss rv" data-boss="sun"><span class="s2-sil"></span><b class="s2-bname">Солнечный дух</b><span>Живёт в&nbsp;храме выше всех. Горячий приём гарантирован.</span></li>
+      <li class="s2-boss rv" data-boss="leviathan"><span class="s2-sil"></span><b class="s2-bname">Левиафан</b><span>Глубоко под водой кто-то очень большой ждёт, когда вы&nbsp;спуститесь.</span></li>
+      <li class="s2-boss rv" data-boss="ignis"><span class="s2-sil"></span><b class="s2-bname">Игнис</b><span>Рыцарь в&nbsp;доспехах из&nbsp;огня. Проверит, из&nbsp;чего сделано ваше оружие.</span></li>
+    </ul>
+    <p class="s2-howto s2-more">Это четверо из&nbsp;34. Остальные — в&nbsp;<a href="season2-map.html#bosses">бестиарии на&nbsp;карте сезона</a>: где искать, что с&nbsp;них падает и&nbsp;кто победил первым.</p>
+
+    <h3 class="s2-h3">Было → будет</h3>
+    <table class="s2-vs rv">
+      <thead><tr><th scope="col"></th><th scope="col">Сезон 1</th><th scope="col">Сезон 2</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Модов</th><td>262</td><td>540</td></tr>
+        <tr><th scope="row">Квестов</th><td>322</td><td>1136</td></tr>
+        <tr><th scope="row">Длится</th><td>8 дней</td><td>21 день</td></tr>
+        <tr><th scope="row">Играем</th><td>каждый сам за&nbsp;себя</td><td>командами, с&nbsp;общим зачётом</td></tr>
+        <tr><th scope="row">Кем играть</th><td>человеком</td><td>55 рас и&nbsp;20 классов</td></tr>
+        <tr><th scope="row">Небо</th><td>пустое</td><td>обитаемое</td></tr>
+        <tr><th scope="row">Главный злодей</th><td>Паук-мотылёк</td><td>узнаете 1&nbsp;октября</td></tr>
+        <tr><th scope="row">Поймано рыбы</th><td>0</td><td>посмотрим</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="s2-h3">Три недели и&nbsp;финал</h3>
+    <p class="s2-howto">Три командных испытания по календарю сервер считает сам, а&nbsp;в&nbsp;финальные выходные — два живых ивента. Места приносят команде 150, 90 и&nbsp;50 очков, участие — 20.</p>
+    <ol class="s2-plan">
+      <li class="rv"><b>1.10</b><span>Старт</span><small>Новый мир, выбор расы и&nbsp;класса, первая ночь.</small></li>
+      <li class="rv"><b>1–3.10</b><span>Стартовый рывок</span><small>Какая команда откроет больше вех за&nbsp;первые три дня.</small></li>
+      <li class="rv"><b>8–14.10</b><span>Охота на&nbsp;боссов</span><small>Больше всех первых побед над боссами за&nbsp;неделю.</small></li>
+      <li class="rv"><b>15–21.10</b><span>Книжный марафон</span><small>Больше всех квестов книги за&nbsp;неделю.</small></li>
+      <li class="rv s2-plan-live"><b>17.10</b><span>Гран-при дирижаблей</span><small>20:00 МСК. Экипажи до&nbsp;трёх человек, трасса над облаками.</small></li>
+      <li class="rv s2-plan-live"><b>18.10</b><span>Турнир арены</span><small>20:00 МСК. Бои команд на&nbsp;выбывание, в&nbsp;финале 3×3.</small></li>
+      <li class="rv"><b>21.10</b><span>Итоги</span><small>Командный зачёт, герои сезона и&nbsp;зал славы.</small></li>
+    </ol>
+    <p class="s2-howto s2-more">А&nbsp;весь сезон идёт гонка к&nbsp;дракону: кто первым освободит Энд. Правила и&nbsp;живой зачёт — на&nbsp;<a href="season2-map.html#events">карте сезона</a>.</p>
+    <div class="actions">
+      <a class="btn" href="#apply">Хочу во&nbsp;второй сезон</a>
+      <a class="btn btn-quiet" href="https://discord.gg/sashawaify" target="_blank" rel="noopener">Первыми узнают в&nbsp;Discord</a>
+    </div>
+    <p class="s2-note">Ветераны первого сезона, наигравшие больше 10&nbsp;часов, уже в&nbsp;вайтлисте.</p>
+  </section>
+
+  <section class="about" id="about">
+    <div class="col">
+      <h2>Как это устроено</h2>
+      <p>Мы&nbsp;не&nbsp;держим один мир годами. Каждый сезон — отдельная история: с&nbsp;началом, финалом и&nbsp;итогами.</p>
+    </div>
+    <dl class="features four">
+      <div><dt>Сезоны</dt><dd>Каждый сезон начинается с&nbsp;чистого мира и&nbsp;идёт от&nbsp;одной до&nbsp;трёх недель. В&nbsp;конце — финал, итоги и&nbsp;зал славы, а&nbsp;мир мы&nbsp;выкладываем на&nbsp;скачивание.</dd></div>
+      <div><dt>Вайтлист</dt><dd>Заходят только те, чью заявку одобрил AliveEnjoyer. Гриферов нет, потому что их&nbsp;некому пустить.</dd></div>
+      <div><dt>Зрители стримеров</dt><dd>Играют зрители Twitch-каналов, где AliveEnjoyer модератор. Иногда заходят и&nbsp;сами стримеры.</dd></div>
+      <div><dt>На русском и&nbsp;с&nbsp;голосом</dt><dd>Каждую сборку переводим на&nbsp;русский. Голосовой чат со&nbsp;звуком в&nbsp;пространстве: в&nbsp;пещере эхо, за&nbsp;стеной тише.</dd></div>
+    </dl>
+  </section>
+
+  <section class="join" id="join">
+    <div class="col">
+      <h2>Как попасть во&nbsp;второй сезон</h2>
+      <ol class="steps">
+        <li><b>Подай заявку.</b> Форма ниже. Ник пиши точно как в&nbsp;TLauncher, с&nbsp;теми&nbsp;же большими и&nbsp;маленькими буквами. Ветеранам первого сезона, наигравшим больше 10&nbsp;часов, заявка не&nbsp;нужна: вы&nbsp;уже в&nbsp;вайтлисте.</li>
+        <li><b>Дождись ответа.</b> Заявки читает AliveEnjoyer и&nbsp;отвечает туда, куда ты&nbsp;укажешь. Новости сезона — в&nbsp;<a href="https://discord.gg/sashawaify" target="_blank" rel="noopener">Discord</a>.</li>
+        <li><b>Установи сборку.</b> Нужен только TLauncher: NeoForge, моды, русский перевод и&nbsp;шейдеры установщик поставит сам, в&nbsp;один клик. <a href="#install">Скачать и&nbsp;установить</a> — чуть ниже.</li>
+        <li><b>Заходи 1&nbsp;октября в&nbsp;00:00&nbsp;МСК.</b> При первом запуске сборка попросит придумать пароль: он защищает твой ник, игра его запомнит, и дальше вход автоматический. Потом жми «Играть на&nbsp;сервере» в&nbsp;главном меню. Квесты и&nbsp;моды на&nbsp;русском.</li>
+        <li><b>Загляни на&nbsp;<a href="season2-map.html">карту сезона</a>.</b> Там видно, с&nbsp;чего начать, какие вехи уже открыты и&nbsp;как идёт командный зачёт.</li>
+      </ol>
+
+      <div class="world install" id="install">
+        <h3 class="h3">Сборка второго сезона</h3>
+        <p>Minecraft 1.21.1 и&nbsp;NeoForge, больше пятисот модов, русский перевод, шейдеры и&nbsp;наше главное меню. Ставится одной кнопкой поверх TLauncher.</p>
+        <div class="actions">
+          <a class="btn" href="https://173-249-26-11.sslip.io:8444/files/EchoesInTheSky-client.zip?v=2026.09.27.8" download>Скачать сборку · 1,7&nbsp;ГБ</a>
+        </div>
+        <p class="world-note">Версия от&nbsp;26&nbsp;сентября, вечер: в&nbsp;путеводителе (клавиша Э) новая глава «Эмпирей» — мир над островами «Осколков неба», куда ведут аметистовые врата, — а&nbsp;на&nbsp;карте сезона семь его вех. В&nbsp;этой же сборке руководства Industrial Foregoing и&nbsp;PneumaticCraft на&nbsp;русском и&nbsp;рецепты в&nbsp;EMI. Сборка уже стоит? Скачай архив заново и&nbsp;снова запусти УСТАНОВИТЬ.cmd: установщик обновит её поверх, миры и&nbsp;настройки игры останутся. Если прошлое обновление оборвалось на&nbsp;«Отказано в&nbsp;доступе… euphoria_patcher», в&nbsp;этой версии установщик это исправляет.</p>
+        <ol class="steps">
+          <li><b>Распакуй архив.</b> Правой кнопкой по&nbsp;архиву → «Извлечь всё…».</li>
+          <li><b>Запусти УСТАНОВИТЬ.cmd.</b> Он сам положит сборку в&nbsp;папку игры, поставит NeoForge, выберет его в&nbsp;TLauncher и&nbsp;выделит игре память. Твои старые моды не&nbsp;пропадут: они переедут в&nbsp;резервную копию. Если Windows спросит, запускать&nbsp;ли файл, — «Запустить» или «Подробнее» → «Выполнить в&nbsp;любом случае».</li>
+          <li><b>Открой TLauncher и&nbsp;нажми «Войти в&nbsp;игру».</b> Ник — как в&nbsp;заявке. Первый запуск долгий, 3–5&nbsp;минут: докачиваются звуки и&nbsp;Java.</li>
+        </ol>
+        <p class="world-note">Нужны Windows 10 или&nbsp;11, 16&nbsp;ГБ оперативной памяти в&nbsp;компьютере и&nbsp;5&nbsp;ГБ на&nbsp;диске. Если архив не&nbsp;качается, включи VPN: у&nbsp;части провайдеров в&nbsp;России наш сервер без него недоступен. Сборка первого сезона не&nbsp;подойдёт. Подробная инструкция лежит в&nbsp;архиве.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="rules" id="rules">
+    <div class="col">
+      <h2>Правила</h2>
+      <ul class="rule-list">
+        <li>Не ломай и&nbsp;не&nbsp;забирай чужое. Хочешь строить рядом с&nbsp;чужой базой — спроси хозяина.</li>
+        <li>Никаких читов, иксрея и&nbsp;модов, которые дают преимущество. Играем на&nbsp;нашей сборке.</li>
+        <li>Уважай людей в&nbsp;чате и&nbsp;в&nbsp;голосе. Розыгрыши только над теми, кто не&nbsp;против.</li>
+        <li>Далёкие походы через порталы в&nbsp;неразведанные земли лучше делать, когда онлайн мало: генерация нового мира подвешивает сервер для всех.</li>
+        <li>Спорные вопросы решает AliveEnjoyer.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="apply" id="apply">
+    <div class="col">
+      <h2>Заявка на&nbsp;второй сезон</h2>
+      <p class="form-note">Заявки читает AliveEnjoyer. Ник пиши точно так&nbsp;же, как в&nbsp;игре, с&nbsp;теми&nbsp;же большими и&nbsp;маленькими буквами. Вопросы можно задать в&nbsp;<a href="https://discord.gg/sashawaify" target="_blank" rel="noopener">Discord</a>.</p>
+      <form id="wl-form" novalidate>
+        <div class="field">
+          <label for="f-nick">Ник в&nbsp;Minecraft</label>
+          <input id="f-nick" name="nick" required minlength="3" maxlength="16" pattern="[A-Za-z0-9_]{3,16}" autocomplete="nickname" spellcheck="false">
+          <p class="hint">Латиница, цифры и&nbsp;подчёркивание, от&nbsp;3 до&nbsp;16 символов.</p>
+          <p class="err" data-for="nick"></p>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="f-age">Возраст</label>
+            <input id="f-age" name="age" type="number" inputmode="numeric" min="8" max="99" required>
+            <p class="err" data-for="age"></p>
+          </div>
+          <div class="field grow">
+            <label for="f-contact">Куда тебе ответить</label>
+            <input id="f-contact" name="contact" required maxlength="100" placeholder="Discord, Telegram или Twitch">
+            <p class="err" data-for="contact"></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="field grow">
+            <label for="f-twitch">Ник на&nbsp;Twitch <span class="opt">необязательно</span></label>
+            <input id="f-twitch" name="twitch" maxlength="40" spellcheck="false">
+          </div>
+          <div class="field grow">
+            <label for="f-source">Откуда знаешь о&nbsp;сервере <span class="opt">необязательно</span></label>
+            <input id="f-source" name="source" maxlength="200">
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-about">Расскажи о&nbsp;себе</label>
+          <textarea id="f-about" name="about" rows="5" required minlength="10" maxlength="1000" placeholder="Как давно играешь и что любишь: строить, исследовать, собирать механизмы или ходить на боссов"></textarea>
+          <p class="err" data-for="about"></p>
+        </div>
+        <div class="hp" aria-hidden="true">
+          <label for="f-website">Сайт</label>
+          <input id="f-website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="field check">
+          <input id="f-rules" name="rules" type="checkbox" required>
+          <label for="f-rules">Мне понятны <a href="#rules">правила</a>, и&nbsp;я&nbsp;их&nbsp;принимаю</label>
+          <p class="err" data-for="rules"></p>
+        </div>
+        <button class="btn" type="submit">Отправить заявку</button>
+        <div class="result" role="status" aria-live="polite" hidden></div>
+      </form>
+    </div>
+  </section>
+
+  <section class="archive" id="season1">
+    <p class="kicker">Архив · 11–19 сентября 2026</p>
+    <h2>Сезон 1 · Whispers in&nbsp;the&nbsp;Void <span class="stamp">Закрыт</span></h2>
+    <p class="intro">8 дней под землёй, 14 игроков, 492 смерти и&nbsp;ни&nbsp;одной пойманной рыбы.</p>
+    <div class="col">
+      <p>Первый сезон шёл на&nbsp;нашей хоррор-сборке Whispers in&nbsp;the&nbsp;Void: Forge 1.20.1, 262 мода и&nbsp;русский перевод. В&nbsp;пещерах караулил Cave Dweller, в&nbsp;лесу ходил Сталкер, а&nbsp;шаги за&nbsp;спиной не&nbsp;всегда были твоими. Поэтому мы&nbsp;ушли под землю и&nbsp;построили там свой оазис.</p>
+      <p>Сезон закончился 19&nbsp;сентября в&nbsp;22:47, когда последний игрок вышел с&nbsp;сервера. Боссы, рекорды гонок, номинации и&nbsp;зал славы собраны на&nbsp;странице итогов.</p>
+    </div>
+    <div class="actions">
+      <a class="btn" href="season1.html">Итоги сезона</a>
+      <a class="btn btn-quiet" href="#world">Скачать наш мир</a>
+    </div>
+
+    <h3 class="h3">Что мы построили</h3>
+    <p class="sub-lead">Базу мы&nbsp;вырыли в&nbsp;глубинном сланце: пещера на&nbsp;двести блоков, озеро с&nbsp;фонтаном, колонны гномьей кладки и&nbsp;двадцать четыре дерева, которые растут прямо с&nbsp;потолка и&nbsp;светятся. А&nbsp;в&nbsp;небе над заливом висят Пристань Бездны и&nbsp;Небесная Цитадель для гонок на&nbsp;мётлах. Все картинки отрисованы из&nbsp;настоящего мира сервера.</p>
+    <div class="carousel" role="region" aria-roledescription="карусель" aria-label="Постройки и скриншоты">
+      <div class="track" tabindex="0">
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="1 из 13">
+          <button class="zoom" data-full="img/oasis-map.webp" aria-label="Открыть крупно">
+            <img src="img/oasis-map.webp" width="1800" height="968" loading="eager" alt="План подземного оазиса без потолка: озеро, дорожки со светящимися камнями, колонны, усадьба и вокзал">
+          </button>
+          <figcaption>Оазис без потолка. В&nbsp;центре озеро с&nbsp;островом-фонтаном, справа усадьба, у&nbsp;южной стены вокзал.</figcaption>
+        </figure>
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="2 из 13">
+          <button class="zoom" data-full="img/close-center.webp" aria-label="Открыть крупно">
+            <img src="img/close-center.webp" width="1400" height="875" loading="lazy" alt="Фиолетовые светящиеся деревья свисают с потолка над озером, рядом радужная труба спуска">
+          </button>
+          <figcaption>Деревья Ars Nouveau и&nbsp;Blue Skies свисают над озером. Радужная труба рядом — вход на&nbsp;базу: прыгаешь сверху и&nbsp;падаешь в&nbsp;воду.</figcaption>
+        </figure>
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="3 из 13">
+          <button class="zoom" data-full="img/close-east.webp" aria-label="Открыть крупно">
+            <img src="img/close-east.webp" width="1400" height="875" loading="lazy" alt="Хрустальное дерево с сосульками из стержней Края и лунное дерево среди арок">
+          </button>
+          <figcaption>Хрустальное дерево с&nbsp;сосульками из&nbsp;стержней Края. Под каждой кроной фонари на&nbsp;цепях и&nbsp;гирлянды.</figcaption>
+        </figure>
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="4 из 13">
+          <button class="zoom" data-full="img/station-ext.webp" aria-label="Открыть крупно">
+            <img src="img/station-ext.webp" width="1050" height="820" loading="lazy" alt="Вокзал из глубинного сланца с медным сводом, витражным окном и часовой башней">
+          </button>
+          <figcaption>Вокзал «Оазис»: медный свод, витраж и&nbsp;часовая башня с&nbsp;колоколом.</figcaption>
+        </figure>
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="5 из 13">
+          <button class="zoom" data-full="img/station-int.webp" aria-label="Открыть крупно">
+            <img src="img/station-int.webp" width="1050" height="735" loading="lazy" alt="Вокзал без крыши: зал ожидания с мозаикой, кассы, буфет, платформы и паровоз">
+          </button>
+          <figcaption>Внутри кассы, буфет, два пути в&nbsp;тоннель и&nbsp;паровоз-экспонат «Гном-1». Вагонетки выдаёт автомат.</figcaption>
+        </figure>
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="6 из 13">
+          <button class="zoom" data-full="img/manor-sw.webp" aria-label="Открыть крупно">
+            <img src="img/manor-sw.webp" width="1092" height="856" loading="lazy" alt="Фахверковая усадьба с круглой башней, кирпичными дымоходами и садом за каменной оградой">
+          </button>
+          <figcaption>Усадьба «Дубовый Двор»: круглая башня, два камина, библиотека и&nbsp;сад с&nbsp;колодцем.</figcaption>
+        </figure>
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="7 из 13">
+          <button class="zoom" data-full="img/manor-nw.webp" aria-label="Открыть крупно">
+            <img src="img/manor-nw.webp" width="1092" height="791" loading="lazy" alt="Усадьба с другой стороны: башня со входом, крыльцо и терраса">
+          </button>
+          <figcaption>Та же усадьба с&nbsp;другой стороны: вход через башню и&nbsp;терраса с&nbsp;огородом.</figcaption>
+        </figure>
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="8 из 13">
+          <button class="zoom" data-full="img/close-station.webp" aria-label="Открыть крупно">
+            <img src="img/close-station.webp" width="1400" height="875" loading="lazy" alt="Крыша вокзала, усадьба и синие светящиеся деревья у южной стены пещеры">
+          </button>
+          <figcaption>Вокзал и&nbsp;усадьба на&nbsp;общем плане пещеры.</figcaption>
+        </figure>
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="9 из 13">
+          <button class="zoom" data-full="img/shot-cave.webp" aria-label="Открыть крупно">
+            <img src="img/shot-cave.webp" width="1100" height="780" loading="lazy" alt="Скриншот из игры: светящееся голубое дерево висит над поляной с грибами">
+          </button>
+          <figcaption>Оазис глазами игрока.</figcaption>
+        </figure>
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="10 из 13">
+          <button class="zoom" data-full="img/shot-house.webp" aria-label="Открыть крупно">
+            <img src="img/shot-house.webp" width="1260" height="820" loading="lazy" alt="Скриншот из игры: деревянный дом с табличкой «Дом QissMe» и игрок в алмазной броне">
+          </button>
+          <figcaption>Дом QissMe наверху, у&nbsp;спавна.</figcaption>
+        </figure>
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="11 из 13">
+          <button class="zoom" data-full="img/shot-dog.webp" aria-label="Открыть крупно">
+            <img src="img/shot-dog.webp" width="1280" height="785" loading="lazy" alt="Скриншот из игры: собака спит в каменной будке с табличками «Конура Тубистрон гера» и «Не кормить»">
+          </button>
+          <figcaption>Конура Тубистрона. Не&nbsp;кормить.</figcaption>
+        </figure>
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="12 из 13">
+          <button class="zoom" data-full="img/race-hub.webp" aria-label="Открыть крупно">
+            <img src="img/race-hub.webp" width="900" height="695" loading="lazy" alt="Пристань Бездны: парящая площадка с золотыми стартовыми воротами и тремя порталами">
+          </button>
+          <figcaption>Пристань Бездны — лобби гонок на&nbsp;мётлах. Отсюда стартовали все три трассы.</figcaption>
+        </figure>
+        <figure class="slide" role="group" aria-roledescription="слайд" aria-label="13 из 13">
+          <button class="zoom" data-full="img/race-castle.webp" aria-label="Открыть крупно">
+            <img src="img/race-castle.webp" width="1000" height="1014" loading="lazy" alt="Небесная цитадель на парящем острове: донжон со шпилем, башни с фиолетовыми крышами, водопады и маленькие островки вокруг">
+          </button>
+          <figcaption>Небесная Цитадель: около ста тысяч блоков в&nbsp;небе. Кольца третьей трассы вились спиралью вокруг донжона.</figcaption>
+        </figure>
+      </div>
+      <div class="car-nav">
+        <button class="car-btn prev" aria-label="Предыдущий слайд">‹</button>
+        <span class="car-count" aria-live="polite">1 / 13</span>
+        <button class="car-btn next" aria-label="Следующий слайд">›</button>
+      </div>
+      <ul class="thumbs">
+        <li><button class="thumb" data-i="0" aria-label="Слайд 1" aria-current="true"><img src="img/thumb/oasis-map.webp" width="320" height="200" alt="" loading="lazy"></button></li>
+        <li><button class="thumb" data-i="1" aria-label="Слайд 2"><img src="img/thumb/close-center.webp" width="320" height="200" alt="" loading="lazy"></button></li>
+        <li><button class="thumb" data-i="2" aria-label="Слайд 3"><img src="img/thumb/close-east.webp" width="320" height="200" alt="" loading="lazy"></button></li>
+        <li><button class="thumb" data-i="3" aria-label="Слайд 4"><img src="img/thumb/station-ext.webp" width="320" height="200" alt="" loading="lazy"></button></li>
+        <li><button class="thumb" data-i="4" aria-label="Слайд 5"><img src="img/thumb/station-int.webp" width="320" height="200" alt="" loading="lazy"></button></li>
+        <li><button class="thumb" data-i="5" aria-label="Слайд 6"><img src="img/thumb/manor-sw.webp" width="320" height="200" alt="" loading="lazy"></button></li>
+        <li><button class="thumb" data-i="6" aria-label="Слайд 7"><img src="img/thumb/manor-nw.webp" width="320" height="200" alt="" loading="lazy"></button></li>
+        <li><button class="thumb" data-i="7" aria-label="Слайд 8"><img src="img/thumb/close-station.webp" width="320" height="200" alt="" loading="lazy"></button></li>
+        <li><button class="thumb" data-i="8" aria-label="Слайд 9"><img src="img/thumb/shot-cave.webp" width="320" height="200" alt="" loading="lazy"></button></li>
+        <li><button class="thumb" data-i="9" aria-label="Слайд 10"><img src="img/thumb/shot-house.webp" width="320" height="200" alt="" loading="lazy"></button></li>
+        <li><button class="thumb" data-i="10" aria-label="Слайд 11"><img src="img/thumb/shot-dog.webp" width="320" height="200" alt="" loading="lazy"></button></li>
+        <li><button class="thumb" data-i="11" aria-label="Слайд 12"><img src="img/thumb/slide-hub.webp" width="320" height="200" alt="" loading="lazy"></button></li>
+        <li><button class="thumb" data-i="12" aria-label="Слайд 13"><img src="img/thumb/slide-castle.webp" width="320" height="200" alt="" loading="lazy"></button></li>
+      </ul>
+    </div>
+
+    <div class="world" id="world">
+      <h3 class="h3">Скачай наш мир</h3>
+      <p>Весь мир первого сезона целиком, каким мы&nbsp;его оставили: оазис, вокзал, усадьба, Пристань Бездны, Небесная Цитадель, дома игроков и&nbsp;8 открытых измерений. Открывается в&nbsp;одиночной игре на&nbsp;сборке первого сезона.</p>
+      <div class="mc-world" aria-hidden="true">
+        <img src="img/s1-world-icon.png" width="64" height="64" alt="">
+        <p><b>Whispers in&nbsp;the Void · Сезон&nbsp;1</b><span>WhispersInTheVoid-S1 (19.09.2026, 22:47)</span><span>Режим выживания, Читы, Версия: 1.20.1</span></p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="https://173-249-26-11.sslip.io:8444/files/WhispersInTheVoid-S1-world.zip" download>Скачать мир · 3&nbsp;ГБ</a>
+        <a class="btn btn-quiet" href="https://173-249-26-11.sslip.io:8444/files/WhispersInTheVoid-client.zip" download>Сборка · 1,2&nbsp;ГБ</a>
+      </div>
+      <ol class="steps">
+        <li><b>Поставь сборку первого сезона.</b> В&nbsp;TLauncher выбери версию Forge 1.20.1&nbsp;-&nbsp;47.4.20, обычную, без OptiFine. Выдели игре 8&nbsp;ГБ памяти, запусти один раз и&nbsp;закрой. Потом открой папку игры («Настройки» → «Директория») и&nbsp;скопируй туда все папки из&nbsp;архива сборки. Старую папку mods с&nbsp;другими модами сначала удали.</li>
+        <li><b>Положи мир в&nbsp;saves.</b> Распакуй архив мира и&nbsp;перенеси папку WhispersInTheVoid-S1 в&nbsp;папку saves внутри папки игры.</li>
+        <li><b>Открой.</b> «Одиночная игра» → «Whispers in&nbsp;the Void · Сезон&nbsp;1». Мир большой, первая загрузка займёт пару минут. Координаты оазиса, Пристани и&nbsp;спавна лежат в&nbsp;README внутри архива.</li>
+      </ol>
+      <p class="world-note">Читы включены: <code>/gamemode spectator</code> — и&nbsp;можно облететь всё сквозь стены. Гонки, лобби и&nbsp;награды работали через сервер, поэтому трассы можно пролететь, но&nbsp;таймер не&nbsp;запустится.</p>
+    </div>
+
+    <details class="s1-pack">
+      <summary>Что было в&nbsp;сборке первого сезона</summary>
+      <dl class="tags">
+        <div class="tag-row">
+          <dt>Кто бродит</dt>
+          <dd><ul class="chips">
+            <li>The End of Herobrine</li><li>Cave Dweller</li><li>Born in Chaos</li><li>Mutant Monsters</li><li>Arthropod Phobia</li>
+            <li>Undead Revamp</li><li>Opposing Force</li><li>Sons of Sins</li><li>Mowzie’s Mobs</li><li>Bosses of Mass Destruction</li><li>Aquamirae</li><li>The Graveyard</li>
+          </ul></dd>
+        </div>
+        <div class="tag-row">
+          <dt>Миры</dt>
+          <dd><ul class="chips realms">
+            <li style="--c:#8fd3ff">Everbright</li><li style="--c:#ffd27a">Everdawn</li><li style="--c:#7bd37a">Undergarden</li><li style="--c:#b28cff">The Midnight</li>
+            <li style="--c:#4ec2b8">Otherside</li><li style="--c:#f4b860">Bumblezone</li><li style="--c:#8a86aa">Deep Void</li><li style="--c:#6d6a8a">The Pit</li>
+            <li style="--c:#9b86c9">Afterdark</li><li style="--c:#554d78">Pure Dark</li><li style="--c:#c98a5a">The Crawling</li><li style="--c:#d7b98a">Webrooms</li>
+            <li style="--c:#e6d77a">Level 0</li><li style="--c:#d9774a">Boiler Room</li><li style="--c:#c65a6a">Прошлое</li><li style="--c:#e05a4a">Незер</li><li style="--c:#d9d2a0">Энд</li>
+          </ul></dd>
+        </div>
+        <div class="tag-row">
+          <dt>Магия и дела</dt>
+          <dd><ul class="chips">
+            <li>Ars Nouveau</li><li>Blood Magic</li><li>EvilCraft</li><li>FTB Quests</li><li>YUNG’s данжи</li><li>Dungeon Crawl</li><li>Towns and Towers</li>
+            <li>Farmer’s Delight</li><li>Sophisticated Backpacks</li><li>Waystones</li><li>Supplementaries</li><li>Lootr</li>
+          </ul></dd>
+        </div>
+        <div class="tag-row">
+          <dt>Атмосфера</dt>
+          <dd><ul class="chips">
+            <li>Sound Physics Remastered</li><li>AmbientSounds</li><li>Leon’s Spooky Music</li><li>VoidFog</li><li>Visuality</li><li>Enhanced Visuals</li>
+          </ul></dd>
+        </div>
+      </dl>
+    </details>
+  </section>
+</main>
+
+<footer>
+  <p>Сервер AliveEnjoyer, модератора Twitch-каналов sashawaify, QissMe_, skipsleeps, aiihosh1no и&nbsp;ezdok_nakomaze. Играем со&nbsp;зрителями. Вопросы можно задать в&nbsp;<a href="https://discord.gg/sashawaify" target="_blank" rel="noopener">Discord</a>.</p>
+  <p>Сезон 2 «Echoes in&nbsp;the&nbsp;Sky» — с&nbsp;1&nbsp;октября, <a href="season2-map.html">карта сезона</a>, <a href="empyrean.html">Эмпирей</a>. Сезон 1 «Whispers in&nbsp;the&nbsp;Void» — Minecraft 1.20.1, <a href="season1.html">итоги сезона</a>.</p>
+  <p class="fine">Minecraft — торговая марка Mojang Studios. Сайт и&nbsp;сервер с&nbsp;Mojang не&nbsp;связаны.</p>
+</footer>
+
+<dialog class="viewer" aria-label="Изображение крупно">
+  <form method="dialog"><button class="close" aria-label="Закрыть">×</button></form>
+  <img alt="">
+</dialog>
+
+<script src="app.js?v=20260925b" defer></script>
+<script src="teaser.js?v=20260928a" defer></script>
+<script src="stat.js?v=20260925a" defer></script>
+</body>
+</html>

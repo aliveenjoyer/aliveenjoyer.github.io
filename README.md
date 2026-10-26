@@ -1,4 +1,10 @@
-# Сайт сервера AliveEnjoyer
+# aliveenjoyer.github.io
+
+Главная страница (`index.html`, картинки в `assets/`): все программы aliveenjoyer для стрима и Deadlock. Это Twitch Chat Overlay, Chatlock, Колесо хаоса с чат-RPG и Now Playing, а ещё сборки для других стримеров. Исходник страницы лежит у автора в `Skyrim\Hub`. 3D-картинки сгенерированы на sinlab.
+
+Сайт Minecraft-сервера с 26.10.2026 живёт в папке `minecraft/`: https://aliveenjoyer.github.io/minecraft/ . Старые адреса его страниц (`season1.html`, `season2-map.html`, `empyrean.html`, `zavod.html`) — заглушки, которые переадресуют в `minecraft/` с теми же параметрами и якорем. Старые якоря главной (`#season2`, `#apply` и т. п.) главная тоже отправляет туда.
+
+## Сайт сервера AliveEnjoyer (`minecraft/`)
 
 Сезонный Minecraft-сервер AliveEnjoyer, модератора Twitch-каналов sashawaify, QissMe_, skipsleeps, aiihosh1no и ezdok_nakomaze. Discord: https://discord.gg/sashawaify
 
@@ -6,7 +12,7 @@
 - Эмпирей — авторский мир второго сезона (`empyrean.html`): лор, места, путь к Первому Звонарю. Иллюстрации — скриншоты из игры на сервере.
 - Сезон 1 «Whispers in the Void»: хоррор-сборка на Minecraft 1.20.1, 11–19 сентября 2026. Архив на главной и итоги (`season1.html`).
 
-Сайт: https://aliveenjoyer.github.io/ (старый адрес mikolakiyv.github.io/whispers-in-the-void переадресует сюда)
+Сайт: https://aliveenjoyer.github.io/minecraft/ (старый адрес mikolakiyv.github.io/whispers-in-the-void переадресует сюда)
 
 Картинки построек первого сезона отрисованы изометрическим рендером из настоящего мира сервера, скриншоты сделаны в игре. Форма заявки отправляет данные на API сервера (`app.js`, константа `API`), карта сезона берёт прогресс оттуда же (`roadmap.js`).
 
