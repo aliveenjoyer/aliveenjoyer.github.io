@@ -33,8 +33,6 @@ if (/^#(season1|season2|about|join|install|rules|apply|world|wl-form)$/.test(loc
   --amber: #ffb340;
   --teal: #4fe3c1;
   --pink: #ff7eb6;
-  --gold: #f2c86b;
-  --ice: #8ec5ff;
   --gutter: clamp(20px, 5vw, 56px);
 }
 * { box-sizing: border-box; }
@@ -140,24 +138,6 @@ a { color: inherit; text-decoration: none; }
   .facts li::before { margin: 0; transform: translateY(-2px); }
 }
 
-/* others */
-.others { max-width: 1000px; margin: 0 auto; padding: clamp(140px, 22vh, 240px) var(--gutter) 0; }
-.others h2 { margin: 0; text-align: center; font-weight: 600; font-size: clamp(32px, 4.4vw, 56px); letter-spacing: -.04em; line-height: 1.05; }
-.others > p { margin: 16px auto 0; text-align: center; color: var(--gray); font-size: clamp(18px, 1.6vw, 21px); max-width: 40ch; }
-.olist { list-style: none; margin: clamp(40px, 7vh, 64px) 0 0; padding: 0; }
-.olist li { display: grid; grid-template-columns: 112px minmax(0, 1fr) auto; gap: 8px 28px; align-items: center; padding: 26px 0; border-top: 1px solid var(--line); }
-.olist li:last-child { border-bottom: 1px solid var(--line); }
-.olist .ico { position: relative; width: 112px; height: 112px; }
-.olist .ico::before { content: ""; position: absolute; inset: 22%; border-radius: 50%; background: var(--c); opacity: .25; filter: blur(30px); }
-.olist .ico img { position: relative; width: 100%; height: 100%; object-fit: cover; mix-blend-mode: screen; -webkit-mask-image: radial-gradient(circle, #000 50%, transparent 70%); mask-image: radial-gradient(circle, #000 50%, transparent 70%); }
-.olist h3 { margin: 0; font-weight: 600; font-size: 24px; letter-spacing: -.025em; }
-.olist p { margin: 6px 0 0; color: var(--gray); max-width: 56ch; }
-.tag { font-size: 13px; color: var(--gray-2); padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); white-space: nowrap; }
-@media (max-width: 640px) {
-  .olist li { grid-template-columns: 76px 1fr; gap: 4px 18px; }
-  .olist .ico { width: 76px; height: 76px; grid-row: span 2; }
-  .tag { grid-column: 2; justify-self: start; margin-top: 8px; }
-}
 
 /* footer */
 .foot { max-width: 1000px; margin: 0 auto; padding: clamp(140px, 22vh, 240px) var(--gutter) 40px; text-align: center; }
@@ -257,23 +237,6 @@ a { color: inherit; text-decoration: none; }
     <li>Заказали трек в Trula: твоя музыка встаёт на паузу и потом играет дальше сама.</li>
     <li>Одна плашка и для своей музыки, и для заказов.</li>
     <li>Картинка вместо вебки, которая открывает рот, когда ты говоришь.</li>
-  </ul>
-</section>
-
-<section class="others" aria-labelledby="h-others">
-  <h2 id="h-others">Сделано для других стримеров</h2>
-  <p>Эти сборки живут на чужих каналах. Хочешь что-то похожее себе, пиши в Telegram.</p>
-  <ul class="olist">
-    <li style="--c: var(--gold)">
-      <div class="ico"><img src="assets/slot.webp" width="400" height="400" alt="" loading="lazy"></div>
-      <div><h3>ТиммикЛудик и Лудочка</h3><p>Казино в чате на баллы канала: слот-машина, общий банк, VIP-джекпот и эффекты прямо в Deadlock. Две версии, для qissme_ и censorxxx.</p></div>
-      <span class="tag">Deadlock</span>
-    </li>
-    <li style="--c: var(--ice)">
-      <div class="ico"><img src="assets/rune.webp" width="400" height="400" alt="" loading="lazy"></div>
-      <div><h3>Thu'um</h3><p>Skyrim, в котором NPC отвечают голосом нейросети, а зрители за баллы говорят за героя.</p></div>
-      <span class="tag">Skyrim</span>
-    </li>
   </ul>
 </section>
 </main>

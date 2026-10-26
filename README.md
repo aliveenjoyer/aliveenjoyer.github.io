@@ -1,6 +1,6 @@
 # aliveenjoyer.github.io
 
-Главная страница (`index.html`, картинки в `assets/`): все программы aliveenjoyer для стрима и Deadlock. Это Twitch Chat Overlay, Chatlock, Колесо хаоса с чат-RPG и Now Playing, а ещё сборки для других стримеров. Исходник страницы лежит у автора в `Skyrim\Hub`. 3D-картинки сгенерированы на sinlab.
+Главная страница (`index.html`, картинки в `assets/`): все программы aliveenjoyer для стрима и Deadlock. Это Twitch Chat Overlay, Chatlock, Колесо хаоса с чат-RPG и Now Playing. Исходник страницы лежит у автора в `Skyrim\Hub`. 3D-картинки сгенерированы на sinlab.
 
 Сайт Minecraft-сервера с 26.10.2026 живёт в папке `minecraft/`: https://aliveenjoyer.github.io/minecraft/ . Старые адреса его страниц (`season1.html`, `season2-map.html`, `empyrean.html`, `zavod.html`) — заглушки, которые переадресуют в `minecraft/` с теми же параметрами и якорем. Старые якоря главной (`#season2`, `#apply` и т. п.) главная тоже отправляет туда.
 
