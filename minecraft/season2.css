@@ -1,0 +1,43 @@
+/* Season 2 recap. Builds on style.css and season1.css (same components and motion); here only the sky palette
+   and the blocks season 1 did not have: the team duel, the events, the season's secret. */
+.r2 { --sky: #8fd3ff; --amethyst: #b9a6ff; --amethyst-dark: #3b2f66; }
+
+/* hero: the season 2 key art is already the .hero background in style.css; the stamp is gold over the sky */
+.r2 .s1-stamp { color: var(--lantern); border-color: var(--lantern);
+  box-shadow: 0 0 1.5rem rgba(244, 184, 96, .3), inset 0 0 1rem rgba(244, 184, 96, .15); }
+.r2 .glitch::before { color: var(--amethyst); }
+.r2 .glitch::after { color: var(--sky); }
+.r2 .s1-save-bar i { background: repeating-linear-gradient(90deg, var(--amethyst) 0 10px, transparent 10px 12px); }
+.r2 .s1-save.done .s1-save-text { color: var(--amethyst); }
+.r2-good { color: var(--copper) !important; }
+
+/* ---------------- teams ---------------- */
+.r2-versus { display: grid; grid-template-columns: 1fr; gap: 1rem; align-items: stretch; max-width: 56rem; }
+@media (min-width: 760px) { .r2-versus { grid-template-columns: 1fr auto 1fr; } }
+.r2-team { background: var(--deep); padding: 1.4rem 1.4rem 1.2rem; border: 2px solid var(--slate); }
+.r2-team.r2-win { border-color: var(--lantern); box-shadow: 0 0 2rem -1rem var(--lantern); }
+.r2-tname { font-family: var(--pixel); font-size: 18px; line-height: 1.4; color: var(--pearl); margin: 0 0 .6rem; }
+.r2-win .r2-tname::after { content: " ★"; color: var(--lantern); }
+.r2-tnum { color: var(--mist); margin: 0 0 .9rem; }
+.r2-tnum b { font-family: var(--pixel); font-weight: 400; font-size: 32px; color: var(--pearl); margin-right: .35rem; font-variant-numeric: tabular-nums; }
+.r2-win .r2-tnum b { color: var(--lantern); }
+.r2-tm { display: flex; flex-wrap: wrap; gap: .4rem .9rem; margin: 0; }
+.r2-tm b { font-weight: 600; color: var(--pearl); }
+.r2-vs { align-self: center; justify-self: center; font-family: var(--pixel); font-size: 24px; color: var(--blood); margin: 0; }
+.r2-events { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: .9rem; }
+.r2-events li { background: var(--deep); padding: 1.1rem 1.2rem 1rem; border-left: 4px solid var(--amethyst); }
+.r2-events .r2-skip { border-left-color: var(--slate); opacity: .85; }
+.r2-ev { font-family: var(--pixel); font-size: 12px; line-height: 1.7; color: var(--amethyst); margin: 0 0 .4rem; display: flex; align-items: center; gap: .5rem; }
+.r2-ev .s1-ico svg { width: 20px; height: 20px; }
+.r2-skip .r2-ev { color: var(--mist); }
+.r2-res { font-weight: 600; font-size: 1.1rem; color: var(--pearl); margin: 0 0 .35rem; }
+
+/* ---------------- villain and the season's secret ---------------- */
+.r2-villain { border-color: rgba(185, 166, 255, .5); box-shadow: 0 0 2.4rem -1rem var(--amethyst); }
+.r2-villain .s1-vname { color: var(--amethyst); }
+.r2-vicon { flex: none; }
+.r2-secret { margin-top: 2.4rem; padding: 1.5rem 1.6rem; max-width: 46rem; background: linear-gradient(135deg, var(--amethyst-dark), var(--deep) 70%);
+  border: 2px dashed var(--amethyst); }
+.r2-st { font-family: var(--pixel); font-size: 12px; line-height: 1.7; color: var(--amethyst); margin: 0 0 .7rem; text-transform: uppercase; letter-spacing: .06em; }
+.r2-sname { font-size: 1.35rem; color: var(--pearl); margin: 0 0 .7rem; }
+.r2-sname b { font-weight: 600; }
