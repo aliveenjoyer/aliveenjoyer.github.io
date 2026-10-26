@@ -21,7 +21,7 @@ if (/^#(season1|season2|about|join|install|rules|apply|world|wl-form)$/.test(loc
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Pixelify+Sans:wght@600..700&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #000;
@@ -35,6 +35,7 @@ if (/^#(season1|season2|about|join|install|rules|apply|world|wl-form)$/.test(loc
   --teal: #4fe3c1;
   --pink: #ff7eb6;
   --gold: #f2c86b;
+  --ember: #ff5a3c;
   --gutter: clamp(16px, 4vw, 40px);
 }
 * { box-sizing: border-box; }
@@ -109,6 +110,40 @@ button { font: inherit; color: inherit; }
 .btn.solid:hover { filter: brightness(1.1); background: var(--c, var(--text)); }
 .btn[aria-disabled="true"] { pointer-events: none; color: var(--gray); border-style: dashed; }
 .btn svg { width: 16px; height: 16px; flex: none; }
+
+/* the Ring: browser fighting game, the site's headline feature */
+.nav a.nav-ring { color: var(--ember); font-weight: 600; }
+.nav a.nav-ring:hover { color: #ff8a70; }
+.ring {
+  position: relative;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); align-items: center; gap: 16px 28px;
+  margin-top: clamp(28px, 5vh, 48px);
+  padding: clamp(22px, 3vw, 34px) clamp(22px, 3.4vw, 44px);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 120, 90, .24);
+  background:
+    radial-gradient(60% 130% at 78% 70%, rgba(255, 90, 60, .24), transparent 62%),
+    linear-gradient(180deg, #140908, #0a0605);
+  overflow: hidden;
+  overflow: clip;
+  transition: border-color .2s, box-shadow .2s;
+}
+.ring:hover { border-color: rgba(255, 120, 90, .55); box-shadow: 0 0 60px -20px rgba(255, 90, 60, .45); }
+.ring-new { display: inline-block; font-size: 12px; font-weight: 600; color: #200803; background: var(--ember); padding: 2px 10px; border-radius: 99px; }
+.ring h2 { margin: 12px 0 0; font-family: "Pixelify Sans", "Geist", sans-serif; font-weight: 700; font-size: clamp(44px, 5.2vw, 64px); line-height: .9; letter-spacing: .01em; color: #ffe3bd; text-shadow: 0 0 26px rgba(255, 90, 60, .5); }
+.ring-line { margin: 12px 0 0; font-size: clamp(18px, 1.6vw, 21px); font-weight: 600; letter-spacing: -.01em; }
+.ring-sub { margin: 6px 0 0; max-width: 44ch; color: var(--gray-2); font-size: 15px; line-height: 1.45; }
+.ring .btn { margin-top: 18px; --c: var(--ember); }
+.ring-stage { --s: 1.7; position: relative; height: 230px; }
+.ring-stage::before { content: ""; position: absolute; left: 8%; right: 8%; bottom: 14px; height: 22px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, .55), transparent); }
+.ring-stage::after { content: ""; position: absolute; left: 2%; right: 2%; bottom: 24px; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 190, 150, .35), transparent); }
+.fx { position: absolute; bottom: 24px; background-repeat: no-repeat; image-rendering: pixelated; }
+.fx-lesh { background-image: url("assets/fx-lesh.png"); right: 50%; margin-right: -6px; }
+.fx-trooper { background-image: url("assets/fx-trooper.png"); left: 50%; margin-left: -4px; transform: scaleX(-1); }
+@media (max-width: 760px) {
+  .ring { grid-template-columns: minmax(0, 1fr); }
+  .ring-stage { --s: 1.35; order: -1; height: 170px; margin: -6px 0 -4px; }
+}
 
 /* project index */
 .index { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: clamp(28px, 5vh, 52px); }
@@ -253,6 +288,7 @@ main.wrap { overflow-x: clip; }
       <a href="#chatlock">Chatlock</a>
       <a href="#music">Now Playing</a>
     </nav>
+    <a class="nav-ring" href="https://rpg.aliveenjoyer.art/ring">Ринг</a>
     <a href="minecraft/">Minecraft</a>
     <a href="https://twitch.tv/aliveenjoyer">Twitch</a>
   </div>
@@ -272,6 +308,20 @@ main.wrap { overflow-x: clip; }
     <img src="assets/hero.webp" width="1920" height="1072" alt="Четыре стеклянных объекта: фиолетовый пузырь чата, янтарная клавиша, бирюзовое колесо и розовая пластинка" fetchpriority="high" onload="this.classList.add('in')">
   </div>
 </section>
+
+<a class="ring" href="https://rpg.aliveenjoyer.art/ring" aria-labelledby="h-ring">
+  <div>
+    <span class="ring-new">Новое</span>
+    <h2 id="h-ring">Ринг</h2>
+    <p class="ring-line">Подерись с Трупером прямо сейчас.</p>
+    <p class="ring-sub">Пиксельный файтинг по Deadlock прямо в браузере. 45 бойцов, без входа и без стрима.</p>
+    <span class="btn solid">В бой</span>
+  </div>
+  <div class="ring-stage" aria-hidden="true">
+    <div class="fx fx-lesh"></div>
+    <div class="fx fx-trooper"></div>
+  </div>
+</a>
 
 <nav class="index" aria-label="Все проекты">
   <a href="#rpg" style="--c: var(--teal)"><img src="assets/rpg-orb.webp" width="52" height="52" alt=""><span><b>Чат-RPG</b><small>герой качается в чате</small></span></a>
@@ -515,6 +565,51 @@ main.wrap { overflow-x: clip; }
       npState.textContent = 'Заказ доиграл, твоя музыка снова в деле';
     }, 6000);
   });
+
+  /* the Ring: Lash and the Trooper trade blows (sprite strips from the game) */
+  const FX = {
+    lesh: { w: 101, h: 113, strip: 1010, f: { idle: 0, jab_wind: 202, jab_hit: 303, heavy_wind: 404, heavy_hit: 505, win: 909 } },
+    trooper: { w: 92, h: 103, strip: 920, f: { idle: 0, block: 552, hit: 644 } }
+  };
+  const stage = document.querySelector('.ring-stage');
+  const fighters = { lesh: stage.querySelector('.fx-lesh'), trooper: stage.querySelector('.fx-trooper') };
+  let scale = 1;
+  function pose(name, frame) {
+    fighters[name].style.backgroundPosition = `${-FX[name].f[frame] * scale}px 0`;
+  }
+  function sizeFighters() {
+    scale = parseFloat(getComputedStyle(stage).getPropertyValue('--s')) || 1.6;
+    for (const name in FX) {
+      const d = FX[name], el = fighters[name];
+      el.style.width = d.w * scale + 'px';
+      el.style.height = d.h * scale + 'px';
+      el.style.backgroundSize = `${d.strip * scale}px ${d.h * scale}px`;
+    }
+    pose('lesh', 'idle'); pose('trooper', 'idle');
+  }
+  sizeFighters();
+  addEventListener('resize', sizeFighters);
+  const BOUT = [
+    [0, 'lesh', 'idle'], [0, 'trooper', 'idle'],
+    [700, 'lesh', 'heavy_wind'],
+    [980, 'lesh', 'heavy_hit'], [1040, 'trooper', 'hit'],
+    [1450, 'lesh', 'idle'], [1500, 'trooper', 'idle'],
+    [2100, 'lesh', 'jab_wind'],
+    [2260, 'lesh', 'jab_hit'], [2280, 'trooper', 'block'],
+    [2600, 'lesh', 'idle'], [2650, 'trooper', 'idle']
+  ];
+  let ringOn = false, boutTimers = [];
+  function bout() {
+    boutTimers = BOUT.map(([at, who, frame]) => setTimeout(() => pose(who, frame), at));
+    boutTimers.push(setTimeout(() => { if (ringOn) bout(); }, 3200));
+  }
+  if (!reduce) {
+    new IntersectionObserver(es => {
+      const vis = es[0].isIntersecting;
+      if (vis && !ringOn) { ringOn = true; bout(); }
+      if (!vis && ringOn) { ringOn = false; boutTimers.forEach(clearTimeout); pose('lesh', 'idle'); pose('trooper', 'idle'); }
+    }, { threshold: .3 }).observe(stage);
+  }
 
   /* live versions from GitHub releases */
   document.querySelectorAll('[data-release]').forEach(el => {
