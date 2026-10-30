@@ -93,6 +93,18 @@ button { font: inherit; color: inherit; }
   .hero-art { margin: 8px -12% 0; }
 }
 
+/* новое */
+.news { display: inline-flex; align-items: center; gap: 10px; margin: 0 0 18px; padding: 5px 14px 5px 5px; border-radius: 999px;
+  font-size: 14px; color: var(--gray-2); background: rgba(79, 227, 193, .08); border: 1px solid rgba(79, 227, 193, .28);
+  transition: background .2s, border-color .2s, color .2s; }
+.news b { font-weight: 600; font-size: 12px; letter-spacing: .02em; color: #000; background: var(--teal); padding: 3px 9px; border-radius: 999px; }
+.news:hover { color: var(--text); background: rgba(79, 227, 193, .14); border-color: rgba(79, 227, 193, .5); }
+.news .go { color: var(--teal); }
+.tile .news { margin: 0 0 14px; }
+.tile .more { margin: 14px 0 0; font-size: 14px; color: var(--gray); }
+.tile .more a { color: var(--teal); }
+.tile .more a:hover { text-decoration: underline; }
+
 /* buttons */
 .cta { display: flex; flex-wrap: wrap; gap: 10px; }
 .btn {
@@ -288,6 +300,7 @@ main.wrap { overflow-x: clip; }
 <main class="wrap">
 <section class="hero">
   <div>
+    <a class="news" href="https://rpg.aliveenjoyer.art/game/news"><b>Новое</b><span>Колесо хаоса v4: четыре колеса и бонус-игры</span><span class="go" aria-hidden="true">→</span></a>
     <h1>Отдай чату пульт.</h1>
     <p class="sub">Я стримлю Deadlock и пишу для стрима программы. Зрители качают героев в чате, крутят колесо, жмут мне кнопки и ставят музыку, а я пытаюсь при этом выиграть. Две программы забирай себе бесплатно.</p>
     <div class="cta">
@@ -310,6 +323,7 @@ main.wrap { overflow-x: clip; }
 <div class="tiles">
   <section class="tile featured" id="rpg" style="--c: var(--teal)" aria-labelledby="h-rpg">
     <div>
+      <a class="news" href="https://rpg.aliveenjoyer.art/game/news"><b>v4</b><span>Что нового</span><span class="go" aria-hidden="true">→</span></a>
       <h2 id="h-rpg">Чат-RPG</h2>
       <p class="line">Зашёл на минутку. Остался до босса.</p>
       <p class="desc">Пока сидишь в чате, капают души. Тратишь их на героя, предметы и мелкие пакости соседям. А колесо хаоса крутишь ты, страдаю я.</p>
@@ -318,6 +332,7 @@ main.wrap { overflow-x: clip; }
         <a class="btn solid" href="https://rpg.aliveenjoyer.art/game">Войти в игру</a>
         <a class="btn" href="https://twitch.tv/aliveenjoyer">Зайти на стрим</a>
       </div>
+      <p class="more">Впервые тут? <a href="https://rpg.aliveenjoyer.art/game/guide">Как играть — гид для новичка</a></p>
     </div>
     <div class="demo">
       <button class="toy" type="button" data-toy="wheel" aria-label="Крутить колесо хаоса"><img src="assets/wheel.webp" width="1000" height="1000" alt="" loading="lazy"></button>
