@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>aliveenjoyer: программы для стрима</title>
-<meta name="description" content="Программы для стрима от aliveenjoyer: чат прямо в игре, кнопки, которые жмут зрители, колесо хаоса и плашка с музыкой.">
+<meta name="description" content="Программы для стрима от aliveenjoyer: чат прямо в игре, кнопки, которые жмут зрители, колесо хаоса и заказ музыки за баллы.">
 <meta name="theme-color" content="#000000">
 <meta property="og:title" content="aliveenjoyer: программы для стрима">
-<meta property="og:description" content="Отдай чату пульт: Chat Overlay, Chatlock, Колесо хаоса и Now Playing.">
+<meta property="og:description" content="Отдай чату пульт: Chat Overlay, Chatlock, Колесо хаоса и Encore.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aliveenjoyer.art/">
 <meta property="og:image" content="https://aliveenjoyer.art/assets/og.jpg">
@@ -290,7 +290,7 @@ main.wrap { overflow-x: clip; }
       <a href="#rpg">RPG</a>
       <a href="#chat">Оверлей</a>
       <a href="#chatlock">Chatlock</a>
-      <a href="#music">Now Playing</a>
+      <a href="#music">Encore</a>
     </nav>
     <a href="minecraft/">Minecraft</a>
     <a href="https://twitch.tv/aliveenjoyer">Twitch</a>
@@ -317,7 +317,7 @@ main.wrap { overflow-x: clip; }
   <a href="#rpg" style="--c: var(--teal)"><img src="assets/rpg-orb.webp" width="52" height="52" alt=""><span><b>Чат-RPG</b><small>герой качается в чате</small></span></a>
   <a href="#chat" style="--c: var(--violet)"><img src="assets/chat.webp" width="52" height="52" alt=""><span><b>Chat Overlay</b><small>чат прямо в игре</small></span></a>
   <a href="#chatlock" style="--c: var(--amber)"><img src="assets/keycap.webp" width="52" height="52" alt=""><span><b>Chatlock</b><small>чат жмёт твои кнопки</small></span></a>
-  <a href="#music" style="--c: var(--pink)"><img src="assets/vinyl.webp" width="52" height="52" alt=""><span><b>Now Playing</b><small>что сейчас играет</small></span></a>
+  <a href="#music" style="--c: var(--pink)"><img src="assets/vinyl.webp" width="52" height="52" alt=""><span><b>Encore</b><small>заказ треков за баллы</small></span></a>
 </nav>
 
 <div class="tiles">
@@ -405,22 +405,22 @@ main.wrap { overflow-x: clip; }
 
   <section class="tile" id="music" style="--c: var(--pink)" aria-labelledby="h-np">
     <div>
-      <h2 id="h-np">Now Playing</h2>
+      <h2 id="h-np">Encore</h2>
       <p class="line">Музыка сама знает, когда помолчать.</p>
       <ul class="facts">
-        <li>Зритель заказал трек в Trula, твоя музыка ждёт и потом играет дальше сама</li>
+        <li>Зрители заказывают треки за баллы канала, без Trula и донатов. Не подошёл трек, и баллы вернутся сами</li>
+        <li>Пока играет заказ, твоя музыка ждёт и потом играет дальше сама</li>
         <li>Название и обложка из YouTube Music или любого плеера. 11&nbsp;стилей плашки, от минимала до киберпанка</li>
-        <li>Бонус: картинка вместо вебки открывает рот, когда ты говоришь</li>
       </ul>
-      <ul class="chips"><li>Бесплатно</li><li>Обновляется сама</li><li>Windows 10 и 11</li><li>Версия <span data-release="aliveenjoyer/now-playing">1.3.0</span></li></ul>
+      <ul class="chips"><li>Бесплатно</li><li>Обновляется сама</li><li>Windows 10 и 11</li><li>Версия <span data-release="aliveenjoyer/encore">1.4.1</span></li></ul>
       <div class="cta">
-        <a class="btn solid" href="https://github.com/aliveenjoyer/now-playing/releases/latest/download/NowPlaying.zip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>Скачать бесплатно</a>
-        <a class="btn" href="https://github.com/aliveenjoyer/now-playing">Подробнее</a>
+        <a class="btn solid" href="https://github.com/aliveenjoyer/encore/releases/latest/download/Encore.zip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>Скачать бесплатно</a>
+        <a class="btn" href="https://encore.aliveenjoyer.art/">Подробнее</a>
       </div>
     </div>
     <div class="demo">
-      <button class="toy" type="button" data-toy="vinyl" aria-label="Прислать заказ из Trula"><img src="assets/vinyl.webp" width="1000" height="1000" alt="" loading="lazy"></button>
-      <p class="hint">Нажми, и придёт заказ из Trula</p>
+      <button class="toy" type="button" data-toy="vinyl" aria-label="Прислать заказ за баллы"><img src="assets/vinyl.webp" width="1000" height="1000" alt="" loading="lazy"></button>
+      <p class="hint">Нажми, и придёт заказ за баллы</p>
       <div class="out">
         <div class="bar glass" aria-hidden="true">
           <div class="cover" id="npCover"></div>
@@ -548,7 +548,7 @@ main.wrap { overflow-x: clip; }
     }, reduce ? 50 : 2650);
   });
 
-  /* now playing: a Trula order pauses your music */
+  /* Encore: an order for channel points pauses your music */
   const npCover = $('#npCover'), npTitle = $('#npTitle'), npSub = $('#npSub'), npState = $('#npState');
   function setTrack(title, artist, sub, order) {
     npTitle.textContent = title + ' ';
@@ -561,7 +561,7 @@ main.wrap { overflow-x: clip; }
   document.querySelector('[data-toy="vinyl"]').addEventListener('click', e => {
     bump(e.currentTarget.querySelector('img'), 'pop');
     clearTimeout(npTimer);
-    setTrack('Звезда по имени Солнце', 'Кино', 'заказ от Kelvin42 <span class="amt">300 ₽</span>', true);
+    setTrack('Звезда по имени Солнце', 'Кино', 'заказ от Kelvin42 <span class="amt">50 баллов</span>', true);
     npState.textContent = 'Твоя музыка подождёт, играет заказ';
     npTimer = setTimeout(() => {
       setTrack('Ага, ну', 'T-Fest и Скриптонит', 'YouTube Music', false);
