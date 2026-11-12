@@ -149,6 +149,21 @@ button { font: inherit; color: inherit; }
   .ring .btn { justify-self: start; margin-top: 8px; }
 }
 
+/* the clicker, a second row inside the RPG tile: same layout as the Ring, its own colour and a little scene */
+.clk { border-color: rgba(242, 200, 107, .22); background: radial-gradient(40% 160% at 12% 60%, rgba(242, 200, 107, .15), transparent 70%), rgba(255, 255, 255, .02); }
+.clk:hover { border-color: rgba(242, 200, 107, .5); }
+.clk .btn { --c: var(--gold); }
+.clk-title { font-family: "Geist", sans-serif; font-size: 26px; letter-spacing: -.02em; color: #fff3d6; text-shadow: 0 0 18px rgba(242, 200, 107, .4); }
+.clk-title .ring-new { background: var(--gold); color: #241a02; letter-spacing: 0; }
+.clk-stage { position: relative; height: 126px; }
+.clk-stage::before { content: ""; position: absolute; left: 34%; right: 12%; bottom: 6px; height: 14px; border-radius: 50%; background: radial-gradient(closest-side, rgba(0, 0, 0, .55), transparent); }
+.clk-trooper { position: absolute; left: 44%; bottom: 10px; width: auto; height: 112px; transform-origin: 50% 100%; animation: clk-hit 1.8s ease-in-out infinite; }
+.clk-soul { position: absolute; left: 20%; bottom: 46px; width: 44px; height: auto; opacity: 0; animation: clk-soul 1.8s ease-out infinite; }
+@keyframes clk-hit { 0%, 38%, 62%, 100% { transform: none; } 44% { transform: scale(.9, 1.08); } 52% { transform: scale(1.07, .94); } }
+@keyframes clk-soul { 0%, 44% { opacity: 0; transform: translate(46px, 12px) scale(.5); } 56% { opacity: 1; transform: translate(4px, -4px) scale(1.12); } 82% { opacity: 1; transform: translate(-4px, -14px) scale(1); } 100% { opacity: 0; transform: translate(-8px, -30px) scale(.9); } }
+@media (prefers-reduced-motion: reduce) { .clk-trooper, .clk-soul { animation: none; } .clk-soul { opacity: 1; } }
+@media (max-width: 760px) { .clk-stage { height: 112px; } .clk-trooper { left: 34%; height: 100px; } .clk-soul { left: 8%; } }
+
 /* project index */
 .index { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-top: clamp(28px, 5vh, 52px); }
 .index a {
@@ -356,6 +371,17 @@ main.wrap { overflow-x: clip; }
         <p class="ring-line">Пиксельный файтинг по Deadlock. Выбирай любого из 45 бойцов и дерись с Трупером прямо сейчас, без входа.</p>
       </div>
       <span class="btn solid">В бой</span>
+    </a>
+    <a class="ring clk" href="https://clicker.aliveenjoyer.art/">
+      <div class="clk-stage" aria-hidden="true">
+        <img class="clk-soul" src="assets/clk-soul.webp" width="96" height="98" alt="" loading="lazy">
+        <img class="clk-trooper" src="assets/clk-trooper.webp" width="233" height="240" alt="" loading="lazy">
+      </div>
+      <div>
+        <p class="ring-title clk-title">Хлыстопад <span class="ring-new">Новое</span></p>
+        <p class="ring-line">Кликер по Deadlock. Бей труперов хлыстом Лэша, нанимай героев, проходи боссов и поднимайся в таблице рекордов. Играть можно сразу, прямо в браузере.</p>
+      </div>
+      <span class="btn solid">Играть</span>
     </a>
   </section>
 
