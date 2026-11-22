@@ -7,7 +7,7 @@
 <meta name="description" content="Игры и программы для стрима от aliveenjoyer: чат-RPG с колесом хаоса, кликер, кастомки Deadlock со стримерами, заказ музыки за баллы и кнопки, которые жмут зрители.">
 <meta name="theme-color" content="#000000">
 <meta property="og:title" content="aliveenjoyer: игры и программы для стрима">
-<meta property="og:description" content="Отдай чату пульт: чат-RPG, кликер, кастомки со стримерами, заказ музыки и кнопки, которые жмут зрители.">
+<meta property="og:description" content="Играю, стримлю, пишу код: чат-RPG, кликер, кастомки со стримерами, заказ музыки и кнопки, которые жмут зрители.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aliveenjoyer.art/">
 <meta property="og:image" content="https://aliveenjoyer.art/assets/og-reel.jpg">
@@ -251,7 +251,7 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
 .i-hold .tab { visibility: hidden; }
 .intro-ov { position: fixed; inset: 0; z-index: 8; display: grid; place-items: center; cursor: pointer; -webkit-user-select: none; user-select: none; }
 .i-stack { width: min(1180px, calc(100vw - 2 * var(--gutter))); display: grid; justify-items: center; text-align: center; }
-.i-title { margin: 0; font-weight: 600; font-size: clamp(34px, 5.4vw, 78px); line-height: 1; letter-spacing: -.045em; opacity: 0; }
+.i-title { margin: 0; font-weight: 600; font-size: clamp(34px, 5.4vw, 78px); line-height: 1.04; letter-spacing: -.045em; text-wrap: balance; opacity: 0; }
 .i-sub { margin: 16px 0 0; font-size: clamp(15px, 1.45vw, 20px); color: var(--gray-2); letter-spacing: -.01em; opacity: 0; }
 .i-row {
   --img: min(150px, calc((100vw - 2 * var(--gutter)) / 7.6));
@@ -351,7 +351,7 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
 
 <header class="nav">
   <a class="brand" href="./">aliveenjoyer</a>
-  <h1 class="tagline">Отдай чату пульт.</h1>
+  <h1 class="tagline">Играю. Стримлю. Пишу код.</h1>
   <nav class="nav-links" aria-label="Ссылки">
     <a class="minor" href="minecraft/">Minecraft</a>
     <div class="cta3">
@@ -778,7 +778,7 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
     try { localStorage.setItem('ae-intro', '1'); } catch (e) {}
     const ov = document.createElement('div');
     ov.className = 'intro-ov';
-    ov.innerHTML = '<div class="i-stack" aria-hidden="true"><p class="i-title">Отдай чату пульт.</p>' +
+    ov.innerHTML = '<div class="i-stack" aria-hidden="true"><p class="i-title">Играю. Стримлю. Пишу код.</p>' +
       '<p class="i-sub">Семь проектов для стрима и Deadlock</p><div class="i-row"><i class="i-line"></i><i class="i-spark"></i></div></div>' +
       '<button class="i-skip" type="button">Пропустить</button>';
     const row = ov.querySelector('.i-row');
