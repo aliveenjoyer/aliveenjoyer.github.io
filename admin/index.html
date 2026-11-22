@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Пульт</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" href="../assets/icon-64.png">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap" rel="stylesheet">
+<!-- Пульт aliveenjoyer: закрытая сводка по всем сайтам. Цифры отдаёт служба wl-admin на VPS
+     (исходник Skyrim/Pult/server/admin.py), вход через Twitch пускает только канал aliveenjoyer.
+     Счётчик посещений сюда специально не подключён. -->
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #000;
+  --panel: rgba(255, 255, 255, .035);
+  --panel-hi: rgba(255, 255, 255, .06);
+  --text: #f5f5f7;
+  --text-2: #c7c7cc;
+  --muted: #86868b;
+  --grid: rgba(255, 255, 255, .07);
+  --base: rgba(255, 255, 255, .16);
+  --bar: rgba(245, 245, 247, .24);
+  --accent: #4fe3c1;
+  --up: #3ddc84;
+  --down: #ff7a7a;
+  --twitch: #9146ff;
+  --gutter: clamp(16px, 4vw, 40px);
+  --r: 18px;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100vh; min-height: 100dvh;
+  background:
+    radial-gradient(1200px 520px at 12% -120px, rgba(79, 227, 193, .10), transparent 70%),
+    radial-gradient(900px 480px at 100% -80px, rgba(145, 70, 255, .08), transparent 70%),
+    var(--bg);
+  background-repeat: no-repeat;
+  color: var(--text);
+  font-family: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 15px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; border-radius: 8px; }
+.num, .t td.n, .axis { font-variant-numeric: tabular-nums; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 var(--gutter); }
+[hidden] { display: none !important; }
+
+/* ---------- вход ---------- */
+.login { min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; padding: 40px var(--gutter); }
+.login-box { width: min(420px, 100%); }
+.login h1 { margin: 0 0 6px; font-size: clamp(44px, 9vw, 64px); font-weight: 600; letter-spacing: -.035em; line-height: 1; }
+.login p { margin: 0; color: var(--muted); }
+.login .lead { margin-bottom: 28px; }
+.tw-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 52px;
+  border-radius: 14px; background: var(--twitch); color: #fff; font-weight: 600; font-size: 16px;
+  box-shadow: 0 10px 40px -10px rgba(145, 70, 255, .7), inset 0 1px 0 rgba(255, 255, 255, .18);
+  transition: transform .15s, filter .15s;
+}
+.tw-btn:hover { filter: brightness(1.08); }
+.tw-btn:active { transform: scale(.985); }
+.tw-btn[aria-disabled="true"] { opacity: .5; pointer-events: none; }
+.tw-btn svg { width: 20px; height: 20px; fill: #fff; flex: none; }
+.wait { margin-top: 22px; padding: 18px 20px; border-radius: 14px; background: var(--panel-hi); }
+.wait b { display: block; font-weight: 600; margin-bottom: 4px; }
+.code { font-size: 26px; font-weight: 600; letter-spacing: .14em; margin: 6px 0 2px; font-variant-numeric: tabular-nums; }
+.wait .again { color: var(--text-2); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255,255,255,.3); }
+.msg { margin-top: 16px; color: var(--text-2); }
+.msg.bad { color: var(--down); }
+
+/* ---------- верх ---------- */
+.top { display: flex; align-items: center; gap: 16px; height: 64px; }
+.top .brand { font-weight: 600; font-size: 17px; letter-spacing: -.01em; }
+.top .upd { margin-left: auto; color: var(--muted); font-size: 13px; }
+.top .upd.stale { color: var(--down); }
+.top .out { color: var(--muted); font-size: 13px; padding: 6px 10px; border-radius: 8px; }
+.top .out:hover { color: var(--text); background: var(--panel-hi); }
+
+/* ---------- главная цифра ---------- */
+.hero { padding: 18px 0 8px; display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 20px 48px; align-items: end; }
+.big-w { position: relative; display: inline-block; }
+.big { display: block; font-size: clamp(72px, 12vw, 132px); font-weight: 600; letter-spacing: -.055em; line-height: .9; }
+.stroke { position: absolute; left: -4px; right: -10px; bottom: -16px; width: calc(100% + 14px); min-width: 120px; height: 22px; overflow: visible; }
+.stroke path { fill: none; stroke: var(--accent); stroke-width: 5; stroke-linecap: round; opacity: .85; }
+.hero-lbl { margin: 26px 0 0; color: var(--text-2); font-size: 16px; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 14px 0 0; padding: 0; }
+.facts div { display: flex; flex-direction: column; }
+.facts dt { color: var(--muted); font-size: 13px; }
+.facts dd { margin: 0; font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
+.chart { position: relative; height: 210px; }
+.chart svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.axis { fill: var(--muted); font-size: 11px; }
+.chart-cap { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
+
+/* ---------- блоки ---------- */
+section.block { margin-top: 44px; }
+.block > h2 { margin: 0 0 14px; font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
+.block > h2 small { font-size: 14px; font-weight: 400; color: var(--muted); letter-spacing: 0; margin-left: 8px; }
+
+/* список сайтов */
+.sites { border-radius: var(--r); background: var(--panel); padding: 6px 0; }
+.srow {
+  display: grid; align-items: center; gap: 0 18px; padding: 11px 20px;
+  grid-template-columns: minmax(150px, 1.25fr) 64px 56px minmax(120px, 1fr) 96px 64px minmax(150px, 1.35fr);
+}
+.srow + .srow { box-shadow: 0 -1px 0 var(--grid); }
+.srow.head { color: var(--muted); font-size: 12px; padding-top: 8px; padding-bottom: 6px; }
+.srow.head + .srow { box-shadow: none; }
+.sname { display: flex; align-items: center; gap: 10px; min-width: 0; font-weight: 500; }
+.sname a { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sname a:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(255,255,255,.35); }
+.dot { width: 8px; height: 8px; border-radius: 50%; flex: none; background: var(--c, var(--muted)); box-shadow: 0 0 12px var(--c, transparent); }
+.today { font-size: 20px; font-weight: 600; letter-spacing: -.02em; text-align: right; }
+.yest, .wk, .nw { text-align: right; color: var(--text-2); }
+.wk b { color: var(--text); font-weight: 600; }
+.delta { display: block; font-size: 12px; color: var(--muted); }
+.delta.up { color: var(--up); }
+.delta.down { color: var(--down); }
+.wk-l { display: none; color: var(--muted); font-size: 12px; }
+.src { color: var(--muted); font-size: 13px; line-height: 1.35; min-width: 0; }
+.src span { white-space: nowrap; }
+.spark { height: 30px; position: relative; }
+.spark svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+/* проекты */
+.proj { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+.card { border-radius: var(--r); background: var(--panel); padding: 20px 22px 22px; min-width: 0; }
+.w7 { grid-column: span 7; } .w5 { grid-column: span 5; } .w12 { grid-column: span 12; }
+.card h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+.card h3 a.open { margin-left: auto; font-size: 13px; font-weight: 400; color: var(--muted); }
+.card h3 a.open:hover { color: var(--text); }
+.stats { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-bottom: 16px; }
+.stat { display: flex; flex-direction: column; }
+.stat .v { font-size: 26px; font-weight: 600; letter-spacing: -.03em; line-height: 1.1; }
+.stat .k { color: var(--muted); font-size: 13px; }
+.note { color: var(--muted); font-size: 13px; margin: 12px 0 0; }
+.note b { color: var(--text-2); font-weight: 500; }
+.off { color: var(--text-2); padding: 14px 16px; border-radius: 12px; background: var(--panel-hi); }
+
+.t { width: 100%; border-collapse: collapse; font-size: 14px; }
+.t th { text-align: left; font-weight: 400; color: var(--muted); font-size: 12px; padding: 0 8px 6px 0; }
+.t td { padding: 6px 8px 6px 0; border-top: 1px solid var(--grid); vertical-align: middle; }
+.t th.n, .t td.n { text-align: right; padding-right: 0; padding-left: 8px; }
+.t td.who { max-width: 0; width: 40%; }
+.t td.who > span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.t .m { color: var(--muted); }
+.t .sub { color: var(--muted); font-size: 12px; margin-left: 4px; }
+.t td.hero { color: var(--text-2); white-space: nowrap; }
+
+.split { display: flex; gap: 2px; height: 8px; margin: 4px 0 10px; }
+.split i { display: block; border-radius: 4px; background: var(--c); min-width: 4px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: 13px; color: var(--text-2); margin-bottom: 16px; }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend .m { color: var(--muted); }
+
+.mini { height: 64px; margin: 2px 0 6px; position: relative; }
+.mini svg { width: 100%; height: 100%; display: block; overflow: visible; }
+
+.events { list-style: none; margin: 0; padding: 0; }
+.events li { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 12px; padding: 8px 0; border-top: 1px solid var(--grid); font-size: 14px; }
+.events li .d { color: var(--muted); }
+.events li .ti { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.events li .p { color: var(--text-2); white-space: nowrap; }
+
+.strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.strip .card h3 { margin-bottom: 8px; }
+.strip .line { color: var(--text-2); font-size: 14px; }
+.strip .line b { color: var(--text); font-weight: 600; }
+
+.err { color: var(--down); font-size: 13px; }
+footer { margin: 48px 0 40px; color: var(--muted); font-size: 13px; max-width: 760px; }
+
+/* подсказка над столбиками */
+.tip {
+  position: fixed; z-index: 50; pointer-events: none; padding: 7px 10px; border-radius: 10px;
+  background: rgba(28, 28, 30, .96); box-shadow: 0 8px 30px rgba(0, 0, 0, .5), inset 0 0 0 1px rgba(255,255,255,.08);
+  font-size: 13px; line-height: 1.35; color: var(--text); white-space: nowrap; transform: translate(-50%, calc(-100% - 10px));
+}
+.tip .m { color: var(--muted); }
+
+.skeleton { color: var(--muted); padding: 60px 0; }
+
+@media (max-width: 1100px) {
+  .srow { grid-template-columns: minmax(140px, 1.3fr) 56px 50px minmax(110px, 1fr) 90px 56px; }
+  .srow .src { display: none; }
+}
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; }
+  .w7, .w5 { grid-column: span 12; }
+  .strip { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .srow {
+    grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "name today" "spark wk" "src src";
+    gap: 6px 14px; padding: 12px 16px;
+  }
+  .srow.head { display: none; }
+  .srow .sname { grid-area: name; }
+  .srow .today { grid-area: today; }
+  .srow .spark { grid-area: spark; }
+  .srow .wk { grid-area: wk; }
+  .srow .yest, .srow .nw { display: none; }
+  .wk-l { display: inline; }
+  .srow .src { display: block; grid-area: src; }
+  .today::after { content: " сегодня"; font-size: 12px; font-weight: 400; color: var(--muted); letter-spacing: 0; }
+  .card { padding: 18px 16px 18px; }
+  .chart { height: 170px; }
+  .t td.hero { display: none; }
+  .t th.hero { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<main id="login" class="login" hidden>
+  <div class="login-box">
+    <h1>Пульт</h1>
+    <p class="lead">Статистика всех сайтов и проектов. Пускает только канал aliveenjoyer.</p>
+    <a id="tw" class="tw-btn" href="#" target="_blank" rel="noopener" aria-disabled="true">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.3 3 3 6.4v13.1h4.5V22h2.6l2.4-2.5h3.6L21 14.6V3H4.3Zm15 10.7-2.8 2.8H12l-2.4 2.4v-2.4H5.8V4.7h13.5v9Zm-3.4-5.9v4.9h-1.7V7.8h1.7Zm-4.7 0v4.9H9.5V7.8h1.7Z"/></svg>
+      <span id="tw-l">Готовлю вход…</span>
+    </a>
+    <div id="wait" class="wait" hidden>
+      <b>Подтверди вход на Twitch</b>
+      <p>Код уже вписан. Если Twitch спросит, введи:</p>
+      <div class="code" id="code"></div>
+      <p><a id="again" class="again" href="#" target="_blank" rel="noopener">Открыть Twitch ещё раз</a></p>
+    </div>
+    <p id="lmsg" class="msg" hidden></p>
+  </div>
+</main>
+
+<div id="app" hidden>
+  <div class="wrap">
+    <header class="top">
+      <span class="brand">Пульт</span>
+      <span id="upd" class="upd"></span>
+      <button id="out" class="out" type="button">Выйти</button>
+    </header>
+    <div id="body"><p class="skeleton">Собираю цифры…</p></div>
+    <footer>Дни считаются по Москве. «Людей за день» — разные люди за один день; кто зашёл в разные дни, считается в каждом.
+      Тестовые заходы не входят. Скачивания — с GitHub за всё время, твои собственные обновления тоже там.</footer>
+  </div>
+</div>
+
+<div id="tip" class="tip" hidden></div>
+
+<script>
+(function () {
+  'use strict';
+  var LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
+  var API = LOCAL ? 'http://127.0.0.1:8100' : 'https://173-249-26-11.sslip.io:8444/admin';
+  var KEY = 'ae-pult';
+  var token = '';
+  try { token = localStorage.getItem(KEY) || ''; } catch (e) {}
+  function keep(t) { token = t; try { if (t) localStorage.setItem(KEY, t); else localStorage.removeItem(KEY); } catch (e) {} }
+
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  var nf = new Intl.NumberFormat('ru-RU');
+  function n(x) { return nf.format(x || 0); }
+  function compact(x) {
+    x = x || 0;
+    if (x >= 1e6) return (Math.round(x / 1e5) / 10).toString().replace('.', ',') + ' млн';
+    if (x >= 1e4) return Math.round(x / 1e3) + ' тыс.';
+    return n(x);
+  }
+  function plural(k, one, few, many) {
+    var a = Math.abs(k) % 100, b = a % 10;
+    if (a > 10 && a < 20) return many;
+    if (b === 1) return one;
+    if (b >= 2 && b <= 4) return few;
+    return many;
+  }
+  function people(k) { return n(k) + ' ' + plural(k, 'человек', 'человека', 'человек'); }
+  var WD = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+  function dshort(day) { return day.slice(8, 10) + '.' + day.slice(5, 7); }
+  function dlong(day) { var d = new Date(day + 'T12:00:00Z'); return dshort(day) + ', ' + WD[d.getUTCDay()]; }
+  function ago(ts) {
+    var s = Date.now() / 1000 - ts;
+    if (s < 90) return 'только что';
+    if (s < 3600) return Math.round(s / 60) + ' мин назад';
+    if (s < 86400) return Math.round(s / 3600) + ' ч назад';
+    var d = Math.round(s / 86400);
+    return d + ' ' + plural(d, 'день', 'дня', 'дней') + ' назад';
+  }
+  function hours(sec) { return sec < 3600 ? Math.round(sec / 60) + ' мин' : (Math.round(sec / 360) / 10).toString().replace('.', ',') + ' ч'; }
+
+  function call(path, body) {
+    var h = {};
+    if (token) h.Authorization = 'Bearer ' + token;
+    if (body) h['Content-Type'] = 'application/json';
+    return fetch(API + path, { method: body ? 'POST' : 'GET', headers: h, body: body ? JSON.stringify(body) : undefined, cache: 'no-store' })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (!r.ok) { var e = new Error(j.error || r.status); e.status = r.status; throw e; }
+          return j;
+        });
+      });
+  }
+
+  /* ---------------- вход ---------------- */
+  var flow = null, pollT = 0, restartT = 0, waiting = false;
+  function lmsg(text, bad) { var m = $('lmsg'); m.hidden = !text; m.textContent = text || ''; m.className = 'msg' + (bad ? ' bad' : ''); }
+  function showLogin(text, bad) {
+    $('app').hidden = true; $('login').hidden = false;
+    waiting = false; $('wait').hidden = true;
+    lmsg(text, bad);
+    prepare();
+  }
+  function prepare() {
+    clearTimeout(pollT); clearTimeout(restartT);
+    var b = $('tw');
+    b.setAttribute('aria-disabled', 'true'); $('tw-l').textContent = 'Готовлю вход…';
+    call('/api/login/start', {}).then(function (f) {
+      flow = f;
+      b.href = f.url; $('again').href = f.url; $('code').textContent = f.code;
+      b.setAttribute('aria-disabled', 'false'); $('tw-l').textContent = 'Войти через Twitch';
+      restartT = setTimeout(function () { showLogin('Код входа устарел, нажми кнопку ещё раз.'); }, Math.max(60, f.expires_in - 60) * 1000);
+    }).catch(function () {
+      $('tw-l').textContent = 'Сервер не отвечает';
+      lmsg('Не получилось связаться с сервером пульта. Обнови страницу через минуту.', true);
+    });
+  }
+  $('tw').addEventListener('click', function () {
+    if (!flow) return;
+    waiting = true; $('wait').hidden = false; lmsg('');
+    $('tw-l').textContent = 'Жду подтверждения на Twitch…';
+    clearTimeout(pollT); pollT = setTimeout(poll, 3000);
+  });
+  function poll() {
+    if (!flow || !waiting) return;
+    call('/api/login/poll', { id: flow.id }).then(function (r) {
+      if (r.state === 'ok') { keep(r.token); flow = null; waiting = false; clearTimeout(restartT); openApp(); return; }
+      if (r.state === 'denied') { showLogin('Это канал ' + (r.login || 'не aliveenjoyer') + '. Пульт открывается только для aliveenjoyer.', true); return; }
+      if (r.state === 'expired') { showLogin('Вход не подтвердился. Нажми кнопку ещё раз.'); return; }
+      pollT = setTimeout(poll, ((flow && flow.interval) || 5) * 1000);
+    }).catch(function () { pollT = setTimeout(poll, 8000); });
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) return;
+    if (waiting) { clearTimeout(pollT); poll(); }
+    else if (token && !$('app').hidden && Date.now() - lastOk > 30000) refresh();
+  });
+
+  /* ---------------- пульт ---------------- */
+  var lastOk = 0, timer = 0, last = null;
+  function openApp() {
+    $('login').hidden = true; $('app').hidden = false;
+    refresh();
+    clearInterval(timer);
+    timer = setInterval(function () { if (!document.hidden) refresh(); }, 60000);
+  }
+  function refresh() {
+    return call('/api/data').then(function (d) {
+      lastOk = Date.now(); last = d; render(d);
+      var t = new Date(d.at * 1000);
+      $('upd').className = 'upd';
+      $('upd').textContent = 'обновлено в ' + String(t.getHours()).padStart(2, '0') + ':' + String(t.getMinutes()).padStart(2, '0');
+    }).catch(function (e) {
+      if (e.status === 401) { keep(''); clearInterval(timer); showLogin('Вход истёк, войди ещё раз.'); return; }
+      $('upd').className = 'upd stale';
+      $('upd').textContent = lastOk ? 'нет связи, цифры на ' + new Date(lastOk).toTimeString().slice(0, 5) : 'нет связи с сервером';
+    });
+  }
+  $('out').addEventListener('click', function () {
+    var t = token;
+    keep(''); clearInterval(timer);
+    if (t) fetch(API + '/api/logout', { method: 'POST', headers: { Authorization: 'Bearer ' + t } }).catch(function () {});
+    showLogin('Ты вышел из пульта.');
+  });
+
+  /* ---------------- графики ---------------- */
+  function niceStep(max, count) {
+    var raw = Math.max(1, max) / count, p = Math.pow(10, Math.floor(Math.log10(raw))), m = raw / p;
+    return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 5 ? 5 : 10) * p;
+  }
+  function barPath(x, y, w, h, r) {
+    if (h <= 0) return '';
+    r = Math.min(r, w / 2, h);
+    return 'M' + x + ',' + (y + h) + 'V' + (y + r) + 'Q' + x + ',' + y + ' ' + (x + r) + ',' + y + 'H' + (x + w - r) +
+      'Q' + (x + w) + ',' + y + ' ' + (x + w) + ',' + (y + r) + 'V' + (y + h) + 'Z';
+  }
+  /* столбики по дням: values, days, opts {color, todayColor, axis, labels, tip(i)} */
+  function columns(el, values, days, o) {
+    var W = el.clientWidth || 300, H = el.clientHeight || 100;
+    var padR = o.axis ? 34 : 0, padB = o.labels ? 20 : 0, padT = o.axis ? 8 : 2;
+    var cw = W - padR, ch = H - padB - padT, nn = values.length, slot = cw / nn;
+    var bw = Math.max(2, Math.min(24, slot - 2)), max = 0;
+    values.forEach(function (v) { if (v > max) max = v; });
+    var top = max || 1, svg = '';
+    if (o.axis) {
+      var step = niceStep(max, 3); top = Math.max(step, Math.ceil(max / step) * step);
+      for (var t = step; t <= top + 1e-9; t += step) {
+        var gy = padT + ch - ch * t / top;
+        svg += '<line x1="0" x2="' + cw + '" y1="' + gy + '" y2="' + gy + '" stroke="var(--grid)" stroke-width="1"/>' +
+          '<text class="axis" x="' + (W - 2) + '" y="' + (gy + 4) + '" text-anchor="end">' + n(t) + '</text>';
+      }
+    }
+    svg += '<line x1="0" x2="' + cw + '" y1="' + (padT + ch + .5) + '" y2="' + (padT + ch + .5) + '" stroke="var(--base)" stroke-width="1"/>';
+    values.forEach(function (v, i) {
+      if (v == null) return;
+      var h = v > 0 ? Math.max(2, ch * v / top) : 0, x = i * slot + (slot - bw) / 2;
+      var c = i === nn - 1 ? (o.todayColor || o.color) : o.color;
+      svg += '<path d="' + barPath(x, padT + ch - h, bw, h, bw >= 8 ? 4 : 2) + '" fill="' + c + '"' + (o.dim && i !== nn - 1 ? ' fill-opacity="' + o.dim + '"' : '') + '/>';
+    });
+    if (o.labels) {
+      var marks = [0, Math.floor(nn / 2), nn - 1];
+      marks.forEach(function (i, k) {
+        var x = i * slot + slot / 2, anchor = k === 0 ? 'start' : k === 2 ? 'end' : 'middle';
+        if (k === 0) x = i * slot + (slot - bw) / 2; if (k === 2) x = i * slot + (slot + bw) / 2;
+        svg += '<text class="axis" x="' + x + '" y="' + (H - 4) + '" text-anchor="' + anchor + '">' + (i === nn - 1 ? 'сегодня' : dshort(days[i])) + '</text>';
+      });
+    }
+    el.innerHTML = '<svg role="img" aria-label="' + esc(o.label || '') + '" viewBox="0 0 ' + W + ' ' + H + '">' + svg + '</svg>';
+    hover(el, nn, slot, o.tip);
+  }
+  var tip = $('tip');
+  function hover(el, nn, slot, fn) {
+    if (!fn) return;
+    function at(e) {
+      var r = el.getBoundingClientRect(), i = Math.floor((e.clientX - r.left) / slot);
+      if (i < 0 || i >= nn) { tip.hidden = true; return; }
+      var html = fn(i);
+      if (!html) { tip.hidden = true; return; }
+      tip.innerHTML = html; tip.hidden = false;
+      var x = Math.min(Math.max(r.left + (i + .5) * slot, 90), innerWidth - 90);
+      tip.style.left = x + 'px'; tip.style.top = Math.max(e.clientY, 64) + 'px';
+    }
+    el.onpointermove = at; el.onpointerdown = at;
+    el.onpointerleave = function () { tip.hidden = true; };
+  }
+  window.addEventListener('scroll', function () { tip.hidden = true; }, { passive: true });
+
+  /* ---------------- отрисовка ---------------- */
+  function bad(sec) { return !sec || sec.error; }
+  function errLine(name, sec) { return '<p class="err">' + esc(name) + ': не собралось' + (sec && sec.error ? ' (' + esc(sec.error) + ')' : '') + '</p>'; }
+
+  function render(d) {
+    var s = d.sites, html = '';
+    if (bad(s)) { $('body').innerHTML = errLine('Сайты', s); return; }
+    var days = s.days, tot = s.total, nn = days.length;
+    var prev7 = tot.slice(nn - 8, nn - 1), avg = Math.round(prev7.reduce(function (a, b) { return a + b; }, 0) / 7);
+    html += '<section class="hero">' +
+      '<div class="hero-num"><span class="big-w"><span class="big">' + n(tot[nn - 1]) + '</span>' +
+      '<svg class="stroke" viewBox="0 0 190 22" preserveAspectRatio="none" aria-hidden="true"><path d="M4 15c30-7 62-10 96-9 30 1 55 4 84 1" vector-effect="non-scaling-stroke"/></svg></span>' +
+      '<p class="hero-lbl">' + plural(tot[nn - 1], 'человек', 'человека', 'человек') + ' сегодня на всех сайтах</p>' +
+      '<dl class="facts"><div><dt>вчера</dt><dd>' + n(tot[nn - 2]) + '</dd></div>' +
+      '<div><dt>в среднем за неделю</dt><dd>' + n(avg) + '</dd></div>' +
+      '<div><dt>за час</dt><dd>' + n(s.hour) + '</dd></div></dl></div>' +
+      '<div><div class="chart" id="c-total"></div><p class="chart-cap" id="c-total-cap">Люди за день на всех сайтах вместе</p></div>' +
+      '</section>';
+
+    html += '<section class="block"><h2>Сайты<small>люди за день</small></h2><div class="sites">' +
+      '<div class="srow head"><span>сайт</span><span class="today" style="font-size:12px;font-weight:400">сегодня</span><span class="yest">вчера</span>' +
+      '<span>14 дней</span><span class="wk">за 7 дней</span><span class="nw">новых</span><span class="src">откуда за неделю</span></div>';
+    s.sites.forEach(function (x, k) {
+      var dl = '';
+      if (x.prev_week > 0) {
+        var p = Math.round(100 * (x.week - x.prev_week) / x.prev_week);
+        dl = p > 0 ? '<span class="delta up">▲ ' + p + ' %</span>' : p < 0 ? '<span class="delta down">▼ ' + (-p) + ' %</span>' : '<span class="delta">как прошлая</span>';
+      } else if (x.week > 0) dl = '<span class="delta">новое</span>';
+      var src = x.sources.map(function (z) { return '<span>' + esc(z[0]) + ' ' + n(z[1]) + '</span>'; }).join(', ');
+      if (x.pages.length) src += (src ? '<br>' : '') + x.pages.map(function (z) { return '<span>' + esc(z[0]) + ' ' + n(z[1]) + '</span>'; }).join(', ');
+      html += '<div class="srow" style="--c:' + esc(x.color) + '">' +
+        '<span class="sname"><i class="dot"></i><a href="' + esc(x.url) + '" target="_blank" rel="noopener" title="Всего ' + n(x.views_all) + ' просмотров' + (x.since ? ' с ' + dshort(x.since) : '') + '">' + esc(x.name) + '</a></span>' +
+        '<span class="today num">' + n(x.today) + '</span>' +
+        '<span class="yest num">' + n(x.yesterday) + '</span>' +
+        '<span class="spark" id="sp-' + k + '"></span>' +
+        '<span class="wk num"><span class="wk-l">за неделю </span><b>' + n(x.week) + '</b>' + dl + '</span>' +
+        '<span class="nw num">' + (x.has_new ? n(x.week_new) : '—') + '</span>' +
+        '<span class="src">' + (src || 'никого') + '</span></div>';
+    });
+    html += '</div></section>';
+
+    html += '<section class="block"><h2>Внутри проектов</h2><div class="proj">' +
+      rpgCard(d.rpg) + clickerCard(d.clicker, days) + lobbyCard(d.lobby) + dlCard(d.downloads) + '</div>' +
+      '<div class="strip" style="margin-top:16px">' + dloCard(d.dlo) + mcCard(d.misc) + sashaCard(d.misc) + '</div></section>';
+
+    $('body').innerHTML = html;
+    drawCharts(d);
+  }
+
+  function drawCharts(d) {
+    var s = d.sites, days = s.days, nn = days.length;
+    var el = $('c-total');
+    if (el) {
+      // пустое начало (до счётчиков на всех сайтах) не показываем: с первого дня, где людей хотя бы 5 % от пика, но не меньше 14 дней
+      var peak = Math.max.apply(null, s.total), from = 0;
+      while (from < nn - 14 && s.total[from] < peak * .05) from++;
+      var tv = s.total.slice(from), td = days.slice(from);
+      $('c-total-cap').textContent = 'Люди за день на всех сайтах вместе, с ' + dshort(td[0]);
+      columns(el, tv, td, {
+        color: 'var(--bar)', todayColor: 'var(--accent)', axis: true, labels: true, label: 'Люди за день на всех сайтах с ' + dshort(td[0]),
+        tip: function (i) { return '<b>' + people(tv[i]) + '</b><br><span class="m">' + dlong(td[i]) + (i === tv.length - 1 ? ', день ещё идёт' : '') + '</span>'; }
+      });
+    }
+    s.sites.forEach(function (x, k) {
+      var e = $('sp-' + k); if (!e) return;
+      var from = nn - 14, vals = x.people.slice(from), dd = days.slice(from);
+      columns(e, vals, dd, {
+        color: x.color, dim: .45, label: x.name + ': люди за день, 14 дней',
+        tip: function (i) {
+          var j = from + i;
+          return '<b>' + people(x.people[j]) + '</b><br><span class="m">' + dlong(days[j]) + ', просмотров ' + n(x.views[j]) +
+            (x.has_new ? ', новых ' + n(x.new[j]) : '') + '</span>';
+        }
+      });
+    });
+    var c = d.clicker, ce = $('c-click');
+    if (ce && !bad(c)) {
+      var from = nn - 14, vals = c.browsers.slice(from).map(function (v, i) { return v == null ? c.logged[from + i] : v; });
+      columns(ce, vals, days.slice(from), {
+        color: '#f5cf6a', dim: .5, labels: true, label: 'Кликер: игроки за день, 14 дней',
+        tip: function (i) { var j = from + i; return '<b>' + people(vals[i]) + ' играли</b><br><span class="m">' + dlong(days[j]) + ', из них вошли через Twitch ' + n(c.logged[j]) + '</span>'; }
+      });
+    }
+  }
+
+  function card(cls, color, title, url, inner) {
+    return '<article class="card ' + cls + '" style="--c:' + color + '"><h3><i class="dot"></i>' + esc(title) +
+      (url ? '<a class="open" href="' + esc(url) + '" target="_blank" rel="noopener">открыть</a>' : '') + '</h3>' + inner + '</article>';
+  }
+  function stat(v, k) { return '<div class="stat"><span class="v">' + v + '</span><span class="k">' + esc(k) + '</span></div>'; }
+
+  function rpgCard(r) {
+    var url = 'https://rpg.aliveenjoyer.art/game';
+    if (bad(r)) return card('w7', '#4fe3c1', 'Чат-RPG', url, errLine('RPG', r));
+    if (!r.online) return card('w7', '#4fe3c1', 'Чат-RPG', url, '<p class="off">Колесо сейчас выключено. Игроки RPG видны, только пока оно запущено.</p>');
+    var f = r.factions, keys = Object.keys(f), sum = keys.reduce(function (a, k) { return a + f[k].souls; }, 0) || 1;
+    var inner = '<div class="stats">' + stat(n(r.players), 'игроков в таблице') + stat(n(r.active), 'сейчас в чате') +
+      stat(n(r.subs), 'сабов') + stat(compact(r.souls), 'душ на руках') + '</div>';
+    inner += '<div class="split" role="img" aria-label="Души по фракциям">' + keys.map(function (k) {
+      return '<i style="--c:' + f[k].color + ';flex:' + Math.max(f[k].souls, 1) + '"></i>'; }).join('') + '</div>';
+    inner += '<div class="legend">' + keys.map(function (k) {
+      return '<span><i class="dot" style="--c:' + f[k].color + '"></i>' + esc(f[k].name) + ' <span class="m">' + n(f[k].players) + ' игр., ' +
+        Math.round(100 * f[k].souls / sum) + ' % душ</span></span>'; }).join('') + '</div>';
+    inner += '<table class="t"><thead><tr><th>игрок</th><th class="hero">герой</th><th class="n">души</th><th class="n">всего добыл</th></tr></thead><tbody>' +
+      r.top.map(function (p) {
+        var fc = (f[p.faction] || {}).color || 'var(--muted)';
+        return '<tr><td class="who"><span><i class="dot" style="display:inline-block;margin-right:8px;--c:' + fc + '"></i>' + esc(p.name) +
+          (p.sub ? '<span class="sub">саб</span>' : '') + (p.active ? '<span class="sub">в чате</span>' : '') + '</span></td>' +
+          '<td class="hero">' + esc(p.hero || '—') + '</td><td class="n">' + n(p.souls) + '</td><td class="n m">' + n(p.earned) + '</td></tr>';
+      }).join('') + '</tbody></table>';
+    return card('w7', '#4fe3c1', 'Чат-RPG', url, inner);
+  }
+
+  function clickerCard(c, days) {
+    var url = 'https://clicker.aliveenjoyer.art';
+    if (bad(c)) return card('w5', '#f5cf6a', 'Хлыстопад', url, errLine('Кликер', c));
+    var inner = '<div class="stats">' + stat(n(c.week), 'играли за неделю') + stat(n(c.logged_total), 'вошли через Twitch') +
+      stat(compact(c.exchange_souls), 'душ обменяли в RPG') + '</div>';
+    inner += '<div class="mini" id="c-click"></div>';
+    inner += '<p class="note" style="margin:0 0 14px">' + (c.today.length ? 'Сегодня играли: <b>' + c.today.map(esc).join(', ') + '</b>' : 'Сегодня через Twitch ещё никто не играл') + '</p>';
+    inner += '<table class="t"><thead><tr><th>игрок</th><th class="n">волна</th><th class="n">в игре</th><th class="n">заходил</th></tr></thead><tbody>' +
+      c.players.slice(0, 6).map(function (p) {
+        return '<tr><td class="who"><span>' + esc(p.name) + '</span></td><td class="n">' + n(p.wave) + '</td><td class="n m">' + hours(p.play) +
+          '</td><td class="n m">' + ago(p.last) + '</td></tr>';
+      }).join('') + '</tbody></table>';
+    inner += '<p class="note">Обменник: ' + n(c.exchange_people) + ' ' + plural(c.exchange_people, 'человек', 'человека', 'человек') + ' за всё время.</p>';
+    return card('w5', '#f5cf6a', 'Хлыстопад', url, inner);
+  }
+
+  function lobbyCard(l) {
+    var url = 'https://lobby.aliveenjoyer.art';
+    if (bad(l)) return card('w5', '#f0a02c', 'Лобби', url, errLine('Лобби', l));
+    var wk = l.signups.slice(-7).reduce(function (a, b) { return a + b; }, 0);
+    var inner = '<div class="stats">' + stat(n(l.users), 'аккаунтов') + stat(n(l.steam), 'со Steam') + stat(n(l.played), 'уже сыграли') +
+      stat(n(wk), 'новых за неделю') + '</div>';
+    inner += '<ul class="events">' + l.events.map(function (e) {
+      return '<li><span class="d">' + dshort(e.day) + '</span><span class="ti">' + esc(e.title) + '</span><span class="p">' +
+        n(e.people) + ' ' + plural(e.people, 'игрок', 'игрока', 'игроков') + ', ' + n(e.matches) + ' ' + plural(e.matches, 'матч', 'матча', 'матчей') + '</span></li>';
+    }).join('') + '</ul>';
+    inner += '<p class="note">Всего ' + n(l.events_total) + ' ' + plural(l.events_total, 'лобби', 'лобби', 'лобби') + ' и ' + n(l.matches_total) + ' ' +
+      plural(l.matches_total, 'матч', 'матча', 'матчей') + (l.last_activity ? '. Последнее действие на сайте ' + ago(l.last_activity) : '') + '.</p>';
+    return card('w5', '#f0a02c', 'Лобби', url, inner);
+  }
+
+  function dlCard(g) {
+    if (bad(g)) return card('w7', '#a1a1a6', 'Скачивания программ', '', errLine('Скачивания', g));
+    var colors = { chatlock: '#ff9a2e', encore: '#ff7eb6', dlo: '#3f8cff', overlay: '#a78bfa' };
+    var inner = '<table class="t"><thead><tr><th>программа</th><th>последняя версия</th><th class="n">её скачали</th><th class="n">всего</th></tr></thead><tbody>' +
+      g.repos.map(function (r) {
+        if (r.error) return '<tr><td class="who"><span>' + esc(r.name) + '</span></td><td class="m" colspan="3">GitHub не ответил</td></tr>';
+        return '<tr><td class="who"><span><i class="dot" style="display:inline-block;margin-right:8px;--c:' + (colors[r.key] || 'var(--muted)') + '"></i>' +
+          '<a href="https://github.com/' + esc(r.repo) + '/releases" target="_blank" rel="noopener">' + esc(r.name) + '</a></span></td>' +
+          '<td>' + esc(r.tag || '—') + ' <span class="m">' + (r.date ? dshort(r.date) : '') + '</span></td>' +
+          '<td class="n">' + n(r.latest) + '</td><td class="n">' + n(r.total) + '</td></tr>';
+      }).join('') + '</tbody></table>';
+    inner += '<p class="note">С GitHub, без файлов контрольных сумм. Обновляется раз в час' + (g.at ? ', последний раз ' + ago(g.at) : '') + '.</p>';
+    return card('w7', '#a1a1a6', 'Скачивания программ', '', inner);
+  }
+
+  function dloCard(t) {
+    if (bad(t)) return card('', '#3f8cff', 'Поддержка Optimizer', '', errLine('Поддержка', t));
+    var l = t.latest[0];
+    return card('', '#3f8cff', 'Поддержка Optimizer', '', '<p class="line"><b>' + n(t.total) + '</b> ' + plural(t.total, 'отчёт', 'отчёта', 'отчётов') +
+      ', за неделю <b>' + n(t.week) + '</b>, открытых ' + n(t.open) + '.' + (l ? ' Последний ' + ago(l.at) + ', версия ' + esc(l.app) + '.' : '') + '</p>');
+  }
+  function mcCard(m) {
+    if (bad(m)) return card('', '#8bd46a', 'Minecraft-сервер', '', errLine('Minecraft', m));
+    var s = m.minecraft;
+    return card('', '#8bd46a', 'Minecraft-сервер', 'https://aliveenjoyer.art/minecraft/', '<p class="line">' +
+      (s.up ? 'Работает, на сервере <b>' + n(s.online) + '</b> из ' + n(s.max) + '.' : 'Сейчас выключен.') + '</p>');
+  }
+  function sashaCard(m) {
+    if (bad(m)) return '';
+    var a = m.sasha_apps;
+    return card('', '#ff9ecf', 'Анкета sashawaify', 'https://sashawaify.aliveenjoyer.art', '<p class="line"><b>' + n(a.total) + '</b> ' +
+      plural(a.total, 'заявка', 'заявки', 'заявок') + ' в модеры, за неделю <b>' + n(a.week) + '</b>.</p>');
+  }
+
+  var rT = 0;
+  window.addEventListener('resize', function () { clearTimeout(rT); rT = setTimeout(function () { if (last && !$('app').hidden) drawCharts(last); }, 150); });
+
+  if (token) openApp(); else showLogin();
+})();
+</script>
+</body>
+</html>
