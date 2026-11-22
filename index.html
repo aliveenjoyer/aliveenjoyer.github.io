@@ -66,11 +66,46 @@ button { font: inherit; color: inherit; }
 .nav { position: relative; z-index: 6; display: flex; align-items: center; gap: clamp(12px, 2vw, 24px); height: 56px; padding: 0 var(--gutter); font-size: 13px; }
 .brand { font-weight: 600; font-size: 15px; letter-spacing: -.01em; }
 .tagline { margin: 0; font-size: 13px; font-weight: 400; color: var(--gray); white-space: nowrap; }
-.nav-links { margin-left: auto; display: flex; align-items: center; gap: 22px; }
+.nav-links { margin-left: auto; display: flex; align-items: center; gap: 12px; }
 .nav-links a { color: rgba(245, 245, 247, .78); transition: color .2s; }
 .nav-links a:hover { color: var(--text); }
-.nav-links a.pill { color: #000; background: var(--text); padding: 7px 15px; border-radius: 999px; font-weight: 500; }
-.pill .short { display: none; }
+.nav-links a.minor { margin-right: 10px; }
+/* Telegram, донат и Twitch: три неоновые кнопки одной ширины в цвет сервиса, при открытии страницы по очереди
+   «загораются», как неоновые трубки. Сетка 1fr делает все три по ширине самой длинной. */
+.cta3 { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 10px; }
+.nav-links a.soc {
+  --sc: #2aabee;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 38px; padding: 0 17px 0 14px; border-radius: 999px;
+  color: var(--text); font-size: 14px; font-weight: 500; white-space: nowrap;
+  background: color-mix(in srgb, var(--sc) 17%, #050506);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--sc) 75%, transparent),
+    0 0 14px -2px color-mix(in srgb, var(--sc) 70%, transparent),
+    0 0 36px -6px color-mix(in srgb, var(--sc) 60%, transparent);
+  transition: background .25s, box-shadow .25s;
+  animation: neon-on 1.3s steps(1, end) .9s both;
+}
+.nav-links a.soc.da { --sc: #ff8a1e; animation-delay: 1.2s; }
+.nav-links a.soc.tw { --sc: #9146ff; animation-delay: 1.5s; }
+.nav-links a.soc:hover {
+  color: #fff; background: color-mix(in srgb, var(--sc) 28%, #050506);
+  box-shadow:
+    inset 0 0 0 1px var(--sc),
+    0 0 18px 0 color-mix(in srgb, var(--sc) 80%, transparent),
+    0 0 48px -4px color-mix(in srgb, var(--sc) 70%, transparent);
+}
+.soc svg { flex: none; width: 17px; height: 17px; fill: var(--sc); filter: drop-shadow(0 0 5px var(--sc)); }
+.soc.tw svg { fill: #a970ff; }   /* фирменный фиолетовый Twitch на чёрном темноват, значок чуть светлее */
+.soc .s, .soc .m { display: none; }
+html.intro .nav-links a.soc { animation: none; }
+@keyframes neon-on {
+  0% { opacity: .22; }
+  6% { opacity: 1; }
+  9% { opacity: .3; }
+  16% { opacity: 1; }
+  19% { opacity: .45; }
+  30%, 100% { opacity: 1; }
+}
 
 /* сцена */
 .stage {
@@ -248,21 +283,24 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
 .fine nav { display: flex; gap: 18px; }
 .fine nav a { text-decoration: underline; text-underline-offset: 3px; }
 .fine nav a:hover { color: var(--text); }
-.fine nav a.m { display: none; }
 
 .grain {
   position: fixed; inset: 0; z-index: 9; pointer-events: none; opacity: .05;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
-@media (max-width: 900px) { .nav-links a.minor { display: none; } .fine nav a.m { display: inline; } }
+@media (max-width: 1100px) { .soc .l { display: none; } .soc .s { display: inline; } }
+@media (max-width: 900px) { .nav-links a.minor { display: none; } }
 
 /* телефон */
 @media (max-width: 760px) {
   .nav { height: 50px; }
-  .nav-links a:not(.pill) { display: none; }
-  .pill .long { display: none; }
-  .pill .short { display: inline; }
+  .tagline { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .cta3 { gap: 6px; }
+  .nav-links a.soc { height: 34px; padding: 0 9px; gap: 5px; font-size: 12.5px; }
+  .soc svg { width: 15px; height: 15px; }
+  .soc.tg .s { display: none; }
+  .soc.tg .m { display: inline; }
   .frame { grid-template-columns: minmax(0, 1fr) !important; grid-template-rows: minmax(0, 1fr) auto; }
   .obj { grid-row: 1; height: 90%; }
   .copy { grid-row: 2; }
@@ -296,8 +334,14 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
   body { height: auto; min-height: 100vh; overflow: auto; }
   .stage { min-height: 460px; touch-action: pan-y pinch-zoom; }
 }
+/* совсем узкий телефон: три круглые кнопки с одними значками */
+@media (max-width: 372px) {
+  .nav-links a.soc { width: 36px; height: 36px; padding: 0; }
+  .cta3 a.soc > span { display: none !important; }
+  .soc svg { width: 17px; height: 17px; }
+}
 @media (prefers-reduced-motion: reduce) {
-  .stage, .slide.is-active .streak, .slide.is-active .copy > * { animation: none; }
+  .stage, .slide.is-active .streak, .slide.is-active .copy > *, .nav-links a.soc { animation: none; }
   .tab .thumb, .playhead { transition: none !important; }
 }
 </style>
@@ -310,9 +354,11 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
   <h1 class="tagline">Отдай чату пульт.</h1>
   <nav class="nav-links" aria-label="Ссылки">
     <a class="minor" href="minecraft/">Minecraft</a>
-    <a class="minor" href="https://t.me/aliveenjoyer">Telegram</a>
-    <a class="minor" href="https://www.donationalerts.com/r/aliveenjoyer">Закинуть донат</a>
-    <a class="pill" href="https://twitch.tv/aliveenjoyer" aria-label="Twitch: смотреть стрим"><span class="long">Смотреть, как я страдаю</span><span class="short">Twitch</span></a>
+    <div class="cta3">
+    <a class="soc tg" href="https://t.me/aliveenjoyer" aria-label="Telegram-канал"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 3.3 2.7 10.5c-1.1.4-1.1 1.1-.1 1.4l4.7 1.5 1.8 5.6c.2.7.4.8.9.8.4 0 .6-.2.9-.5l2.4-2.3 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.8c.3-1.3-.5-1.9-1.5-1.6Zm-3.2 3.9-8.6 7.8-.4 3.4-1.3-4.2 9.8-6.6c.5-.3.8 0 .5.4Z"/></svg><span class="l">Telegram-канал</span><span class="s">Telegram</span><span class="m">ТГК</span></a>
+    <a class="soc da" href="https://www.donationalerts.com/r/aliveenjoyer" aria-label="Закинуть донат"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.2-4.4-9.4-9.1C1 8.5 3.2 4.6 7 4.6c2.2 0 3.8 1.2 5 2.9 1.2-1.7 2.8-2.9 5-2.9 3.8 0 6 3.9 4.4 7.3C19.2 16.6 12 21 12 21Z"/></svg><span class="l">Закинуть донат</span><span class="s">Донат</span></a>
+    <a class="soc tw" href="https://twitch.tv/aliveenjoyer" aria-label="Twitch: смотреть стрим"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 2.5 3 6.6v13.6h4.6v2.5h2.6l2.5-2.5h3.7l5.1-5.1V2.5H4.6Zm14.9 11.6-2.9 2.9H12l-2.5 2.5V17H5.7V4.2h13.8v9.9ZM16.6 7.3h-1.8v5.2h1.8V7.3Zm-4.8 0H10v5.2h1.8V7.3Z"/></svg><span class="l">Смотреть стрим</span><span class="s">Twitch</span></a>
+    </div>
   </nav>
 </header>
 
@@ -470,7 +516,7 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
 
 <footer class="fine">
   <p>Deadlock принадлежит Valve. Я просто фанат, Valve тут ни при чём.</p>
-  <nav aria-label="Ещё"><a class="m" href="https://t.me/aliveenjoyer">Telegram</a><a class="m" href="https://www.donationalerts.com/r/aliveenjoyer">Донат</a><a href="minecraft/">Minecraft-сервер</a><a href="https://github.com/aliveenjoyer">GitHub</a></nav>
+  <nav aria-label="Ещё"><a href="minecraft/">Minecraft-сервер</a><a href="https://github.com/aliveenjoyer">GitHub</a></nav>
 </footer>
 
 <div class="grain" aria-hidden="true"></div>
