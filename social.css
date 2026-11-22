@@ -1,0 +1,77 @@
+/* Telegram, донат и Twitch: три неоновые кнопки одной ширины, как на aliveenjoyer.art.
+   Один файл на все сайты: https://aliveenjoyer.art/social.css (исходник Skyrim\Hub\social.css).
+   Разметка (вставлять как есть, подписи переключаются сами по ширине экрана):
+
+   <nav class="ae-soc" aria-label="Канал aliveenjoyer">
+     <a class="ae-b ae-tg" href="https://t.me/aliveenjoyer" aria-label="Telegram-канал">…svg…<span class="ae-l">Telegram-канал</span><span class="ae-s">Telegram</span><span class="ae-m">ТГК</span></a>
+     <a class="ae-b ae-da" href="https://www.donationalerts.com/r/aliveenjoyer" aria-label="Закинуть донат">…svg…<span class="ae-l">Закинуть донат</span><span class="ae-s">Донат</span><span class="ae-m">Донат</span></a>
+     <a class="ae-b ae-tw" href="https://twitch.tv/aliveenjoyer" aria-label="Twitch: смотреть стрим">…svg…<span class="ae-l">Смотреть стрим</span><span class="ae-s">Twitch</span><span class="ae-m">Twitch</span></a>
+   </nav>
+
+   Подписи: шире 1100 px длинные, до 1100 короткие, до 760 (телефон) компактные, до 372 одни значки.
+   Классы на .ae-soc: is-short — всегда короткие на ПК, is-icons — всегда одни значки.
+   Шрифт берётся у страницы. При открытии кнопки по очереди «загораются», как неоновые трубки. */
+
+.ae-soc { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 10px; flex: none; }
+.ae-soc .ae-b {
+  --sc: #2aabee;
+  box-sizing: border-box;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 38px; padding: 0 17px 0 14px; border-radius: 999px;
+  color: #f5f5f7; font-size: 14px; font-weight: 500; line-height: 1; letter-spacing: 0;
+  white-space: nowrap; text-decoration: none; text-transform: none;
+  background: color-mix(in srgb, var(--sc) 17%, #050506);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--sc) 75%, transparent),
+    0 0 14px -2px color-mix(in srgb, var(--sc) 70%, transparent),
+    0 0 36px -6px color-mix(in srgb, var(--sc) 60%, transparent);
+  transition: background .25s, box-shadow .25s, color .2s;
+  animation: ae-neon-on 1.3s steps(1, end) .9s both;
+}
+.ae-soc .ae-da { --sc: #ff8a1e; animation-delay: 1.2s; }
+.ae-soc .ae-tw { --sc: #9146ff; animation-delay: 1.5s; }
+.ae-soc .ae-b:hover, .ae-soc .ae-b:focus-visible {
+  color: #fff; background: color-mix(in srgb, var(--sc) 28%, #050506);
+  box-shadow:
+    inset 0 0 0 1px var(--sc),
+    0 0 18px 0 color-mix(in srgb, var(--sc) 80%, transparent),
+    0 0 48px -4px color-mix(in srgb, var(--sc) 70%, transparent);
+}
+.ae-soc .ae-b:focus-visible { outline: 2px solid #f5f5f7; outline-offset: 3px; }
+.ae-soc svg { display: block; flex: none; width: 17px; height: 17px; fill: var(--sc); filter: drop-shadow(0 0 5px var(--sc)); }
+.ae-soc .ae-tw svg { fill: #a970ff; }   /* фирменный фиолетовый Twitch на чёрном темноват, значок чуть светлее */
+.ae-soc .ae-s, .ae-soc .ae-m { display: none; }
+.ae-soc.is-short .ae-l { display: none; }
+.ae-soc.is-short .ae-s { display: inline; }
+
+@keyframes ae-neon-on {
+  0% { opacity: .22; }
+  6% { opacity: 1; }
+  9% { opacity: .3; }
+  16% { opacity: 1; }
+  19% { opacity: .45; }
+  30%, 100% { opacity: 1; }
+}
+
+@media (max-width: 1100px) {
+  .ae-soc .ae-l { display: none; }
+  .ae-soc .ae-s { display: inline; }
+}
+@media (max-width: 760px) {
+  .ae-soc { gap: 6px; }
+  .ae-soc .ae-b { height: 34px; padding: 0 9px; gap: 5px; font-size: 12.5px; }
+  .ae-soc svg { width: 15px; height: 15px; }
+  .ae-soc .ae-s, .ae-soc.is-short .ae-s { display: none; }
+  .ae-soc .ae-m { display: inline; }
+}
+@media (max-width: 372px) {
+  .ae-soc .ae-b { width: 36px; height: 36px; padding: 0; }
+  .ae-soc .ae-b > span { display: none !important; }
+  .ae-soc svg { width: 17px; height: 17px; }
+}
+.ae-soc.is-icons .ae-b { width: 36px; height: 36px; padding: 0; }
+.ae-soc.is-icons .ae-b > span { display: none !important; }
+.ae-soc.is-icons svg { width: 17px; height: 17px; }
+@media (prefers-reduced-motion: reduce) {
+  .ae-soc .ae-b { animation: none; }
+}
