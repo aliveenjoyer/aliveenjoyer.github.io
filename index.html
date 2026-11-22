@@ -17,6 +17,19 @@
 <script>
 // the Minecraft server site used to live here; keep its old anchors working
 if (/^#(season1|season2|about|join|install|rules|apply|world|wl-form)$/.test(location.hash)) location.replace('minecraft/' + location.search + location.hash);
+// вступление решается здесь, до первой отрисовки, чтобы страница не мелькнула: при первом заходе в этом браузере,
+// не по ссылке на конкретный проект и не при «уменьшить движение». ?intro=1 — показать всегда, ?intro=0 — никогда.
+(function () {
+  var q = location.search, seen = false;
+  try { seen = localStorage.getItem('ae-intro') === '1'; } catch (e) {}
+  var deep = /^#(rpg|ring|clicker|lobby|optimizer|dlo|music|encore|chatlock|chat|overlay)$/.test(location.hash);
+  var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (/[?&]intro=1/.test(q) || (!seen && !deep && !calm && !/[?&](intro=0|pos=)/.test(q))) {
+    document.documentElement.classList.add('intro');
+    // если скрипт страницы почему-то не запустил вступление, страница всё равно откроется
+    setTimeout(function () { if (!window.__introRunning) document.documentElement.classList.remove('intro'); }, 4000);
+  }
+})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -180,8 +193,46 @@ button { font: inherit; color: inherit; }
 }
 .count { display: none; margin: 0; font-size: 13px; color: var(--gray); white-space: nowrap; }
 .count b { font-weight: 500; color: var(--text); }
-.hint { position: absolute; right: var(--gutter); top: 50%; transform: translateY(-50%); margin: 0; white-space: nowrap; font-size: 12.5px; color: var(--gray); transition: opacity .5s; }
-.used .hint { opacity: 0; }
+/* подсказка над лентой: после вступления и при каждом заходе, пока человек сам не полистал */
+.peek {
+  position: absolute; left: 50%; bottom: calc(100% + 4px); margin: 0;
+  display: flex; align-items: center; gap: 8px; padding: 7px 12px 7px 15px; border-radius: 999px;
+  background: rgba(255, 255, 255, .06); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  font-size: 13px; color: var(--gray-2); white-space: nowrap; pointer-events: none;
+  opacity: 0; transform: translate(-50%, 8px); transition: opacity .6s, transform .6s cubic-bezier(.2, .7, .1, 1);
+}
+.peek b { font-weight: 500; color: var(--text); }
+.peek svg { width: 15px; height: 15px; color: var(--accent); animation: peek-go 1.3s ease-in-out infinite; }
+.peek .pk-m { display: none; }
+.peeking:not(.used) .peek { opacity: 1; transform: translate(-50%, 0); }
+@keyframes peek-go { 50% { transform: translateX(4px); } }
+
+/* вступление: семь объектов выходят в ряд на линии своих цветов и улетают вниз, каждый в свою миниатюру */
+.nav, .bar, .fine { transition: opacity .8s ease; }
+html.intro .nav, html.intro .bar, html.intro .fine { opacity: 0; }
+/* прозрачностью, а не visibility: у слайдов своя visibility в style, она перебила бы скрытие */
+html.intro .stage { animation: none; opacity: 0; }
+html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { animation: none; }
+.i-hold .tab { visibility: hidden; }
+.intro-ov { position: fixed; inset: 0; z-index: 8; display: grid; place-items: center; cursor: pointer; -webkit-user-select: none; user-select: none; }
+.i-stack { width: min(1180px, calc(100vw - 2 * var(--gutter))); display: grid; justify-items: center; text-align: center; }
+.i-title { margin: 0; font-weight: 600; font-size: clamp(34px, 5.4vw, 78px); line-height: 1; letter-spacing: -.045em; opacity: 0; }
+.i-sub { margin: 16px 0 0; font-size: clamp(15px, 1.45vw, 20px); color: var(--gray-2); letter-spacing: -.01em; opacity: 0; }
+.i-row {
+  --img: min(150px, calc((100vw - 2 * var(--gutter)) / 7.6));
+  position: relative; width: 100%; margin-top: clamp(30px, 6vh, 64px);
+  display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); justify-items: center;
+}
+.i-line { position: absolute; left: -6%; right: -6%; top: calc(var(--img) / 2); height: 2px; margin-top: -1px; opacity: 0; transform-origin: 50% 50%; }
+.i-line::after { content: ""; position: absolute; inset: -10px 0; background: inherit; filter: blur(10px); opacity: .7; }
+.i-spark { position: absolute; left: 0; top: calc(var(--img) / 2); width: 180px; height: 70px; margin: -35px 0 0 -90px; border-radius: 50%; opacity: 0; background: radial-gradient(closest-side, #fff, rgba(255, 255, 255, .35) 35%, transparent); filter: blur(4px); }
+.i-item { position: relative; display: grid; justify-items: center; gap: 12px; }
+/* копии с прозрачностью (assets/neon/a): слой вступления не смешивается со страницей, «screen» тут не сработал бы */
+.i-item img { position: relative; width: var(--img); height: var(--img); opacity: 0; pointer-events: none; -webkit-user-drag: none; }
+.i-halo { position: absolute; left: 50%; top: calc(var(--img) / 2); width: calc(var(--img) * 1.5); aspect-ratio: 1; margin: calc(var(--img) * -.75) 0 0 calc(var(--img) * -.75); border-radius: 50%; opacity: 0; background: radial-gradient(closest-side, color-mix(in srgb, var(--c) 55%, transparent), color-mix(in srgb, var(--c2) 22%, transparent) 55%, transparent); filter: blur(8px); }
+.i-name { font-size: 13px; color: var(--gray-2); white-space: nowrap; opacity: 0; }
+.i-skip { position: fixed; right: var(--gutter); bottom: 14px; padding: 8px 12px; border: 0; border-radius: 999px; background: none; font-size: 12.5px; color: var(--gray); cursor: pointer; opacity: 0; transition: color .2s; }
+.i-skip:hover { color: var(--text); }
 
 .tabs { gap: clamp(8px, 1.6vw, 22px); }
 .tab { padding: 6px; }
@@ -204,7 +255,6 @@ button { font: inherit; color: inherit; }
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
 }
 
-@media (max-width: 1380px) { .hint { display: none; } }
 @media (max-width: 900px) { .nav-links a.minor { display: none; } .fine nav a.m { display: inline; } }
 
 /* телефон */
@@ -237,6 +287,10 @@ button { font: inherit; color: inherit; }
   .count { display: block; }
   .fine { justify-content: center; text-align: center; font-size: 11px; padding-bottom: 10px; }
   .fine nav { flex-wrap: wrap; justify-content: center; gap: 4px 16px; }
+  .peek .pk-d { display: none; }
+  .peek .pk-m { display: inline; }
+  .i-name { display: none; }
+  .i-row { margin-top: 34px; }
 }
 @media (max-height: 560px) {
   body { height: auto; min-height: 100vh; overflow: auto; }
@@ -411,7 +465,7 @@ button { font: inherit; color: inherit; }
   <div class="tabs" role="tablist" aria-label="Все проекты"><i class="playhead" aria-hidden="true"></i></div>
   <p class="count"><b>1</b> из 7</p>
   <button class="arrow next" type="button" aria-label="Следующий проект"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></button>
-  <p class="hint" aria-hidden="true">Листай в любую сторону: колесом, стрелками или тяни</p>
+  <p class="peek" aria-hidden="true"><b>Тут ещё 6 проектов.</b><span class="pk-d">Листай колесом, стрелками или тяни</span><span class="pk-m">Свайпай в любую сторону</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></p>
 </div>
 
 <footer class="fine">
@@ -450,11 +504,14 @@ button { font: inherit; color: inherit; }
     return b;
   });
 
+  /* лента замкнута в круг: pos и target растут без ограничений в обе стороны, а проект — остаток от деления на n.
+     С первого назад попадаешь на последний, с последнего вперёд — на первый. */
   let pos = 0, target = 0, vel = 0, active = -1, raf = 0, last = 0, dragging = false, settle = 0;
+  const mod = (a, m) => ((a % m) + m) % m;
   /* прыжок через несколько проектов (клик по миниатюре): текущая сцена сразу растворяется в выбранную,
-     промежуточные не показываются. Пока идёт прыжок, pos едет от from до from + sgn. */
+     промежуточные не показываются. Пока идёт прыжок, pos едет от base до base + sgn. */
   let jump = null;
-  function endJump() { if (jump) { pos = Math.abs(pos - jump.from) < .5 ? jump.from : jump.to; jump = null; vel = 0; } }
+  function endJump() { if (jump) { pos = Math.abs(pos - jump.base) < .5 ? jump.base : target; jump = null; vel = 0; } }
   let step = 1, stepY = 1, axis = 'x', geo = [];
 
   function measure() {
@@ -474,13 +531,14 @@ button { font: inherit; color: inherit; }
   }
 
   function render() {
-    const jf = jump ? clamp(Math.abs(pos - jump.from), 0, 1) : 0;
+    const jf = jump ? clamp(Math.abs(pos - jump.base), 0, 1) : 0;
     for (let i = 0; i < n; i++) {
       const s = slides[i];
       let p = i - pos;
+      p -= n * Math.round(p / n);          // ближайший путь по кругу
       if (jump) {
-        if (i === jump.from) p = jump.from - pos;
-        else if (i === jump.to) p = jump.from + jump.sgn - pos;
+        if (i === jump.from) p = jump.base - pos;
+        else if (i === jump.to) p = jump.base + jump.sgn - pos;
         else { s.style.visibility = 'hidden'; continue; }
       }
       const a = Math.abs(p);
@@ -493,12 +551,11 @@ button { font: inherit; color: inherit; }
       s.style.transform = (axis === 'y' ? `translate3d(0,${(q * 5).toFixed(2)}vh,0)` : `translate3d(${(q * 5).toFixed(2)}vw,0,0)`) + ` scale(${(1 - q * .08).toFixed(4)})`;
       s.style.filter = k < .004 ? 'none' : `blur(${(k * 14).toFixed(2)}px)`;
     }
-    const idx = jump ? (jf < .5 ? jump.from : jump.to) : clamp(Math.round(pos), 0, n - 1);
+    const idx = jump ? (jf < .5 ? jump.from : jump.to) : mod(Math.round(pos), n);
     if (idx !== active) setActive(idx);
-    prevBtn.disabled = target <= 0; nextBtn.disabled = target >= n - 1;
     if (geo.length) {
-      const cp = clamp(pos, 0, n - 1);
-      const i0 = jump ? jump.from : Math.min(n - 2, Math.floor(cp)), i1 = jump ? jump.to : i0 + 1, f = jump ? jf : cp - i0;
+      const fl = Math.floor(pos);
+      const i0 = jump ? jump.from : mod(fl, n), i1 = jump ? jump.to : mod(fl + 1, n), f = jump ? jf : pos - fl;
       const x = geo[i0][0] + (geo[i1][0] - geo[i0][0]) * f;
       const w = geo[i0][1] + (geo[i1][1] - geo[i0][1]) * f;
       const stretch = Math.sin(Math.PI * f) * 26;
@@ -506,7 +563,7 @@ button { font: inherit; color: inherit; }
       playhead.style.transform = `translate3d(${(x - stretch / 2).toFixed(1)}px,0,0)`;
     }
     if (flash) {
-      const f = jump ? jf : clamp(pos, 0, n - 1) % 1;
+      const f = jump ? jf : pos - Math.floor(pos);
       flash.style.opacity = (Math.sin(Math.PI * f) ** 2 * .9).toFixed(3);
     }
   }
@@ -516,7 +573,7 @@ button { font: inherit; color: inherit; }
     raf = 0;
     const dt = Math.min(.04, Math.max(.001, (t - last) / 1000)); last = t;
     if (!dragging) {
-      const goal = jump ? jump.from + jump.sgn : target;
+      const goal = jump ? jump.base + jump.sgn : target;
       vel += ((goal - pos) * 84 - vel * 18.4) * dt;
       pos += vel * dt;
       if (Math.abs(goal - pos) < .0006 && Math.abs(vel) < .01) { pos = target; jump = null; vel = 0; render(); return; }
@@ -531,14 +588,23 @@ button { font: inherit; color: inherit; }
     try { h = decodeURIComponent(location.hash.slice(1)); } catch (e) {}
     return slides.findIndex(s => s.dataset.id === (alias[h] || h));
   }
+  // к проекту с номером i (0…n−1) коротким путём по кругу
   function go(i, instant) {
+    let d = mod(i - mod(target, n), n);
+    if (d > n / 2) d -= n;
+    move(target + d, instant);
+  }
+  // на k проектов вперёд или назад
+  function goBy(k, instant) { move(target + k, instant); }
+  function move(t, instant) {
     endJump();
-    target = clamp(i, 0, n - 1);
-    try { history.replaceState(null, '', target ? '#' + slides[target].dataset.id : location.pathname + location.search); } catch (e) {}
+    target = t;
+    const ti = mod(target, n);
+    try { history.replaceState(null, '', ti ? '#' + slides[ti].dataset.id : location.pathname + location.search); } catch (e) {}
     clearTimeout(settle);
     if (instant || reduce || document.hidden) { pos = target; vel = 0; render(); return; }
-    const cur = clamp(Math.round(pos), 0, n - 1);
-    if (!dragging && Math.abs(target - cur) > 1) jump = { from: cur, to: target, sgn: Math.sign(target - cur) };
+    const base = Math.round(pos);
+    if (!dragging && Math.abs(target - base) > 1) jump = { base, from: mod(base, n), to: ti, sgn: Math.sign(target - base) };
     kick();
     /* если кадры анимации не идут (вкладка в фоне), всё равно доехать */
     settle = setTimeout(() => { if (!dragging && pos !== target && Math.abs(vel) < .02) { pos = target; jump = null; render(); } }, 1600);
@@ -572,9 +638,8 @@ button { font: inherit; color: inherit; }
     }
     const c = pd.ax === 'y' ? e.clientY : e.clientX, dtm = e.timeStamp - pd.lt;
     if (dtm > 0) { pd.v = .65 * pd.v + .35 * ((c - pd.l) / dtm); pd.l = c; pd.lt = e.timeStamp; }
-    let p = pd.pos - (c - pd.o) / stepOf(pd.ax);
-    if (p < 0) p *= .28; else if (p > n - 1) p = n - 1 + (p - (n - 1)) * .28;
-    pos = p; kick();
+    pos = pd.pos - (c - pd.o) / stepOf(pd.ax);
+    kick();
   });
   function endDrag(e) {
     if (!pd || e.pointerId !== pd.id) return;
@@ -589,7 +654,7 @@ button { font: inherit; color: inherit; }
     /* медленно дотянул почти на треть — тоже считается */
     if (t === from && Math.abs(pos - from) > .28) t = from + Math.sign(pos - from);
     vel = clamp(-(v * 1000) / st, -7, 7);
-    go(clamp(t, from - far, from + far));
+    move(clamp(t, from - far, from + far));
   }
   stage.addEventListener('pointerup', endDrag);
   stage.addEventListener('pointercancel', endDrag);
@@ -599,7 +664,7 @@ button { font: inherit; color: inherit; }
     const s = e.target.closest && e.target.closest('.slide');
     if (!s) return;
     const i = slides.indexOf(s);
-    if (i !== downTarget) { e.preventDefault(); used(); go(i); }
+    if (i !== mod(downTarget, n)) { e.preventDefault(); used(); go(i); }
   }, true);
 
   /* колесо мыши и тачпад */
@@ -615,28 +680,28 @@ button { font: inherit; color: inherit; }
     wLast = now;
     if (now < wLock || Math.abs(d) < 3) return;
     wAcc += d;
-    if (Math.abs(wAcc) >= 36) { used(); axis = horiz ? 'x' : 'y'; go(target + Math.sign(wAcc)); wAcc = 0; wLock = now + 430; }
+    if (Math.abs(wAcc) >= 36) { used(); axis = horiz ? 'x' : 'y'; goBy(Math.sign(wAcc)); wAcc = 0; wLock = now + 430; }
   }, { passive: false });
 
   /* клавиатура */
   addEventListener('keydown', e => {
     if (e.altKey || e.ctrlKey || e.metaKey) return;
-    let t = null;
     const vert = e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === 'PageDown' || e.key === 'PageUp';
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') t = target + 1;
-    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') t = target - 1;
-    else if (e.key === 'Home') t = 0;
-    else if (e.key === 'End') t = n - 1;
-    if (t === null) return;
+    let act = null;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') act = () => goBy(1);
+    else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') act = () => goBy(-1);
+    else if (e.key === 'Home') act = () => go(0);
+    else if (e.key === 'End') act = () => go(n - 1);
+    if (!act) return;
     if (vert && pageScrolls()) return;
-    e.preventDefault(); used(); axis = vert ? 'y' : 'x'; go(t);
+    e.preventDefault(); used(); axis = vert ? 'y' : 'x'; act();
     const ae = document.activeElement;
-    if (ae && ae.classList.contains('tab')) tabs[target].focus({ preventScroll: true });
+    if (ae && ae.classList.contains('tab')) tabs[mod(target, n)].focus({ preventScroll: true });
   });
-  slides.forEach((s, i) => s.addEventListener('focusin', () => { if (!pd && i !== target) { used(); go(i); } }));
-  prevBtn.addEventListener('click', () => { used(); axis = 'x'; go(target - 1); });
-  nextBtn.addEventListener('click', () => { used(); axis = 'x'; go(target + 1); });
-  addEventListener('hashchange', () => { const i = fromHash(); if (i >= 0 && i !== target) go(i); });
+  slides.forEach((s, i) => s.addEventListener('focusin', () => { if (!pd && i !== mod(target, n)) { used(); go(i); } }));
+  prevBtn.addEventListener('click', () => { used(); axis = 'x'; goBy(-1); });
+  nextBtn.addEventListener('click', () => { used(); axis = 'x'; goBy(1); });
+  addEventListener('hashchange', () => { const i = fromHash(); if (i >= 0 && i !== mod(target, n)) go(i); });
 
   measure();
   { const h = fromHash(); pos = target = h >= 0 ? h : 0; }
@@ -646,8 +711,144 @@ button { font: inherit; color: inherit; }
   addEventListener('resize', () => { measure(); render(); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { measure(); render(); });
 
-  /* один намёк после открытия: лента чуть подаётся и возвращается */
-  setTimeout(() => { if (!interacted && !reduce && !document.hidden && target < n - 1) { vel = 2.4; kick(); } }, 1700);
+  /* после открытия: миниатюры по очереди вспыхивают, над лентой «тут ещё 6 проектов», и сцена чуть подаётся вбок */
+  function peek(ripple, nudgeIn) {
+    root.classList.add('peeking');
+    if (ripple && !reduce) tabs.forEach((t, i) => {
+      const th = t.querySelector('.thumb');
+      const el = th.offsetWidth ? th : t;
+      el.animate(el === th ? [{ filter: 'brightness(2.3) saturate(1.3)', offset: .3 }] : [{ background: 'rgba(255, 255, 255, .9)', offset: .3 }],
+        { duration: 700, delay: 95 * i, easing: 'ease-out' });
+    });
+    setTimeout(() => root.classList.remove('peeking'), 7000);
+    setTimeout(() => { if (!interacted && !reduce && !document.hidden) { vel = 2.4; kick(); } }, nudgeIn);
+  }
+
+  /* вступление (решение принято в <head>): линия цветов, заголовок, семь объектов загораются по очереди,
+     по ним проходит свет, потом каждый улетает в свою миниатюру, а сцена раскрывается из той же линии.
+     Любое касание, клавиша или колесо пропускают его. */
+  function runIntro() {
+    window.__introRunning = true;
+    try { localStorage.setItem('ae-intro', '1'); } catch (e) {}
+    const ov = document.createElement('div');
+    ov.className = 'intro-ov';
+    ov.innerHTML = '<div class="i-stack" aria-hidden="true"><p class="i-title">Отдай чату пульт.</p>' +
+      '<p class="i-sub">Семь проектов для стрима и Deadlock</p><div class="i-row"><i class="i-line"></i><i class="i-spark"></i></div></div>' +
+      '<button class="i-skip" type="button">Пропустить</button>';
+    const row = ov.querySelector('.i-row');
+    const items = slides.map(s => {
+      const f = document.createElement('div');
+      f.className = 'i-item';
+      f.style.setProperty('--c', s.style.getPropertyValue('--c'));
+      f.style.setProperty('--c2', s.style.getPropertyValue('--c2'));
+      const halo = document.createElement('i'); halo.className = 'i-halo';
+      const im = document.createElement('img'); im.src = s.querySelector('.obj > img').src.replace('/neon/', '/neon/a/'); im.alt = ''; im.draggable = false;
+      const nm = document.createElement('span'); nm.className = 'i-name'; nm.textContent = s.dataset.name;
+      f.append(halo, im, nm);
+      row.append(f);
+      return f;
+    });
+    document.body.append(ov);
+    root.classList.add('i-hold');
+
+    const anims = [], timers = [];
+    let finished = false;
+    // ?introt=3000 — только для проверки: вступление замирает на этой миллисекунде (чтобы снять точный кадр)
+    const freeze = +((/[?&]introt=(\d+)/.exec(location.search) || [])[1] || -1), later = [];
+    let clock = 0;
+    const A = (el, kf, o) => { const a = el.animate(kf, Object.assign({ fill: 'both', easing: 'cubic-bezier(.2, .7, .1, 1)' }, o)); a.t0 = clock; anims.push(a); return a; };
+    const at = (ms, fn) => { if (freeze >= 0) later.push([ms, fn]); else timers.push(setTimeout(fn, ms)); };
+    function freezeFrame() {
+      const seek = t => anims.forEach(a => { a.currentTime = t - a.t0; a.pause(); });
+      later.sort((a, b) => a[0] - b[0]).forEach(([ms, fn]) => { if (ms <= freeze) { seek(ms); clock = ms; fn(); } });
+      seek(freeze);
+      if (freeze >= 4750) document.getAnimations().filter(a => !anims.includes(a)).forEach(a => { a.currentTime = Math.min(freeze - 4750, 1200); a.pause(); });
+    }
+    // конец вступления: и когда объекты долетели, и когда его пропустили
+    function finish() {
+      if (finished) return;
+      finished = true;
+      timers.forEach(clearTimeout);
+      removeEventListener('keydown', onKey, true);
+      removeEventListener('wheel', onWheel, true);
+      removeEventListener('resize', onResize);
+      root.classList.remove('intro', 'i-hold');
+      anims.forEach(a => a.cancel());
+      ov.remove();
+      peek(true, 1000);
+    }
+    function onKey(e) { if (e.key === 'Tab') return; e.preventDefault(); e.stopImmediatePropagation(); finish(); }
+    function onWheel(e) { e.preventDefault(); e.stopImmediatePropagation(); finish(); }
+    // на телефоне окно меняет высоту, когда прячется адресная строка: пропускаем вступление только при смене ширины
+    const w0 = innerWidth;
+    function onResize() { if (Math.abs(innerWidth - w0) > 40) finish(); }
+    ov.addEventListener('pointerdown', e => { e.preventDefault(); finish(); });
+    addEventListener('keydown', onKey, true);
+    addEventListener('wheel', onWheel, { capture: true, passive: false });
+    addEventListener('resize', onResize);
+
+    function play() {
+      if (finished) return;
+      const title = ov.querySelector('.i-title'), sub = ov.querySelector('.i-sub');
+      const line = ov.querySelector('.i-line'), spark = ov.querySelector('.i-spark'), skip = ov.querySelector('.i-skip');
+      const imgs = items.map(f => f.querySelector('img'));
+      line.style.background = 'linear-gradient(90deg, transparent, ' +
+        items.map((f, i) => `${f.style.getPropertyValue('--c')} ${(6 + (i + .5) / n * 88).toFixed(1)}%`).join(', ') + ', transparent)';
+      const lit = 'blur(0px) brightness(1) saturate(1)';
+      const up = [{ opacity: 0, transform: 'translateY(18px)', filter: 'blur(8px)' }, { opacity: 1, transform: 'none', filter: 'blur(0px)' }];
+      const away = [{ opacity: 1, transform: 'none', filter: 'blur(0px)' }, { opacity: 0, transform: 'translateY(-14px)', filter: 'blur(8px)' }];
+
+      A(line, [{ opacity: 0, transform: 'scaleX(0)' }, { opacity: .9, transform: 'scaleX(1)' }], { duration: 1150 });
+      A(title, up, { duration: 900, delay: 300 });
+      A(sub, up, { duration: 900, delay: 520 });
+      A(skip, [{ opacity: 0 }, { opacity: .75 }], { duration: 600, delay: 900 });
+      items.forEach((f, i) => {
+        const im = imgs[i], d = 1050 + i * 190;
+        A(im, [{ opacity: 0, transform: 'translateY(26px) scale(.8)', filter: 'blur(12px) brightness(.2) saturate(1)' }, { opacity: 1, transform: 'none', filter: lit }], { duration: 850, delay: d });
+        A(f.querySelector('.i-halo'), [{ opacity: 0, transform: 'scale(.6)' }, { opacity: 1, transform: 'scale(1.12)', offset: .35 }, { opacity: .42, transform: 'scale(1)' }], { duration: 1200, delay: d });
+        A(f.querySelector('.i-name'), [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 500, delay: d + 380 });
+        // свет проходит по ряду
+        A(im, [{ filter: lit }, { filter: 'blur(0px) brightness(1.9) saturate(1.15)', offset: .35 }, { filter: lit }], { duration: 520, delay: 3150 + (i + .5) / n * 900, easing: 'ease-out', fill: 'none' });
+        // уход: подписи и ореолы гаснут, объект летит в свою миниатюру
+        A(f.querySelector('.i-name'), [{ opacity: 1 }, { opacity: 0 }], { duration: 300, delay: 4180, fill: 'forwards' });
+        A(f.querySelector('.i-halo'), [{ opacity: .42 }, { opacity: 0 }], { duration: 450, delay: 4250, fill: 'forwards' });
+      });
+      // полёт в миниатюры: откуда и куда меряем прямо перед ним, когда объекты уже стоят на местах
+      at(4440, () => {
+        if (finished) return;
+        imgs.forEach((im, i) => {
+          const a = im.getBoundingClientRect(), th = tabs[i].querySelector('.thumb'), dash = !th.offsetWidth;
+          const b = dash ? tabs[i].getBoundingClientRect() : th.getBoundingClientRect();
+          const dx = b.left + b.width / 2 - (a.left + a.width / 2), dy = b.top + b.height / 2 - (a.top + a.height / 2), sc = b.width / a.width;
+          const end = i === mod(target, n) ? lit : 'blur(0px) brightness(.78) saturate(.7)';
+          A(im, [{ opacity: 1, transform: 'none', filter: lit }, { opacity: 1, offset: .78 },
+            { opacity: dash ? 0 : 1, transform: `translate(${dx.toFixed(1)}px, ${dy.toFixed(1)}px) scale(${sc.toFixed(4)})`, filter: end }],
+            { duration: 1050, delay: 10 + i * 40, easing: 'cubic-bezier(.7, 0, .2, 1)', fill: 'forwards' });
+        });
+      });
+      A(spark, [{ left: '0%', opacity: 0 }, { opacity: 1, offset: .12 }, { opacity: 1, offset: .88 }, { left: '100%', opacity: 0 }], { duration: 900, delay: 3150, easing: 'linear' });
+      A(title, away, { duration: 550, delay: 4250, fill: 'forwards' });
+      A(sub, away, { duration: 550, delay: 4300, fill: 'forwards' });
+      A(skip, [{ opacity: .75 }, { opacity: 0 }], { duration: 300, delay: 4300, fill: 'forwards' });
+      A(line, [{ opacity: .9, transform: 'scaleX(1)' }, { opacity: 0, transform: 'scaleX(1.08)' }], { duration: 650, delay: 4400, fill: 'forwards' });
+      // сцена раскрывается, пока объекты летят вниз; когда они долетели, на их места встают настоящие миниатюры
+      at(4750, () => root.classList.remove('intro'));
+      at(4450 + (n - 1) * 40 + 1080, finish);
+      if (freeze >= 0) freezeFrame();
+    }
+
+    // ждём картинки (не дольше 1,2 с) и видимую вкладку: в фоне вступление никто не увидит
+    const ready = Promise.race([Promise.all(items.map(f => { const im = f.querySelector('img'); return im.decode ? im.decode().catch(() => {}) : 0; })),
+      new Promise(r => setTimeout(r, 1200))]);
+    const shown = document.hidden ? new Promise(r => document.addEventListener('visibilitychange', function h() {
+      if (!document.hidden) { document.removeEventListener('visibilitychange', h); r(); }
+    })) : null;
+    Promise.all([ready, shown]).then(play, finish);
+  }
+
+  if (root.classList.contains('intro')) {
+    try { runIntro(); } catch (e) { root.classList.remove('intro', 'i-hold'); document.querySelectorAll('.intro-ov').forEach(x => x.remove()); peek(false, 1700); }
+  } else peek(true, 1700);
 
   /* версии программ из релизов GitHub */
   document.querySelectorAll('[data-release]').forEach(el => {
