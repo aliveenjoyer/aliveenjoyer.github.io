@@ -69,7 +69,6 @@ button { font: inherit; color: inherit; }
 .nav-links { margin-left: auto; display: flex; align-items: center; gap: 12px; }
 .nav-links a { color: rgba(245, 245, 247, .78); transition: color .2s; }
 .nav-links a:hover { color: var(--text); }
-.nav-links a.minor { margin-right: 10px; }
 /* Telegram, донат и Twitch: три неоновые кнопки одной ширины в цвет сервиса, при открытии страницы по очереди
    «загораются», как неоновые трубки. Сетка 1fr делает все три по ширине самой длинной. */
 .cta3 { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 10px; }
@@ -96,7 +95,15 @@ button { font: inherit; color: inherit; }
 }
 .soc svg { flex: none; width: 17px; height: 17px; fill: var(--sc); filter: drop-shadow(0 0 5px var(--sc)); }
 .soc.tw svg { fill: #a970ff; }   /* фирменный фиолетовый Twitch на чёрном темноват, значок чуть светлее */
-.soc .s, .soc .m { display: none; }
+.soc .s, .soc .m, .soc .v { display: none; }
+/* канал в эфире (проверка раз в минуту в скрипте внизу): на значке Twitch красная точка, подпись «В эфире» */
+.soc .ic { position: relative; display: block; flex: none; }
+.soc .air { display: none; position: absolute; right: -4px; top: -4px; width: 9px; height: 9px; border-radius: 50%; background: #ff3b30; box-shadow: 0 0 0 2px #050506, 0 0 10px 1px rgba(255, 59, 48, .8); }
+.soc .air::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: #ff3b30; animation: air 1.8s ease-out infinite; }
+@keyframes air { from { opacity: .7; transform: scale(1); } to { opacity: 0; transform: scale(2.8); } }
+.soc.tw.on-air .air { display: block; }
+.soc.tw.on-air .l, .soc.tw.on-air .s { display: none; }
+.soc.tw.on-air .v { display: inline; }
 html.intro .nav-links a.soc { animation: none; }
 @keyframes neon-on {
   0% { opacity: .22; }
@@ -158,6 +165,19 @@ html.intro .nav-links a.soc { animation: none; }
 .meta .addr { color: var(--gray-2); }
 .meta a { text-decoration: underline; text-underline-offset: 3px; }
 .meta a:hover { color: var(--text); }
+/* открыто лобби (данные lobby.aliveenjoyer.art раз в минуту): строка под кнопкой загорается цветом сцены */
+.meta .lobby-now.on { display: inline-flex; align-items: center; gap: 7px; color: var(--text); }
+.meta .lobby-now.on::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--c); box-shadow: 0 0 9px 1px var(--c); animation: air-soft 2s ease-in-out infinite; }
+@keyframes air-soft { 50% { opacity: .35; } }
+/* кому проект: тег над заголовком в цвете сцены */
+.aud {
+  display: inline-flex; align-items: center; gap: 7px; margin: 0 0 clamp(12px, 1.3vw, 18px); padding: 4px 11px 4px 9px; border-radius: 999px;
+  font-size: 12.5px; font-weight: 500; line-height: 1.25; letter-spacing: .005em; white-space: nowrap;
+  color: color-mix(in srgb, var(--c) 80%, #fff);
+  background: color-mix(in srgb, var(--c) 9%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 36%, transparent);
+}
+.aud::before { content: ""; flex: none; width: 5px; height: 5px; border-radius: 50%; background: var(--c); box-shadow: 0 0 8px var(--c); }
 
 /* объект кадра */
 /* без z-index и transform: иначе у объекта свой слой, и чёрный фон рендера перестаёт растворяться (screen) */
@@ -201,6 +221,7 @@ html.intro .nav-links a.soc { animation: none; }
 .slide.is-active .copy > :nth-child(2) { animation-delay: .06s; }
 .slide.is-active .copy > :nth-child(3) { animation-delay: .12s; }
 .slide.is-active .copy > :nth-child(4) { animation-delay: .18s; }
+.slide.is-active .copy > :nth-child(5) { animation-delay: .24s; }
 @keyframes rise { from { opacity: 0; transform: translateY(16px); filter: blur(6px); } }
 .flash {
   display: none; position: absolute; left: 0; right: 0; top: 41%; height: 3px; z-index: 5; opacity: 0; pointer-events: none;
@@ -271,6 +292,22 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
 
 .tabs { gap: clamp(8px, 1.6vw, 22px); }
 .tab { padding: 6px; }
+/* две группы миниатюр: «Зрителям» и «Стримерам». Между группами промежуток шире, над каждой — подпись с тонкими
+   чертами до краёв группы; подпись группы открытого проекта светлее, черты — в его цвете. */
+.bar { height: 96px; }
+.bar > .arrow, .bar > .count { margin-top: 22px; }
+.tabs { gap: clamp(22px, 3.2vw, 46px); padding-top: 22px; }
+.grp { position: relative; display: flex; align-items: center; gap: clamp(8px, 1.6vw, 22px); }
+.grp-name {
+  position: absolute; left: 50%; bottom: calc(100% + 9px); transform: translateX(-50%); min-width: 100%;
+  display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 4px;
+  font-size: 12px; line-height: 14px; color: var(--gray); white-space: nowrap; pointer-events: none;
+  transition: color .35s;
+}
+.grp-name::before, .grp-name::after { content: ""; flex: 1 1 0; min-width: 0; height: 1px; background: rgba(255, 255, 255, .13); transition: background .35s; }
+.grp.on .grp-name { color: var(--text); }
+.grp.on .grp-name::before, .grp.on .grp-name::after { background: color-mix(in srgb, var(--accent) 55%, transparent); }
+.i-hold .grp-name { visibility: hidden; }
 .tab .thumb { display: block; width: 46px; height: 46px; object-fit: contain; mix-blend-mode: screen; filter: brightness(.78) saturate(.7); transition: transform .4s cubic-bezier(.3, 1.4, .5, 1), filter .3s; }
 .tab:hover .thumb { filter: brightness(1); }
 .tab[aria-selected="true"] .thumb { transform: scale(1.45); filter: none; }
@@ -290,7 +327,6 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
 }
 
 @media (max-width: 1100px) { .soc .l { display: none; } .soc .s { display: inline; } }
-@media (max-width: 900px) { .nav-links a.minor { display: none; } }
 
 /* телефон */
 @media (max-width: 760px) {
@@ -310,12 +346,16 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
   .act { margin-top: 18px; gap: 10px; }
   .btn { width: 100%; }
   .meta { width: 100%; text-align: center; }
+  .meta .lobby-now.on { justify-content: center; text-align: left; }
   .frame { padding: 0 var(--gutter) 10px; }
   .obj { height: 86%; top: 0; }
   .obj > .refl { display: none; }
-  .bar { height: 54px; gap: 12px; }
+  .bar { height: 62px; gap: 12px; }
+  .bar > .arrow, .bar > .count { margin-top: 18px; }
   .arrow { width: 36px; height: 36px; }
-  .tabs, .tabs { gap: 6px; }
+  .tabs { gap: 14px; padding-top: 18px; }
+  .grp { gap: 6px; }
+  .grp-name { bottom: calc(100% + 8px); gap: 6px; padding: 0; font-size: 11px; }
   .tab, .tab { width: 20px; height: 3px; padding: 0; border-radius: 2px; background: rgba(255, 255, 255, .2); transition: width .3s, background .3s; }
   .tab::before { content: ""; position: absolute; inset: -16px -3px; }
   .tab[aria-selected="true"] { width: 34px; background: var(--accent); }
@@ -343,6 +383,7 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
 @media (prefers-reduced-motion: reduce) {
   .stage, .slide.is-active .streak, .slide.is-active .copy > *, .nav-links a.soc { animation: none; }
   .tab .thumb, .playhead { transition: none !important; }
+  .soc .air::after, .meta .lobby-now.on::before { animation: none; }
 }
 </style>
 <script src="https://aliveenjoyer.art/stat.js" data-page="hub" defer></script>
@@ -353,20 +394,20 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
   <a class="brand" href="./">aliveenjoyer</a>
   <h1 class="tagline">Играю. Стримлю. Пишу код.</h1>
   <nav class="nav-links" aria-label="Ссылки">
-    <a class="minor" href="minecraft/">Minecraft</a>
     <div class="cta3">
     <a class="soc tg" href="https://t.me/aliveenjoyer" aria-label="Telegram-канал"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 3.3 2.7 10.5c-1.1.4-1.1 1.1-.1 1.4l4.7 1.5 1.8 5.6c.2.7.4.8.9.8.4 0 .6-.2.9-.5l2.4-2.3 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.8c.3-1.3-.5-1.9-1.5-1.6Zm-3.2 3.9-8.6 7.8-.4 3.4-1.3-4.2 9.8-6.6c.5-.3.8 0 .5.4Z"/></svg><span class="l">Telegram-канал</span><span class="s">Telegram</span><span class="m">ТГК</span></a>
     <a class="soc da" href="https://www.donationalerts.com/r/aliveenjoyer" aria-label="Закинуть донат"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.2-4.4-9.4-9.1C1 8.5 3.2 4.6 7 4.6c2.2 0 3.8 1.2 5 2.9 1.2-1.7 2.8-2.9 5-2.9 3.8 0 6 3.9 4.4 7.3C19.2 16.6 12 21 12 21Z"/></svg><span class="l">Закинуть донат</span><span class="s">Донат</span></a>
-    <a class="soc tw" href="https://twitch.tv/aliveenjoyer" aria-label="Twitch: смотреть стрим"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 2.5 3 6.6v13.6h4.6v2.5h2.6l2.5-2.5h3.7l5.1-5.1V2.5H4.6Zm14.9 11.6-2.9 2.9H12l-2.5 2.5V17H5.7V4.2h13.8v9.9ZM16.6 7.3h-1.8v5.2h1.8V7.3Zm-4.8 0H10v5.2h1.8V7.3Z"/></svg><span class="l">Смотреть стрим</span><span class="s">Twitch</span></a>
+    <a class="soc tw" href="https://twitch.tv/aliveenjoyer" aria-label="Twitch: смотреть стрим"><b class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 2.5 3 6.6v13.6h4.6v2.5h2.6l2.5-2.5h3.7l5.1-5.1V2.5H4.6Zm14.9 11.6-2.9 2.9H12l-2.5 2.5V17H5.7V4.2h13.8v9.9ZM16.6 7.3h-1.8v5.2h1.8V7.3Zm-4.8 0H10v5.2h1.8V7.3Z"/></svg><i class="air" aria-hidden="true"></i></b><span class="l">Смотреть стрим</span><span class="s">Twitch</span><span class="v">В эфире</span></a>
     </div>
   </nav>
 </header>
 
 <main class="stage" id="reel" aria-roledescription="карусель" aria-label="Проекты">
-  <article class="slide" id="s-rpg" data-id="rpg" data-name="Чат-RPG" style="--c:#4fe3c1;--c2:#4fe3c1" role="group" aria-roledescription="слайд" aria-label="Чат-RPG, 1 из 7">
+  <article class="slide" id="s-rpg" data-id="rpg" data-aud="viewers" data-name="Чат-RPG" style="--c:#4fe3c1;--c2:#4fe3c1" role="group" aria-roledescription="слайд" aria-label="Чат-RPG, 1 из 7">
     <div class="frame">
       <div class="glow" aria-hidden="true"></div>
       <div class="copy">
+        <p class="aud">для зрителей</p>
         <h2>Чат-RPG</h2>
         <p class="line">Зашёл на минутку. Остался до босса.</p>
         <p class="desc">Пока сидишь в чате, капают души. Качай героя, бей боссов и крути колесо хаоса. Страдать при этом буду я.</p>
@@ -383,10 +424,11 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
     </div>
   </article>
 
-  <article class="slide" id="s-clicker" data-id="clicker" data-name="Хлыстопад" style="--c:#f5cf6a;--c2:#f5cf6a" role="group" aria-roledescription="слайд" aria-label="Хлыстопад, 2 из 7">
+  <article class="slide" id="s-clicker" data-id="clicker" data-aud="viewers" data-name="Хлыстопад" style="--c:#f5cf6a;--c2:#f5cf6a" role="group" aria-roledescription="слайд" aria-label="Хлыстопад, 2 из 7">
     <div class="frame">
       <div class="glow" aria-hidden="true"></div>
       <div class="copy">
+        <p class="aud">для зрителей</p>
         <h2>Хлыстопад</h2>
         <p class="line">Труперы сами себя не отхлещут.</p>
         <p class="desc">Кликер по Deadlock: хлыст Лэша, наёмные герои и жирные боссы. Всё, что накликал, меняешь на души для Чат-RPG.</p>
@@ -403,16 +445,17 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
     </div>
   </article>
 
-  <article class="slide" id="s-lobby" data-id="lobby" data-name="Лобби" style="--c:#f0a02c;--c2:#6a93e8" role="group" aria-roledescription="слайд" aria-label="Лобби, 3 из 7">
+  <article class="slide" id="s-lobby" data-id="lobby" data-aud="viewers" data-name="Лобби" style="--c:#f0a02c;--c2:#6a93e8" role="group" aria-roledescription="слайд" aria-label="Лобби, 3 из 7">
     <div class="frame">
       <div class="glow" aria-hidden="true"></div>
       <div class="copy">
+        <p class="aud">для зрителей</p>
         <h2>Лобби</h2>
         <p class="line">Сыграй с любимым стримером.</p>
         <p class="desc">Кастомные игры Deadlock со зрителями от Twitch-стримеров. Записывайся, попадай в команду и играй в необычных режимах на глазах у всего чата.</p>
         <div class="act">
           <a class="btn" href="https://lobby.aliveenjoyer.art/">Записаться на кастомку</a>
-          <p class="meta"><span class="addr">lobby.aliveenjoyer.art</span><span>Бесплатно, нужен только Twitch</span></p>
+          <p class="meta"><span class="addr">lobby.aliveenjoyer.art</span><span class="lobby-now">Бесплатно, нужен только Twitch</span></p>
         </div>
       </div>
       <div class="obj" aria-hidden="true">
@@ -423,10 +466,11 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
     </div>
   </article>
 
-  <article class="slide" id="s-optimizer" data-id="optimizer" data-name="Optimizer" style="--c:#3f8cff;--c2:#3f8cff" role="group" aria-roledescription="слайд" aria-label="Deadlock Optimizer, 4 из 7">
+  <article class="slide" id="s-optimizer" data-id="optimizer" data-aud="viewers" data-name="Optimizer" style="--c:#3f8cff;--c2:#3f8cff" role="group" aria-roledescription="слайд" aria-label="Deadlock Optimizer, 4 из 7">
     <div class="frame">
       <div class="glow" aria-hidden="true"></div>
       <div class="copy">
+        <p class="aud">для зрителей</p>
         <h2>Deadlock Optimizer</h2>
         <p class="line">У твоего FPS есть причина. Один матч, чтобы её назвать.</p>
         <p class="desc">Играешь матч как обычно. Программа находит, что съедает твои кадры, и подсказывает, как их вернуть.</p>
@@ -443,10 +487,11 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
     </div>
   </article>
 
-  <article class="slide" id="s-music" data-id="music" data-name="Encore" style="--c:#ff7eb6;--c2:#ff7eb6" role="group" aria-roledescription="слайд" aria-label="Encore, 5 из 7">
+  <article class="slide" id="s-music" data-id="music" data-aud="streamers" data-name="Encore" style="--c:#ff7eb6;--c2:#ff7eb6" role="group" aria-roledescription="слайд" aria-label="Encore, 5 из 7">
     <div class="frame">
       <div class="glow" aria-hidden="true"></div>
       <div class="copy">
+        <p class="aud">для стримеров</p>
         <h2>Encore</h2>
         <p class="line">Музыка сама знает, когда помолчать.</p>
         <p class="desc">Зрители ставят треки за баллы канала, а твоя музыка вежливо ждёт своей очереди. Чат доволен, ты ничего не трогаешь.</p>
@@ -463,10 +508,11 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
     </div>
   </article>
 
-  <article class="slide" id="s-chatlock" data-id="chatlock" data-name="Chatlock" style="--c:#ff9a2e;--c2:#ff9a2e" role="group" aria-roledescription="слайд" aria-label="Chatlock, 6 из 7">
+  <article class="slide" id="s-chatlock" data-id="chatlock" data-aud="streamers" data-name="Chatlock" style="--c:#ff9a2e;--c2:#ff9a2e" role="group" aria-roledescription="слайд" aria-label="Chatlock, 6 из 7">
     <div class="frame">
       <div class="glow" aria-hidden="true"></div>
       <div class="copy">
+        <p class="aud">для стримеров</p>
         <h2>Chatlock</h2>
         <p class="line">Зрители жмут твои кнопки. Ты делаешь вид, что так и задумано.</p>
         <p class="desc">Прыжок в тимфайт, ульта в стену, перепутанный WASD. Всё это зрители покупают за баллы и донаты. Контент делает себя сам.</p>
@@ -483,10 +529,11 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
     </div>
   </article>
 
-  <article class="slide" id="s-chat" data-id="chat" data-name="Chat Overlay" style="--c:#a78bfa;--c2:#a78bfa" role="group" aria-roledescription="слайд" aria-label="Twitch Chat Overlay, 7 из 7">
+  <article class="slide" id="s-chat" data-id="chat" data-aud="streamers" data-name="Chat Overlay" style="--c:#a78bfa;--c2:#a78bfa" role="group" aria-roledescription="слайд" aria-label="Twitch Chat Overlay, 7 из 7">
     <div class="frame">
       <div class="glow" aria-hidden="true"></div>
       <div class="copy">
+        <p class="aud">для стримеров</p>
         <h2>Chat Overlay</h2>
         <p class="line">Читай чат, не выходя из боя.</p>
         <p class="desc">Чат Twitch висит прямо поверх игры и не мешает целиться. Смайлы на месте, второй монитор можно не покупать.</p>
@@ -508,7 +555,11 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
 
 <div class="bar">
   <button class="arrow prev" type="button" aria-label="Предыдущий проект"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button>
-  <div class="tabs" role="tablist" aria-label="Все проекты"><i class="playhead" aria-hidden="true"></i></div>
+  <div class="tabs" role="tablist" aria-label="Все проекты">
+    <div class="grp" data-aud="viewers" role="none"><span class="grp-name" aria-hidden="true">Зрителям</span></div>
+    <div class="grp" data-aud="streamers" role="none"><span class="grp-name" aria-hidden="true">Стримерам</span></div>
+    <i class="playhead" aria-hidden="true"></i>
+  </div>
   <p class="count"><b>1</b> из 7</p>
   <button class="arrow next" type="button" aria-label="Следующий проект"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></button>
   <p class="peek" aria-hidden="true"><b>Тут ещё 6 проектов.</b><span class="pk-d">Листай колесом, стрелками или тяни</span><span class="pk-m">Свайпай в любую сторону</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg></p>
@@ -530,6 +581,7 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
   const n = slides.length;
   const tabsEl = document.querySelector('.tabs');
   const playhead = tabsEl.querySelector('.playhead');
+  const grps = [...tabsEl.querySelectorAll('.grp')];
   const countEl = document.querySelector('.count b');
   const prevBtn = document.querySelector('.arrow.prev'), nextBtn = document.querySelector('.arrow.next');
   const flash = stage.querySelector('.flash');
@@ -546,7 +598,8 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
     const nm = document.createElement('span'); nm.className = 'name'; nm.textContent = s.dataset.name;
     b.append(th, nm);
     b.addEventListener('click', () => { used(); axis = 'x'; go(i); });
-    tabsEl.insertBefore(b, playhead);
+    // миниатюра — в свою группу: «Зрителям» или «Стримерам»
+    (tabsEl.querySelector('.grp[data-aud="' + s.dataset.aud + '"]') || tabsEl.querySelector('.grp')).append(b);
     return b;
   });
 
@@ -572,6 +625,7 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
     slides.forEach((s, j) => s.classList.toggle('is-active', j === i));
     tabs.forEach((t, j) => { t.setAttribute('aria-selected', j === i); t.tabIndex = j === i ? 0 : -1; });
     countEl.textContent = i + 1;
+    grps.forEach(g => g.classList.toggle('on', g.dataset.aud === slides[i].dataset.aud));
     root.style.setProperty('--accent', slides[i].style.getPropertyValue('--c'));
     root.style.setProperty('--accent-2', slides[i].style.getPropertyValue('--c2'));
   }
@@ -903,6 +957,63 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
       .then(j => { if (j && j.tag_name) el.textContent = j.tag_name.replace(/^v/, ''); })
       .catch(() => {});
   });
+
+  /* живые сигналы, раз в минуту, пока вкладка открыта:
+     — идёт ли стрим aliveenjoyer: как в кликере (js/stream.js) — превью канала у Twitch; не в эфире, и адрес превью
+       переадресует на заглушку 404_preview. В эфире — на кнопке Twitch красная точка и «В эфире».
+     — открыто ли лобби: список лобби с сервера lobby.aliveenjoyer.art (тот же, что на его главной). Есть — строка под
+       кнопкой слайда «Лобби» говорит, у кого и сколько записались, а кнопка ведёт прямо в это лобби.
+     Не ответило или ошибка — молча обычный вид. Страница меняется, только когда изменились сами данные.
+     Только на своём компьютере: ?fake=live,lobby — показать оба сигнала без запросов (для снимков). */
+  const LOCAL = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) || location.protocol === 'file:';
+  const FAKE = LOCAL ? ((/[?&]fake=([a-z,]+)/.exec(location.search) || [])[1] || '').split(',') : [];
+  const twBtn = document.querySelector('.soc.tw');
+  const lobbyBtn = document.querySelector('#s-lobby .btn'), lobbyNow = document.querySelector('#s-lobby .lobby-now');
+  const lobbyDef = { href: lobbyBtn.getAttribute('href'), text: lobbyNow.textContent };
+  const withTimeout = (url, opt) => {
+    const ac = window.AbortController ? new AbortController() : null;
+    const t = ac && setTimeout(() => ac.abort(), 8000);
+    return fetch(url, Object.assign({ cache: 'no-store' }, opt, ac ? { signal: ac.signal } : {})).finally(() => clearTimeout(t));
+  };
+  function setAir(on) {
+    if (twBtn.classList.contains('on-air') === on) return;
+    twBtn.classList.toggle('on-air', on);
+    twBtn.setAttribute('aria-label', on ? 'Twitch: aliveenjoyer сейчас в эфире, смотреть стрим' : 'Twitch: смотреть стрим');
+  }
+  let lobbyKey = '';
+  function setLobby(e) {
+    const key = e ? [e.host.login, e.host.name, e.n].join('|') : '';
+    if (key === lobbyKey) return;
+    lobbyKey = key;
+    lobbyBtn.setAttribute('href', e ? 'https://lobby.aliveenjoyer.art/#/' + encodeURIComponent(e.host.login) : lobbyDef.href);
+    lobbyNow.textContent = e ? 'Сейчас открыто лобби у ' + (e.host.name || e.host.login) + ' · записались ' + e.n : lobbyDef.text;
+    lobbyNow.classList.toggle('on', !!e);
+  }
+  async function checkAir() {
+    if (FAKE.includes('live')) return setAir(true);
+    try {
+      const r = await withTimeout('https://static-cdn.jtvnw.net/previews-ttv/live_user_aliveenjoyer-320x180.jpg?t=' + Date.now());
+      setAir(r.ok && !(r.redirected && /404_preview/.test(r.url)));
+    } catch (e) { setAir(false); }
+  }
+  async function checkLobby() {
+    if (FAKE.includes('lobby')) return setLobby({ host: { login: 'aliveenjoyer', name: 'aliveenjoyer' }, n: 9 });
+    try {
+      const r = await withTimeout('https://173-249-26-11.sslip.io:8444/lobby/events');
+      const d = r.ok ? await r.json() : null;
+      const list = (d && Array.isArray(d.events) ? d.events : [])
+        .filter(e => e && e.host && /^[a-z0-9_]{2,25}$/i.test(e.host.login || '') && e.phase !== 'closed')
+        .map(e => Object.assign({}, e, { n: (+e.seats || 0) + (+e.queue || 0) }))
+        // несколько сразу: сначала у того, кто сейчас в эфире, потом где больше записались
+        .sort((a, b) => (!!b.host.live - !!a.host.live) || (b.n - a.n));
+      setLobby(list[0] || null);
+    } catch (e) { setLobby(null); }
+  }
+  let lastCheck = 0;
+  function checkAll() { lastCheck = Date.now(); checkAir(); checkLobby(); }
+  checkAll();
+  setInterval(() => { if (!document.hidden) checkAll(); }, 60000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && Date.now() - lastCheck > 60000) checkAll(); });
 
   /* для проверки макета из консоли: __reel.go(3), __reel.pos = 1.5 */
   window.__reel = { go, tick, get pos() { return pos; }, set pos(v) { pos = +v; jump = null; vel = 0; render(); } };
