@@ -22,7 +22,7 @@ if (/^#(season1|season2|about|join|install|rules|apply|world|wl-form)$/.test(loc
 (function () {
   var q = location.search, seen = false;
   try { seen = localStorage.getItem('ae-intro') === '1'; } catch (e) {}
-  var deep = /^#(uslugi|services|price|rpg|ring|clicker|lobby|optimizer|dlo|music|encore|chatlock|chat|overlay)$/.test(location.hash);
+  var deep = /^#(me|uslugi|services|price|rpg|ring|clicker|lobby|optimizer|dlo|music|encore|chatlock|chat|overlay)$/.test(location.hash);
   var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (/[?&]intro=1/.test(q) || (!seen && !deep && !calm && !/[?&](intro=0|pos=)/.test(q))) {
     document.documentElement.classList.add('intro');
@@ -170,11 +170,16 @@ html.intro .nav-links a.soc { animation: none; }
 .meta .lobby-now.on { display: inline-flex; align-items: center; gap: 7px; color: var(--text); }
 .meta .lobby-now.on::before { content: ""; flex: none; width: 7px; height: 7px; border-radius: 50%; background: var(--c); box-shadow: 0 0 9px 1px var(--c); animation: air-soft 2s ease-in-out infinite; }
 @keyframes air-soft { 50% { opacity: .35; } }
-/* услуги на первом слайде: строки как в меню — название, точки, цена в рублях */
-.svc { margin: 18px 0 0; padding: 0; list-style: none; max-width: 34ch; display: grid; gap: 4px; font-size: clamp(14.5px, 1.12vw, 16px); line-height: 1.4; }
-.svc li { display: flex; align-items: baseline; gap: 10px; color: var(--gray-2); }
-.svc li::after { content: ""; order: 1; flex: 1 1 0; min-width: 16px; border-bottom: 1px dotted rgba(255, 255, 255, .2); }
-.svc b { order: 2; font-weight: 600; color: color-mix(in srgb, var(--c) 32%, #fff); font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* первый слайд «Это я»: вместо объекта портрет в окне с красной неоновой кромкой (GPT Image 2.5, assets/me/portrait-1.webp) */
+.slide.v-cam .obj { display: none; }
+.cam { position: relative; justify-self: center; align-self: center; width: min(92%, 620px); aspect-ratio: 4 / 3; top: -1%; }
+.cam .streak { left: -30%; right: -40%; }
+.cam-in {
+  position: relative; width: 100%; height: 100%; border-radius: 22px; overflow: hidden; background: #000;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 65%, transparent), 0 0 26px -2px color-mix(in srgb, var(--c) 70%, transparent), 0 0 90px -10px color-mix(in srgb, var(--c) 55%, transparent), 0 60px 120px -50px #000;
+}
+.cam-in img { width: 100%; height: 100%; object-fit: cover; filter: brightness(.92) contrast(1.04); pointer-events: none; -webkit-user-drag: none; }
+.cam-in::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, .4)), radial-gradient(70% 60% at 100% 0%, color-mix(in srgb, var(--c) 16%, transparent), transparent 70%); }
 /* кому проект: тег над заголовком в цвете сцены */
 .aud {
   display: inline-flex; align-items: center; gap: 7px; margin: 0 0 clamp(12px, 1.3vw, 18px); padding: 4px 11px 4px 9px; border-radius: 999px;
@@ -228,6 +233,7 @@ html.intro .nav-links a.soc { animation: none; }
 .slide.is-active .copy > :nth-child(3) { animation-delay: .12s; }
 .slide.is-active .copy > :nth-child(4) { animation-delay: .18s; }
 .slide.is-active .copy > :nth-child(5) { animation-delay: .24s; }
+.slide.is-active .cam { animation: rise .9s cubic-bezier(.2, .7, .1, 1) both; }
 @keyframes rise { from { opacity: 0; transform: translateY(16px); filter: blur(6px); } }
 .flash {
   display: none; position: absolute; left: 0; right: 0; top: 41%; height: 3px; z-index: 5; opacity: 0; pointer-events: none;
@@ -363,7 +369,8 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
   .tabs { gap: 14px; padding-top: 18px; }
   .grp { gap: 6px; }
   .grp-name { bottom: calc(100% + 8px); gap: 6px; padding: 0; font-size: 11px; }
-  .svc { max-width: none; margin-top: 12px; gap: 2px; }
+  .cam { grid-row: 1; width: auto; height: 92%; max-width: 100%; top: 0; }
+  .cam-in { border-radius: 18px; }
   .grp[data-aud="me"] { margin: 0 12px; }    /* подпись «Со мной» шире одной чёрточки: место соседям */
   .tab, .tab { width: 20px; height: 3px; padding: 0; border-radius: 2px; background: rgba(255, 255, 255, .2); transition: width .3s, background .3s; }
   .tab::before { content: ""; position: absolute; inset: -16px -3px; }
@@ -414,30 +421,26 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
 </header>
 
 <main class="stage" id="reel" aria-roledescription="карусель" aria-label="Проекты">
-  <article class="slide" id="s-uslugi" data-id="uslugi" data-aud="me" data-name="Услуги" style="--c:#ff4f64;--c2:#ff4f64" role="group" aria-roledescription="слайд" aria-label="Услуги, 1 из 8">
+  <article class="slide v-cam" id="s-me" data-id="me" data-aud="me" data-name="Это я" style="--c:#ff4f64;--c2:#ff4f64" role="group" aria-roledescription="слайд" aria-label="Это я, 1 из 8">
     <div class="frame">
       <div class="glow" aria-hidden="true"></div>
       <div class="copy">
-        <p class="aud">лично со мной</p>
-        <h2>Услуги</h2>
-        <p class="line">Сыграем, разберём, посмотрим кино.</p>
-        <ul class="svc">
-          <li><span>Играю с твоим билдом</span><b>300 ₽</b></li>
-          <li><span>Разбор игры или демки</span><b>500 ₽</b></li>
-          <li><span>Фильм на стрим</span><b>1 000 ₽</b></li>
-          <li><span>Час коучинга</span><b>1 000 ₽</b></li>
-          <li><span>Игра на стрим, 2 часа</span><b>2 000 ₽</b></li>
-        </ul>
+        <p class="aud">это я</p>
+        <h2>Привет, я aliveenjoyer</h2>
+        <p class="line">Играю в Deadlock, мейню Лэша и пишу код для своего стрима.</p>
+        <p class="desc">Всё, что дальше, я сделал сам: игры для чата, кастомки со зрителями, программы для стримеров. А ещё у меня стартап на нейросетях, и он приносит деньги.</p>
         <div class="act">
-          <a class="btn" href="uslugi/">Все услуги и цены</a>
-          <p class="meta"><span class="addr">Можно баллами канала или душами из Чат-RPG</span><a href="dev/">Ещё настройка стрима и разработка</a></p>
+          <a class="btn" href="uslugi/">Что я могу для тебя</a>
+          <p class="meta"><span class="addr">Сыграть, разобрать игру, сделать проект</span><a href="dev/">Разработка и ИИ</a></p>
         </div>
       </div>
+      <!-- гарнитура не видна на слайде: из неё берутся миниатюра «Со мной» и объект во вступлении -->
       <div class="obj" aria-hidden="true">
         <div class="streak"></div>
         <img src="assets/neon/headset.webp" width="1200" height="1200" alt="" draggable="false">
         <img class="refl" src="assets/neon/headset.webp" width="1200" height="1200" alt="" draggable="false">
       </div>
+      <div class="cam"><div class="streak" aria-hidden="true"></div><div class="cam-in"><img src="assets/me/portrait-1.webp" width="1200" height="898" alt="aliveenjoyer за своим столом" draggable="false"></div></div>
     </div>
   </article>
 
@@ -721,7 +724,7 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
     raf = requestAnimationFrame(tick);
   }
 
-  const alias = { encore: 'music', overlay: 'chat', dlo: 'optimizer', ring: 'rpg', price: 'uslugi', services: 'uslugi' };
+  const alias = { encore: 'music', overlay: 'chat', dlo: 'optimizer', ring: 'rpg', uslugi: 'me', price: 'me', services: 'me' };
   function fromHash() {
     let h = '';
     try { h = decodeURIComponent(location.hash.slice(1)); } catch (e) {}
@@ -872,7 +875,7 @@ html.intro .slide.is-active .copy > *, html.intro .slide.is-active .streak { ani
     const ov = document.createElement('div');
     ov.className = 'intro-ov';
     ov.innerHTML = '<div class="i-stack" aria-hidden="true"><p class="i-title">Играю. Стримлю. Пишу код.</p>' +
-      '<p class="i-sub">Услуги и семь проектов для стрима и Deadlock</p><div class="i-row"><i class="i-line"></i><i class="i-spark"></i></div></div>' +
+      '<p class="i-sub">Немного обо мне и семь проектов для стрима и Deadlock</p><div class="i-row"><i class="i-line"></i><i class="i-spark"></i></div></div>' +
       '<button class="i-skip" type="button">Пропустить</button>';
     const row = ov.querySelector('.i-row');
     row.style.setProperty('--n', n);
