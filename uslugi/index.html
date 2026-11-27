@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Услуги aliveenjoyer: разбор, коучинг, фильм на стрим</title>
+<meta name="description" content="Разбор демки, коучинг по Deadlock, фильм на стрим, игра с твоим билдом. Плати рублями, баллами канала или душами из Чат-RPG. А ещё консультации и разработка.">
+<meta name="theme-color" content="#000000">
+<meta property="og:title" content="Услуги aliveenjoyer">
+<meta property="og:description" content="Разбор демки, коучинг, фильм на стрим и игра с твоим билдом: за рубли, баллы канала или души из Чат-RPG.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aliveenjoyer.art/uslugi/">
+<meta property="og:image" content="https://aliveenjoyer.art/assets/og-reel.jpg">
+<link rel="icon" type="image/png" href="../assets/icon-64.png">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
+<script>if (/[?&]still/.test(location.search)) document.documentElement.classList.add('still');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&display=swap" rel="stylesheet">
+<!-- Telegram, донат и Twitch: общий файл всех сайтов (исходник Skyrim\Hub\social.css) -->
+<link rel="stylesheet" href="https://aliveenjoyer.art/social.css">
+<style>
+/* Услуги плашками: у каждой неоновая иконка (assets/neon/svc, Nano Banana Pro), цены чипами в цветах валют
+   (₽ — оранжевый доната, баллы — фиолетовый Twitch, души — бирюзовый Чат-RPG) и одна кнопка «Заказать за N ₽».
+   Чип баллов ведёт на канал (прямой ссылки на награду у Twitch нет), чип душ копирует команду «!заказ <слово>».
+   Ниже — выделенный блок «Разработка и ИИ» со ссылкой на /dev/. Рамок нет: плашки отделены светом. */
+:root {
+  --bg: #000;
+  --text: #f5f5f7;
+  --gray: #86868b;
+  --gray-2: #a1a1a6;
+  --gutter: clamp(16px, 4vw, 40px);
+  --c: #ff4f64;
+  --rub: #ff8a1e;
+  --pts: #a970ff;
+  --soul: #4fe3c1;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100vh;
+  background: var(--bg); color: var(--text);
+  font-family: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 16px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; overflow-x: clip;
+}
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; border-radius: 10px; }
+.still *, .still *::before, .still *::after { animation: none !important; transition: none !important; }
+
+/* шапка как на главной */
+.nav { display: flex; align-items: center; gap: clamp(12px, 2vw, 24px); height: 56px; padding: 0 var(--gutter); font-size: 13px; }
+.brand { font-weight: 600; font-size: 15px; letter-spacing: -.01em; }
+.crumb { color: var(--gray); transition: color .2s; }
+.crumb:hover { color: var(--text); }
+.nav .ae-soc { margin-left: auto; }
+
+main { width: min(1120px, 100% - 2 * var(--gutter)); margin: 0 auto; padding: clamp(28px, 6vh, 64px) 0 40px; }
+
+/* заголовок */
+h1 { margin: 0; font-weight: 600; font-size: clamp(40px, 6vw, 80px); line-height: 1; letter-spacing: -.045em; }
+.lead { margin: 16px 0 0; max-width: 40ch; font-size: clamp(18px, 1.9vw, 24px); font-weight: 500; line-height: 1.25; letter-spacing: -.02em; text-wrap: balance; }
+.lead span { color: var(--gray-2); }
+
+/* плашки: 3 сверху, 2 широкие снизу */
+.cards { margin: clamp(32px, 5vh, 52px) 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
+.card {
+  grid-column: span 2; position: relative; isolation: isolate; overflow: hidden;
+  display: flex; flex-direction: column; padding: 18px 22px 22px; border-radius: 26px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .018) 70%);
+}
+.card::before {
+  content: ""; position: absolute; z-index: -1; left: -30px; top: -60px; width: 300px; height: 260px; pointer-events: none;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--c) 20%, transparent), transparent);
+}
+.card .ico { width: 116px; height: 116px; margin: 0 0 6px -8px; pointer-events: none; -webkit-user-drag: none; }
+.card h2 { margin: 0; font-size: clamp(20px, 1.8vw, 23px); font-weight: 600; letter-spacing: -.02em; line-height: 1.2; }
+.card p { margin: 8px 0 0; color: var(--gray-2); font-size: 15px; line-height: 1.45; text-wrap: pretty; }
+.card p { flex-grow: 1; }   /* у плашек в ряд цены и кнопки встают на одну высоту */
+.card.wide { grid-column: span 3; display: grid; grid-template-columns: 150px minmax(0, 1fr); grid-template-rows: auto auto auto 1fr; column-gap: 18px; align-items: start; }
+.card.wide::before { left: -60px; top: -40px; }
+.card.wide .ico { grid-row: 1 / span 4; width: 150px; height: 150px; margin: 4px 0 0 -10px; }
+
+/* цены чипами */
+.prices { margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.pp {
+  --k: var(--rub);
+  display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 12px 0 9px; border: 0; border-radius: 999px;
+  font-size: 14.5px; font-weight: 600; letter-spacing: -.01em; white-space: nowrap; font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--k) 30%, #fff);
+  background: color-mix(in srgb, var(--k) 14%, rgba(255, 255, 255, .02));
+  transition: background .2s, box-shadow .2s;
+}
+.pp.pts { --k: var(--pts); }
+.pp.soul { --k: var(--soul); }
+.pp .g { width: 17px; height: 17px; display: grid; place-items: center; flex: none; font-size: 14px; font-weight: 700; color: var(--k); text-shadow: 0 0 8px var(--k); }
+.pp .g svg { width: 15px; height: 15px; fill: var(--k); filter: drop-shadow(0 0 5px var(--k)); }
+.pp .g img { width: 17px; height: 17px; border-radius: 50%; filter: drop-shadow(0 0 5px rgba(79, 227, 193, .6)); }
+.pp small { font-size: 12.5px; font-weight: 500; color: var(--gray-2); }
+a.pp, button.pp { cursor: pointer; }
+a.pp:hover, button.pp:hover { background: color-mix(in srgb, var(--k) 24%, rgba(255, 255, 255, .02)); box-shadow: 0 0 18px -6px var(--k); }
+
+/* одна кнопка на плашке: заказать донатом */
+.order { margin-top: auto; padding-top: 18px; }
+.card.wide .order { grid-column: 2; align-self: end; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 44px; padding: 0 20px; border: 0; border-radius: 999px; cursor: pointer;
+  background: linear-gradient(100deg, var(--c), color-mix(in srgb, var(--c) 82%, #ff8a6a)); color: #000;
+  font-weight: 600; font-size: 15px; letter-spacing: -.01em; white-space: nowrap;
+  box-shadow: 0 10px 30px -12px color-mix(in srgb, var(--c) 75%, transparent);
+  transition: filter .2s, transform .15s;
+}
+.btn:hover { filter: brightness(1.1); }
+.btn:active { transform: scale(.98); }
+.btn svg { width: 16px; height: 16px; fill: currentColor; }
+.hint { margin: 14px 0 0; font-size: 13px; color: var(--gray); }
+
+/* Разработка и ИИ: одна выделенная полоса, отсюда «проваливаются» на /dev/ */
+.dev {
+  position: relative; isolation: isolate; overflow: hidden; margin-top: clamp(56px, 9vh, 96px);
+  display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 28px 56px; align-items: center;
+  padding: clamp(26px, 4vw, 52px); border-radius: 32px;
+  background:
+    radial-gradient(60% 90% at 0% 100%, color-mix(in srgb, var(--c) 22%, transparent), transparent 70%),
+    radial-gradient(50% 70% at 100% 0%, color-mix(in srgb, var(--c) 12%, transparent), transparent 70%),
+    #08070a;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 22%, transparent), 0 40px 90px -50px color-mix(in srgb, var(--c) 70%, transparent);
+}
+.dev h2 { margin: 0; font-size: clamp(32px, 4vw, 54px); font-weight: 600; letter-spacing: -.045em; line-height: 1.02; }
+.dev .line { margin: 14px 0 0; max-width: 28ch; font-size: clamp(18px, 1.7vw, 22px); font-weight: 500; line-height: 1.3; letter-spacing: -.02em; text-wrap: balance; }
+.dev .btn { margin-top: 24px; height: 48px; padding: 0 24px; font-size: 15.5px; }
+.dev-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }
+.dev-list a { display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; gap: 0 14px; align-items: center; padding: 6px 14px 6px 4px; border-radius: 20px; transition: background .2s; }
+.dev-list a:hover { background: rgba(255, 255, 255, .04); }
+.dev-list img { width: 76px; height: 76px; }
+.dev-list b { display: block; font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+.dev-list small { display: block; margin-top: 2px; font-size: 13.5px; color: var(--gray-2); line-height: 1.35; }
+.dev-list em { font-style: normal; font-size: 17px; font-weight: 600; white-space: nowrap; text-align: right; color: color-mix(in srgb, var(--c) 30%, #fff); }
+.dev-list em.q { color: var(--gray-2); font-weight: 500; font-size: 14.5px; }
+.dev-list em small { display: inline; margin: 0 0 0 4px; font-size: 12.5px; }
+
+/* как заказать: три способа текстом, по цвету валюты */
+.how { margin-top: clamp(56px, 9vh, 96px); }
+.how h2 { margin: 0; font-size: clamp(26px, 3vw, 38px); font-weight: 600; letter-spacing: -.035em; line-height: 1.1; }
+.ways { margin: 22px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.ways li { --k: var(--rub); }
+.ways li.pts { --k: var(--pts); }
+.ways li.soul { --k: var(--soul); }
+.ways b { display: inline-flex; align-items: center; gap: 8px; font-size: 17px; font-weight: 600; letter-spacing: -.01em; }
+.ways b::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--k); box-shadow: 0 0 10px 1px var(--k); }
+.ways p { margin: 6px 0 0; color: var(--gray-2); font-size: 15px; line-height: 1.45; text-wrap: pretty; }
+.ways code { font-family: inherit; font-weight: 600; color: var(--text); white-space: nowrap; }
+.ways a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, var(--k) 60%, transparent); }
+
+/* подсказка после нажатия на баллы или души */
+.toast {
+  position: fixed; left: 50%; bottom: 22px; z-index: 20; max-width: min(520px, calc(100% - 32px));
+  padding: 12px 18px; border-radius: 18px; font-size: 14.5px; line-height: 1.4; color: var(--text);
+  background: rgba(22, 22, 26, .92); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .1), 0 20px 50px -20px #000;
+  opacity: 0; transform: translate(-50%, 10px); pointer-events: none; transition: opacity .25s, transform .25s;
+}
+.toast.on { opacity: 1; transform: translate(-50%, 0); }
+.toast b { font-weight: 600; }
+
+.fine { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 22px; padding: 18px var(--gutter) 16px; font-size: 12px; color: var(--gray); }
+.fine p { margin: 0; }
+.fine nav { display: flex; gap: 18px; }
+.fine nav a { text-decoration: underline; text-underline-offset: 3px; }
+.fine nav a:hover { color: var(--text); }
+
+@media (max-width: 1000px) {
+  .card, .card.wide { grid-column: span 3; }
+  .card.wide { display: flex; }
+  .card.wide .ico { width: 116px; height: 116px; margin: 0 0 6px -8px; }
+  .card.wide .order { align-self: auto; }
+  .dev { grid-template-columns: minmax(0, 1fr); }
+}
+/* телефон: плашка в одну строку, иконка слева, кнопка во всю ширину */
+@media (max-width: 760px) {
+  .nav { height: 50px; }
+  .crumb { display: none; }
+  .cards { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .card, .card.wide { grid-column: 1; display: grid; grid-template-columns: 76px minmax(0, 1fr); column-gap: 14px; padding: 16px 16px 16px 12px; border-radius: 22px; }
+  .card .ico, .card.wide .ico { grid-row: 1 / span 2; width: 84px; height: 84px; margin: -6px 0 0 -6px; }
+  .card::before { left: -90px; top: -70px; width: 240px; height: 220px; }
+  .card h2 { font-size: 19px; }
+  .card p { margin-top: 4px; font-size: 14px; }
+  .prices, .order, .card.wide .order { grid-column: 1 / -1; }
+  .prices { margin-top: 12px; }
+  .order { padding-top: 12px; }
+  .card .btn { width: 100%; height: 46px; }
+  .dev { padding: 24px 18px 18px; border-radius: 26px; }
+  .dev .btn { width: 100%; }
+  .dev-list a { grid-template-columns: 60px minmax(0, 1fr); padding: 4px 4px 4px 0; }
+  .dev-list img { width: 60px; height: 60px; grid-row: 1 / span 2; }
+  .dev-list em { grid-column: 2; text-align: left; font-size: 15px; }
+  .ways { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .fine { justify-content: center; text-align: center; font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+</style>
+<script src="https://aliveenjoyer.art/stat.js" data-page="uslugi" defer></script>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="../">aliveenjoyer</a>
+  <a class="crumb" href="../">Все проекты</a>
+  <a class="crumb" href="../dev/">Разработка и ИИ</a>
+  <nav class="ae-soc" aria-label="Канал aliveenjoyer">
+    <a class="ae-b ae-tg" href="https://t.me/aliveenjoyer" aria-label="Telegram-канал"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 3.3 2.7 10.5c-1.1.4-1.1 1.1-.1 1.4l4.7 1.5 1.8 5.6c.2.7.4.8.9.8.4 0 .6-.2.9-.5l2.4-2.3 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.8c.3-1.3-.5-1.9-1.5-1.6Zm-3.2 3.9-8.6 7.8-.4 3.4-1.3-4.2 9.8-6.6c.5-.3.8 0 .5.4Z"/></svg><span class="ae-l">Telegram-канал</span><span class="ae-s">Telegram</span><span class="ae-m">ТГК</span></a>
+    <a class="ae-b ae-da" href="https://www.donationalerts.com/r/aliveenjoyer" aria-label="Закинуть донат"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.2-4.4-9.4-9.1C1 8.5 3.2 4.6 7 4.6c2.2 0 3.8 1.2 5 2.9 1.2-1.7 2.8-2.9 5-2.9 3.8 0 6 3.9 4.4 7.3C19.2 16.6 12 21 12 21Z"/></svg><span class="ae-l">Закинуть донат</span><span class="ae-s">Донат</span><span class="ae-m">Донат</span></a>
+    <a class="ae-b ae-tw" href="https://twitch.tv/aliveenjoyer" aria-label="Twitch: смотреть стрим"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 2.5 3 6.6v13.6h4.6v2.5h2.6l2.5-2.5h3.7l5.1-5.1V2.5H4.6Zm14.9 11.6-2.9 2.9H12l-2.5 2.5V17H5.7V4.2h13.8v9.9ZM16.6 7.3h-1.8v5.2h1.8V7.3Zm-4.8 0H10v5.2h1.8V7.3Z"/></svg><span class="ae-l">Смотреть стрим</span><span class="ae-s">Twitch</span><span class="ae-m">Twitch</span></a>
+  </nav>
+</header>
+
+<!-- значки валют: один раз, дальше <use> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="pts" viewBox="0 0 24 24"><path d="M12 3.5a8.5 8.5 0 1 0 8.5 8.5h-2.8A5.7 5.7 0 1 1 12 6.3V3.5Z"/><path d="M14.4 3.9a8.5 8.5 0 0 1 5.7 5.7h-2.9a5.8 5.8 0 0 0-2.8-2.8V3.9Z"/></symbol>
+  <symbol id="heart" viewBox="0 0 24 24"><path d="M12 21s-7.2-4.4-9.4-9.1C1 8.5 3.2 4.6 7 4.6c2.2 0 3.8 1.2 5 2.9 1.2-1.7 2.8-2.9 5-2.9 3.8 0 6 3.9 4.4 7.3C19.2 16.6 12 21 12 21Z"/></symbol>
+</svg>
+
+<main>
+  <h1>Услуги</h1>
+  <p class="lead">Сыграем, разберём, посмотрим кино. <span>Плати рублями, баллами канала или душами из Чат-RPG.</span></p>
+
+  <ul class="cards" aria-label="Услуги на стриме">
+    <li class="card" data-word="билд" data-reward="Играю с твоим билдом">
+      <img class="ico" src="../assets/neon/svc/build.webp" width="512" height="512" alt="" draggable="false">
+      <h2>Играю с твоим билдом</h2>
+      <p>Скидываешь билд, я играю с ним целый матч на стриме. Имба или кринж, решаем с чатом.</p>
+      <div class="prices">
+        <span class="pp rub"><span class="g">₽</span>300</span>
+        <a class="pp pts" href="https://twitch.tv/aliveenjoyer" target="_blank" rel="noopener" data-pay="pts"><span class="g"><svg><use href="#pts"/></svg></span>10 000</a>
+        <button class="pp soul" type="button" data-pay="soul"><span class="g"><img src="../assets/rpg-orb.webp" alt=""></span>50 000</button>
+      </div>
+      <div class="order"><a class="btn" href="https://www.donationalerts.com/r/aliveenjoyer" target="_blank" rel="noopener"><svg><use href="#heart"/></svg>Заказать за 300 ₽</a></div>
+    </li>
+    <li class="card" data-word="разбор" data-reward="Разбор игры или демки">
+      <img class="ico" src="../assets/neon/svc/demo.webp" width="512" height="512" alt="" draggable="false">
+      <h2>Разбор игры или демки</h2>
+      <p>Присылаешь демку или номер матча. Смотрим на стриме, где ты отдал бой и что делать иначе.</p>
+      <div class="prices">
+        <span class="pp rub"><span class="g">₽</span>500</span>
+        <a class="pp pts" href="https://twitch.tv/aliveenjoyer" target="_blank" rel="noopener" data-pay="pts"><span class="g"><svg><use href="#pts"/></svg></span>30 000</a>
+        <button class="pp soul" type="button" data-pay="soul"><span class="g"><img src="../assets/rpg-orb.webp" alt=""></span>200 000</button>
+      </div>
+      <div class="order"><a class="btn" href="https://www.donationalerts.com/r/aliveenjoyer" target="_blank" rel="noopener"><svg><use href="#heart"/></svg>Заказать за 500 ₽</a></div>
+    </li>
+    <li class="card" data-word="фильм" data-reward="Фильм на стрим">
+      <img class="ico" src="../assets/neon/svc/film.webp" width="512" height="512" alt="" draggable="false">
+      <h2>Фильм на стрим</h2>
+      <p>Ты выбираешь фильм, весь чат смотрит его вместе со мной.</p>
+      <div class="prices">
+        <span class="pp rub"><span class="g">₽</span>1 000</span>
+        <a class="pp pts" href="https://twitch.tv/aliveenjoyer" target="_blank" rel="noopener" data-pay="pts"><span class="g"><svg><use href="#pts"/></svg></span>75 000</a>
+        <button class="pp soul" type="button" data-pay="soul"><span class="g"><img src="../assets/rpg-orb.webp" alt=""></span>250 000</button>
+      </div>
+      <div class="order"><a class="btn" href="https://www.donationalerts.com/r/aliveenjoyer" target="_blank" rel="noopener"><svg><use href="#heart"/></svg>Заказать за 1 000 ₽</a></div>
+    </li>
+    <li class="card wide" data-word="коучинг" data-reward="Час коучинга">
+      <img class="ico" src="../assets/neon/svc/coach.webp" width="512" height="512" alt="" draggable="false">
+      <h2>Час коучинга</h2>
+      <p>Час один на один по твоей игре: что покупать, где стоять и когда лезть в драку.</p>
+      <div class="prices">
+        <span class="pp rub"><span class="g">₽</span>1 000</span>
+        <a class="pp pts" href="https://twitch.tv/aliveenjoyer" target="_blank" rel="noopener" data-pay="pts"><span class="g"><svg><use href="#pts"/></svg></span>60 000</a>
+        <button class="pp soul" type="button" data-pay="soul"><span class="g"><img src="../assets/rpg-orb.webp" alt=""></span>350 000</button>
+      </div>
+      <div class="order"><a class="btn" href="https://www.donationalerts.com/r/aliveenjoyer" target="_blank" rel="noopener"><svg><use href="#heart"/></svg>Заказать за 1 000 ₽</a></div>
+    </li>
+    <li class="card wide" data-word="игра" data-reward="Игра на стрим">
+      <img class="ico" src="../assets/neon/svc/game.webp" width="512" height="512" alt="" draggable="false">
+      <h2>Игра на стрим</h2>
+      <p>Ты выбираешь игру, я играю в неё на стриме два часа. Если игра платная, её покупаешь ты, чем бы ни платил за заказ.</p>
+      <div class="prices">
+        <span class="pp rub"><span class="g">₽</span>2 000</span>
+        <a class="pp pts" href="https://twitch.tv/aliveenjoyer" target="_blank" rel="noopener" data-pay="pts"><span class="g"><svg><use href="#pts"/></svg></span>150 000</a>
+        <button class="pp soul" type="button" data-pay="soul"><span class="g"><img src="../assets/rpg-orb.webp" alt=""></span>450 000</button>
+      </div>
+      <div class="order"><a class="btn" href="https://www.donationalerts.com/r/aliveenjoyer" target="_blank" rel="noopener"><svg><use href="#heart"/></svg>Заказать за 2 000 ₽</a></div>
+    </li>
+  </ul>
+  <p class="hint">Хочешь баллами или душами, жми на цену в нужном цвете.</p>
+
+  <section class="dev" aria-labelledby="dev-t">
+    <div>
+      <h2 id="dev-t">Разработка и ИИ</h2>
+      <p class="line">Мой стартап на нейросетях приносит деньги. Помогу запустить твой или сделаю под ключ.</p>
+      <a class="btn" href="../dev/">Подробнее и заявка</a>
+    </div>
+    <ul class="dev-list">
+      <li><a href="../dev/#ceny"><img src="../assets/neon/svc/consult.webp" width="512" height="512" alt=""><span><b>Консультация по ИИ и разработке</b><small>Разберу задачу, научу промптингу</small></span><em>2 000 ₽<small>за час</small></em></a></li>
+      <li><a href="../dev/#ceny"><img src="../assets/neon/svc/dev.webp" width="512" height="512" alt=""><span><b>Разработка под ключ</b><small>Сайт, бот или сервис на нейросетях</small></span><em class="q">по договорённости</em></a></li>
+      <li><a href="../dev/#ceny"><img src="../assets/neon/svc/setup.webp" width="512" height="512" alt=""><span><b>Настройка стрима</b><small>OBS, Encore, Chatlock и оверлеи, как у меня</small></span><em>1 500 ₽</em></a></li>
+    </ul>
+  </section>
+
+  <section class="how" aria-labelledby="how-t">
+    <h2 id="how-t">Как заказать</h2>
+    <ul class="ways">
+      <li class="rub">
+        <b>Рублями</b>
+        <p>Жми «Заказать» на услуге и закинь донат. В сообщении напиши, что заказываешь и как с тобой связаться.</p>
+      </li>
+      <li class="pts">
+        <b>Баллами канала</b>
+        <p>Награды с теми же названиями ждут в наградах <a href="https://twitch.tv/aliveenjoyer" target="_blank" rel="noopener">канала на Twitch</a>. Выбери нужную и напиши, что заказываешь.</p>
+      </li>
+      <li class="soul">
+        <b>Душами</b>
+        <p>Напиши в чат стрима <code>!заказ фильм</code> и что смотрим. Подойдут только души, заработанные на стриме, души из кликера не идут. <a href="https://rpg.aliveenjoyer.art/game">Сколько у меня душ</a></p>
+      </li>
+    </ul>
+  </section>
+</main>
+
+<footer class="fine">
+  <p>Deadlock принадлежит Valve. Я просто фанат, Valve тут ни при чём.</p>
+  <nav aria-label="Ещё"><a href="../">Все проекты</a><a href="../dev/">Разработка и ИИ</a><a href="../minecraft/">Minecraft-сервер</a><a href="https://github.com/aliveenjoyer">GitHub</a></nav>
+</footer>
+
+<p class="toast" role="status" aria-live="polite"></p>
+
+<script>
+// Чип баллов открывает канал и напоминает, какую награду искать; чип душ копирует «!заказ <слово>» для чата стрима.
+(function () {
+  var toast = document.querySelector('.toast'), timer = 0;
+  function show(html) {
+    toast.innerHTML = html; toast.classList.add('on');
+    clearTimeout(timer); timer = setTimeout(function () { toast.classList.remove('on'); }, 5200);
+  }
+  document.querySelectorAll('[data-pay]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var card = el.closest('.card'), word = card.getAttribute('data-word'), reward = card.getAttribute('data-reward');
+      if (el.getAttribute('data-pay') === 'pts') {
+        show('Открыл канал. В наградах ищи <b>«' + reward + '»</b> и напиши, что заказываешь.');
+        return;
+      }
+      var cmd = '!заказ ' + word + ' ';
+      var done = function () { show('Скопировал <b>' + cmd.trim() + '</b>. Вставь в чат стрима и допиши, что заказываешь. Души из кликера не идут.'); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(cmd).then(done, function () { show('Напиши в чат стрима <b>' + cmd.trim() + '</b> и что заказываешь.'); });
+      else show('Напиши в чат стрима <b>' + cmd.trim() + '</b> и что заказываешь.');
+    });
+  });
+})();
+</script>
+</body>
+</html>
